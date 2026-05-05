@@ -1,0 +1,1680 @@
+<!DOCTYPE html><html lang="bg"><head>
+
+
+
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Progresstrade — Изкупуване на железен скрап, София</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&amp;family=Barlow+Condensed:wght@600;700;800&amp;family=Montserrat:wght@900&amp;display=swap" rel="stylesheet">
+
+<style>
+/* ── TOKENS ───────────────────────────────────────────── */
+:root {
+  --green:        #1a4a2e;
+  --green-deep:   #0f2d1c;
+  --green-accent: #21603b;
+  --yellow:       #f0c040;
+  --yellow-soft:  #fdf3c0;
+  --cream:        #f5f4ee;
+  --cream-dark:   #eceae2;
+  --white:        #ffffff;
+  --text:         rgba(0,0,0,0.87);
+  --text-soft:    rgba(0,0,0,0.55);
+  --text-white:   rgba(255,255,255,1);
+  --text-white-soft: rgba(255,255,255,0.70);
+
+  --radius-card:  12px;
+  --radius-pill:  50px;
+  --shadow-card:  0 0 0.5px rgba(0,0,0,0.14), 0 2px 6px rgba(0,0,0,0.10);
+  --shadow-nav:   0 1px 3px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08), 0 0 2px rgba(0,0,0,0.06);
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+  --space-6: 40px;
+  --space-7: 48px;
+  --space-8: 56px;
+  --space-9: 64px;
+
+  --gutter: 20px;
+  --max-w: 1200px;
+
+  --font: 'Barlow', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font-cond: 'Barlow Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* ── RESET ────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--cream);
+  letter-spacing: -0.01em;
+}
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+
+/* ── UTILITY ──────────────────────────────────────────── */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+
+/* ── BUTTONS ──────────────────────────────────────────── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: var(--radius-pill);
+  padding: 12px 28px;
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  white-space: nowrap;
+}
+.btn:active { transform: scale(0.95); }
+
+.btn-primary {
+  background: var(--yellow);
+  color: var(--green-deep);
+  border-color: var(--yellow);
+}
+.btn-primary:hover { background: #e6b530; border-color: #e6b530; }
+
+.btn-outline-dark {
+  background: transparent;
+  color: var(--green-deep);
+  border-color: var(--green-deep);
+}
+.btn-outline-dark:hover { background: var(--green-deep); color: var(--white); }
+
+.btn-outline-white {
+  background: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+.btn-outline-white:hover { background: rgba(255,255,255,0.12); }
+
+.btn-white {
+  background: var(--white);
+  color: var(--green);
+  border-color: var(--white);
+}
+.btn-white:hover { background: var(--yellow); color: var(--green-deep); border-color: var(--yellow); }
+
+.btn-sm { padding: 8px 20px; font-size: 13px; }
+
+/* ── TOP BAR ──────────────────────────────────────────── */
+.topbar {
+  background: var(--green-deep);
+  padding: 7px var(--gutter);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.topbar-text {
+  font-size: 13px;
+  color: var(--text-white-soft);
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.topbar-text a { color: var(--yellow); font-weight: 600; }
+.topbar-phone {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--yellow);
+  letter-spacing: 0.02em;
+}
+
+/* ── NAV ──────────────────────────────────────────────── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--white);
+  box-shadow: var(--shadow-nav);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 0 var(--gutter);
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  line-height: 1;
+}
+.logo-wordmark {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  letter-spacing: 1.5px;
+  font-size: 20px;
+  color: #1a5c1a;
+  white-space: nowrap;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+  list-style: none;
+}
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--green); }
+.nav-actions { display: flex; gap: var(--space-2); align-items: center; }
+.nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--green-deep); border-radius: 2px; transition: transform 0.2s; }
+
+/* ── HERO ─────────────────────────────────────────────── */
+.hero {
+  background: var(--green);
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: 55% 45%;
+}
+.hero-content {
+  padding: 72px var(--gutter) 72px calc((100vw - var(--max-w)) / 2 + var(--gutter));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-4);
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--yellow);
+}
+.hero-tag::before {
+  content: '';
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--yellow);
+}
+.hero-title {
+  font-family: var(--font-cond);
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--white);
+  letter-spacing: -0.02em;
+}
+.hero-title em { color: var(--yellow); font-style: normal; }
+.hero-sub {
+  font-size: 17px;
+  color: var(--text-white-soft);
+  line-height: 1.6;
+  max-width: 440px;
+}
+.hero-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+.hero-img {
+  position: relative;
+  overflow: hidden;
+}
+.hero-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255,255,255,0.04) 0px,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 12px
+    ),
+    var(--green-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.3);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 32px;
+}
+.hero-img-placeholder svg { opacity: 0.3; }
+
+/* ── TICKER / USP BAR ─────────────────────────────────── */
+.ticker {
+  background: var(--yellow);
+  padding: 14px 0;
+  overflow: hidden;
+}
+.ticker-inner {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0;
+}
+.ticker-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--green-deep);
+  padding: 4px 28px;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.ticker-item + .ticker-item { border-left: 2px solid rgba(0,0,0,0.15); }
+.ticker-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
+
+/* ── SECTION GENERIC ──────────────────────────────────── */
+.section { padding: var(--space-9) 0; }
+.section-cream { background: var(--cream); }
+.section-white { background: var(--white); }
+.section-green { background: var(--green); }
+.section-deep { background: var(--green-deep); }
+
+.section-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: var(--space-2);
+}
+.section-label-dark {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: var(--space-2);
+}
+.section-title {
+  font-family: var(--font-cond);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--white);
+}
+.section-title-dark {
+  font-family: var(--font-cond);
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--green);
+}
+.section-body {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-white-soft);
+  max-width: 520px;
+}
+.section-body-dark {
+  font-size: 16px;
+  line-height: 1.65;
+  color: var(--text-soft);
+  max-width: 520px;
+}
+
+/* ── SERVICES ─────────────────────────────────────────── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-3);
+  margin-top: var(--space-6);
+}
+.service-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.service-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+}
+.service-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  background: var(--cream-dark);
+}
+.service-card-body {
+  padding: var(--space-4) var(--space-4) var(--space-5);
+}
+.service-icon {
+  width: 52px;
+  height: 52px;
+  background: var(--yellow-soft);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: var(--space-3);
+}
+.service-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: var(--space-1);
+  letter-spacing: -0.02em;
+}
+.service-card p {
+  font-size: 14px;
+  color: var(--text-soft);
+  line-height: 1.55;
+}
+.service-tag {
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--green-deep);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  padding: 3px 10px;
+  margin-top: var(--space-2);
+}
+
+/* ── FEATURE BAND ─────────────────────────────────────── */
+.feature-band {
+  background: var(--green-deep);
+  padding: var(--space-9) 0;
+}
+.feature-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+.feature-split.reverse { direction: rtl; }
+.feature-split.reverse > * { direction: ltr; }
+
+.feature-img {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+}
+.img-placeholder {
+  width: 100%;
+  height: 100%;
+  min-height: 260px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.05) 0px,
+      rgba(255,255,255,0.05) 1px,
+      transparent 1px,
+      transparent 10px
+    ),
+    var(--green-accent);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.35);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 24px;
+}
+
+/* ── WHO WE SERVE ─────────────────────────────────────── */
+/* ── ABOUT */
+.about-section { background: var(--white); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr;
+  gap: var(--space-7);
+  align-items: stretch;
+}
+.about-img {
+  width: 100%;
+  height: 100%;
+  min-height: 460px;
+  object-fit: cover;
+  border-radius: var(--radius-card);
+  display: block;
+}
+.about-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+.advantages-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3);
+}
+.advantage {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  padding: var(--space-4);
+  background: var(--cream);
+  border-radius: var(--radius-card);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.advantage:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+}
+.advantage-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.advantage h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.advantage p {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+.targets-section { background: var(--cream); }
+.targets-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+}
+.target-card {
+  background: var(--white);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-5);
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+  transition: transform 0.2s;
+}
+.target-card:hover { transform: translateY(-2px); }
+.target-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.target-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green);
+  margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+.target-card p {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+/* ── HOW IT WORKS ─────────────────────────────────────── */
+.steps-section { background: var(--white); }
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  margin-top: var(--space-6);
+  position: relative;
+}
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 32px;
+  left: calc(12.5% + 20px);
+  right: calc(12.5% + 20px);
+  height: 2px;
+  background: repeating-linear-gradient(90deg, var(--yellow) 0, var(--yellow) 8px, transparent 8px, transparent 16px);
+}
+.step-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-3);
+  position: relative;
+  z-index: 1;
+}
+.step-num {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--green-deep);
+  font-family: var(--font-cond);
+  font-size: 26px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 6px var(--white), 0 0 0 8px var(--yellow);
+  flex-shrink: 0;
+}
+.step-card h4 {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--green);
+  letter-spacing: -0.01em;
+}
+.step-card p {
+  font-size: 13px;
+  color: var(--text-soft);
+  line-height: 1.5;
+}
+
+/* ── PRICES BAND ──────────────────────────────────────── */
+.prices-band {
+  background: var(--green);
+  padding: var(--space-9) 0;
+}
+.prices-intro {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: var(--space-6);
+  gap: var(--space-4);
+}
+.prices-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+.price-card {
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  border-radius: var(--radius-card);
+  padding: var(--space-4) var(--space-5);
+  transition: background 0.2s;
+}
+.price-card:hover { background: rgba(255,255,255,0.12); }
+.price-card-label {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-white-soft);
+  margin-bottom: var(--space-2);
+}
+.price-card-name {
+  font-family: var(--font-cond);
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--white);
+  letter-spacing: -0.01em;
+  margin-bottom: var(--space-1);
+}
+.price-card-note {
+  font-size: 13px;
+  color: var(--text-white-soft);
+  line-height: 1.4;
+}
+.price-card-value {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  margin-top: var(--space-3);
+  background: var(--yellow);
+  color: var(--green-deep);
+  border-radius: 20px;
+  padding: 4px 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.prices-disclaimer {
+  margin-top: var(--space-4);
+  font-size: 13px;
+  color: var(--text-white-soft);
+  text-align: center;
+}
+
+/* ── TRANSPORT BAND ───────────────────────────────────── */
+.transport-band {
+  background: var(--cream);
+  padding: var(--space-9) 0;
+}
+.transport-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: center;
+}
+.checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin: var(--space-4) 0;
+}
+.checklist li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 15px;
+  color: var(--text);
+  line-height: 1.5;
+}
+.check-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--yellow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ── MAP / CONTACT BAND ───────────────────────────────── */
+.contact-band {
+  background: var(--green-deep);
+  padding: var(--space-9) 0;
+}
+.contact-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-7);
+  align-items: start;
+}
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+.contact-item {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+.contact-item-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(240,192,64,0.15);
+  border: 1.5px solid rgba(240,192,64,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.contact-item-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: 3px;
+}
+.contact-item-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--white);
+  line-height: 1.4;
+}
+.contact-item-sub {
+  font-size: 13px;
+  color: var(--text-white-soft);
+  margin-top: 2px;
+}
+.map-placeholder {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      rgba(255,255,255,0.04) 0,
+      rgba(255,255,255,0.04) 1px,
+      transparent 1px,
+      transparent 10px
+    ),
+    #1e3d2c;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: rgba(255,255,255,0.4);
+  font-size: 13px;
+  text-align: center;
+  padding: 24px;
+  border: 1.5px solid rgba(255,255,255,0.08);
+}
+
+/* ── CTA BAND ─────────────────────────────────────────── */
+.cta-band {
+  background: var(--yellow);
+  padding: var(--space-8) 0;
+}
+.cta-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+}
+.cta-text h2 {
+  font-family: var(--font-cond);
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 800;
+  color: var(--green-deep);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+.cta-text p {
+  font-size: 15px;
+  color: rgba(15,45,28,0.65);
+  margin-top: 6px;
+}
+.cta-actions { display: flex; gap: var(--space-2); flex-shrink: 0; }
+
+/* ── FOOTER ───────────────────────────────────────────── */
+.footer {
+  background: var(--green-deep);
+  padding: var(--space-7) 0 var(--space-5);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-6);
+  padding-bottom: var(--space-6);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-logo {
+  font-family: var(--font-cond);
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  margin-bottom: var(--space-3);
+}
+.footer-logo span { color: var(--yellow); }
+.footer-desc {
+  font-size: 14px;
+  color: var(--text-white-soft);
+  line-height: 1.6;
+  max-width: 240px;
+}
+.footer-col h5 {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--yellow);
+  margin-bottom: var(--space-3);
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.footer-col ul li a {
+  font-size: 14px;
+  color: var(--text-white-soft);
+  transition: color 0.15s;
+}
+.footer-col ul li a:hover { color: var(--yellow); }
+.footer-bottom {
+  padding-top: var(--space-4);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-3);
+}
+.footer-bottom p {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ── MOBILE NAV ───────────────────────────────────────── */
+.mobile-menu {
+  display: none;
+  flex-direction: column;
+  background: var(--white);
+  border-top: 1px solid var(--cream-dark);
+  padding: var(--space-3) var(--gutter) var(--space-4);
+  gap: var(--space-3);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--cream-dark);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────── */
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-content { padding: 48px var(--gutter); }
+  .hero-img { display: none; }
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .targets-grid { grid-template-columns: 1fr 1fr; }
+  .advantages-grid { grid-template-columns: 1fr 1fr; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid::before { display: none; }
+  .feature-split, .transport-split, .contact-split, .about-grid { grid-template-columns: 1fr; }
+  .feature-split.reverse { direction: ltr; }
+  .prices-intro { flex-direction: column; align-items: flex-start; }
+  .prices-grid { grid-template-columns: 1fr 1fr; }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .cta-inner { flex-direction: column; align-items: flex-start; }
+  .nav-links, .nav-actions { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+@media (max-width: 560px) {
+  .services-grid { grid-template-columns: 1fr; }
+  .targets-grid { grid-template-columns: 1fr; }
+  .advantages-grid { grid-template-columns: 1fr; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .prices-grid { grid-template-columns: 1fr; }
+  .ticker-item + .ticker-item { border-left: none; }
+  .ticker-inner { flex-direction: column; align-items: center; gap: 6px; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .topbar { display: none; }
+}
+</style>
+</head>
+<body style="font-family: Barlow;">
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-text">
+    <span style="display:flex; align-items:center; gap:7px;">
+      <svg width="14" height="16" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 1C4.24 1 2 3.24 2 6c0 4.25 5 11 5 11s5-6.75 5-11c0-2.76-2.24-5-5-5z" fill="#f0c040"></path>
+        <circle cx="7" cy="6" r="2" fill="#0f2d1c"></circle>
+      </svg>
+      гр. София, кв. Военна Рампа, ул. „Проф. Иван Георгов" № 1
+    </span>
+  </div>
+  <span class="topbar-phone" style="color:var(--text-white-soft); font-size:13px; font-weight:500;">
+    <span style="display:flex; align-items:center; gap:7px;">
+      <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="10" cy="10" r="8" stroke="#f0c040" stroke-width="1.6"></circle>
+        <polyline points="10,5 10,10 13,12" stroke="#f0c040" stroke-width="1.6" stroke-linecap="round" fill="none"></polyline>
+      </svg>
+      Понеделник – Петък: 9:00 – 17:00
+    </span>
+  </span>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <svg width="32" height="35" viewBox="0 0 46 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 42 C8 42 6 24 20 16 C20 16 24 30 12 42 Z" fill="#1a5c1a"></path>
+        <path d="M18 36 C18 36 20 18 34 10 C34 10 38 24 22 36 Z" fill="#3ab53a"></path>
+      </svg>
+      <span class="logo-wordmark">PROGRESSTRADE</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Какво изкупуваме</a></li>
+      <li><a href="#prices">Актуални цени</a></li>
+      <li><a href="#about">За нас</a></li>
+      <li><a href="#contact">Контакти</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="tel:0893416559" class="btn btn-primary btn-sm" style="display:inline-flex; align-items:center; gap:7px;">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="#0f2d1c"></path>
+        </svg>
+        0893 416 559
+      </a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Меню" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#services" onclick="toggleMenu()">Какво изкупуваме</a>
+    <a href="#prices" onclick="toggleMenu()">Актуални цени</a>
+    <a href="#about" onclick="toggleMenu()">За нас</a>
+    <a href="#contact" onclick="toggleMenu()">Контакти</a>
+    <a href="tel:0893416559" class="btn btn-primary" style="margin-top:8px; justify-content:center;">☎ 0893 416 559</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <h1 class="hero-title">
+      Максимална стойност<br>
+      за вашите<br>
+      <em>железни отпадъци.</em>
+    </h1>
+    <p class="hero-sub">
+      Желязо, стари електроуреди и коли за скрап — топ цени и бързо обслужване.
+    </p>
+    <div class="hero-actions">
+      <a href="#prices" class="btn btn-primary">Виж актуалните цени</a>
+    </div>
+  </div>
+  <div class="hero-img">
+    <img src="uploads/Untitled-6.jpeg" alt="Купчина железен скрап" style="width:100%; height:100%; object-fit:cover; object-position:center;">
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <div class="ticker-item"><div class="ticker-dot"></div>Мигновено плащане</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Гарантирано най-висока цена</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Бързо и лесно разтоварване</div>
+    <div class="ticker-item"><div class="ticker-dot"></div>Точно измерване</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="section section-cream" id="services">
+  <div class="container">
+    <div class="section-label-dark">Нашите услуги</div>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap;">
+      <h2 class="section-title-dark">Какво изкупуваме?</h2>
+      <p class="section-body-dark" style="max-width:420px;">Специализирани сме в черни метали и приемаме широк спектър от материали — от промишлен отпадък до домакинска техника.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="service-card">
+        <img class="service-img" src="uploads/debelo-zhelyazo-skrap-hero-section.png" alt="Плътно желязо">
+        <div class="service-card-body">
+          <h3>Плътно желязо</h3>
+          <p>Масивни метални конструкции, греди, профили и арматура.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img class="service-img" src="uploads/lamarina-hero-section.png" alt="Тънко желязо">
+        <div class="service-card-body">
+          <h3>Тънко желязо</h3>
+          <p>Ламарина, кофражи, тръби и тънкостенни метални елементи.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img class="service-img" src="uploads/tehnologichen-otpadak-skrap-hero-section.png" alt="Технологичен отпадък">
+        <div class="service-card-body">
+          <h3>Технологичен отпадък</h3>
+          <p>От металообработващи предприятия — стружки, опилки и производствен скрап.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img class="service-img" src="uploads/koli-za-skrap-hero-section.png" alt="Коли за скрап">
+        <div class="service-card-body">
+          <h3>Коли за скрап (ИУМПС)</h3>
+          <p>Изкупуваме и разкомплектоваме автомобили и МПС за скрап. Бърза и лесна процедура.</p>
+        </div>
+      </div>
+
+      <div class="service-card">
+        <img class="service-img" src="uploads/elektronna-skrap-kakvo-izkupuvane.png" alt="Стари електроуреди">
+        <div class="service-card-body">
+          <h3>Стари електроуреди (ИУЕЕО)</h3>
+          <p>Перални, хладилници, печки и друга домакинска техника.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURE BAND — Gas cutting -->
+<section class="feature-band" id="cutting">
+  <div class="container">
+    <div class="feature-split">
+      <div>
+        <div class="section-label">Допълнителна услуга</div>
+        <h2 class="section-title" style="margin-bottom:16px;">Газокислородно рязане и демонтаж</h2>
+        <p class="section-body" style="margin-bottom:24px;">
+          Разполагаме с оборудване за газокислородно рязане на метални конструкции. Демонтираме стари машини, съоръжения и метални конструкции директно на вашия обект.
+        </p>
+        <a href="tel:0893416559" class="btn btn-white" style="margin-right:10px;">Заявете посещение</a>
+        <a href="#contact" class="btn btn-outline-white">Виж местоположението</a>
+      </div>
+      <div class="feature-img">
+        <img src="uploads/Untitled-28.png" alt="Газокислородно рязане" style="width:100%; height:100%; object-fit:cover; border-radius:var(--radius-card); display:block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT US -->
+<section class="section about-section" id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <img class="about-img" src="uploads/Untitled-11.jpeg" alt="Площадка Прогрес Трейд">
+
+      <div class="about-content">
+        <div>
+          <div class="section-label-dark">За нас</div>
+          <h2 class="section-title-dark" style="margin-bottom:16px;">Над 25 години опит в отрасъла</h2>
+          <p class="section-body">
+            Прогрес Трейд е установено име на пазара за изкупуване на черни метали. Работим директно с металургични заводи в България и Чужбина, което ни позволява да предлагаме най-високи изкупни цени в София.
+          </p>
+        </div>
+
+        <div class="advantages-grid">
+
+        <div class="advantage">
+          <div class="advantage-icon">
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+              <path d="M11 2v18M6 6c0-1.5 1.5-3 5-3s5 1.5 5 3-2 3-5 3-5 1.5-5 3 2 3 5 3 5-1.5 5-3" stroke="white" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div>
+            <h4>Най-високи цени в София</h4>
+            <p>Гарантирано конкурентни изкупни цени — сравнете и вижте разликата.</p>
+          </div>
+        </div>
+
+        <div class="advantage">
+          <div class="advantage-icon">
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+              <path d="M13 2 L4 13 L10 13 L9 20 L18 9 L12 9 Z" stroke="white" stroke-width="1.6" stroke-linejoin="round" fill="none"></path>
+            </svg>
+          </div>
+          <div>
+            <h4>Бързо и лесно разтоварване</h4>
+            <p>Плащаме на място — получавате мигновено плащане след приемане на материала.</p>
+          </div>
+        </div>
+
+        <div class="advantage">
+          <div class="advantage-icon">
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+              <path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="white" stroke-width="1.6" stroke-linecap="round"></path>
+              <circle cx="11" cy="11" r="4" stroke="white" stroke-width="1.6"></circle>
+              <circle cx="11" cy="11" r="1" fill="white"></circle>
+            </svg>
+          </div>
+          <div>
+            <h4>Точно измерване</h4>
+            <p>Калибрирани електронни везни и прозрачна процедура на приемане.</p>
+          </div>
+        </div>
+
+        <div class="advantage">
+          <div class="advantage-icon">
+            <svg width="20" height="20" viewBox="0 0 22 22" fill="none">
+              <circle cx="11" cy="8" r="3.5" stroke="white" stroke-width="1.8"></circle>
+              <path d="M4 19c0-3.5 3-6 7-6s7 2.5 7 6" stroke="white" stroke-width="1.8" stroke-linecap="round"></path>
+            </svg>
+          </div>
+          <div>
+            <h4>Дружелюбен персонал</h4>
+            <p>Опитните ни служители ще ви помогнат с всеки въпрос.</p>
+          </div>
+        </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- WHO WE SERVE -->
+<section class="section targets-section" id="clients">
+  <div class="container">
+    <div class="section-label-dark">Клиенти</div>
+    <h2 class="section-title-dark">За кого работим?</h2>
+    <div class="targets-grid">
+
+      <div class="target-card">
+        <div class="target-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M3 19v-8l8-6 8 6v8" stroke="white" stroke-width="1.8" stroke-linejoin="round"></path>
+            <rect x="8" y="13" width="6" height="6" rx="1" stroke="white" stroke-width="1.8"></rect>
+          </svg>
+        </div>
+        <div>
+          <h4>Автосервизи</h4>
+          <p>Сервизи за коли и камиони — изкупуваме технологичен отпадък и употребявани части.</p>
+        </div>
+      </div>
+
+      <div class="target-card">
+        <div class="target-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <rect x="2" y="8" width="18" height="12" rx="1.5" stroke="white" stroke-width="1.8"></rect>
+            <path d="M6 8V5a5 5 0 0 1 10 0v3" stroke="white" stroke-width="1.8"></path>
+          </svg>
+        </div>
+        <div>
+          <h4>Металообработващи предприятия</h4>
+          <p>Редовно изкупуване на производствен и технологичен отпадък от заводи и цехове.</p>
+        </div>
+      </div>
+
+      <div class="target-card">
+        <div class="target-icon">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+            <path d="M2 19 L11 4 L20 19 Z" stroke="white" stroke-width="1.8" stroke-linejoin="round"></path>
+            <line x1="11" y1="12" x2="11" y2="19" stroke="white" stroke-width="1.8"></line>
+          </svg>
+        </div>
+        <div>
+          <h4>Строителни компании</h4>
+          <p>Извозваме железни отпадъци от строителство като  стара арматура.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section steps-section" id="how">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:8px;">
+      <div class="section-label-dark" style="display:inline-block;">Процес</div>
+    </div>
+    <h2 class="section-title-dark" style="text-align:center; margin-bottom:0;">Как работи?</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <h4>Обадете се</h4>
+        <p>Свържете се с нас на 0893 416 559 или ни опишете какво имате за продажба.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <h4>Безплатна оценка</h4>
+        <p>Даваме ви цена веднага — по телефона или след оглед на материала.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <h4>Идваме и товарим</h4>
+        <p>При по-големи количества организираме транспорт и товарене на ваш адрес.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <h4>Плащаме веднага</h4>
+        <p>Получавате парите в брой в момента на предаването. Без изчакване, без усложнения.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICES BAND -->
+<section class="prices-band" id="prices">
+  <div class="container">
+    <div class="prices-intro">
+      <div>
+        <div class="section-label">Актуални цени</div>
+        <h2 class="section-title">Какво плащаме?</h2>
+        <p class="section-body" style="margin-top:8px;">Цените се актуализират ежедневно. Гарантираме най-добра цена в София — сравнете сами.</p>
+      </div>
+      <a href="tel:0893416559" class="btn btn-white" style="flex-shrink:0;">☎ Питайте за цена</a>
+    </div>
+    <div class="prices-grid">
+
+      <div class="price-card">
+        <div class="price-card-label">Черни метали</div>
+        <div class="price-card-name">Плътно желязо</div>
+        <div class="price-card-note">Масивни конструкции, греди, профили</div>
+        <div class="price-card-value">Питайте за цена →</div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-card-label">Черни метали</div>
+        <div class="price-card-name">Тънко желязо</div>
+        <div class="price-card-note">Ламарина, кофражи, тръби</div>
+        <div class="price-card-value">Питайте за цена →</div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-card-label">Технологичен отпадък</div>
+        <div class="price-card-name">Производствен скрап</div>
+        <div class="price-card-note">Стружки, опилки, отпадък от машини</div>
+        <div class="price-card-value">Питайте за цена →</div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-card-label">ИУМПС</div>
+        <div class="price-card-name">Коли за скрап</div>
+        <div class="price-card-note">Цената зависи от марката и теглото</div>
+        <div class="price-card-value">Питайте за цена →</div>
+      </div>
+
+      <div class="price-card">
+        <div class="price-card-label">ИУЕЕО</div>
+        <div class="price-card-name">Стари уреди</div>
+        <div class="price-card-note">Перални, хладилници, техника</div>
+        <div class="price-card-value">Питайте за цена →</div>
+      </div>
+
+      <div class="price-card" style="background:rgba(240,192,64,0.12); border-color:rgba(240,192,64,0.3);">
+        <div class="price-card-label" style="color:var(--yellow);">Специална оферта</div>
+        <div class="price-card-name">Промишлени количества</div>
+        <div class="price-card-note">Индивидуална цена при над 1 тон материал</div>
+        <a href="tel:0893416559" class="price-card-value" style="text-decoration:none;">Обадете се →</a>
+      </div>
+
+    </div>
+    <p class="prices-disclaimer">* Цените са ориентировъчни и зависят от вида, чистотата и количеството на материала. Обадете се за точна оферта.</p>
+  </div>
+</section>
+
+<!-- TRANSPORT BAND -->
+<section class="transport-band" id="transport">
+  <div class="container">
+    <div class="transport-split">
+      <div>
+        <div class="section-label-dark">Транспорт и извозване</div>
+        <h2 class="section-title-dark" style="margin-bottom:12px;">Идваме при вас — безплатно</h2>
+        <p class="section-body-dark">При по-големи количества организираме транспорт и товарене на вашия адрес. Не е необходимо да се притеснявате за логистиката.</p>
+        <ul class="checklist">
+          <li>
+            <div class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#1a4a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+            </div>
+            Безплатен транспорт при над 500 кг
+          </li>
+          <li>
+            <div class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#1a4a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+            </div>
+            Разполагаме с подходяща техника за товарене
+          </li>
+          <li>
+            <div class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#1a4a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+            </div>
+            Газокислородно рязане на метални конструкции
+          </li>
+          <li>
+            <div class="check-icon">
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none"><polyline points="2,6 5,9 10,3" stroke="#1a4a2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></polyline></svg>
+            </div>
+            Обслужваме София и региона
+          </li>
+        </ul>
+        <a href="tel:0893416559" class="btn btn-primary">Заявете посещение</a>
+      </div>
+      <div class="feature-img">
+        <img src="uploads/Untitled-26.png" alt="Транспорт и товарене" style="width:100%; height:100%; object-fit:cover; border-radius:var(--radius-card); display:block;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT BAND -->
+<section class="contact-band" id="contact">
+  <div class="container">
+    <div class="section-label">Контакти</div>
+    <h2 class="section-title" style="margin-bottom:40px;">Свържете се с нас</h2>
+    <div class="contact-split">
+      <div class="contact-details">
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" stroke="#f0c040" stroke-width="1.8"></path>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Телефон</div>
+            <a href="tel:0893416559" class="contact-item-value" style="color:white; display:block;">0893 416 559</a>
+            <div class="contact-item-sub">
+</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 2C7.24 2 5 4.24 5 7c0 4.25 5 11 5 11s5-6.75 5-11c0-2.76-2.24-5-5-5z" stroke="#f0c040" stroke-width="1.8"></path>
+              <circle cx="10" cy="7" r="2" stroke="#f0c040" stroke-width="1.8"></circle>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Адрес</div>
+            <div class="contact-item-value">ул. Проф. Иван Георгов 1</div>
+            <div class="contact-item-sub">Военна Рампа, гр. София</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <circle cx="10" cy="10" r="8" stroke="#f0c040" stroke-width="1.8"></circle>
+              <polyline points="10,5 10,10 14,13" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round"></polyline>
+            </svg>
+          </div>
+          <div>
+            <div class="contact-item-label">Работно време</div>
+            <div class="contact-item-value">Пон – Пет: 9:00 – 17:00</div>
+            <div class="contact-item-sub">
+</div>
+          </div>
+        </div>
+
+        <div style="margin-top:8px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a href="tel:0893416559" class="btn btn-primary">☎ Обадете се сега</a>
+          <a href="https://maps.google.com/?q=ул.+Проф.+Иван+Георгов+1,+София" target="_blank" class="btn btn-outline-white">Отвори в Maps</a>
+        </div>
+      </div>
+
+      <div class="map-placeholder" style="padding:0; background:none; border:none;">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2930.446157495925!2d23.327283075978404!3d42.73661191122927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa8fd07a9f8f55%3A0x1224d306438dfc1!2sPROGRESSTRADE%20LTD!5e0!3m2!1sbg!2sbg!4v1777668278746!5m2!1sbg!2sbg" width="100%" height="100%" style="border:0; min-height:340px; border-radius:var(--radius-card); display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-inner">
+      <div class="cta-text">
+        <h2>Имате скрап за продажба?<br>Обадете се — отговаряме бързо.</h2>
+        <p>Гарантираме най-добра цена и плащане веднага в брой.</p>
+      </div>
+      <div class="cta-actions">
+        <a href="tel:0893416559" class="btn btn-outline-dark">☎ 0893 416 559</a>
+        <a href="#prices" class="btn btn-outline-dark">Виж актуалните цени</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div style="display:flex; align-items:center; gap:9px; margin-bottom:12px;">
+          <svg width="28" height="31" viewBox="0 0 46 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 42 C8 42 6 24 20 16 C20 16 24 30 12 42 Z" fill="#4ecb4e"></path>
+            <path d="M18 36 C18 36 20 18 34 10 C34 10 38 24 22 36 Z" fill="#9ee89e"></path>
+          </svg>
+          <span style="font-family:'Montserrat',sans-serif; font-weight:900; font-size:18px; letter-spacing:1.5px; color:#fff;">PROGRESSTRADE</span>
+        </div>
+        <p class="footer-desc">Изкупуване на железен скрап, черни метали, коли и стари уреди в София. Плащаме веднага — гарантирано най-добра цена.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Услуги</h5>
+        <ul>
+          <li><a href="#services">Черни метали</a></li>
+          <li><a href="#services">Коли ИУМПС</a></li>
+          <li><a href="#services">Стари уреди</a></li>
+          <li><a href="#services">Транспорт</a></li>
+          <li><a href="#cutting">Газо рязане</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Информация</h5>
+        <ul>
+          <li><a href="#prices">Актуални цени</a></li>
+          <li><a href="#how">Как работим</a></li>
+          <li><a href="#clients">За кого</a></li>
+          <li><a href="#transport">Транспорт</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Контакти</h5>
+        <ul>
+          <li><a href="tel:0893416559">0893 416 559</a></li>
+          <li><a href="#contact">Военна Рампа, София</a></li>
+          <li><a href="#contact">ул. Проф. Иван Георгов 1</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Progresstrade. Всички права запазени.</p>
+      <p>Изкупуване на скрап · София · Военна Рампа</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  const menu = document.getElementById('mobile-menu');
+  menu.classList.toggle('open');
+}
+
+// Smooth active nav link highlight on scroll
+const sections = document.querySelectorAll('section[id], div[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.style.color = '';
+        link.style.fontWeight = '';
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.style.color = 'var(--green)';
+          link.style.fontWeight = '700';
+        }
+      });
+    }
+  });
+}, { rootMargin: '-50% 0px -50% 0px' });
+
+sections.forEach(s => observer.observe(s));
+</script>
+
+<!-- ────────────────────────────────────────────────────────────────
+     TWEAKS — vibe / type personality / energy
+     Swaps palette + typography + spatial energy via [data-vibe],
+     [data-type], [data-energy] on <html>.
+     ──────────────────────────────────────────────────────────── -->
+<style id="tweaks-styles">
+  /* Vibe — Industrial (default), Forest, Sunburst */
+  html[data-vibe="forest"] {
+    --green:        #1f3a2a;
+    --green-deep:   #122418;
+    --green-accent: #2d5a3e;
+    --yellow:       #d4a843;
+    --yellow-soft:  #f0e2b8;
+    --cream:        #ede8db;
+    --cream-dark:   #ddd6c4;
+  }
+  html[data-vibe="forest"] body { background: var(--cream); }
+  html[data-vibe="sunburst"] {
+    --green:        #0d2b1c;
+    --green-deep:   #061509;
+    --green-accent: #18482e;
+    --yellow:       #ffc524;
+    --yellow-soft:  #fff0a8;
+    --cream:        #fff8e8;
+    --cream-dark:   #f3e8c4;
+  }
+  html[data-vibe="sunburst"] body { background: var(--cream); }
+  html[data-vibe="sunburst"] .ticker { background: var(--green-deep); color: var(--yellow); }
+  html[data-vibe="sunburst"] .ticker-item { color: var(--yellow); }
+  html[data-vibe="sunburst"] .ticker-dot { background: var(--yellow); }
+  html[data-vibe="sunburst"] .ticker-item + .ticker-item { border-left-color: rgba(255,255,255,0.18); }
+  html[data-vibe="sunburst"] .cta-band { background: var(--green); }
+  html[data-vibe="sunburst"] .cta-text h2 { color: var(--yellow); }
+  html[data-vibe="sunburst"] .cta-band .btn-primary { background: var(--yellow); color: var(--green-deep); border-color: var(--yellow); }
+
+  /* Type — Condensed (default), Wide, Editorial */
+  html[data-type="wide"] {
+    --font: 'Inter', 'Helvetica Neue', sans-serif;
+    --font-cond: 'Anton', 'Oswald', 'Helvetica Neue', sans-serif;
+  }
+  html[data-type="wide"] .hero-title,
+  html[data-type="wide"] .section-title,
+  html[data-type="wide"] .section-title-dark,
+  html[data-type="wide"] .cta-text h2 {
+    letter-spacing: 0;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+  html[data-type="editorial"] {
+    --font: 'Source Sans 3', 'Helvetica Neue', sans-serif;
+    --font-cond: 'Fraunces', 'Playfair Display', Georgia, serif;
+  }
+  html[data-type="editorial"] .hero-title,
+  html[data-type="editorial"] .section-title,
+  html[data-type="editorial"] .section-title-dark,
+  html[data-type="editorial"] .cta-text h2 {
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    font-style: italic;
+  }
+  html[data-type="editorial"] .section-label,
+  html[data-type="editorial"] .section-label-dark {
+    font-style: normal;
+    letter-spacing: 0.18em;
+  }
+
+  /* Energy — Calm, Standard (default), Bold */
+  html[data-energy="calm"] {
+    --space-9: 96px;
+    --radius-card: 4px;
+    --shadow-card: 0 0 0 1px rgba(0,0,0,0.04);
+  }
+  html[data-energy="calm"] .feature-band,
+  html[data-energy="calm"] .prices-band,
+  html[data-energy="calm"] .transport-band,
+  html[data-energy="calm"] .contact-band { padding: 96px 0; }
+  html[data-energy="calm"] .hero { min-height: 640px; }
+  html[data-energy="calm"] .ticker { display: none; }
+
+  html[data-energy="bold"] {
+    --space-9: 56px;
+    --radius-card: 24px;
+    --shadow-card: 0 0 0 1px rgba(0,0,0,0.08), 0 12px 32px rgba(0,0,0,0.16);
+  }
+  html[data-energy="bold"] .feature-band,
+  html[data-energy="bold"] .prices-band,
+  html[data-energy="bold"] .transport-band,
+  html[data-energy="bold"] .contact-band { padding: 56px 0; }
+  html[data-energy="bold"] .service-card:hover,
+  html[data-energy="bold"] .advantage:hover {
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.08), 0 24px 56px rgba(0,0,0,0.22);
+  }
+  html[data-energy="bold"] .hero-title { font-size: clamp(44px, 6vw, 78px); }
+  html[data-energy="bold"] .section-title,
+  html[data-energy="bold"] .section-title-dark { font-size: clamp(32px, 5vw, 56px); }
+  html[data-energy="bold"] .btn { padding: 14px 32px; font-size: 16px; }
+</style>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,500;1,600;1,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+
+<div id="tweaks-root"></div>
+<script type="text/babel">
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "vibe": "industrial",
+    "type": "condensed",
+    "energy": "calm"
+  }/*EDITMODE-END*/;
+
+  function ProgresstradeTweaks() {
+    const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
+
+    React.useEffect(() => {
+      const html = document.documentElement;
+      if (t.vibe === 'industrial') html.removeAttribute('data-vibe');
+      else html.setAttribute('data-vibe', t.vibe);
+      if (t.type === 'condensed') html.removeAttribute('data-type');
+      else html.setAttribute('data-type', t.type);
+      if (t.energy === 'standard') html.removeAttribute('data-energy');
+      else html.setAttribute('data-energy', t.energy);
+    }, [t.vibe, t.type, t.energy]);
+
+    return (
+      <TweaksPanel>
+        <TweakSection label="Vibe" />
+        <TweakRadio
+          label="Palette"
+          value={t.vibe}
+          options={[
+            { value: 'industrial', label: 'Industrial' },
+            { value: 'forest',     label: 'Forest' },
+            { value: 'sunburst',   label: 'Sunburst' },
+          ]}
+          onChange={(v) => setTweak('vibe', v)}
+        />
+
+        <TweakSection label="Typography" />
+        <TweakRadio
+          label="Personality"
+          value={t.type}
+          options={[
+            { value: 'condensed',  label: 'Condensed' },
+            { value: 'wide',       label: 'Wide' },
+            { value: 'editorial',  label: 'Editorial' },
+          ]}
+          onChange={(v) => setTweak('type', v)}
+        />
+
+        <TweakSection label="Spatial energy" />
+        <TweakRadio
+          label="Density"
+          value={t.energy}
+          options={[
+            { value: 'calm',     label: 'Calm' },
+            { value: 'standard', label: 'Standard' },
+            { value: 'bold',     label: 'Bold' },
+          ]}
+          onChange={(v) => setTweak('energy', v)}
+        />
+      </TweaksPanel>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<ProgresstradeTweaks />);
+</script>
+
+</body></html>
