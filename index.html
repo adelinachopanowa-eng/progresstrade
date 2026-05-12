@@ -8,20 +8,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Barlow+Condensed:wght@600;700;800&family=Montserrat:wght@900&family=Anton&family=Inter:wght@400;500;600;700&family=Fraunces:ital,wght@0,400;0,600;0,700;1,500;1,600;1,700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<script>
-/* =====================================================
-   АКТУАЛНИ ЦЕНИ — СМЕНЯЙТЕ САМО ТУК
-   Цените са в евро на тон (€/т)
-   ===================================================== */
-var PRICES = {
-  platno:  "230",  // Плътно желязо
-  tanko:   "180",  // Тънко желязо
-  tech:    "240",  // Технологичен отпадък
-  koli:    "160",  // Коли за скрап (ИУМПС)
-  elektro: "160",  // Стари електроуреди (ИУЕЕО)
-};
-/* ===================================================== */
-</script>
 
 <style>
 :root {
@@ -229,7 +215,7 @@ a{color:inherit;text-decoration:none}
     </a>
     <ul class="nav-links">
       <li><a href="#services">Какво изкупуваме</a></li>
-      <li><a href="#prices">Актуални цени</a></li>
+      <li><a href="#prices">Услуги</a></li>
       <li><a href="#about">За нас</a></li>
       <li><a href="#contact">Контакти</a></li>
     </ul>
@@ -245,7 +231,7 @@ a{color:inherit;text-decoration:none}
   </div>
   <div class="mobile-menu" id="mobile-menu">
     <a href="#services" onclick="toggleMenu()">Какво изкупуваме</a>
-    <a href="#prices" onclick="toggleMenu()">Актуални цени</a>
+    <a href="#prices" onclick="toggleMenu()">Услуги</a>
     <a href="#about" onclick="toggleMenu()">За нас</a>
     <a href="#contact" onclick="toggleMenu()">Контакти</a>
     <a href="tel:0893416559" class="btn btn-primary" style="margin-top:8px;justify-content:center;">☎ 0893 416 559</a>
@@ -257,7 +243,7 @@ a{color:inherit;text-decoration:none}
     <h1 class="hero-title">Максимална стойност<br>за вашите<br><em>железни отпадъци.</em></h1>
     <p class="hero-sub">Желязо, стари електроуреди и коли за скрап — топ цени и бързо обслужване.</p>
     <div class="hero-actions">
-      <a href="#prices" class="btn btn-primary">Виж актуалните цени</a>
+      <a href="tel:0893416559" class="btn btn-primary">Попитай за цена</a>
     </div>
   </div>
   <div class="hero-img">
@@ -387,9 +373,9 @@ a{color:inherit;text-decoration:none}
   <div class="container">
     <div class="prices-intro">
       <div>
-        <div class="section-label">Актуални цени</div>
-        <h2 class="section-title">Колко плащаме?</h2>
-        <p class="section-body" style="margin-top:8px;">Цените се актуализират ежедневно. Гарантираме най-добра цена в София — сравнете сами.</p>
+        <div class="section-label">Услуги</div>
+        <h2 class="section-title">Какво изкупуваме?</h2>
+        <p class="section-body" style="margin-top:8px;">Изкупуваме всички видове черни метали и отпадъци. Обадете се за актуална цена.</p>
       </div>
     </div>
     <div class="prices-grid">
@@ -397,40 +383,31 @@ a{color:inherit;text-decoration:none}
         <div class="price-card-label">Черни метали</div>
         <div class="price-card-name">Плътно желязо</div>
         <div class="price-card-note">Масивни конструкции, греди, профили с дебелина над 3 мм.</div>
-        <div class="price-amount" id="price-platno"></div>
       </div>
       <div class="price-card">
         <div class="price-card-label">Черни метали</div>
         <div class="price-card-name">Тънко желязо</div>
         <div class="price-card-note">Ламарина и други отпадъци с дебелина под 3 мм.</div>
-        <div class="price-amount" id="price-tanko"></div>
       </div>
       <div class="price-card">
         <div class="price-card-label">Технологичен отпадък</div>
         <div class="price-card-name">Железен отпадък от металообработка</div>
         <div class="price-card-note">Изрезки и отпадъци от металообработката</div>
-        <div class="price-amount" id="price-tech"></div>
       </div>
       <div class="price-card">
         <div class="price-card-label">ИУМПС</div>
         <div class="price-card-name">Коли за скрап</div>
         <div class="price-card-note">Цената зависи от теглото и окомплектовката на автомобила</div>
-        <div class="price-amount" id="price-koli"></div>
       </div>
       <div class="price-card">
         <div class="price-card-label">ИУЕЕО</div>
         <div class="price-card-name">Бяла техника</div>
         <div class="price-card-note">Перални, хладилници и др. бяла техника</div>
-        <div class="price-amount" id="price-elektro"></div>
-      </div>
-      <div class="price-card" style="background:rgba(240,192,64,0.12);border-color:rgba(240,192,64,0.3);">
-        <div class="price-card-label" style="color:var(--yellow);">Специална оферта</div>
-        <div class="price-card-name">Промишлени количества</div>
-        <div class="price-card-note">Индивидуална цена при над 1 тон материал</div>
-        <a href="tel:0893416559" class="price-amount" style="text-decoration:none;margin-top:16px;">Обадете се →</a>
       </div>
     </div>
-    <p class="prices-disclaimer">* Цените са ориентировъчни и зависят от вида, чистотата и количеството на материала. Обадете се за точна оферта.</p>
+    <div style="text-align:center;margin-top:var(--space-6);">
+      <a href="tel:0893416559" class="btn btn-primary" style="font-size:18px;padding:16px 40px;">Попитай за цена</a>
+    </div>
   </div>
 </section>
 
@@ -525,7 +502,7 @@ a{color:inherit;text-decoration:none}
       <div class="footer-col">
         <h5>Информация</h5>
         <ul>
-          <li><a href="#prices">Актуални цени</a></li>
+          <li><a href="#prices">Услуги</a></li>
           <li><a href="#how">Как работим</a></li>
           <li><a href="#clients">За нас</a></li>
         </ul>
@@ -570,11 +547,6 @@ function toggleMenu() {
   document.getElementById('mobile-menu').classList.toggle('open');
 }
 
-document.getElementById('price-platno').innerHTML  = PRICES.platno  + ' <span class="price-unit">€/т</span>';
-document.getElementById('price-tanko').innerHTML   = PRICES.tanko   + ' <span class="price-unit">€/т</span>';
-document.getElementById('price-tech').innerHTML    = PRICES.tech    + ' <span class="price-unit">€/т</span>';
-document.getElementById('price-koli').innerHTML    = PRICES.koli    + ' <span class="price-unit">€/т</span>';
-document.getElementById('price-elektro').innerHTML = PRICES.elektro + ' <span class="price-unit">€/т</span>';
 
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-links a');
