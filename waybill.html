@@ -187,20 +187,41 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); col
   .alert-error { background: #fce4e4; color: #8b0000; border: 1px solid #f0a0a0; }
 }
 
-/* ===== PRINT STYLES ===== */
+/* ===== PRINT STYLES (A4) ===== */
+@page { size: A4 portrait; margin: 8mm; }
 @media print {
-  body { background: #fff; font-family: Arial, sans-serif; }
-  header, .tabs, .tab-panel, .screen-only, .actions { display: none !important; }
-  .print-only { display: block !important; }
-  .waybill-print { page-break-inside: avoid; }
+  html, body { background: #fff !important; font-family: Arial, sans-serif; }
+  header, .tabs, .tab-panel { display: none !important; }
+  .preview-overlay {
+    position: static !important;
+    background: #fff !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    display: block !important;
+  }
+  .preview-container {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    width: auto !important;
+  }
+  .preview-toolbar { display: none !important; }
+  .preview-container > div { padding: 0 !important; background: #fff !important; }
+  .waybill-print {
+    width: auto !important;
+    min-height: 0 !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    page-break-inside: avoid;
+  }
 }
 
-/* ===== WAYBILL PRINT LAYOUT ===== */
+/* ===== WAYBILL PRINT LAYOUT (A4) ===== */
 .waybill-print {
-  width: 185mm;
-  min-height: 240mm;
+  width: 194mm;
+  min-height: 277mm;
   margin: 0 auto;
-  padding: 6mm 8mm;
+  padding: 6mm 7mm;
   font-family: Arial, sans-serif;
   font-size: 8.5pt;
   color: #000;
@@ -244,44 +265,59 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); col
 }
 
 /* Waybill internal styles */
-.wb-header { margin-bottom: 4mm; }
-.wb-company-block { display: flex; justify-content: space-between; align-items: flex-start; }
+.wb-topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 8mm; margin-bottom: 3mm; }
 .wb-company-left { flex: 1; }
-.wb-company-right { text-align: right; font-size: 7.5pt; }
-.wb-dotline { border-bottom: 0.5pt dotted #000; margin: 2pt 0 6pt; min-width: 100px; display: inline-block; }
+.wb-authorized { width: 70mm; }
+.wb-authorized .ahint { font-size: 6.5pt; color: #555; font-style: italic; text-align: center; margin-top: 1pt; }
+
 .wb-title {
   text-align: center;
-  font-size: 16pt;
+  font-size: 17pt;
   font-weight: bold;
-  letter-spacing: 3pt;
-  margin: 5mm 0 2mm;
+  letter-spacing: 4pt;
+  margin: 4mm 0 1mm;
   text-transform: uppercase;
 }
-.wb-series {
+.wb-series { text-align: center; font-size: 9pt; margin-bottom: 4mm; }
+.wb-series .ser-ln {
+  display: inline-block;
+  min-width: 30mm;
+  border-bottom: 0.5pt dotted #000;
   text-align: center;
-  font-size: 9pt;
-  margin-bottom: 5mm;
 }
-.wb-series .series-no {
-  font-size: 13pt;
-  font-weight: bold;
-  color: #cc0000;
-}
-.wb-field-row {
+.wb-series .series-no { font-size: 14pt; font-weight: bold; color: #cc0000; }
+
+/* generic field row: label + line / cells */
+.wb-line-row {
   display: flex;
-  align-items: baseline;
-  margin-bottom: 3pt;
+  align-items: flex-end;
+  margin-bottom: 4pt;
   gap: 4pt;
 }
-.wb-field-row .label { white-space: nowrap; font-size: 8pt; }
-.wb-field-row .val {
+.wb-line-row .lbl { white-space: nowrap; font-size: 8pt; padding-bottom: 1pt; }
+.wb-line-row .ln {
   flex: 1;
   border-bottom: 0.5pt dotted #000;
-  min-height: 11pt;
-  padding: 0 2pt;
+  min-height: 12pt;
+  padding: 0 2pt 1pt;
   font-size: 8pt;
 }
-.wb-field-row .sub { font-size: 6.5pt; color: #555; font-style: italic; }
+/* a cell where the explanatory hint sits UNDER the dotted line */
+.wb-cell { display: flex; flex-direction: column; }
+.wb-cell .cl {
+  border-bottom: 0.5pt dotted #000;
+  min-height: 12pt;
+  padding: 0 2pt 1pt;
+  font-size: 8pt;
+}
+.wb-cell .ch {
+  font-size: 6.5pt;
+  color: #555;
+  font-style: italic;
+  text-align: center;
+  margin-top: 1pt;
+  white-space: nowrap;
+}
 
 .wb-two-col {
   display: grid;
@@ -289,49 +325,18 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); col
   gap: 4mm;
   margin: 2mm 0;
 }
-.wb-box {
-  border: 0.5pt solid #000;
-  padding: 3pt 4pt;
-}
-.wb-box .bline {
-  border-bottom: 0.5pt dotted #000;
-  min-height: 14pt;
-  margin-bottom: 3pt;
-  font-size: 8pt;
-  padding: 1pt 2pt;
-}
-.wb-box .bsub { font-size: 6.5pt; color: #555; font-style: italic; margin-bottom: 4pt; }
-.wb-box p { font-size: 8pt; margin-bottom: 2pt; }
+.wb-box { border: 0.5pt solid #000; padding: 4pt 5pt; }
+.wb-box p { font-size: 8pt; margin-bottom: 3pt; }
+.wb-box .wb-line-row { margin-bottom: 2pt; }
 
 .wb-km-row {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
   gap: 6mm;
   margin: 2mm 0;
   border: 0.5pt solid #000;
-  padding: 3pt 4pt;
+  padding: 4pt 6pt 3pt;
 }
-.wb-km-row .label { font-size: 8pt; font-weight: bold; }
-.wb-km-row .km-field { display: flex; align-items: baseline; gap: 3pt; flex: 1; }
-.wb-km-row .km-field .sub-label { font-size: 8pt; white-space: nowrap; }
-.wb-km-row .km-field .val {
-  flex: 1;
-  border-bottom: 0.5pt dotted #000;
-  min-height: 12pt;
-  font-size: 8pt;
-}
-
-.wb-accept-row {
-  display: flex;
-  align-items: baseline;
-  margin: 3pt 0;
-  gap: 4pt;
-}
-.wb-accept-row .label { font-size: 7.5pt; white-space: nowrap; }
-.wb-accept-row .val { flex: 1; border-bottom: 0.5pt dotted #000; font-size: 8pt; padding: 0 2pt; min-height: 11pt; }
-.wb-accept-row .date-val { width: 40mm; border-bottom: 0.5pt dotted #000; font-size: 8pt; padding: 0 2pt; min-height: 11pt; }
-.wb-accept-row .sig-val { width: 30mm; border-bottom: 0.5pt dotted #000; font-size: 8pt; padding: 0 2pt; min-height: 11pt; }
-.wb-accept-row .sub { font-size: 6pt; color: #555; font-style: italic; }
 
 .wb-docs-title {
   text-align: center;
@@ -576,7 +581,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); col
     <h3>Документи за превоза (незадължително)</h3>
     <div id="doc-rows">
       <div class="field-grid two-col doc-row" style="margin-bottom:8px">
-        <div class="field"><label>Вид обществен превоз</label><input type="text" class="doc-type" placeholder="напр. Товарен превоз"></div>
+        <div class="field"><label>Вид обществен превоз</label><input type="text" class="doc-type" value="Превоз за собствена сметка"></div>
         <div class="field"><label>Документ</label><input type="text" class="doc-num" placeholder="напр. ЧМ № 00123"></div>
       </div>
     </div>
@@ -606,6 +611,14 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); col
         <div class="field"><label>Адрес</label><input type="text" id="s-company-addr" placeholder="гр. София, ул. ..."></div>
         <div class="field"><label>Телефон</label><input type="tel" id="s-company-phone" placeholder="0893 416 559"></div>
         <div class="field"><label>Факс</label><input type="text" id="s-company-fax" placeholder=""></div>
+      </div>
+      <h4 style="margin-top:6px">Данни по подразбиране за тази фирма (зареждат се автоматично при избор)</h4>
+      <div class="field-grid" style="margin-bottom:10px">
+        <div class="field"><label>Издал пътния лист</label><input type="text" id="s-company-issued" placeholder="Три имена"></div>
+        <div class="field"><label>Механик</label><input type="text" id="s-company-mechanic" placeholder="Фамилия"></div>
+        <div class="field"><label>Медицинско лице</label><input type="text" id="s-company-medic" placeholder="Фамилия"></div>
+        <div class="field"><label>Приел и проверил</label><input type="text" id="s-company-checker" placeholder="Три имена"></div>
+        <div class="field"><label>Вид превоз</label><input type="text" id="s-company-transport" value="Превоз за собствена сметка"></div>
       </div>
       <button class="btn btn-primary btn-sm" onclick="addCompany()">Добави</button>
     </div>
@@ -692,7 +705,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); col
 <script>
 // ===== DATA LAYER =====
 function loadData() {
-  const defaults = { companies: [], vehicles: [], drivers: [], personnel: [], history: [] };
+  const defaults = { companies: [], vehicles: [], drivers: [], personnel: [], history: [], lastNumber: 0 };
   try {
     return Object.assign(defaults, JSON.parse(localStorage.getItem('waybill_data') || '{}'));
   } catch { return defaults; }
@@ -727,10 +740,10 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 function autoNextNumber() {
-  if (!DB.history.length) return;
-  const nums = DB.history.map(h => parseInt(h.number)).filter(n => !isNaN(n));
-  if (!nums.length) return;
-  document.getElementById('f-number').value = Math.max(...nums) + 1;
+  const histNums = DB.history.map(h => parseInt(h.number)).filter(n => !isNaN(n));
+  const maxHist = histNums.length ? Math.max(...histNums) : 0;
+  const next = Math.max(maxHist, DB.lastNumber || 0) + 1;
+  if (next > 1) document.getElementById('f-number').value = next;
 }
 
 // ===== POPULATE SELECTS =====
@@ -775,6 +788,32 @@ function fillCompany() {
   document.getElementById('f-address').value = co.address || '';
   document.getElementById('f-phone').value = co.phone || '';
   document.getElementById('f-fax').value = co.fax || '';
+
+  // Auto-load default personnel for this company
+  setSelectByName('f-issued-by', 'f-issued-by-custom', co.issuedBy);
+  setSelectByName('f-mechanic', 'f-mechanic-custom', co.mechanic);
+  setSelectByName('f-medic', 'f-medic-custom', co.medic);
+  setSelectByName('f-checker', 'f-checker-custom', co.checker);
+
+  // Auto-load transport type into the first document row
+  const transport = co.transportType || 'Превоз за собствена сметка';
+  const firstDocType = document.querySelector('.doc-row .doc-type');
+  if (firstDocType && !firstDocType.value.trim()) firstDocType.value = transport;
+}
+
+// Set a select to the option matching `name`; if no match, use the custom input
+function setSelectByName(selectId, customId, name) {
+  if (!name) return;
+  const sel = document.getElementById(selectId);
+  const custom = document.getElementById(customId);
+  const opt = Array.from(sel.options).find(o => o.text === name);
+  if (opt) {
+    sel.value = opt.value;
+    if (custom) custom.style.display = 'none';
+  } else {
+    sel.value = '__custom__';
+    if (custom) { custom.value = name; custom.style.display = 'block'; }
+  }
 }
 
 function fillVehicle() {
@@ -818,10 +857,18 @@ function addCompany() {
     id: uid(), name,
     address: document.getElementById('s-company-addr').value.trim(),
     phone: document.getElementById('s-company-phone').value.trim(),
-    fax: document.getElementById('s-company-fax').value.trim()
+    fax: document.getElementById('s-company-fax').value.trim(),
+    issuedBy: document.getElementById('s-company-issued').value.trim(),
+    mechanic: document.getElementById('s-company-mechanic').value.trim(),
+    medic: document.getElementById('s-company-medic').value.trim(),
+    checker: document.getElementById('s-company-checker').value.trim(),
+    transportType: document.getElementById('s-company-transport').value.trim()
   });
   saveData(DB);
-  ['s-company-name','s-company-addr','s-company-phone','s-company-fax'].forEach(id => document.getElementById(id).value = '');
+  ['s-company-name','s-company-addr','s-company-phone','s-company-fax',
+   's-company-issued','s-company-mechanic','s-company-medic','s-company-checker']
+    .forEach(id => document.getElementById(id).value = '');
+  document.getElementById('s-company-transport').value = 'Превоз за собствена сметка';
   renderSettingsLists(); renderAllSelects();
   alert_('settings-alert', 'Фирмата е добавена.');
 }
@@ -985,66 +1032,61 @@ function buildWaybillHTML(data) {
     : `<tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr>`;
 
   return `
-<div class="wb-header">
-  <div class="wb-company-block">
-    <div class="wb-company-left">
-      <div class="wb-field-row"><span class="label">Фирма</span><span class="val">${data.companyName}</span></div>
-      <div class="wb-field-row"><span class="label">Адрес</span><span class="val">${data.address}</span></div>
-      <div class="wb-field-row">
-        <span class="label">Тел.</span><span class="val" style="max-width:80px">${data.phone}</span>
-        &nbsp;&nbsp;<span class="label">Факс</span><span class="val" style="max-width:80px">${data.fax}</span>
-      </div>
+<div class="wb-topbar">
+  <div class="wb-company-left">
+    <div class="wb-line-row"><span class="lbl">Фирма</span><span class="ln">${data.companyName}</span></div>
+    <div class="wb-line-row"><span class="lbl">Адрес</span><span class="ln">${data.address}</span></div>
+    <div class="wb-line-row">
+      <span class="lbl">Тел.</span><span class="ln" style="max-width:90px">${data.phone}</span>
+      <span class="lbl" style="margin-left:8pt">Факс</span><span class="ln" style="max-width:90px">${data.fax}</span>
     </div>
-    <div class="wb-company-right">
-      Разрешил излизането: <span class="wb-dotline" style="min-width:70px">${data.authorized}</span><br>
-      <span style="font-size:6.5pt;font-style:italic">(подпис, печат)</span>
-    </div>
+  </div>
+  <div class="wb-authorized">
+    <div class="wb-line-row"><span class="lbl">Разрешил излизането:</span><span class="ln" style="min-height:30pt">${data.authorized}</span></div>
+    <div class="ahint">(подпис, печат)</div>
   </div>
 </div>
 
 <div class="wb-title">ПЪТЕН ЛИСТ</div>
 <div class="wb-series">
-  Серия <span class="wb-dotline" style="min-width:40px">${data.series}</span>
+  Серия <span class="ser-ln">${data.series}</span>
   &nbsp;&nbsp; № &nbsp;<span class="series-no">${data.number}</span>
 </div>
 
-<div class="wb-field-row">
-  <span class="label">Автомобил</span>
-  <span class="val">${data.vehicle}</span>
-  <span style="font-size:6.5pt;font-style:italic;white-space:nowrap">(марка, модел)</span>
-  <span class="val" style="max-width:90px">${data.regno}</span>
-  <span style="font-size:6.5pt;font-style:italic;white-space:nowrap">(регистрационен №)</span>
+<div class="wb-line-row">
+  <span class="lbl">Автомобил</span>
+  <span class="wb-cell" style="flex:1"><span class="cl">${data.vehicle}</span><span class="ch">(марка, модел)</span></span>
+  <span class="wb-cell" style="width:45mm"><span class="cl">${data.regno}</span><span class="ch">(регистрационен №)</span></span>
 </div>
-<div class="wb-field-row"><span class="label">Водач I</span><span class="val">${data.driver1}</span></div>
-<div class="wb-field-row"><span class="label">Водач II</span><span class="val">${data.driver2}</span></div>
-<div class="wb-field-row">
-  <span class="label">Придружители: 1.</span><span class="val">${data.companion1}</span>
-  &nbsp;&nbsp;<span class="label">2.</span><span class="val">${data.companion2}</span>
+<div class="wb-line-row"><span class="lbl">Водач I</span><span class="ln">${data.driver1}</span></div>
+<div class="wb-line-row"><span class="lbl">Водач II</span><span class="ln">${data.driver2}</span></div>
+<div class="wb-line-row">
+  <span class="lbl">Придружители: 1.</span><span class="ln">${data.companion1}</span>
+  <span class="lbl" style="margin-left:6pt">2.</span><span class="ln">${data.companion2}</span>
 </div>
-<div class="wb-field-row">
-  <span class="label">Издал пътния лист:</span>
-  <span class="val">${data.issuedBy}</span>
-  <span style="font-size:6.5pt;font-style:italic;white-space:nowrap">(ime, презиме, фамилия)</span>
-  <span class="val" style="max-width:50px">${formatDate(data.issueDate)}</span>
-  <span style="font-size:6.5pt;font-style:italic;white-space:nowrap">(дата)</span>
-  <span class="val" style="max-width:40px"></span>
-  <span style="font-size:6.5pt;font-style:italic;white-space:nowrap">(подпис)</span>
+<div class="wb-line-row">
+  <span class="lbl">Издал пътния лист:</span>
+  <span class="wb-cell" style="flex:1"><span class="cl">${data.issuedBy}</span><span class="ch">(име, презиме, фамилия)</span></span>
+  <span class="wb-cell" style="width:32mm"><span class="cl">${formatDate(data.issueDate)}</span><span class="ch">(дата)</span></span>
+  <span class="wb-cell" style="width:28mm"><span class="cl"></span><span class="ch">(подпис)</span></span>
 </div>
-<div class="wb-field-row"><span class="label">Време на излизане от гаража (дата, час, мин.)</span><span class="val">${formatDT(data.depart)}</span></div>
-<div class="wb-field-row"><span class="label">Време на прибиране в гаража (дата, час, мин.)</span><span class="val">${formatDT(data.return)}</span></div>
+<div class="wb-line-row">
+  <span class="lbl">Време на излизане от гаража</span>
+  <span class="wb-cell" style="flex:1"><span class="cl">${formatDT(data.depart)}</span><span class="ch">(дата, час, мин.)</span></span>
+</div>
+<div class="wb-line-row">
+  <span class="lbl">Време на прибиране в гаража</span>
+  <span class="wb-cell" style="flex:1"><span class="cl">${formatDT(data.return)}</span><span class="ch">(дата, час, мин.)</span></span>
+</div>
 
 <div class="wb-two-col" style="margin-top:3mm">
   <div class="wb-box">
     <p>Автомобилът е технически изправен.</p>
-    <p>Механик:</p>
-    <div class="bline">${data.mechanic}</div>
-    <div class="bsub">(фамилия, подпис)</div>
+    <div class="wb-line-row"><span class="lbl">Механик:</span><span class="wb-cell" style="flex:1"><span class="cl">${data.mechanic}</span><span class="ch">(фамилия, подпис)</span></span></div>
   </div>
   <div class="wb-box">
     <p>Приех автомобила технически изправен.</p>
-    <p>Водач:</p>
-    <div class="bline">${data.driver1}</div>
-    <div class="bsub">(фамилия, подпис)</div>
+    <div class="wb-line-row"><span class="lbl">Водач:</span><span class="wb-cell" style="flex:1"><span class="cl">${data.driver1}</span><span class="ch">(фамилия, подпис)</span></span></div>
   </div>
 </div>
 <div class="wb-two-col">
@@ -1054,32 +1096,21 @@ function buildWaybillHTML(data) {
   </div>
   <div class="wb-box">
     <p>Водачът е годен да управлява.</p>
-    <p>Извършил проверката:</p>
-    <div class="bline">${data.medic}</div>
-    <div class="bsub">(фамилия, подпис)</div>
+    <div class="wb-line-row"><span class="lbl">Извършил проверката:</span><span class="wb-cell" style="flex:1"><span class="cl">${data.medic}</span><span class="ch">(фамилия, подпис)</span></span></div>
   </div>
 </div>
 
 <div class="wb-km-row">
-  <span class="label">Километропоказател:</span>
-  <span class="km-field">
-    <span class="sub-label">Начален</span>
-    <span class="val">${data.kmStart}</span>
-  </span>
-  <span class="km-field">
-    <span class="sub-label">Краен</span>
-    <span class="val">${data.kmEnd}</span>
-  </span>
+  <span class="lbl" style="font-weight:bold">Километропоказател:</span>
+  <span class="wb-cell" style="flex:1"><span class="cl">${data.kmStart}</span><span class="ch">Начален</span></span>
+  <span class="wb-cell" style="flex:1"><span class="cl">${data.kmEnd}</span><span class="ch">Краен</span></span>
 </div>
 
-<div class="wb-accept-row" style="margin-top:3mm">
-  <span class="label">Приел и проверил пътния лист:</span>
-  <span class="val">${data.checker}</span>
-  <span style="font-size:6pt;font-style:italic;white-space:nowrap">(ime, фамилия)</span>
-  <span class="date-val">${formatDate(data.checkDate)}</span>
-  <span style="font-size:6pt;font-style:italic;white-space:nowrap">(дата)</span>
-  <span class="sig-val"></span>
-  <span style="font-size:6pt;font-style:italic;white-space:nowrap">(подпис)</span>
+<div class="wb-line-row" style="margin-top:3mm">
+  <span class="lbl">Приел и проверил пътния лист:</span>
+  <span class="wb-cell" style="flex:1"><span class="cl">${data.checker}</span><span class="ch">(име, фамилия)</span></span>
+  <span class="wb-cell" style="width:32mm"><span class="cl">${formatDate(data.checkDate)}</span><span class="ch">(дата)</span></span>
+  <span class="wb-cell" style="width:28mm"><span class="cl"></span><span class="ch">(подпис)</span></span>
 </div>
 
 <div class="wb-docs-title">ДОКУМЕНТИ ЗА ПРЕВОЗА КЪМ ПЪТНИЯ ЛИСТ</div>
@@ -1111,9 +1142,12 @@ function saveToHistory() {
   data.id = uid();
   DB.history.unshift(data);
   if (DB.history.length > 200) DB.history = DB.history.slice(0, 200);
+  const n = parseInt(data.number);
+  if (!isNaN(n) && n > (DB.lastNumber || 0)) DB.lastNumber = n;
   saveData(DB);
   alert_('form-alert', `Пътен лист № ${data.number || '—'} е записан в историята.`);
   renderHistory();
+  autoNextNumber();
 }
 
 // ===== HISTORY TAB =====
@@ -1235,7 +1269,7 @@ function clearForm() {
   document.getElementById('f-return').value = '';
   document.getElementById('doc-rows').innerHTML = `
     <div class="field-grid two-col doc-row" style="margin-bottom:8px">
-      <div class="field"><label>Вид обществен превоз</label><input type="text" class="doc-type"></div>
+      <div class="field"><label>Вид обществен превоз</label><input type="text" class="doc-type" value="Превоз за собствена сметка"></div>
       <div class="field"><label>Документ</label><input type="text" class="doc-num"></div>
     </div>`;
   autoNextNumber();
