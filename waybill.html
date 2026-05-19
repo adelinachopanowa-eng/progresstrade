@@ -906,7 +906,7 @@ function closePreview() {
   document.getElementById('preview-overlay').classList.remove('open');
   document.body.style.overflow = '';
   const wb = document.getElementById('wb-content');
-  wb.style.transform = ''; wb.style.transformOrigin = '';
+  wb.style.transform = ''; wb.style.transformOrigin = ''; wb.style.marginBottom = '';
   const wrap = document.getElementById('wb-wrap');
   if (wrap) { wrap.style.height = ''; wrap.style.overflow = ''; }
   autoNextNumber();
@@ -918,18 +918,18 @@ function scaleWaybill() {
   if (!wrap || !wb) return;
   wb.style.transform = '';
   wb.style.transformOrigin = '';
-  wrap.style.height = '';
+  wb.style.marginBottom = '';
   wrap.style.overflow = '';
   const wrapW = wrap.clientWidth - 32;
   const wbW   = wb.scrollWidth;
   if (wrapW > 0 && wrapW < wbW) {
     const scale = wrapW / wbW;
+    const wbH   = wb.scrollHeight;
     wb.style.transformOrigin = 'top left';
     wb.style.transform = `scale(${scale})`;
-    // overflow:hidden prevents misleading scrollbar; visual bounds fit because
-    // CSS overflow clips transformed children by their visual (ink) bounds
-    wrap.style.overflow = 'hidden';
-    wrap.style.height = Math.ceil(wb.scrollHeight * scale + 32) + 'px';
+    // Negative margin-bottom makes the element's layout contribution = visual height,
+    // so the parent's scroll area matches the visible scaled content with no clipping.
+    wb.style.marginBottom = -Math.ceil(wbH * (1 - scale)) + 'px';
   }
 }
 window.addEventListener('resize', () => {
