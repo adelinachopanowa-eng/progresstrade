@@ -664,6 +664,15 @@ function populateSelects() {
   fillSel('f-company', DB.companies, c => c.name, c => c.id, '— изберете фирма —');
   fillSel('f-vehicle', DB.vehicles, v => `${v.model} (${v.regno})`, v => v.id, '— изберете —');
   fillSel('f-driver',  DB.drivers,  d => d.name, d => d.id, '— изберете водач —');
+  selectDefaultCompany();
+}
+function selectDefaultCompany() {
+  const sel = document.getElementById('f-company');
+  if (sel.value || !DB.companies.length) return;
+  // prefer "Прогрестрейд", иначе първата въведена фирма
+  const def = DB.companies.find(c => /прогрестрейд/i.test(c.name)) || DB.companies[0];
+  sel.value = def.id;
+  fillCompany();
 }
 function fillSel(id, items, labelFn, valFn, placeholder) {
   const sel = document.getElementById(id);
