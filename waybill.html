@@ -283,10 +283,10 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 /* back page */
 .wb-back { page-break-before: always; margin-top: 8mm; }
 .wb-back-table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin-bottom: 4mm; }
-.wb-back-table th, .wb-back-table td { border: 0.5pt solid #000; padding: 2pt 3pt; text-align: center; }
-.wb-back-table th { font-weight: bold; font-size: 7pt; vertical-align: middle; }
-.wb-back-table td { height: 14pt; }
-.wb-back-table .num-row td { font-weight: bold; background: #f5f5f5; }
+.wb-back-table th, .wb-back-table td { border: 1pt solid #000; padding: 2pt 3pt; text-align: center; }
+.wb-back-table th { font-weight: bold; font-size: 7pt; vertical-align: middle; line-height: 1.3; }
+.wb-back-table td { height: 15pt; }
+.wb-back-table .num-row td { font-weight: bold; background: #f0f0f0; height: 12pt; }
 .wb-notes-label { font-size: 8pt; font-weight: bold; margin-bottom: 3mm; }
 .wb-dotline-full {
   border-bottom: 0.5pt dotted #000;
@@ -333,20 +333,20 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 .wb-series .ser-no { font-size: 14pt; font-weight: bold; color: #cc0000; }
 
 .wb-row {
-  display: flex; align-items: flex-end; margin-bottom: 4pt; gap: 4pt;
+  display: flex; align-items: flex-start; margin-bottom: 5pt; gap: 4pt;
 }
-.wb-row .lbl { white-space: nowrap; font-size: 8pt; padding-bottom: 1pt; }
+.wb-row .lbl { white-space: nowrap; font-size: 8pt; line-height: 12pt; flex-shrink: 0; }
 .wb-row .ln  {
   flex: 1; border-bottom: 0.5pt dotted #000;
-  min-height: 12pt; padding: 0 2pt 1pt; font-size: 8pt;
+  min-height: 12pt; padding: 0 2pt; font-size: 8pt; line-height: 12pt;
 }
 .wb-cell { display: flex; flex-direction: column; }
 .wb-cell .cl {
   border-bottom: 0.5pt dotted #000;
-  min-height: 12pt; padding: 0 2pt 1pt; font-size: 8pt;
+  min-height: 12pt; padding: 0 2pt; font-size: 8pt; line-height: 12pt;
 }
 .wb-cell .ch {
-  font-size: 6.5pt; color: #555; font-style: italic;
+  font-size: 6pt; color: #555; font-style: italic;
   text-align: center; margin-top: 1pt; white-space: nowrap;
 }
 
@@ -356,10 +356,10 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 .wb-box .wb-row { margin-bottom: 2pt; }
 
 .wb-km {
-  display: flex; align-items: flex-end; gap: 6mm;
+  display: flex; align-items: flex-start; gap: 6mm;
   margin: 2mm 0; border: 0.5pt solid #000; padding: 4pt 6pt 3pt;
 }
-.wb-km .lbl { font-size: 8pt; font-weight: bold; padding-bottom: 1pt; }
+.wb-km .lbl { font-size: 8pt; font-weight: bold; line-height: 12pt; flex-shrink: 0; }
 
 .wb-docs-title {
   text-align: center; font-size: 8.5pt; font-weight: bold;
@@ -367,8 +367,8 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   text-transform: uppercase; letter-spacing: 0.5pt;
 }
 .wb-table { width: 100%; border-collapse: collapse; font-size: 7.5pt; }
-.wb-table th { border: 0.5pt solid #000; padding: 3pt 4pt; font-weight: bold; background: #f0f0f0; }
-.wb-table td { border: 0.5pt solid #000; padding: 4pt; height: 16pt; vertical-align: top; }
+.wb-table th { border: 1pt solid #000; padding: 3pt 4pt; font-weight: bold; background: #f0f0f0; }
+.wb-table td { border: 1pt solid #000; padding: 3pt 4pt; height: 18pt; vertical-align: top; }
 
 /* ===== RESPONSIVE ===== */
 @media (max-width: 500px) {
@@ -707,9 +707,13 @@ function closePrevOnBg(e) { if (e.target === document.getElementById('preview-ov
 
 // ===== BUILD WAYBILL HTML =====
 function buildWB(d) {
-  const dRows = d.docs && d.docs.length
-    ? d.docs.map(x => `<tr><td>${x.type}</td><td>${x.num}</td></tr>`).join('')
-    : `<tr><td>&nbsp;</td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr>`;
+  const emptyDocRow = '<tr><td>&nbsp;</td><td></td></tr>';
+  const filledRows = d.docs && d.docs.length
+    ? d.docs.map(x => `<tr><td>${x.type||'&nbsp;'}</td><td>${x.num||''}</td></tr>`).join('')
+    : '';
+  const totalDocRows = Math.max(6, (d.docs ? d.docs.length : 0));
+  const extraEmpty = Array(Math.max(0, totalDocRows - (d.docs ? d.docs.length : 0))).fill(emptyDocRow).join('');
+  const dRows = filledRows + extraEmpty;
   const fmtDate = s => { if(!s) return ''; const dt=new Date(s); return isNaN(dt)?s:dt.toLocaleDateString('bg-BG',{day:'2-digit',month:'2-digit',year:'numeric'}); };
   const cell = (val, hint, w) => `<span class="wb-cell"${w?' style="width:'+w+'"':''}><span class="cl">${val||''}</span><span class="ch">${hint}</span></span>`;
 
