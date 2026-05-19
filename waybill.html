@@ -263,18 +263,6 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     border: none !important; margin: 0 !important; padding: 6mm 7mm !important;
   }
   .wb-back { margin-top: 0 !important; }
-
-  /* Selective printing */
-  body[data-print="waybill"] .doc-zapoved,
-  body[data-print="waybill"] .doc-uds { display: none !important; }
-
-  body[data-print="zapoved"] .doc-waybill,
-  body[data-print="zapoved"] .doc-uds { display: none !important; }
-  body[data-print="zapoved"] .doc-zapoved { page-break-before: avoid !important; }
-
-  body[data-print="uds"] .doc-waybill,
-  body[data-print="uds"] .doc-zapoved { display: none !important; }
-  body[data-print="uds"] .doc-uds { page-break-before: avoid !important; }
 }
 
 /* ===== PREVIEW OVERLAY ===== */
@@ -685,9 +673,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     <div class="preview-toolbar">
       <h2>Документи — преглед</h2>
       <div class="btns">
-        <button class="btn btn-yellow btn-sm" style="font-size:0.78rem" onclick="printDoc('waybill')">🖨️ Пътен лист</button>
-        <button class="btn btn-yellow btn-sm" style="font-size:0.78rem" onclick="printDoc('zapoved')">🖨️ Заповед</button>
-        <button class="btn btn-yellow btn-sm" style="font-size:0.78rem" onclick="printDoc('uds')">🖨️ Удостоверение</button>
+        <button class="btn btn-yellow btn-sm" onclick="window.print()">🖨️ Печат</button>
         <button class="btn btn-outline btn-sm" style="color:#fff;border-color:rgba(255,255,255,0.4)" onclick="closePreview()">✕</button>
       </div>
     </div>
@@ -922,7 +908,7 @@ function closePreview() {
   const wb = document.getElementById('wb-content');
   wb.style.transform = ''; wb.style.transformOrigin = '';
   const wrap = document.getElementById('wb-wrap');
-  if (wrap) wrap.style.height = '';
+  if (wrap) { wrap.style.height = ''; wrap.style.overflow = ''; }
   autoNextNumber();
   autoZapovedNumber();
 }
@@ -930,14 +916,19 @@ function scaleWaybill() {
   const wrap = document.getElementById('wb-wrap');
   const wb   = document.getElementById('wb-content');
   if (!wrap || !wb) return;
-  wb.style.transform = ''; wb.style.transformOrigin = '';
+  wb.style.transform = '';
+  wb.style.transformOrigin = '';
   wrap.style.height = '';
-  const wrapW  = wrap.clientWidth - 32;
-  const wbW    = wb.scrollWidth;
+  wrap.style.overflow = '';
+  const wrapW = wrap.clientWidth - 32;
+  const wbW   = wb.scrollWidth;
   if (wrapW > 0 && wrapW < wbW) {
     const scale = wrapW / wbW;
     wb.style.transformOrigin = 'top left';
     wb.style.transform = `scale(${scale})`;
+    // overflow:hidden prevents misleading scrollbar; visual bounds fit because
+    // CSS overflow clips transformed children by their visual (ink) bounds
+    wrap.style.overflow = 'hidden';
     wrap.style.height = Math.ceil(wb.scrollHeight * scale + 32) + 'px';
   }
 }
@@ -945,11 +936,6 @@ window.addEventListener('resize', () => {
   if (document.getElementById('preview-overlay').classList.contains('open')) scaleWaybill();
 });
 function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
-function printDoc(type) {
-  document.body.dataset.print = type;
-  window.print();
-  delete document.body.dataset.print;
-}
 
 // ===== DATE HELPERS =====
 function fmtDateBG(s) {
