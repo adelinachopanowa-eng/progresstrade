@@ -2,196 +2,221 @@
 <html lang="bg">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Пътен лист — Progresstrade</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Пътен лист — Прогрестрейд ЕООД</title>
 <style>
 /* ===== VARIABLES ===== */
 :root {
   --green: #1a4a2e;
-  --green-light: #21603b;
+  --green-l: #21603b;
   --yellow: #f0c040;
   --cream: #f5f4ee;
   --white: #fff;
-  --border: #ccc;
-  --border-light: #e0e0d8;
+  --border: #d0d0c8;
   --text: #1a1a1a;
-  --text-soft: #555;
-  --radius: 8px;
-  --shadow: 0 2px 8px rgba(0,0,0,0.12);
+  --soft: #666;
+  --r: 10px;
+  --shadow: 0 2px 10px rgba(0,0,0,0.10);
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 15px; }
-body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); color: var(--text); }
+/* ===== RESET ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+body { font-family: 'Segoe UI', system-ui, Arial, sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
 
-/* ===== SCREEN LAYOUT ===== */
-@media screen {
-  .print-only { display: none; }
-
-  header {
-    background: var(--green);
-    color: #fff;
-    padding: 14px 24px;
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    box-shadow: var(--shadow);
-  }
-  header h1 { font-size: 1.15rem; font-weight: 700; letter-spacing: 0.02em; }
-  header .subtitle { font-size: 0.8rem; opacity: 0.7; }
-
-  .tabs {
-    display: flex;
-    background: var(--green);
-    padding: 0 24px;
-    gap: 4px;
-  }
-  .tab-btn {
-    padding: 10px 20px;
-    background: none;
-    border: none;
-    color: rgba(255,255,255,0.65);
-    cursor: pointer;
-    font-size: 0.88rem;
-    font-weight: 600;
-    border-bottom: 3px solid transparent;
-    transition: all 0.15s;
-  }
-  .tab-btn:hover { color: #fff; }
-  .tab-btn.active { color: var(--yellow); border-bottom-color: var(--yellow); }
-
-  .tab-panel { display: none; padding: 28px 24px; max-width: 960px; margin: 0 auto; }
-  .tab-panel.active { display: block; }
-
-  /* ===== FORM STYLES ===== */
-  .form-section {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 18px;
-    box-shadow: var(--shadow);
-  }
-  .form-section h3 {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--green);
-    margin-bottom: 14px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--yellow);
-  }
-
-  .field-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 12px; }
-  .field-grid.two-col { grid-template-columns: 1fr 1fr; }
-  .field-grid.three-col { grid-template-columns: 1fr 1fr 1fr; }
-
-  .field { display: flex; flex-direction: column; gap: 4px; }
-  .field label { font-size: 0.78rem; font-weight: 600; color: var(--text-soft); }
-  .field input, .field select, .field textarea {
-    padding: 8px 10px;
-    border: 1.5px solid var(--border);
-    border-radius: 6px;
-    font-size: 0.88rem;
-    font-family: inherit;
-    color: var(--text);
-    background: #fff;
-    transition: border-color 0.15s;
-  }
-  .field input:focus, .field select:focus {
-    outline: none;
-    border-color: var(--green);
-  }
-  .field select { cursor: pointer; }
-  .field .hint { font-size: 0.72rem; color: var(--text-soft); font-style: italic; }
-
-  .actions {
-    display: flex;
-    gap: 10px;
-    justify-content: flex-end;
-    padding: 12px 0 0;
-    flex-wrap: wrap;
-  }
-  .btn {
-    padding: 10px 22px;
-    border: none;
-    border-radius: 6px;
-    font-size: 0.88rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
-  .btn-primary { background: var(--green); color: #fff; }
-  .btn-primary:hover { background: var(--green-light); }
-  .btn-yellow { background: var(--yellow); color: var(--green); }
-  .btn-yellow:hover { background: #e5b838; }
-  .btn-outline {
-    background: none;
-    border: 1.5px solid var(--border);
-    color: var(--text-soft);
-  }
-  .btn-outline:hover { border-color: var(--green); color: var(--green); }
-  .btn-danger { background: #c0392b; color: #fff; font-size: 0.78rem; padding: 6px 12px; }
-  .btn-danger:hover { background: #a93226; }
-  .btn-sm { padding: 6px 14px; font-size: 0.8rem; }
-
-  /* ===== SETTINGS TAB ===== */
-  .settings-section {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 20px;
-    margin-bottom: 18px;
-    box-shadow: var(--shadow);
-  }
-  .settings-section h3 {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--green);
-    margin-bottom: 14px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .settings-section h3 .icon { font-size: 1.1rem; }
-
-  .entity-list { list-style: none; margin-bottom: 14px; }
-  .entity-list li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 8px 12px;
-    background: var(--cream);
-    border-radius: 6px;
-    margin-bottom: 6px;
-    font-size: 0.88rem;
-  }
-  .entity-list li .meta { color: var(--text-soft); font-size: 0.78rem; }
-  .entity-list li .btns { display: flex; gap: 6px; }
-
-  .add-form {
-    background: #f0f7f3;
-    border: 1.5px dashed #a8d5b7;
-    border-radius: 6px;
-    padding: 14px;
-    margin-top: 8px;
-  }
-  .add-form h4 { font-size: 0.82rem; color: var(--green); margin-bottom: 10px; font-weight: 700; }
-
-  /* ===== ALERT ===== */
-  .alert {
-    padding: 10px 14px;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    margin-bottom: 14px;
-  }
-  .alert-success { background: #d4edda; color: #1a4a2e; border: 1px solid #a8d5b7; }
-  .alert-error { background: #fce4e4; color: #8b0000; border: 1px solid #f0a0a0; }
+/* ===== HEADER ===== */
+header {
+  background: var(--green);
+  color: #fff;
+  padding: 14px 20px 12px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
+header h1 { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.01em; }
+header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
+
+/* ===== TABS ===== */
+.tabs {
+  background: var(--green);
+  display: flex;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.tabs::-webkit-scrollbar { display: none; }
+.tab-btn {
+  flex: 1;
+  min-width: 90px;
+  padding: 11px 14px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.tab-btn.active { color: var(--yellow); border-bottom-color: var(--yellow); }
+.tab-btn:hover  { color: #fff; }
+
+/* ===== PANELS ===== */
+.tab-panel { display: none; padding: 18px 16px 80px; max-width: 700px; margin: 0 auto; }
+.tab-panel.active { display: block; }
+
+/* ===== CARDS ===== */
+.card {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.card h3 {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--green);
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 2px solid var(--yellow);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== FIELDS ===== */
+.fields { display: grid; gap: 12px; }
+.fields.col2 { grid-template-columns: 1fr 1fr; }
+.fields.col3 { grid-template-columns: 1fr 1fr 1fr; }
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label { font-size: 0.75rem; font-weight: 700; color: var(--soft); }
+.field input, .field select {
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  color: var(--text);
+  background: #fff;
+  transition: border-color .15s;
+  min-height: 44px;
+}
+.field input:focus, .field select:focus { outline: none; border-color: var(--green); }
+.field select { cursor: pointer; }
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 44px;
+  transition: all .15s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-primary { background: var(--green); color: #fff; }
+.btn-primary:active { background: var(--green-l); }
+.btn-yellow  { background: var(--yellow); color: var(--green); }
+.btn-yellow:active  { background: #e0b030; }
+.btn-outline { background: none; border: 1.5px solid var(--border); color: var(--soft); }
+.btn-outline:active { border-color: var(--green); color: var(--green); }
+.btn-danger  { background: #c0392b; color: #fff; font-size: 0.78rem; padding: 7px 12px; min-height: 36px; }
+.btn-sm { padding: 8px 14px; font-size: 0.82rem; min-height: 38px; }
+.btn-full { width: 100%; }
+
+/* ===== ACTIONS BAR ===== */
+.actions-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  padding: 10px 16px;
+  display: none;
+  gap: 10px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.08);
+  z-index: 50;
+}
+.actions-bar.visible { display: flex; }
+
+/* ===== ALERT ===== */
+.alert {
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 14px;
+}
+.alert-ok  { background: #d4edda; color: #1a4a2e; border: 1px solid #a8d5b7; }
+.alert-err { background: #fce4e4; color: #8b0000; border: 1px solid #f0a0a0; }
+
+/* ===== ENTITY LIST ===== */
+.entity-list { list-style: none; margin-bottom: 12px; }
+.entity-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: var(--cream);
+  border-radius: 8px;
+  margin-bottom: 6px;
+  font-size: 0.88rem;
+  gap: 8px;
+}
+.entity-list li .meta { color: var(--soft); font-size: 0.75rem; }
+.empty-list { color: var(--soft); font-size: 0.82rem; padding: 6px 0; }
+
+/* ===== ADD FORM ===== */
+.add-form {
+  background: #f0f7f3;
+  border: 1.5px dashed #a8d5b7;
+  border-radius: 8px;
+  padding: 14px;
+  margin-top: 8px;
+}
+.add-form h4 { font-size: 0.8rem; color: var(--green); margin-bottom: 10px; font-weight: 700; }
+
+/* ===== DOC ROWS ===== */
+.doc-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* ===== HISTORY ===== */
+.hist-item {
+  background: var(--white);
+  border-radius: var(--r);
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.hist-item:active { opacity: 0.85; }
+.hist-no { font-size: 1.1rem; font-weight: 800; color: var(--green); white-space: nowrap; }
+.hist-meta { font-size: 0.8rem; color: var(--soft); flex: 1; min-width: 100px; }
+.hist-btns { display: flex; gap: 6px; margin-left: auto; }
 
 /* ===== PRINT STYLES (A4) ===== */
 @page { size: A4 portrait; margin: 8mm; }
 @media print {
-  html, body { background: #fff !important; font-family: Arial, sans-serif; }
-  header, .tabs, .tab-panel { display: none !important; }
+  html, body { background: #fff !important; }
+  header, .tabs, .tab-panel, .actions-bar { display: none !important; }
   .preview-overlay {
     position: static !important;
     background: #fff !important;
@@ -199,28 +224,55 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); col
     overflow: visible !important;
     display: block !important;
   }
-  .preview-container {
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    width: auto !important;
-  }
-  .preview-toolbar { display: none !important; }
-  .preview-container > div { padding: 0 !important; background: #fff !important; }
+  .preview-container { box-shadow: none !important; border-radius: 0 !important; width: auto !important; }
+  .preview-toolbar  { display: none !important; }
+  .preview-container > .wb-wrap { padding: 0 !important; background: #fff !important; }
   .waybill-print {
-    width: auto !important;
-    min-height: 0 !important;
-    border: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    page-break-inside: avoid;
+    width: auto !important; min-height: 0 !important;
+    border: none !important; margin: 0 !important; padding: 0 !important;
   }
 }
 
-/* ===== WAYBILL PRINT LAYOUT (A4) ===== */
+/* ===== PREVIEW OVERLAY ===== */
+.preview-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: 100;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 12px 40px;
+}
+.preview-overlay.open { display: flex; flex-direction: column; align-items: center; }
+.preview-container {
+  background: var(--white);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  border-radius: 6px;
+  overflow: hidden;
+  width: fit-content;
+  max-width: 100%;
+}
+.preview-toolbar {
+  background: var(--green);
+  color: #fff;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+.preview-toolbar h2 { font-size: 0.9rem; }
+.preview-toolbar .btns { display: flex; gap: 8px; }
+.wb-wrap { padding: 8mm; background: #e8e8e8; overflow-x: auto; }
+
+/* ===== WAYBILL PRINT LAYOUT ===== */
 .waybill-print {
   width: 194mm;
   min-height: 277mm;
-  margin: 0 auto;
   padding: 6mm 7mm;
   font-family: Arial, sans-serif;
   font-size: 8.5pt;
@@ -229,1052 +281,625 @@ body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--cream); col
   border: 1px solid #000;
 }
 
-@media screen {
-  .waybill-print {
-    display: none; /* shown only when preview modal is open */
-  }
-  .preview-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.6);
-    z-index: 100;
-    overflow-y: auto;
-    padding: 30px 20px;
-  }
-  .preview-overlay.open { display: flex; flex-direction: column; align-items: center; }
-  .preview-container {
-    background: #fff;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-    border-radius: 4px;
-    overflow: hidden;
-    width: fit-content;
-  }
-  .preview-toolbar {
-    background: var(--green);
-    color: #fff;
-    padding: 12px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-  .preview-toolbar h2 { font-size: 0.95rem; }
-  .preview-toolbar .actions { padding: 0; margin: 0; }
-  .waybill-print { display: block; }
-}
-
-/* Waybill internal styles */
-.wb-topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 8mm; margin-bottom: 3mm; }
-.wb-company-left { flex: 1; }
-.wb-authorized { width: 70mm; }
-.wb-authorized .ahint { font-size: 6.5pt; color: #555; font-style: italic; text-align: center; margin-top: 1pt; }
+/* Waybill elements */
+.wb-topbar { display: flex; justify-content: space-between; gap: 8mm; margin-bottom: 3mm; }
+.wb-co-left { flex: 1; }
+.wb-authorized { width: 68mm; }
+.wb-auth-hint { font-size: 6.5pt; color: #555; font-style: italic; text-align: center; margin-top: 1pt; }
 
 .wb-title {
-  text-align: center;
-  font-size: 17pt;
-  font-weight: bold;
-  letter-spacing: 4pt;
-  margin: 4mm 0 1mm;
-  text-transform: uppercase;
+  text-align: center; font-size: 17pt; font-weight: bold;
+  letter-spacing: 4pt; margin: 4mm 0 1mm; text-transform: uppercase;
 }
 .wb-series { text-align: center; font-size: 9pt; margin-bottom: 4mm; }
 .wb-series .ser-ln {
-  display: inline-block;
-  min-width: 30mm;
-  border-bottom: 0.5pt dotted #000;
-  text-align: center;
+  display: inline-block; min-width: 30mm;
+  border-bottom: 0.5pt dotted #000; text-align: center;
 }
-.wb-series .series-no { font-size: 14pt; font-weight: bold; color: #cc0000; }
+.wb-series .ser-no { font-size: 14pt; font-weight: bold; color: #cc0000; }
 
-/* generic field row: label + line / cells */
-.wb-line-row {
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 4pt;
-  gap: 4pt;
+.wb-row {
+  display: flex; align-items: flex-end; margin-bottom: 4pt; gap: 4pt;
 }
-.wb-line-row .lbl { white-space: nowrap; font-size: 8pt; padding-bottom: 1pt; }
-.wb-line-row .ln {
-  flex: 1;
-  border-bottom: 0.5pt dotted #000;
-  min-height: 12pt;
-  padding: 0 2pt 1pt;
-  font-size: 8pt;
+.wb-row .lbl { white-space: nowrap; font-size: 8pt; padding-bottom: 1pt; }
+.wb-row .ln  {
+  flex: 1; border-bottom: 0.5pt dotted #000;
+  min-height: 12pt; padding: 0 2pt 1pt; font-size: 8pt;
 }
-/* a cell where the explanatory hint sits UNDER the dotted line */
 .wb-cell { display: flex; flex-direction: column; }
 .wb-cell .cl {
   border-bottom: 0.5pt dotted #000;
-  min-height: 12pt;
-  padding: 0 2pt 1pt;
-  font-size: 8pt;
+  min-height: 12pt; padding: 0 2pt 1pt; font-size: 8pt;
 }
 .wb-cell .ch {
-  font-size: 6.5pt;
-  color: #555;
-  font-style: italic;
-  text-align: center;
-  margin-top: 1pt;
-  white-space: nowrap;
+  font-size: 6.5pt; color: #555; font-style: italic;
+  text-align: center; margin-top: 1pt; white-space: nowrap;
 }
 
-.wb-two-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4mm;
-  margin: 2mm 0;
-}
-.wb-box { border: 0.5pt solid #000; padding: 4pt 5pt; }
+.wb-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; margin: 2mm 0; }
+.wb-box  { border: 0.5pt solid #000; padding: 4pt 5pt; }
 .wb-box p { font-size: 8pt; margin-bottom: 3pt; }
-.wb-box .wb-line-row { margin-bottom: 2pt; }
+.wb-box .wb-row { margin-bottom: 2pt; }
 
-.wb-km-row {
-  display: flex;
-  align-items: flex-end;
-  gap: 6mm;
-  margin: 2mm 0;
-  border: 0.5pt solid #000;
-  padding: 4pt 6pt 3pt;
+.wb-km {
+  display: flex; align-items: flex-end; gap: 6mm;
+  margin: 2mm 0; border: 0.5pt solid #000; padding: 4pt 6pt 3pt;
 }
+.wb-km .lbl { font-size: 8pt; font-weight: bold; padding-bottom: 1pt; }
 
 .wb-docs-title {
-  text-align: center;
-  font-size: 8.5pt;
-  font-weight: bold;
-  text-decoration: underline;
-  margin: 4mm 0 2mm;
-  text-transform: uppercase;
-  letter-spacing: 0.5pt;
+  text-align: center; font-size: 8.5pt; font-weight: bold;
+  text-decoration: underline; margin: 4mm 0 2mm;
+  text-transform: uppercase; letter-spacing: 0.5pt;
 }
-.wb-docs-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 7.5pt;
-}
-.wb-docs-table th {
-  border: 0.5pt solid #000;
-  padding: 3pt 4pt;
-  font-weight: bold;
-  background: #f0f0f0;
-}
-.wb-docs-table td {
-  border: 0.5pt solid #000;
-  padding: 4pt;
-  height: 16pt;
-  vertical-align: top;
-}
+.wb-table { width: 100%; border-collapse: collapse; font-size: 7.5pt; }
+.wb-table th { border: 0.5pt solid #000; padding: 3pt 4pt; font-weight: bold; background: #f0f0f0; }
+.wb-table td { border: 0.5pt solid #000; padding: 4pt; height: 16pt; vertical-align: top; }
 
-/* ===== NUMBER BADGE ===== */
-.waybill-counter {
-  display: inline-flex;
-  align-items: center;
-  background: var(--yellow);
-  color: var(--green);
-  border-radius: 20px;
-  padding: 2px 10px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  margin-left: auto;
+/* ===== RESPONSIVE ===== */
+@media (max-width: 500px) {
+  .fields.col2, .fields.col3 { grid-template-columns: 1fr; }
+  .doc-row { grid-template-columns: 1fr; gap: 6px; }
+  .hist-btns { width: 100%; justify-content: flex-end; }
+  header h1 { font-size: 1rem; }
 }
 </style>
 </head>
 <body>
 
-<!-- ===== HEADER ===== -->
+<!-- HEADER -->
 <header>
-  <div>
-    <h1>Пътен лист — Бързо попълване</h1>
-    <div class="subtitle">Progresstrade · Управление на пътни листове</div>
-  </div>
+  <h1>Прогрестрейд ЕООД</h1>
+  <p>Управление на транспорта</p>
 </header>
 
-<!-- ===== TABS ===== -->
+<!-- TABS -->
 <div class="tabs">
-  <button class="tab-btn active" onclick="showTab('tab-form')">Нов пътен лист</button>
-  <button class="tab-btn" onclick="showTab('tab-settings')">Настройки / Данни</button>
-  <button class="tab-btn" onclick="showTab('tab-history')">История</button>
+  <button class="tab-btn active"  onclick="showTab('tab-form',this)">Нов лист</button>
+  <button class="tab-btn"         onclick="showTab('tab-settings',this)">Настройки</button>
+  <button class="tab-btn"         onclick="showTab('tab-history',this)">История</button>
 </div>
 
-<!-- ===================================================================
-     TAB: NEW WAYBILL
-===================================================================== -->
+<!-- ================================================================
+     FORM TAB
+================================================================= -->
 <div id="tab-form" class="tab-panel active">
-
   <div id="form-alert" style="display:none"></div>
 
-  <!-- Company info -->
-  <div class="form-section">
-    <h3>Фирма и автомобил</h3>
-    <div class="field-grid">
+  <!-- Number + Date -->
+  <div class="card">
+    <h3>Пътен лист</h3>
+    <div class="fields col2">
+      <div class="field">
+        <label>Номер</label>
+        <input type="number" id="f-number" placeholder="автоматично" min="1">
+      </div>
+      <div class="field">
+        <label>Дата</label>
+        <input type="date" id="f-date">
+      </div>
+    </div>
+  </div>
+
+  <!-- Company -->
+  <div class="card">
+    <h3>Фирма</h3>
+    <div class="fields">
       <div class="field">
         <label>Фирма</label>
         <select id="f-company" onchange="fillCompany()">
-          <option value="">— изберете —</option>
+          <option value="">— изберете фирма —</option>
         </select>
       </div>
-      <div class="field">
-        <label>Адрес</label>
-        <input type="text" id="f-address" placeholder="автоматично при избор на фирма">
-      </div>
-      <div class="field">
-        <label>Телефон</label>
-        <input type="text" id="f-phone">
-      </div>
-      <div class="field">
-        <label>Факс</label>
-        <input type="text" id="f-fax">
-      </div>
     </div>
-    <div class="field-grid two-col" style="margin-top:12px">
+  </div>
+
+  <!-- Vehicle + Driver -->
+  <div class="card">
+    <h3>Автомобил и водач</h3>
+    <div class="fields col2">
       <div class="field">
-        <label>Автомобил (марка, модел)</label>
+        <label>Автомобил</label>
         <select id="f-vehicle" onchange="fillVehicle()">
           <option value="">— изберете —</option>
         </select>
       </div>
       <div class="field">
-        <label>Регистрационен №</label>
-        <input type="text" id="f-regno" placeholder="автоматично при избор">
+        <label>Рег. №</label>
+        <input type="text" id="f-regno" readonly placeholder="автоматично">
       </div>
-    </div>
-  </div>
-
-  <!-- Drivers & personnel -->
-  <div class="form-section">
-    <h3>Водачи и придружители</h3>
-    <div class="field-grid two-col">
-      <div class="field">
-        <label>Водач I</label>
-        <select id="f-driver1" onchange="if(!this.value) return; document.getElementById('f-driver1-custom').style.display='none'">
-          <option value="">— изберете —</option>
-          <option value="__custom__">— въведи ръчно —</option>
+      <div class="field" style="grid-column:1/-1">
+        <label>Водач</label>
+        <select id="f-driver">
+          <option value="">— изберете водач —</option>
         </select>
-        <input type="text" id="f-driver1-custom" placeholder="Три имена на водача" style="display:none; margin-top:6px">
-      </div>
-      <div class="field">
-        <label>Водач II</label>
-        <select id="f-driver2" onchange="if(!this.value) return; document.getElementById('f-driver2-custom').style.display='none'">
-          <option value="">— (незадължително) —</option>
-          <option value="__custom__">— въведи ръчно —</option>
-        </select>
-        <input type="text" id="f-driver2-custom" placeholder="Три имена на водача" style="display:none; margin-top:6px">
-      </div>
-      <div class="field">
-        <label>Придружител 1</label>
-        <input type="text" id="f-companion1" placeholder="Незадължително">
-      </div>
-      <div class="field">
-        <label>Придружител 2</label>
-        <input type="text" id="f-companion2" placeholder="Незадължително">
-      </div>
-    </div>
-  </div>
-
-  <!-- Waybill meta -->
-  <div class="form-section">
-    <h3>Данни на листа</h3>
-    <div class="field-grid three-col">
-      <div class="field">
-        <label>Серия</label>
-        <input type="text" id="f-series" placeholder="напр. А">
-      </div>
-      <div class="field">
-        <label>Номер</label>
-        <input type="text" id="f-number" placeholder="напр. 697601">
-      </div>
-      <div class="field">
-        <label>Разрешил излизането</label>
-        <input type="text" id="f-authorized" placeholder="подпис, печат">
-      </div>
-    </div>
-    <div class="field-grid two-col" style="margin-top:12px">
-      <div class="field">
-        <label>Издал пътния лист (три имена)</label>
-        <select id="f-issued-by" onchange="handleIssuedBy()">
-          <option value="">— изберете —</option>
-          <option value="__custom__">— въведи ръчно —</option>
-        </select>
-        <input type="text" id="f-issued-by-custom" placeholder="Три имена" style="display:none; margin-top:6px">
-      </div>
-      <div class="field">
-        <label>Дата на издаване</label>
-        <input type="date" id="f-issue-date">
-      </div>
-    </div>
-  </div>
-
-  <!-- Times -->
-  <div class="form-section">
-    <h3>Час на излизане и прибиране</h3>
-    <div class="field-grid two-col">
-      <div class="field">
-        <label>Излизане от гаража (дата, час, мин.)</label>
-        <input type="datetime-local" id="f-depart">
-      </div>
-      <div class="field">
-        <label>Прибиране в гаража (дата, час, мин.)</label>
-        <input type="datetime-local" id="f-return">
-      </div>
-    </div>
-  </div>
-
-  <!-- Technical & medical -->
-  <div class="form-section">
-    <h3>Технически и медицински преглед</h3>
-    <div class="field-grid two-col">
-      <div class="field">
-        <label>Механик (технически преглед)</label>
-        <select id="f-mechanic" onchange="handleMechanic()">
-          <option value="">— изберете —</option>
-          <option value="__custom__">— въведи ръчно —</option>
-        </select>
-        <input type="text" id="f-mechanic-custom" placeholder="Фамилия, подпис" style="display:none; margin-top:6px">
-      </div>
-      <div class="field">
-        <label>Медицинско лице (проверка на водача)</label>
-        <select id="f-medic" onchange="handleMedic()">
-          <option value="">— изберете —</option>
-          <option value="__custom__">— въведи ръчно —</option>
-        </select>
-        <input type="text" id="f-medic-custom" placeholder="Фамилия, подпис" style="display:none; margin-top:6px">
-      </div>
-    </div>
-  </div>
-
-  <!-- Odometer -->
-  <div class="form-section">
-    <h3>Километропоказател</h3>
-    <div class="field-grid two-col">
-      <div class="field">
-        <label>Начален (км)</label>
-        <input type="number" id="f-km-start" placeholder="0">
-      </div>
-      <div class="field">
-        <label>Краен (км)</label>
-        <input type="number" id="f-km-end" placeholder="0">
-      </div>
-    </div>
-  </div>
-
-  <!-- Checked by -->
-  <div class="form-section">
-    <h3>Приел и проверил пътния лист</h3>
-    <div class="field-grid two-col">
-      <div class="field">
-        <label>Приел и проверил (три имена)</label>
-        <select id="f-checker" onchange="handleChecker()">
-          <option value="">— изберете —</option>
-          <option value="__custom__">— въведи ръчно —</option>
-        </select>
-        <input type="text" id="f-checker-custom" placeholder="Три имена" style="display:none; margin-top:6px">
-      </div>
-      <div class="field">
-        <label>Дата на приемане</label>
-        <input type="date" id="f-check-date">
       </div>
     </div>
   </div>
 
   <!-- Transport docs -->
-  <div class="form-section">
-    <h3>Документи за превоза (незадължително)</h3>
+  <div class="card">
+    <h3>Документи за превоза</h3>
     <div id="doc-rows">
-      <div class="field-grid two-col doc-row" style="margin-bottom:8px">
-        <div class="field"><label>Вид обществен превоз</label><input type="text" class="doc-type" value="Превоз за собствена сметка"></div>
-        <div class="field"><label>Документ</label><input type="text" class="doc-num" placeholder="напр. ЧМ № 00123"></div>
+      <div class="doc-row">
+        <div class="field"><label>Вид превоз</label><input type="text" class="doc-type" value="Превоз за собствена сметка"></div>
+        <div class="field"><label>Документ №</label><input type="text" class="doc-num"></div>
       </div>
     </div>
-    <button class="btn btn-outline btn-sm" onclick="addDocRow()">+ Добави ред</button>
-  </div>
-
-  <div class="actions">
-    <button class="btn btn-outline" onclick="clearForm()">Изчисти</button>
-    <button class="btn btn-yellow" onclick="saveToHistory()">Запази в история</button>
-    <button class="btn btn-primary" onclick="openPreview()">Преглед и печат</button>
+    <button class="btn btn-outline btn-sm" onclick="addDocRow()" style="margin-top:4px">+ Ред</button>
   </div>
 </div>
 
-<!-- ===================================================================
-     TAB: SETTINGS
-===================================================================== -->
+<!-- actions bar (fixed bottom, shown on form tab) -->
+<div class="actions-bar visible" id="form-actions">
+  <button class="btn btn-outline btn-sm" onclick="clearForm()">Изчисти</button>
+  <button class="btn btn-yellow" style="flex:1" onclick="saveAndPreview()">Запази и печат</button>
+</div>
+
+<!-- ================================================================
+     SETTINGS TAB
+================================================================= -->
 <div id="tab-settings" class="tab-panel">
+  <div id="settings-alert" style="display:none"></div>
 
   <!-- Companies -->
-  <div class="settings-section">
-    <h3><span class="icon">🏢</span> Фирми</h3>
+  <div class="card">
+    <h3>🏢 Фирми</h3>
     <ul class="entity-list" id="companies-list"></ul>
     <div class="add-form">
-      <h4>Добави фирма</h4>
-      <div class="field-grid" style="margin-bottom:10px">
-        <div class="field"><label>Наименование</label><input type="text" id="s-company-name" placeholder="Progresstrade ЕООД"></div>
-        <div class="field"><label>Адрес</label><input type="text" id="s-company-addr" placeholder="гр. София, ул. ..."></div>
-        <div class="field"><label>Телефон</label><input type="tel" id="s-company-phone" placeholder="0893 416 559"></div>
-        <div class="field"><label>Факс</label><input type="text" id="s-company-fax" placeholder=""></div>
+      <h4>Добави / редактирай фирма</h4>
+      <div class="fields col2" style="margin-bottom:12px">
+        <div class="field" style="grid-column:1/-1"><label>Наименование</label><input type="text" id="s-co-name" placeholder="Прогрестрейд ЕООД"></div>
+        <div class="field" style="grid-column:1/-1"><label>Адрес</label><input type="text" id="s-co-addr" placeholder="гр. София, ул. Проф. Иван Георгов 1"></div>
+        <div class="field"><label>Телефон</label><input type="tel" id="s-co-phone" placeholder="0893 416 559"></div>
+        <div class="field"><label>Факс</label><input type="text" id="s-co-fax"></div>
       </div>
-      <h4 style="margin-top:6px">Данни по подразбиране за тази фирма (зареждат се автоматично при избор)</h4>
-      <div class="field-grid" style="margin-bottom:10px">
-        <div class="field"><label>Издал пътния лист</label><input type="text" id="s-company-issued" placeholder="Три имена"></div>
-        <div class="field"><label>Механик</label><input type="text" id="s-company-mechanic" placeholder="Фамилия"></div>
-        <div class="field"><label>Медицинско лице</label><input type="text" id="s-company-medic" placeholder="Фамилия"></div>
-        <div class="field"><label>Приел и проверил</label><input type="text" id="s-company-checker" placeholder="Три имена"></div>
-        <div class="field"><label>Вид превоз</label><input type="text" id="s-company-transport" value="Превоз за собствена сметка"></div>
+      <h4 style="margin-bottom:10px">Лица по подразбиране</h4>
+      <div class="fields col2" style="margin-bottom:12px">
+        <div class="field"><label>Издал пътния лист</label><input type="text" id="s-co-issued" placeholder="Три имена"></div>
+        <div class="field"><label>Механик</label><input type="text" id="s-co-mechanic" placeholder="Фамилия"></div>
+        <div class="field"><label>Медицинско лице</label><input type="text" id="s-co-medic" placeholder="Фамилия"></div>
+        <div class="field"><label>Приел / проверил</label><input type="text" id="s-co-checker" placeholder="Три имена"></div>
+        <div class="field" style="grid-column:1/-1"><label>Вид превоз по подразбиране</label><input type="text" id="s-co-transport" value="Превоз за собствена сметка"></div>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="addCompany()">Добави</button>
+      <button class="btn btn-primary btn-sm" onclick="saveCompany()">Запази фирма</button>
     </div>
   </div>
 
   <!-- Vehicles -->
-  <div class="settings-section">
-    <h3><span class="icon">🚛</span> Автомобили</h3>
+  <div class="card">
+    <h3>🚛 Автомобили</h3>
     <ul class="entity-list" id="vehicles-list"></ul>
     <div class="add-form">
       <h4>Добави автомобил</h4>
-      <div class="field-grid" style="margin-bottom:10px">
+      <div class="fields col2" style="margin-bottom:10px">
         <div class="field"><label>Марка и модел</label><input type="text" id="s-veh-model" placeholder="МАН TGX 18.400"></div>
-        <div class="field"><label>Регистрационен №</label><input type="text" id="s-veh-regno" placeholder="СА 1234 АА"></div>
+        <div class="field"><label>Рег. №</label><input type="text" id="s-veh-regno" placeholder="СА 1234 АА"></div>
       </div>
       <button class="btn btn-primary btn-sm" onclick="addVehicle()">Добави</button>
     </div>
   </div>
 
   <!-- Drivers -->
-  <div class="settings-section">
-    <h3><span class="icon">🧑‍✈️</span> Водачи</h3>
+  <div class="card">
+    <h3>🧑‍✈️ Водачи</h3>
     <ul class="entity-list" id="drivers-list"></ul>
     <div class="add-form">
       <h4>Добави водач</h4>
-      <div class="field-grid" style="margin-bottom:10px">
+      <div class="fields" style="margin-bottom:10px">
         <div class="field"><label>Три имена</label><input type="text" id="s-drv-name" placeholder="Иван Петров Георгиев"></div>
       </div>
       <button class="btn btn-primary btn-sm" onclick="addDriver()">Добави</button>
     </div>
   </div>
-
-  <!-- Personnel -->
-  <div class="settings-section">
-    <h3><span class="icon">👷</span> Персонал (издатели, механици, медицински лица)</h3>
-    <ul class="entity-list" id="personnel-list"></ul>
-    <div class="add-form">
-      <h4>Добави лице</h4>
-      <div class="field-grid" style="margin-bottom:10px">
-        <div class="field"><label>Три имена / Фамилия</label><input type="text" id="s-pers-name" placeholder="Стоян Димитров"></div>
-        <div class="field">
-          <label>Роля</label>
-          <select id="s-pers-role">
-            <option value="issued">Издател на пътен лист</option>
-            <option value="mechanic">Механик (техн. преглед)</option>
-            <option value="medic">Медицинско лице</option>
-            <option value="checker">Приел / проверил</option>
-          </select>
-        </div>
-      </div>
-      <button class="btn btn-primary btn-sm" onclick="addPersonnel()">Добави</button>
-    </div>
-  </div>
-
-  <div id="settings-alert" style="display:none"></div>
 </div>
 
-<!-- ===================================================================
-     TAB: HISTORY
-===================================================================== -->
+<!-- ================================================================
+     HISTORY TAB
+================================================================= -->
 <div id="tab-history" class="tab-panel">
-  <div id="history-list"></div>
+  <div id="history-list"><p class="empty-list">Няма записани листове.</p></div>
 </div>
 
-<!-- ===================================================================
-     PRINT PREVIEW OVERLAY
-===================================================================== -->
-<div class="preview-overlay" id="preview-overlay" onclick="closePreviewOnBg(event)">
+<!-- ================================================================
+     PRINT PREVIEW
+================================================================= -->
+<div class="preview-overlay" id="preview-overlay" onclick="closePrevOnBg(event)">
   <div class="preview-container" id="preview-container">
     <div class="preview-toolbar">
-      <h2>Преглед на пътния лист</h2>
-      <div class="actions">
-        <button class="btn btn-yellow" onclick="window.print()">🖨️ Печат</button>
-        <button class="btn btn-outline" style="color:#fff;border-color:rgba(255,255,255,0.4)" onclick="closePreview()">✕ Затвори</button>
+      <h2>Пътен лист — преглед</h2>
+      <div class="btns">
+        <button class="btn btn-yellow btn-sm" onclick="window.print()">🖨️ Печат</button>
+        <button class="btn btn-outline btn-sm" style="color:#fff;border-color:rgba(255,255,255,0.4)" onclick="closePreview()">✕</button>
       </div>
     </div>
-    <!-- The actual waybill -->
-    <div style="padding:10mm; background:#e0e0e0;">
-      <div class="waybill-print" id="waybill-print-content"></div>
+    <div class="wb-wrap">
+      <div class="waybill-print" id="wb-content"></div>
     </div>
   </div>
 </div>
 
 <script>
-// ===== DATA LAYER =====
-function loadData() {
-  const defaults = { companies: [], vehicles: [], drivers: [], personnel: [], history: [], lastNumber: 0 };
-  try {
-    return Object.assign(defaults, JSON.parse(localStorage.getItem('waybill_data') || '{}'));
-  } catch { return defaults; }
+// ===== DATA =====
+function loadDB() {
+  try { return Object.assign({ companies:[], vehicles:[], drivers:[], history:[], lastNumber:0 }, JSON.parse(localStorage.getItem('wb_data')||'{}')); }
+  catch { return { companies:[], vehicles:[], drivers:[], history:[], lastNumber:0 }; }
 }
-function saveData(data) {
-  localStorage.setItem('waybill_data', JSON.stringify(data));
-}
-let DB = loadData();
+function saveDB() { localStorage.setItem('wb_data', JSON.stringify(DB)); }
+let DB = loadDB();
 
-// ===== TAB SWITCHING =====
-function showTab(id) {
+// ===== TABS =====
+function showTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById(id).classList.add('active');
-  event.target.classList.add('active');
+  btn.classList.add('active');
+  document.getElementById('form-actions').className = 'actions-bar' + (id === 'tab-form' ? ' visible' : '');
   if (id === 'tab-history') renderHistory();
 }
 
 // ===== INIT =====
 window.addEventListener('DOMContentLoaded', () => {
-  // Default date today
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('f-issue-date').value = today;
-  document.getElementById('f-check-date').value = today;
-
-  // Auto-fill next number from history
+  setToday();
   autoNextNumber();
-
-  renderAllSelects();
+  populateSelects();
   renderSettingsLists();
   renderHistory();
 });
 
+function setToday() {
+  document.getElementById('f-date').value = new Date().toISOString().split('T')[0];
+}
+
+// ===== NUMBERING =====
 function autoNextNumber() {
-  const histNums = DB.history.map(h => parseInt(h.number)).filter(n => !isNaN(n));
-  const maxHist = histNums.length ? Math.max(...histNums) : 0;
-  const next = Math.max(maxHist, DB.lastNumber || 0) + 1;
-  if (next > 1) document.getElementById('f-number').value = next;
+  const nums = DB.history.map(h => parseInt(h.number)).filter(n => !isNaN(n));
+  const maxH = nums.length ? Math.max(...nums) : 0;
+  const next = Math.max(maxH, DB.lastNumber || 0) + 1;
+  if (next > 1 || DB.lastNumber) document.getElementById('f-number').value = next;
 }
 
-// ===== POPULATE SELECTS =====
-function populateSelect(selectId, items, labelFn, valueFn) {
-  const sel = document.getElementById(selectId);
-  const current = sel.value;
-  // Keep first option(s) (placeholder + manual)
-  const fixedOptions = Array.from(sel.options).filter(o => o.value === '' || o.value === '__custom__');
-  sel.innerHTML = '';
-  fixedOptions.forEach(o => sel.appendChild(o));
-  items.forEach(item => {
-    const opt = document.createElement('option');
-    opt.value = valueFn(item);
-    opt.textContent = labelFn(item);
-    sel.appendChild(opt);
-  });
-  if (current) sel.value = current;
+// ===== SELECTS =====
+function populateSelects() {
+  fillSel('f-company', DB.companies, c => c.name, c => c.id, '— изберете фирма —');
+  fillSel('f-vehicle', DB.vehicles, v => `${v.model} (${v.regno})`, v => v.id, '— изберете —');
+  fillSel('f-driver',  DB.drivers,  d => d.name, d => d.id, '— изберете водач —');
 }
-
-function renderAllSelects() {
-  populateSelect('f-company', DB.companies, c => c.name, c => c.id);
-  populateSelect('f-vehicle', DB.vehicles, v => `${v.model} (${v.regno})`, v => v.id);
-  populateSelect('f-driver1', DB.drivers, d => d.name, d => d.id);
-  populateSelect('f-driver2', DB.drivers, d => d.name, d => d.id);
-
-  const issued = DB.personnel.filter(p => p.role === 'issued');
-  const mechanics = DB.personnel.filter(p => p.role === 'mechanic');
-  const medics = DB.personnel.filter(p => p.role === 'medic');
-  const checkers = DB.personnel.filter(p => p.role === 'checker');
-
-  populateSelect('f-issued-by', issued, p => p.name, p => p.id);
-  populateSelect('f-mechanic', mechanics, p => p.name, p => p.id);
-  populateSelect('f-medic', medics, p => p.name, p => p.id);
-  populateSelect('f-checker', checkers, p => p.name, p => p.id);
-}
-
-// ===== AUTOFILL ON SELECT =====
-function fillCompany() {
-  const id = document.getElementById('f-company').value;
-  const co = DB.companies.find(c => c.id === id);
-  if (!co) return;
-  document.getElementById('f-address').value = co.address || '';
-  document.getElementById('f-phone').value = co.phone || '';
-  document.getElementById('f-fax').value = co.fax || '';
-
-  // Auto-load default personnel for this company
-  setSelectByName('f-issued-by', 'f-issued-by-custom', co.issuedBy);
-  setSelectByName('f-mechanic', 'f-mechanic-custom', co.mechanic);
-  setSelectByName('f-medic', 'f-medic-custom', co.medic);
-  setSelectByName('f-checker', 'f-checker-custom', co.checker);
-
-  // Auto-load transport type into the first document row
-  const transport = co.transportType || 'Превоз за собствена сметка';
-  const firstDocType = document.querySelector('.doc-row .doc-type');
-  if (firstDocType && !firstDocType.value.trim()) firstDocType.value = transport;
-}
-
-// Set a select to the option matching `name`; if no match, use the custom input
-function setSelectByName(selectId, customId, name) {
-  if (!name) return;
-  const sel = document.getElementById(selectId);
-  const custom = document.getElementById(customId);
-  const opt = Array.from(sel.options).find(o => o.text === name);
-  if (opt) {
-    sel.value = opt.value;
-    if (custom) custom.style.display = 'none';
-  } else {
-    sel.value = '__custom__';
-    if (custom) { custom.value = name; custom.style.display = 'block'; }
-  }
-}
-
-function fillVehicle() {
-  const id = document.getElementById('f-vehicle').value;
-  const veh = DB.vehicles.find(v => v.id === id);
-  if (!veh) return;
-  document.getElementById('f-regno').value = veh.regno || '';
-}
-
-function handleCustomSelect(selectId, customId) {
-  const sel = document.getElementById(selectId);
-  const custom = document.getElementById(customId);
-  custom.style.display = sel.value === '__custom__' ? 'block' : 'none';
-}
-
-function handleIssuedBy() { handleCustomSelect('f-issued-by', 'f-issued-by-custom'); }
-function handleMechanic() { handleCustomSelect('f-mechanic', 'f-mechanic-custom'); }
-function handleMedic() { handleCustomSelect('f-medic', 'f-medic-custom'); }
-function handleChecker() { handleCustomSelect('f-checker', 'f-checker-custom'); }
-
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('f-driver1').addEventListener('change', () => handleCustomSelect('f-driver1', 'f-driver1-custom'));
-  document.getElementById('f-driver2').addEventListener('change', () => handleCustomSelect('f-driver2', 'f-driver2-custom'));
-});
-
-// ===== SETTINGS — ADD ENTITIES =====
-function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
-
-function alert_(id, msg, type='success') {
-  const el = document.getElementById(id);
-  el.style.display = 'block';
-  el.className = 'alert alert-' + type;
-  el.textContent = msg;
-  setTimeout(() => { el.style.display = 'none'; }, 3000);
-}
-
-function addCompany() {
-  const name = document.getElementById('s-company-name').value.trim();
-  if (!name) return alert_('settings-alert', 'Въведете наименование на фирмата.', 'error');
-  DB.companies.push({
-    id: uid(), name,
-    address: document.getElementById('s-company-addr').value.trim(),
-    phone: document.getElementById('s-company-phone').value.trim(),
-    fax: document.getElementById('s-company-fax').value.trim(),
-    issuedBy: document.getElementById('s-company-issued').value.trim(),
-    mechanic: document.getElementById('s-company-mechanic').value.trim(),
-    medic: document.getElementById('s-company-medic').value.trim(),
-    checker: document.getElementById('s-company-checker').value.trim(),
-    transportType: document.getElementById('s-company-transport').value.trim()
-  });
-  saveData(DB);
-  ['s-company-name','s-company-addr','s-company-phone','s-company-fax',
-   's-company-issued','s-company-mechanic','s-company-medic','s-company-checker']
-    .forEach(id => document.getElementById(id).value = '');
-  document.getElementById('s-company-transport').value = 'Превоз за собствена сметка';
-  renderSettingsLists(); renderAllSelects();
-  alert_('settings-alert', 'Фирмата е добавена.');
-}
-
-function addVehicle() {
-  const model = document.getElementById('s-veh-model').value.trim();
-  const regno = document.getElementById('s-veh-regno').value.trim();
-  if (!model || !regno) return alert_('settings-alert', 'Въведете марка/модел и регистрационен №.', 'error');
-  DB.vehicles.push({ id: uid(), model, regno });
-  saveData(DB);
-  ['s-veh-model','s-veh-regno'].forEach(id => document.getElementById(id).value = '');
-  renderSettingsLists(); renderAllSelects();
-  alert_('settings-alert', 'Автомобилът е добавен.');
-}
-
-function addDriver() {
-  const name = document.getElementById('s-drv-name').value.trim();
-  if (!name) return alert_('settings-alert', 'Въведете три имена.', 'error');
-  DB.drivers.push({ id: uid(), name });
-  saveData(DB);
-  document.getElementById('s-drv-name').value = '';
-  renderSettingsLists(); renderAllSelects();
-  alert_('settings-alert', 'Водачът е добавен.');
-}
-
-function addPersonnel() {
-  const name = document.getElementById('s-pers-name').value.trim();
-  const role = document.getElementById('s-pers-role').value;
-  if (!name) return alert_('settings-alert', 'Въведете имена.', 'error');
-  DB.personnel.push({ id: uid(), name, role });
-  saveData(DB);
-  document.getElementById('s-pers-name').value = '';
-  renderSettingsLists(); renderAllSelects();
-  alert_('settings-alert', 'Лицето е добавено.');
-}
-
-function deleteEntity(type, id) {
-  DB[type] = DB[type].filter(e => e.id !== id);
-  saveData(DB);
-  renderSettingsLists(); renderAllSelects();
-}
-
-// ===== SETTINGS — RENDER LISTS =====
-function renderSettingsLists() {
-  renderEntityList('companies-list', DB.companies, c => `${c.name}`, c => `${c.address || ''} ${c.phone ? '· т: ' + c.phone : ''}`.trim(), 'companies');
-  renderEntityList('vehicles-list', DB.vehicles, v => v.model, v => v.regno, 'vehicles');
-  renderEntityList('drivers-list', DB.drivers, d => d.name, () => 'Водач', 'drivers');
-  renderEntityList('personnel-list', DB.personnel, p => p.name, p => roleLabel(p.role), 'personnel');
-}
-
-function roleLabel(r) {
-  return { issued: 'Издател', mechanic: 'Механик', medic: 'Медицинско лице', checker: 'Приел/Проверил' }[r] || r;
-}
-
-function renderEntityList(listId, items, labelFn, metaFn, type) {
-  const ul = document.getElementById(listId);
-  if (!items.length) { ul.innerHTML = '<li style="color:var(--text-soft);font-size:0.82rem;padding:6px 0">— Няма добавени записи —</li>'; return; }
-  ul.innerHTML = items.map(item => `
-    <li>
-      <span>
-        <strong>${labelFn(item)}</strong>
-        <span class="meta"> · ${metaFn(item)}</span>
-      </span>
-      <div class="btns">
-        <button class="btn btn-danger btn-sm" onclick="deleteEntity('${type}', '${item.id}')">Изтрий</button>
-      </div>
-    </li>`).join('');
-}
-
-// ===== DOCUMENT ROWS =====
-function addDocRow() {
-  const row = document.createElement('div');
-  row.className = 'field-grid two-col doc-row';
-  row.style.marginBottom = '8px';
-  row.innerHTML = `
-    <div class="field"><label>Вид обществен превоз</label><input type="text" class="doc-type"></div>
-    <div class="field"><label>Документ</label><input type="text" class="doc-num"></div>`;
-  document.getElementById('doc-rows').appendChild(row);
-}
-
-// ===== GET FIELD VALUE =====
-function fval(id) { return (document.getElementById(id)?.value || '').trim(); }
-function selText(id) {
+function fillSel(id, items, labelFn, valFn, placeholder) {
   const sel = document.getElementById(id);
-  if (!sel || !sel.value || sel.value === '__custom__') return '';
-  return sel.options[sel.selectedIndex]?.text || '';
-}
-function resolvePersonField(selectId, customId) {
-  const sel = document.getElementById(selectId);
-  if (!sel.value) return '';
-  if (sel.value === '__custom__') return fval(customId);
-  return sel.options[sel.selectedIndex]?.text || '';
-}
-function resolveDriverField(selectId, customId) {
-  const sel = document.getElementById(selectId);
-  if (!sel.value) return '';
-  if (sel.value === '__custom__') return fval(customId);
-  return sel.options[sel.selectedIndex]?.text || '';
-}
-
-function collectFormData() {
-  const docs = [];
-  document.querySelectorAll('.doc-row').forEach(row => {
-    const t = row.querySelector('.doc-type')?.value.trim();
-    const n = row.querySelector('.doc-num')?.value.trim();
-    if (t || n) docs.push({ type: t, num: n });
+  const cur = sel.value;
+  sel.innerHTML = `<option value="">${placeholder}</option>`;
+  items.forEach(item => {
+    const o = document.createElement('option');
+    o.value = valFn(item); o.textContent = labelFn(item);
+    sel.appendChild(o);
   });
+  if (cur) sel.value = cur;
+}
 
-  const vehicleSel = document.getElementById('f-vehicle');
-  const vehicleText = vehicleSel.value && vehicleSel.value !== '__custom__'
-    ? DB.vehicles.find(v => v.id === vehicleSel.value)?.model || ''
-    : '';
+// ===== AUTOFILL =====
+function fillCompany() {
+  const co = DB.companies.find(c => c.id === document.getElementById('f-company').value);
+  if (!co) return;
+  // fill first doc-type with company default if empty
+  const dt = document.querySelector('.doc-type');
+  if (dt && !dt.value.trim()) dt.value = co.transportType || 'Превоз за собствена сметка';
+}
+function fillVehicle() {
+  const veh = DB.vehicles.find(v => v.id === document.getElementById('f-vehicle').value);
+  document.getElementById('f-regno').value = veh ? veh.regno : '';
+}
 
+// ===== COLLECT DATA =====
+function collectForm() {
+  const co  = DB.companies.find(c => c.id === document.getElementById('f-company').value) || {};
+  const veh = DB.vehicles.find(v  => v.id === document.getElementById('f-vehicle').value) || {};
+  const drv = DB.drivers.find(d   => d.id === document.getElementById('f-driver').value)  || {};
+  const docs = [];
+  document.querySelectorAll('.doc-row').forEach(r => {
+    const t = r.querySelector('.doc-type')?.value.trim();
+    const n = r.querySelector('.doc-num')?.value.trim();
+    if (t || n) docs.push({ type:t||'', num:n||'' });
+  });
   return {
-    company: fval('f-address') ? (selText('f-company') || '') : (selText('f-company') || ''),
-    companyName: selText('f-company') || '',
-    address: fval('f-address'),
-    phone: fval('f-phone'),
-    fax: fval('f-fax'),
-    series: fval('f-series'),
-    number: fval('f-number'),
-    authorized: fval('f-authorized'),
-    vehicle: vehicleText,
-    regno: fval('f-regno'),
-    driver1: resolveDriverField('f-driver1', 'f-driver1-custom'),
-    driver2: resolveDriverField('f-driver2', 'f-driver2-custom'),
-    companion1: fval('f-companion1'),
-    companion2: fval('f-companion2'),
-    issuedBy: resolvePersonField('f-issued-by', 'f-issued-by-custom'),
-    issueDate: fval('f-issue-date'),
-    depart: fval('f-depart'),
-    return: fval('f-return'),
-    mechanic: resolvePersonField('f-mechanic', 'f-mechanic-custom'),
-    medic: resolvePersonField('f-medic', 'f-medic-custom'),
-    kmStart: fval('f-km-start'),
-    kmEnd: fval('f-km-end'),
-    checker: resolvePersonField('f-checker', 'f-checker-custom'),
-    checkDate: fval('f-check-date'),
+    number:    document.getElementById('f-number').value.trim(),
+    date:      document.getElementById('f-date').value,
+    companyId: co.id || '',
+    companyName: co.name || '',
+    address:   co.address || '',
+    phone:     co.phone || '',
+    fax:       co.fax || '',
+    issuedBy:  co.issuedBy || '',
+    mechanic:  co.mechanic || '',
+    medic:     co.medic || '',
+    checker:   co.checker || '',
+    vehicle:   veh.model || '',
+    regno:     veh.regno  || document.getElementById('f-regno').value,
+    driver:    drv.name  || '',
     docs,
     createdAt: new Date().toISOString()
   };
 }
 
-function formatDT(dt) {
-  if (!dt) return '';
-  const d = new Date(dt);
-  if (isNaN(d)) return dt;
-  return d.toLocaleString('bg-BG', { day:'2-digit', month:'2-digit', year:'numeric', hour:'2-digit', minute:'2-digit' });
-}
-function formatDate(d) {
-  if (!d) return '';
-  const dt = new Date(d);
-  if (isNaN(dt)) return d;
-  return dt.toLocaleDateString('bg-BG', { day:'2-digit', month:'2-digit', year:'numeric' });
+// ===== SAVE + PREVIEW =====
+function saveAndPreview() {
+  const data = collectForm();
+  data.id = uid();
+  DB.history.unshift(data);
+  if (DB.history.length > 300) DB.history.pop();
+  const n = parseInt(data.number);
+  if (!isNaN(n) && n > (DB.lastNumber||0)) DB.lastNumber = n;
+  saveDB();
+  renderHistory();
+  openPreview(data);
 }
 
+// ===== PREVIEW =====
+function openPreview(data) {
+  document.getElementById('wb-content').innerHTML = buildWB(data);
+  document.getElementById('preview-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closePreview() {
+  document.getElementById('preview-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+  autoNextNumber();
+}
+function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
+
 // ===== BUILD WAYBILL HTML =====
-function buildWaybillHTML(data) {
-  const docRows = (data.docs && data.docs.length)
-    ? data.docs.map(d => `<tr><td>${d.type||''}</td><td>${d.num||''}</td></tr>`).join('')
-    : `<tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr>`;
+function buildWB(d) {
+  const dRows = d.docs && d.docs.length
+    ? d.docs.map(x => `<tr><td>${x.type}</td><td>${x.num}</td></tr>`).join('')
+    : `<tr><td>&nbsp;</td><td></td></tr><tr><td></td><td></td></tr><tr><td></td><td></td></tr>`;
+  const fmtDate = s => { if(!s) return ''; const dt=new Date(s); return isNaN(dt)?s:dt.toLocaleDateString('bg-BG',{day:'2-digit',month:'2-digit',year:'numeric'}); };
+  const cell = (val, hint, w) => `<span class="wb-cell"${w?' style="width:'+w+'"':''}><span class="cl">${val||''}</span><span class="ch">${hint}</span></span>`;
 
   return `
 <div class="wb-topbar">
-  <div class="wb-company-left">
-    <div class="wb-line-row"><span class="lbl">Фирма</span><span class="ln">${data.companyName}</span></div>
-    <div class="wb-line-row"><span class="lbl">Адрес</span><span class="ln">${data.address}</span></div>
-    <div class="wb-line-row">
-      <span class="lbl">Тел.</span><span class="ln" style="max-width:90px">${data.phone}</span>
-      <span class="lbl" style="margin-left:8pt">Факс</span><span class="ln" style="max-width:90px">${data.fax}</span>
+  <div class="wb-co-left">
+    <div class="wb-row"><span class="lbl">Фирма</span><span class="ln">${d.companyName}</span></div>
+    <div class="wb-row"><span class="lbl">Адрес</span><span class="ln">${d.address}</span></div>
+    <div class="wb-row">
+      <span class="lbl">Тел.</span><span class="ln" style="max-width:90px">${d.phone}</span>
+      <span class="lbl" style="margin-left:6pt">Факс</span><span class="ln" style="max-width:90px">${d.fax}</span>
     </div>
   </div>
   <div class="wb-authorized">
-    <div class="wb-line-row"><span class="lbl">Разрешил излизането:</span><span class="ln" style="min-height:30pt">${data.authorized}</span></div>
-    <div class="ahint">(подпис, печат)</div>
+    <div class="wb-row"><span class="lbl">Разрешил излизането:</span><span class="ln" style="min-height:28pt"></span></div>
+    <div class="wb-auth-hint">(подпис, печат)</div>
   </div>
 </div>
 
 <div class="wb-title">ПЪТЕН ЛИСТ</div>
 <div class="wb-series">
-  Серия <span class="ser-ln">${data.series}</span>
-  &nbsp;&nbsp; № &nbsp;<span class="series-no">${data.number}</span>
+  Серия <span class="ser-ln"></span> &nbsp; № <span class="ser-no">${d.number}</span>
 </div>
 
-<div class="wb-line-row">
+<div class="wb-row">
   <span class="lbl">Автомобил</span>
-  <span class="wb-cell" style="flex:1"><span class="cl">${data.vehicle}</span><span class="ch">(марка, модел)</span></span>
-  <span class="wb-cell" style="width:45mm"><span class="cl">${data.regno}</span><span class="ch">(регистрационен №)</span></span>
+  ${cell(d.vehicle,'(марка, модел)','auto;flex:1')}
+  ${cell(d.regno,'(регистрационен №)','45mm')}
 </div>
-<div class="wb-line-row"><span class="lbl">Водач I</span><span class="ln">${data.driver1}</span></div>
-<div class="wb-line-row"><span class="lbl">Водач II</span><span class="ln">${data.driver2}</span></div>
-<div class="wb-line-row">
-  <span class="lbl">Придружители: 1.</span><span class="ln">${data.companion1}</span>
-  <span class="lbl" style="margin-left:6pt">2.</span><span class="ln">${data.companion2}</span>
+<div class="wb-row"><span class="lbl">Водач I</span><span class="ln">${d.driver}</span></div>
+<div class="wb-row"><span class="lbl">Водач II</span><span class="ln"></span></div>
+<div class="wb-row">
+  <span class="lbl">Придружители: 1.</span><span class="ln"></span>
+  <span class="lbl" style="margin-left:6pt">2.</span><span class="ln"></span>
 </div>
-<div class="wb-line-row">
+<div class="wb-row">
   <span class="lbl">Издал пътния лист:</span>
-  <span class="wb-cell" style="flex:1"><span class="cl">${data.issuedBy}</span><span class="ch">(име, презиме, фамилия)</span></span>
-  <span class="wb-cell" style="width:32mm"><span class="cl">${formatDate(data.issueDate)}</span><span class="ch">(дата)</span></span>
-  <span class="wb-cell" style="width:28mm"><span class="cl"></span><span class="ch">(подпис)</span></span>
+  ${cell(d.issuedBy,'(име, презиме, фамилия)','auto;flex:1')}
+  ${cell(fmtDate(d.date),'(дата)','32mm')}
+  ${cell('','(подпис)','28mm')}
 </div>
-<div class="wb-line-row">
+<div class="wb-row">
   <span class="lbl">Време на излизане от гаража</span>
-  <span class="wb-cell" style="flex:1"><span class="cl">${formatDT(data.depart)}</span><span class="ch">(дата, час, мин.)</span></span>
+  ${cell('','(дата, час, мин.)','auto;flex:1')}
 </div>
-<div class="wb-line-row">
+<div class="wb-row">
   <span class="lbl">Време на прибиране в гаража</span>
-  <span class="wb-cell" style="flex:1"><span class="cl">${formatDT(data.return)}</span><span class="ch">(дата, час, мин.)</span></span>
+  ${cell('','(дата, час, мин.)','auto;flex:1')}
 </div>
 
-<div class="wb-two-col" style="margin-top:3mm">
+<div class="wb-2col" style="margin-top:3mm">
   <div class="wb-box">
     <p>Автомобилът е технически изправен.</p>
-    <div class="wb-line-row"><span class="lbl">Механик:</span><span class="wb-cell" style="flex:1"><span class="cl">${data.mechanic}</span><span class="ch">(фамилия, подпис)</span></span></div>
+    <div class="wb-row"><span class="lbl">Механик:</span>${cell(d.mechanic,'(фамилия, подпис)','auto;flex:1')}</div>
   </div>
   <div class="wb-box">
     <p>Приех автомобила технически изправен.</p>
-    <div class="wb-line-row"><span class="lbl">Водач:</span><span class="wb-cell" style="flex:1"><span class="cl">${data.driver1}</span><span class="ch">(фамилия, подпис)</span></span></div>
+    <div class="wb-row"><span class="lbl">Водач:</span>${cell(d.driver,'(фамилия, подпис)','auto;flex:1')}</div>
   </div>
 </div>
-<div class="wb-two-col">
+<div class="wb-2col">
   <div class="wb-box">
     <p>Проба за алкохол. Общо здравословно</p>
     <p>състояние - добро.</p>
   </div>
   <div class="wb-box">
     <p>Водачът е годен да управлява.</p>
-    <div class="wb-line-row"><span class="lbl">Извършил проверката:</span><span class="wb-cell" style="flex:1"><span class="cl">${data.medic}</span><span class="ch">(фамилия, подпис)</span></span></div>
+    <div class="wb-row"><span class="lbl">Извършил проверката:</span>${cell(d.medic,'(фамилия, подпис)','auto;flex:1')}</div>
   </div>
 </div>
 
-<div class="wb-km-row">
-  <span class="lbl" style="font-weight:bold">Километропоказател:</span>
-  <span class="wb-cell" style="flex:1"><span class="cl">${data.kmStart}</span><span class="ch">Начален</span></span>
-  <span class="wb-cell" style="flex:1"><span class="cl">${data.kmEnd}</span><span class="ch">Краен</span></span>
+<div class="wb-km">
+  <span class="lbl">Километропоказател:</span>
+  ${cell('','Начален','auto;flex:1')}
+  ${cell('','Краен','auto;flex:1')}
 </div>
 
-<div class="wb-line-row" style="margin-top:3mm">
+<div class="wb-row" style="margin-top:3mm">
   <span class="lbl">Приел и проверил пътния лист:</span>
-  <span class="wb-cell" style="flex:1"><span class="cl">${data.checker}</span><span class="ch">(име, фамилия)</span></span>
-  <span class="wb-cell" style="width:32mm"><span class="cl">${formatDate(data.checkDate)}</span><span class="ch">(дата)</span></span>
-  <span class="wb-cell" style="width:28mm"><span class="cl"></span><span class="ch">(подпис)</span></span>
+  ${cell(d.checker,'(име, фамилия)','auto;flex:1')}
+  ${cell('','(дата)','32mm')}
+  ${cell('','(подпис)','28mm')}
 </div>
 
 <div class="wb-docs-title">ДОКУМЕНТИ ЗА ПРЕВОЗА КЪМ ПЪТНИЯ ЛИСТ</div>
-<table class="wb-docs-table">
-  <thead>
-    <tr>
-      <th style="width:55%">Вид обществен превоз</th>
-      <th>Документи за превоза</th>
-    </tr>
-  </thead>
-  <tbody>
-    ${docRows}
-  </tbody>
+<table class="wb-table">
+  <thead><tr><th style="width:55%">Вид обществен превоз</th><th>Документи за превоза</th></tr></thead>
+  <tbody>${dRows}</tbody>
 </table>`;
 }
 
-// ===== PREVIEW =====
-function openPreview() {
-  const data = collectFormData();
-  document.getElementById('waybill-print-content').innerHTML = buildWaybillHTML(data);
-  document.getElementById('preview-overlay').classList.add('open');
-}
-function closePreview() { document.getElementById('preview-overlay').classList.remove('open'); }
-function closePreviewOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
-
-// ===== SAVE TO HISTORY =====
-function saveToHistory() {
-  const data = collectFormData();
-  data.id = uid();
-  DB.history.unshift(data);
-  if (DB.history.length > 200) DB.history = DB.history.slice(0, 200);
-  const n = parseInt(data.number);
-  if (!isNaN(n) && n > (DB.lastNumber || 0)) DB.lastNumber = n;
-  saveData(DB);
-  alert_('form-alert', `Пътен лист № ${data.number || '—'} е записан в историята.`);
-  renderHistory();
-  autoNextNumber();
+// ===== SETTINGS =====
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
+function showAlert(id, msg, type='ok') {
+  const el = document.getElementById(id);
+  el.style.display = 'block';
+  el.className = 'alert alert-' + type;
+  el.textContent = msg;
+  setTimeout(() => el.style.display='none', 3000);
 }
 
-// ===== HISTORY TAB =====
+// Company save (add or update if editing)
+let editingCompanyId = null;
+function saveCompany() {
+  const name = document.getElementById('s-co-name').value.trim();
+  if (!name) return showAlert('settings-alert','Въведете наименование.','err');
+  const co = {
+    id: editingCompanyId || uid(),
+    name,
+    address:       document.getElementById('s-co-addr').value.trim(),
+    phone:         document.getElementById('s-co-phone').value.trim(),
+    fax:           document.getElementById('s-co-fax').value.trim(),
+    issuedBy:      document.getElementById('s-co-issued').value.trim(),
+    mechanic:      document.getElementById('s-co-mechanic').value.trim(),
+    medic:         document.getElementById('s-co-medic').value.trim(),
+    checker:       document.getElementById('s-co-checker').value.trim(),
+    transportType: document.getElementById('s-co-transport').value.trim() || 'Превоз за собствена сметка'
+  };
+  if (editingCompanyId) {
+    const i = DB.companies.findIndex(c => c.id === editingCompanyId);
+    if (i >= 0) DB.companies[i] = co;
+  } else {
+    DB.companies.push(co);
+  }
+  editingCompanyId = null;
+  saveDB(); renderSettingsLists(); populateSelects();
+  ['s-co-name','s-co-addr','s-co-phone','s-co-fax','s-co-issued','s-co-mechanic','s-co-medic','s-co-checker'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('s-co-transport').value='Превоз за собствена сметка';
+  showAlert('settings-alert', 'Фирмата е записана.');
+}
+function editCompany(id) {
+  const co = DB.companies.find(c => c.id === id);
+  if (!co) return;
+  editingCompanyId = id;
+  document.getElementById('s-co-name').value      = co.name || '';
+  document.getElementById('s-co-addr').value      = co.address || '';
+  document.getElementById('s-co-phone').value     = co.phone || '';
+  document.getElementById('s-co-fax').value       = co.fax || '';
+  document.getElementById('s-co-issued').value    = co.issuedBy || '';
+  document.getElementById('s-co-mechanic').value  = co.mechanic || '';
+  document.getElementById('s-co-medic').value     = co.medic || '';
+  document.getElementById('s-co-checker').value   = co.checker || '';
+  document.getElementById('s-co-transport').value = co.transportType || 'Превоз за собствена сметка';
+  document.getElementById('s-co-name').focus();
+  document.getElementById('s-co-name').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+function addVehicle() {
+  const model = document.getElementById('s-veh-model').value.trim();
+  const regno = document.getElementById('s-veh-regno').value.trim();
+  if (!model || !regno) return showAlert('settings-alert','Въведете марка и рег. №.','err');
+  DB.vehicles.push({ id:uid(), model, regno });
+  saveDB();
+  document.getElementById('s-veh-model').value='';
+  document.getElementById('s-veh-regno').value='';
+  renderSettingsLists(); populateSelects();
+  showAlert('settings-alert','Автомобилът е добавен.');
+}
+function addDriver() {
+  const name = document.getElementById('s-drv-name').value.trim();
+  if (!name) return showAlert('settings-alert','Въведете имена.','err');
+  DB.drivers.push({ id:uid(), name });
+  saveDB();
+  document.getElementById('s-drv-name').value='';
+  renderSettingsLists(); populateSelects();
+  showAlert('settings-alert','Водачът е добавен.');
+}
+function deleteEntity(type, id) {
+  if (!confirm('Изтриване?')) return;
+  DB[type] = DB[type].filter(e => e.id !== id);
+  saveDB(); renderSettingsLists(); populateSelects();
+}
+
+function renderSettingsLists() {
+  renderList('companies-list', DB.companies,
+    c => c.name,
+    c => `${c.address||''} ${c.phone?'· '+c.phone:''}`.trim(),
+    'companies', true);
+  renderList('vehicles-list', DB.vehicles,
+    v => v.model, v => v.regno, 'vehicles', false);
+  renderList('drivers-list', DB.drivers,
+    d => d.name, () => 'Водач', 'drivers', false);
+}
+function renderList(listId, items, labelFn, metaFn, type, hasEdit) {
+  const ul = document.getElementById(listId);
+  if (!items.length) { ul.innerHTML=`<li class="empty-list">Няма записи</li>`; return; }
+  ul.innerHTML = items.map(it => `
+    <li>
+      <span><strong>${labelFn(it)}</strong> <span class="meta">· ${metaFn(it)}</span></span>
+      <div style="display:flex;gap:6px;flex-shrink:0">
+        ${hasEdit ? `<button class="btn btn-outline btn-sm" onclick="editCompany('${it.id}')">✏️</button>` : ''}
+        <button class="btn btn-danger" onclick="deleteEntity('${type}','${it.id}')">✕</button>
+      </div>
+    </li>`).join('');
+}
+
+// ===== HISTORY =====
 function renderHistory() {
   const el = document.getElementById('history-list');
-  if (!DB.history.length) {
-    el.innerHTML = '<p style="color:var(--text-soft);padding:20px 0">Няма записани пътни листове.</p>';
-    return;
-  }
+  if (!DB.history.length) { el.innerHTML='<p class="empty-list">Няма записани листове.</p>'; return; }
   el.innerHTML = DB.history.map(h => `
-    <div class="form-section" style="margin-bottom:12px;cursor:pointer" onclick="loadFromHistory('${h.id}')">
-      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
-        <strong style="font-size:1rem">№ ${h.number || '—'}</strong>
-        <span style="color:var(--text-soft);font-size:0.82rem">${formatDate(h.issueDate)}</span>
-        <span style="color:var(--text-soft);font-size:0.82rem">${h.vehicle || ''} ${h.regno ? '(' + h.regno + ')' : ''}</span>
-        <span style="color:var(--text-soft);font-size:0.82rem">${h.driver1 || ''}</span>
-        <button class="btn btn-yellow btn-sm" style="margin-left:auto" onclick="event.stopPropagation();previewFromHistory('${h.id}')">Преглед</button>
-        <button class="btn btn-outline btn-sm" onclick="event.stopPropagation();deleteHistory('${h.id}')">Изтрий</button>
+    <div class="hist-item">
+      <div>
+        <div class="hist-no">№ ${h.number||'—'}</div>
+        <div class="hist-meta">${fmtDateDisplay(h.date)} · ${h.vehicle||''} · ${h.driver||''}</div>
+      </div>
+      <div class="hist-btns">
+        <button class="btn btn-yellow btn-sm" onclick="previewHistory('${h.id}')">👁 Преглед</button>
+        <button class="btn btn-outline btn-sm" onclick="deleteHistory('${h.id}')">✕</button>
       </div>
     </div>`).join('');
 }
-
-function loadFromHistory(id) {
-  const h = DB.history.find(x => x.id === id);
-  if (!h) return;
-
-  // Fill simple fields
-  const map = {
-    'f-address': h.address, 'f-phone': h.phone, 'f-fax': h.fax,
-    'f-regno': h.regno, 'f-series': h.series, 'f-number': h.number,
-    'f-authorized': h.authorized, 'f-issue-date': h.issueDate,
-    'f-depart': h.depart, 'f-return': h.return,
-    'f-km-start': h.kmStart, 'f-km-end': h.kmEnd, 'f-check-date': h.checkDate,
-    'f-companion1': h.companion1, 'f-companion2': h.companion2
-  };
-  Object.entries(map).forEach(([id, val]) => {
-    const el = document.getElementById(id);
-    if (el) el.value = val || '';
-  });
-
-  // Selects — match by text
-  function selectByText(selId, text, customId) {
-    const sel = document.getElementById(selId);
-    if (!text) return;
-    const opt = Array.from(sel.options).find(o => o.text === text);
-    if (opt) { sel.value = opt.value; }
-    else {
-      sel.value = '__custom__';
-      const custom = document.getElementById(customId);
-      if (custom) { custom.value = text; custom.style.display = 'block'; }
-    }
-  }
-
-  // Match company by name
-  const co = DB.companies.find(c => c.name === h.companyName);
-  if (co) { document.getElementById('f-company').value = co.id; fillCompany(); }
-
-  // Match vehicle by model
-  const veh = DB.vehicles.find(v => v.model === h.vehicle);
-  if (veh) { document.getElementById('f-vehicle').value = veh.id; }
-
-  selectByText('f-driver1', h.driver1, 'f-driver1-custom');
-  selectByText('f-driver2', h.driver2, 'f-driver2-custom');
-  selectByText('f-issued-by', h.issuedBy, 'f-issued-by-custom');
-  selectByText('f-mechanic', h.mechanic, 'f-mechanic-custom');
-  selectByText('f-medic', h.medic, 'f-medic-custom');
-  selectByText('f-checker', h.checker, 'f-checker-custom');
-
-  // Docs
-  const docContainer = document.getElementById('doc-rows');
-  docContainer.innerHTML = '';
-  const docList = (h.docs && h.docs.length) ? h.docs : [{ type: '', num: '' }];
-  docList.forEach(d => {
-    const row = document.createElement('div');
-    row.className = 'field-grid two-col doc-row';
-    row.style.marginBottom = '8px';
-    row.innerHTML = `
-      <div class="field"><label>Вид обществен превоз</label><input type="text" class="doc-type" value="${d.type||''}"></div>
-      <div class="field"><label>Документ</label><input type="text" class="doc-num" value="${d.num||''}"></div>`;
-    docContainer.appendChild(row);
-  });
-
-  showTab('tab-form');
-  document.querySelector('.tab-btn').click(); // ensure form tab
-  document.querySelectorAll('.tab-btn')[0].click();
-  window.scrollTo(0, 0);
-  alert_('form-alert', 'Данните са заредени от историята. Можете да редактирате и отпечатате.');
+function fmtDateDisplay(s) {
+  if (!s) return ''; const d=new Date(s); return isNaN(d)?s:d.toLocaleDateString('bg-BG',{day:'2-digit',month:'2-digit',year:'numeric'});
 }
-
-function previewFromHistory(id) {
-  const h = DB.history.find(x => x.id === id);
-  if (!h) return;
-  document.getElementById('waybill-print-content').innerHTML = buildWaybillHTML(h);
-  document.getElementById('preview-overlay').classList.add('open');
+function previewHistory(id) {
+  const h = DB.history.find(x => x.id===id);
+  if (h) openPreview(h);
 }
-
 function deleteHistory(id) {
-  if (!confirm('Изтрий този запис?')) return;
-  DB.history = DB.history.filter(h => h.id !== id);
-  saveData(DB); renderHistory();
+  if (!confirm('Изтрий?')) return;
+  DB.history = DB.history.filter(h => h.id!==id);
+  saveDB(); renderHistory();
 }
 
 // ===== CLEAR FORM =====
 function clearForm() {
-  if (!confirm('Изчисти всички полета?')) return;
-  ['f-address','f-phone','f-fax','f-regno','f-series','f-authorized',
-   'f-companion1','f-companion2','f-km-start','f-km-end',
-   'f-driver1-custom','f-driver2-custom','f-issued-by-custom',
-   'f-mechanic-custom','f-medic-custom','f-checker-custom']
-    .forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
-  ['f-company','f-vehicle','f-driver1','f-driver2','f-issued-by','f-mechanic','f-medic','f-checker']
-    .forEach(id => { const el = document.getElementById(id); if(el) el.value=''; });
-  ['f-driver1-custom','f-driver2-custom','f-issued-by-custom','f-mechanic-custom','f-medic-custom','f-checker-custom']
-    .forEach(id => { const el = document.getElementById(id); if(el) el.style.display='none'; });
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('f-issue-date').value = today;
-  document.getElementById('f-check-date').value = today;
-  document.getElementById('f-depart').value = '';
-  document.getElementById('f-return').value = '';
-  document.getElementById('doc-rows').innerHTML = `
-    <div class="field-grid two-col doc-row" style="margin-bottom:8px">
-      <div class="field"><label>Вид обществен превоз</label><input type="text" class="doc-type" value="Превоз за собствена сметка"></div>
-      <div class="field"><label>Документ</label><input type="text" class="doc-num"></div>
+  if (!confirm('Изчисти формата?')) return;
+  ['f-company','f-vehicle','f-driver'].forEach(id => document.getElementById(id).value='');
+  document.getElementById('f-regno').value='';
+  setToday();
+  document.getElementById('doc-rows').innerHTML=`
+    <div class="doc-row">
+      <div class="field"><label>Вид превоз</label><input type="text" class="doc-type" value="Превоз за собствена сметка"></div>
+      <div class="field"><label>Документ №</label><input type="text" class="doc-num"></div>
     </div>`;
   autoNextNumber();
 }
-</script>
 
+// ===== ADD DOC ROW =====
+function addDocRow() {
+  const row = document.createElement('div');
+  row.className = 'doc-row';
+  row.innerHTML = `
+    <div class="field"><label>Вид превоз</label><input type="text" class="doc-type"></div>
+    <div class="field"><label>Документ №</label><input type="text" class="doc-num"></div>`;
+  document.getElementById('doc-rows').appendChild(row);
+}
+</script>
 </body>
 </html>
