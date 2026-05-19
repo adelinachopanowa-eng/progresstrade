@@ -525,6 +525,12 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
         <input type="time" id="f-depart-time">
       </div>
       <div class="field" style="grid-column:1/-1">
+        <label>Контрагент</label>
+        <select id="f-counterparty" onchange="fillCounterparty()">
+          <option value="">— изберете контрагент —</option>
+        </select>
+      </div>
+      <div class="field" style="grid-column:1/-1">
         <label>Целеви град</label>
         <input type="text" id="f-dest-city" placeholder="гр. Пловдив">
       </div>
@@ -602,6 +608,20 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     </div>
   </div>
 
+  <!-- Counterparties -->
+  <div class="card">
+    <h3>🏭 Контрагенти</h3>
+    <ul class="entity-list" id="counterparties-list"></ul>
+    <div class="add-form">
+      <h4>Добави контрагент</h4>
+      <div class="fields col2" style="margin-bottom:10px">
+        <div class="field" style="grid-column:1/-1"><label>Наименование</label><input type="text" id="s-ctr-name" placeholder="Металтрейд ООД"></div>
+        <div class="field" style="grid-column:1/-1"><label>Град</label><input type="text" id="s-ctr-city" placeholder="гр. Пловдив"></div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="addCounterparty()">Добави</button>
+    </div>
+  </div>
+
   <!-- Vehicles -->
   <div class="card">
     <h3>🚛 Автомобили</h3>
@@ -674,8 +694,8 @@ const sb = createClient(
 
 // ===== LOCAL CACHE =====
 function loadDB() {
-  try { return Object.assign({ companies:[], vehicles:[], drivers:[], history:[], lastNumber:0, zapovedLastNumber:0 }, JSON.parse(localStorage.getItem('wb_data')||'{}')); }
-  catch { return { companies:[], vehicles:[], drivers:[], history:[], lastNumber:0, zapovedLastNumber:0 }; }
+  try { return Object.assign({ companies:[], vehicles:[], drivers:[], counterparties:[], history:[], lastNumber:0, zapovedLastNumber:0 }, JSON.parse(localStorage.getItem('wb_data')||'{}')); }
+  catch { return { companies:[], vehicles:[], drivers:[], counterparties:[], history:[], lastNumber:0, zapovedLastNumber:0 }; }
 }
 function saveDB() { localStorage.setItem('wb_data', JSON.stringify(DB)); }
 let DB = loadDB();
@@ -688,8 +708,10 @@ const M = {
   vehFromRow: r => ({ id:r.id, model:r.model, regno:r.regno }),
   drvToRow:   d => ({ id:d.id, name:d.name, birth_date:d.birthDate||null, license_number:d.licenseNumber||'', employment_date:d.employmentDate||null }),
   drvFromRow: r => ({ id:r.id, name:r.name, birthDate:r.birth_date||'', licenseNumber:r.license_number||'', employmentDate:r.employment_date||'' }),
-  histToRow:  h => ({ id:h.id, number:h.number||'', date:h.date||'', company_id:h.companyId||'', company_name:h.companyName||'', address:h.address||'', phone:h.phone||'', fax:h.fax||'', issued_by:h.issuedBy||'', mechanic:h.mechanic||'', medic:h.medic||'', checker:h.checker||'', vehicle:h.vehicle||'', regno:h.regno||'', driver:h.driver||'', docs:h.docs||[], extra: { zapovedNo:h.zapovedNo||'', destCity:h.destCity||'', cargoType:h.cargoType||'', departTime:h.departTime||'', certFrom:h.certFrom||'', certTo:h.certTo||'', absenceType:h.absenceType||'', driverBirthDate:h.driverBirthDate||'', driverLicenseNumber:h.driverLicenseNumber||'', driverEmploymentDate:h.driverEmploymentDate||'', declarantName:h.declarantName||'', declarantTitle:h.declarantTitle||'', managerName:h.managerName||'' } }),
-  histFromRow:r => ({ id:r.id, number:r.number, date:r.date, companyId:r.company_id||'', companyName:r.company_name||'', address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', vehicle:r.vehicle||'', regno:r.regno||'', driver:r.driver||'', docs:r.docs||[], createdAt:r.created_at, zapovedNo:(r.extra||{}).zapovedNo||'', destCity:(r.extra||{}).destCity||'', cargoType:(r.extra||{}).cargoType||'железен скрап', departTime:(r.extra||{}).departTime||'', certFrom:(r.extra||{}).certFrom||'', certTo:(r.extra||{}).certTo||'', absenceType:(r.extra||{}).absenceType||'', driverBirthDate:(r.extra||{}).driverBirthDate||'', driverLicenseNumber:(r.extra||{}).driverLicenseNumber||'', driverEmploymentDate:(r.extra||{}).driverEmploymentDate||'', declarantName:(r.extra||{}).declarantName||'', declarantTitle:(r.extra||{}).declarantTitle||'', managerName:(r.extra||{}).managerName||'' })
+  ctrToRow:   c => ({ id:c.id, name:c.name, city:c.city||'' }),
+  ctrFromRow: r => ({ id:r.id, name:r.name, city:r.city||'' }),
+  histToRow:  h => ({ id:h.id, number:h.number||'', date:h.date||'', company_id:h.companyId||'', company_name:h.companyName||'', address:h.address||'', phone:h.phone||'', fax:h.fax||'', issued_by:h.issuedBy||'', mechanic:h.mechanic||'', medic:h.medic||'', checker:h.checker||'', vehicle:h.vehicle||'', regno:h.regno||'', driver:h.driver||'', docs:h.docs||[], extra: { zapovedNo:h.zapovedNo||'', destCity:h.destCity||'', counterpartyId:h.counterpartyId||'', counterpartyName:h.counterpartyName||'', cargoType:h.cargoType||'', departTime:h.departTime||'', certFrom:h.certFrom||'', certTo:h.certTo||'', absenceType:h.absenceType||'', driverBirthDate:h.driverBirthDate||'', driverLicenseNumber:h.driverLicenseNumber||'', driverEmploymentDate:h.driverEmploymentDate||'', declarantName:h.declarantName||'', declarantTitle:h.declarantTitle||'', managerName:h.managerName||'' } }),
+  histFromRow:r => ({ id:r.id, number:r.number, date:r.date, companyId:r.company_id||'', companyName:r.company_name||'', address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', vehicle:r.vehicle||'', regno:r.regno||'', driver:r.driver||'', docs:r.docs||[], createdAt:r.created_at, zapovedNo:(r.extra||{}).zapovedNo||'', destCity:(r.extra||{}).destCity||'', counterpartyId:(r.extra||{}).counterpartyId||'', counterpartyName:(r.extra||{}).counterpartyName||'', cargoType:(r.extra||{}).cargoType||'железен скрап', departTime:(r.extra||{}).departTime||'', certFrom:(r.extra||{}).certFrom||'', certTo:(r.extra||{}).certTo||'', absenceType:(r.extra||{}).absenceType||'', driverBirthDate:(r.extra||{}).driverBirthDate||'', driverLicenseNumber:(r.extra||{}).driverLicenseNumber||'', driverEmploymentDate:(r.extra||{}).driverEmploymentDate||'', declarantName:(r.extra||{}).declarantName||'', declarantTitle:(r.extra||{}).declarantTitle||'', managerName:(r.extra||{}).managerName||'' })
 };
 
 // ===== LOADING =====
@@ -711,18 +733,20 @@ window.addEventListener('DOMContentLoaded', () => initApp());
 async function initApp() {
   setLoading(true);
   try {
-    const [cosR, vehsR, drvsR, histR, settR] = await Promise.all([
+    const [cosR, vehsR, drvsR, ctrR, histR, settR] = await Promise.all([
       sb.from('companies').select('*').order('created_at'),
       sb.from('vehicles').select('*').order('created_at'),
       sb.from('drivers').select('*').order('created_at'),
+      sb.from('counterparties').select('*').order('created_at'),
       sb.from('waybill_history').select('*').order('created_at', {ascending:false}).limit(300),
       sb.from('settings').select('*')
     ]);
-    if (cosR.error || vehsR.error || drvsR.error || histR.error) throw cosR.error || vehsR.error || drvsR.error || histR.error;
-    DB.companies = (cosR.data||[]).map(M.coFromRow);
-    DB.vehicles  = (vehsR.data||[]).map(M.vehFromRow);
-    DB.drivers   = (drvsR.data||[]).map(M.drvFromRow);
-    DB.history   = (histR.data||[]).map(M.histFromRow);
+    if (cosR.error || vehsR.error || drvsR.error || ctrR.error || histR.error) throw cosR.error || vehsR.error || drvsR.error || ctrR.error || histR.error;
+    DB.companies     = (cosR.data||[]).map(M.coFromRow);
+    DB.vehicles      = (vehsR.data||[]).map(M.vehFromRow);
+    DB.drivers       = (drvsR.data||[]).map(M.drvFromRow);
+    DB.counterparties= (ctrR.data||[]).map(M.ctrFromRow);
+    DB.history       = (histR.data||[]).map(M.histFromRow);
     const ln = (settR.data||[]).find(s => s.key === 'lastNumber');
     DB.lastNumber = ln ? parseInt(ln.value)||0 : 0;
     const zl = (settR.data||[]).find(s => s.key === 'zapovedLastNumber');
@@ -759,10 +783,15 @@ function autoZapovedNumber() {
 
 // ===== SELECTS =====
 function populateSelects() {
-  fillSel('f-company', DB.companies, c => c.name, c => c.id, '— изберете фирма —');
-  fillSel('f-vehicle', DB.vehicles, v => `${v.model} (${v.regno})`, v => v.id, '— изберете —');
-  fillSel('f-driver',  DB.drivers,  d => d.name, d => d.id, '— изберете водач —');
+  fillSel('f-company',     DB.companies,     c => c.name, c => c.id, '— изберете фирма —');
+  fillSel('f-vehicle',     DB.vehicles,      v => `${v.model} (${v.regno})`, v => v.id, '— изберете —');
+  fillSel('f-driver',      DB.drivers,       d => d.name, d => d.id, '— изберете водач —');
+  fillSel('f-counterparty',DB.counterparties,c => `${c.city} — ${c.name}`, c => c.id, '— изберете контрагент —');
   selectDefaultCompany();
+}
+function fillCounterparty() {
+  const ctr = DB.counterparties.find(c => c.id === document.getElementById('f-counterparty').value);
+  if (ctr) document.getElementById('f-dest-city').value = ctr.city;
 }
 function selectDefaultCompany() {
   const sel = document.getElementById('f-company');
@@ -823,10 +852,12 @@ function collectForm() {
     driver:    drv.name  || '',
     docs,
     // Заповед
-    zapovedNo:   document.getElementById('f-zapovedNo').value.trim(),
-    destCity:    document.getElementById('f-dest-city').value.trim(),
-    cargoType:   document.getElementById('f-cargo-type').value.trim() || 'железен скрап',
-    departTime:  document.getElementById('f-depart-time').value,
+    zapovedNo:        document.getElementById('f-zapovedNo').value.trim(),
+    destCity:         document.getElementById('f-dest-city').value.trim(),
+    counterpartyId:   document.getElementById('f-counterparty').value,
+    counterpartyName: (DB.counterparties.find(c => c.id === document.getElementById('f-counterparty').value)||{}).name || '',
+    cargoType:        document.getElementById('f-cargo-type').value.trim() || 'железен скрап',
+    departTime:       document.getElementById('f-depart-time').value,
     // Удостоверение
     certFrom:    document.getElementById('f-cert-from').value,
     certTo:      document.getElementById('f-cert-to').value,
@@ -1091,7 +1122,7 @@ function buildZapoved(d) {
 </div>
 
 <div style="margin-bottom:6mm">
-  По маршрут: гр. София, НПЗ Военна рампа, ул. „Проф. Иван Георгов" №1 до гр. <strong>${d.destCity||'_______________'}</strong>
+  По маршрут: гр. София, НПЗ Военна рампа, ул. „Проф. Иван Георгов" №1 до ${d.destCity||'гр. _______________'}${d.counterpartyName ? ', <strong>' + d.counterpartyName + '</strong>' : ''}
 </div>
 
 <div style="margin-bottom:10mm">
@@ -1266,6 +1297,21 @@ async function addVehicle() {
   showAlert('settings-alert', error ? '⚠️ Локално записано, облакът върна грешка.' : 'Автомобилът е добавен.', error ? 'err':'ok');
 }
 
+// Counterparties
+async function addCounterparty() {
+  const name = document.getElementById('s-ctr-name').value.trim();
+  const city = document.getElementById('s-ctr-city').value.trim();
+  if (!name || !city) return showAlert('settings-alert','Въведете наименование и град.','err');
+  const ctr = { id:uid(), name, city };
+  DB.counterparties.push(ctr); saveDB();
+  document.getElementById('s-ctr-name').value='';
+  document.getElementById('s-ctr-city').value='';
+  renderSettingsLists(); populateSelects();
+  showAlert('settings-alert','Записвам…');
+  const { error } = await sb.from('counterparties').insert(M.ctrToRow(ctr));
+  showAlert('settings-alert', error ? '⚠️ Локално записано, облакът върна грешка.' : 'Контрагентът е добавен.', error ? 'err':'ok');
+}
+
 // Drivers
 let editingDriverId = null;
 async function saveDriver() {
@@ -1323,7 +1369,7 @@ function cancelEditDriver() {
 }
 
 // Delete
-const SB_TABLE = { companies:'companies', vehicles:'vehicles', drivers:'drivers' };
+const SB_TABLE = { companies:'companies', vehicles:'vehicles', drivers:'drivers', counterparties:'counterparties' };
 async function deleteEntity(type, id) {
   if (!confirm('Изтриване?')) return;
   DB[type] = DB[type].filter(e => e.id !== id);
@@ -1337,6 +1383,8 @@ function renderSettingsLists() {
     c => c.name,
     c => `${c.address||''} ${c.phone?'· '+c.phone:''}`.trim(),
     'companies', true, false);
+  renderList('counterparties-list', DB.counterparties,
+    c => c.name, c => c.city||'', 'counterparties', false, false);
   renderList('vehicles-list', DB.vehicles,
     v => v.model, v => v.regno, 'vehicles', false, false);
   renderList('drivers-list', DB.drivers,
@@ -1391,6 +1439,7 @@ function clearForm() {
   if (!confirm('Изчисти формата?')) return;
   ['f-company','f-vehicle','f-driver'].forEach(id => document.getElementById(id).value='');
   document.getElementById('f-regno').value='';
+  document.getElementById('f-counterparty').value='';
   document.getElementById('f-dest-city').value='';
   document.getElementById('f-cargo-type').value='железен скрап';
   document.getElementById('f-depart-time').value='';
