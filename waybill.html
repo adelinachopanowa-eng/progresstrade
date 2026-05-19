@@ -125,6 +125,21 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   background-size: 12px;
 }
 
+/* ===== ABSENCE TYPE RADIO ===== */
+.abs-section-label { font-size: 0.75rem; font-weight: 700; color: var(--soft); margin-bottom: 8px; display: block; }
+.abs-opt {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  line-height: 1.4;
+  border-radius: 4px;
+}
+.abs-opt:hover { background: var(--cream); }
+.abs-opt input[type="radio"] { flex-shrink: 0; margin-top: 3px; accent-color: var(--green); width: 16px; height: 16px; }
+
 /* ===== BUTTONS ===== */
 .btn {
   display: inline-flex;
@@ -295,7 +310,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 }
 @media (max-width: 750px) { .wb-scale-hint { display: block; } }
 
-/* back page */
+/* back page / new pages */
 .wb-back { page-break-before: always; margin-top: 8mm; }
 .wb-back-table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin-bottom: 4mm; }
 .wb-back-table th, .wb-back-table td { border: 1pt solid #000; padding: 2pt 3pt; text-align: center; }
@@ -496,6 +511,53 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     </div>
     <button class="btn btn-outline btn-sm" onclick="addDocRow()" style="margin-top:4px">+ Ред</button>
   </div>
+
+  <!-- Заповед за собствен транспорт -->
+  <div class="card">
+    <h3>Заповед за собствен транспорт</h3>
+    <div class="fields col2">
+      <div class="field">
+        <label>Заповед №</label>
+        <input type="number" id="f-zapovedNo" placeholder="автоматично" min="1">
+      </div>
+      <div class="field">
+        <label>Час на тръгване</label>
+        <input type="time" id="f-depart-time">
+      </div>
+      <div class="field" style="grid-column:1/-1">
+        <label>Целеви град</label>
+        <input type="text" id="f-dest-city" placeholder="гр. Пловдив">
+      </div>
+      <div class="field" style="grid-column:1/-1">
+        <label>Вид товар</label>
+        <input type="text" id="f-cargo-type" value="железен скрап">
+      </div>
+    </div>
+  </div>
+
+  <!-- Удостоверение -->
+  <div class="card">
+    <h3>Удостоверение (Регл. ЕО 561/2006)</h3>
+    <div class="fields col2" style="margin-bottom:14px">
+      <div class="field">
+        <label>Период от</label>
+        <input type="datetime-local" id="f-cert-from">
+      </div>
+      <div class="field">
+        <label>Период до</label>
+        <input type="datetime-local" id="f-cert-to">
+      </div>
+    </div>
+    <span class="abs-section-label">Тип отсъствие</span>
+    <div>
+      <label class="abs-opt"><input type="radio" name="absence" value="е бил/а в отпуск по болест"> е бил/а в отпуск по болест</label>
+      <label class="abs-opt"><input type="radio" name="absence" value="е бил/а в годишен отпуск"> е бил/а в годишен отпуск</label>
+      <label class="abs-opt"><input type="radio" name="absence" value="е бил/а в отпуск или почивка"> е бил/а в отпуск или почивка</label>
+      <label class="abs-opt"><input type="radio" name="absence" value="е управлявал/а превозно средство, попадащо извън обхвата на Регламент (ЕО) 561/2006 или AETR"> е управлявал/а превозно средство, попадащо извън обхвата на Регламент (ЕО) 561/2006 или AETR</label>
+      <label class="abs-opt"><input type="radio" name="absence" value="е извършвал/а друга работа, а не управление на превозно средство"> е извършвал/а друга работа, а не управление на превозно средство</label>
+      <label class="abs-opt"><input type="radio" name="absence" value="е бил/а на разположение"> е бил/а на разположение</label>
+    </div>
+  </div>
 </div>
 
 <!-- actions bar (fixed bottom, shown on form tab) -->
@@ -530,6 +592,12 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
         <div class="field"><label>Приел / проверил</label><input type="text" id="s-co-checker" placeholder="Три имена"></div>
         <div class="field" style="grid-column:1/-1"><label>Вид превоз по подразбиране</label><input type="text" id="s-co-transport" value="Превоз за собствена сметка"></div>
       </div>
+      <h4 style="margin-bottom:10px">Заповед и удостоверение</h4>
+      <div class="fields col2" style="margin-bottom:12px">
+        <div class="field"><label>Декларатор (три имена)</label><input type="text" id="s-co-declarant-name" placeholder="Ева Костадинова"></div>
+        <div class="field"><label>Длъжност на декларатора</label><input type="text" id="s-co-declarant-title" placeholder="Организатор на транспортна дейност"></div>
+        <div class="field" style="grid-column:1/-1"><label>Управител (за Заповед)</label><input type="text" id="s-co-manager" placeholder="Милан Шопов"></div>
+      </div>
       <button class="btn btn-primary btn-sm" onclick="saveCompany()">Запази фирма</button>
     </div>
   </div>
@@ -553,11 +621,19 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     <h3>🧑‍✈️ Водачи</h3>
     <ul class="entity-list" id="drivers-list"></ul>
     <div class="add-form">
-      <h4>Добави водач</h4>
+      <h4 id="drv-form-title">Добави водач</h4>
       <div class="fields" style="margin-bottom:10px">
         <div class="field"><label>Три имена</label><input type="text" id="s-drv-name" placeholder="Иван Петров Георгиев"></div>
+        <div class="fields col2">
+          <div class="field"><label>Дата на раждане</label><input type="date" id="s-drv-birth"></div>
+          <div class="field"><label>СУМПС / Лична карта №</label><input type="text" id="s-drv-license" placeholder="__________"></div>
+        </div>
+        <div class="field"><label>Дата на постъпване на работа</label><input type="date" id="s-drv-employment"></div>
       </div>
-      <button class="btn btn-primary btn-sm" onclick="addDriver()">Добави</button>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-primary btn-sm" onclick="saveDriver()">Запази водача</button>
+        <button class="btn btn-outline btn-sm" id="drv-cancel-btn" style="display:none" onclick="cancelEditDriver()">Отказ</button>
+      </div>
     </div>
   </div>
 </div>
@@ -575,7 +651,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 <div class="preview-overlay" id="preview-overlay" onclick="closePrevOnBg(event)">
   <div class="preview-container" id="preview-container">
     <div class="preview-toolbar">
-      <h2>Пътен лист — преглед</h2>
+      <h2>Документи — преглед</h2>
       <div class="btns">
         <button class="btn btn-yellow btn-sm" onclick="window.print()">🖨️ Печат</button>
         <button class="btn btn-outline btn-sm" style="color:#fff;border-color:rgba(255,255,255,0.4)" onclick="closePreview()">✕</button>
@@ -598,22 +674,22 @@ const sb = createClient(
 
 // ===== LOCAL CACHE =====
 function loadDB() {
-  try { return Object.assign({ companies:[], vehicles:[], drivers:[], history:[], lastNumber:0 }, JSON.parse(localStorage.getItem('wb_data')||'{}')); }
-  catch { return { companies:[], vehicles:[], drivers:[], history:[], lastNumber:0 }; }
+  try { return Object.assign({ companies:[], vehicles:[], drivers:[], history:[], lastNumber:0, zapovedLastNumber:0 }, JSON.parse(localStorage.getItem('wb_data')||'{}')); }
+  catch { return { companies:[], vehicles:[], drivers:[], history:[], lastNumber:0, zapovedLastNumber:0 }; }
 }
 function saveDB() { localStorage.setItem('wb_data', JSON.stringify(DB)); }
 let DB = loadDB();
 
 // ===== ROW MAPPERS =====
 const M = {
-  coToRow:   c => ({ id:c.id, name:c.name, address:c.address||'', phone:c.phone||'', fax:c.fax||'', issued_by:c.issuedBy||'', mechanic:c.mechanic||'', medic:c.medic||'', checker:c.checker||'', transport_type:c.transportType||'Превоз за собствена сметка' }),
-  coFromRow: r => ({ id:r.id, name:r.name, address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', transportType:r.transport_type||'Превоз за собствена сметка' }),
+  coToRow:   c => ({ id:c.id, name:c.name, address:c.address||'', phone:c.phone||'', fax:c.fax||'', issued_by:c.issuedBy||'', mechanic:c.mechanic||'', medic:c.medic||'', checker:c.checker||'', transport_type:c.transportType||'Превоз за собствена сметка', declarant_name:c.declarantName||'', declarant_title:c.declarantTitle||'', manager_name:c.managerName||'' }),
+  coFromRow: r => ({ id:r.id, name:r.name, address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', transportType:r.transport_type||'Превоз за собствена сметка', declarantName:r.declarant_name||'', declarantTitle:r.declarant_title||'', managerName:r.manager_name||'' }),
   vehToRow:   v => ({ id:v.id, model:v.model, regno:v.regno }),
   vehFromRow: r => ({ id:r.id, model:r.model, regno:r.regno }),
-  drvToRow:   d => ({ id:d.id, name:d.name }),
-  drvFromRow: r => ({ id:r.id, name:r.name }),
-  histToRow:  h => ({ id:h.id, number:h.number||'', date:h.date||'', company_id:h.companyId||'', company_name:h.companyName||'', address:h.address||'', phone:h.phone||'', fax:h.fax||'', issued_by:h.issuedBy||'', mechanic:h.mechanic||'', medic:h.medic||'', checker:h.checker||'', vehicle:h.vehicle||'', regno:h.regno||'', driver:h.driver||'', docs:h.docs||[] }),
-  histFromRow:r => ({ id:r.id, number:r.number, date:r.date, companyId:r.company_id||'', companyName:r.company_name||'', address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', vehicle:r.vehicle||'', regno:r.regno||'', driver:r.driver||'', docs:r.docs||[], createdAt:r.created_at })
+  drvToRow:   d => ({ id:d.id, name:d.name, birth_date:d.birthDate||null, license_number:d.licenseNumber||'', employment_date:d.employmentDate||null }),
+  drvFromRow: r => ({ id:r.id, name:r.name, birthDate:r.birth_date||'', licenseNumber:r.license_number||'', employmentDate:r.employment_date||'' }),
+  histToRow:  h => ({ id:h.id, number:h.number||'', date:h.date||'', company_id:h.companyId||'', company_name:h.companyName||'', address:h.address||'', phone:h.phone||'', fax:h.fax||'', issued_by:h.issuedBy||'', mechanic:h.mechanic||'', medic:h.medic||'', checker:h.checker||'', vehicle:h.vehicle||'', regno:h.regno||'', driver:h.driver||'', docs:h.docs||[], extra: { zapovedNo:h.zapovedNo||'', destCity:h.destCity||'', cargoType:h.cargoType||'', departTime:h.departTime||'', certFrom:h.certFrom||'', certTo:h.certTo||'', absenceType:h.absenceType||'', driverBirthDate:h.driverBirthDate||'', driverLicenseNumber:h.driverLicenseNumber||'', driverEmploymentDate:h.driverEmploymentDate||'', declarantName:h.declarantName||'', declarantTitle:h.declarantTitle||'', managerName:h.managerName||'' } }),
+  histFromRow:r => ({ id:r.id, number:r.number, date:r.date, companyId:r.company_id||'', companyName:r.company_name||'', address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', vehicle:r.vehicle||'', regno:r.regno||'', driver:r.driver||'', docs:r.docs||[], createdAt:r.created_at, zapovedNo:(r.extra||{}).zapovedNo||'', destCity:(r.extra||{}).destCity||'', cargoType:(r.extra||{}).cargoType||'железен скрап', departTime:(r.extra||{}).departTime||'', certFrom:(r.extra||{}).certFrom||'', certTo:(r.extra||{}).certTo||'', absenceType:(r.extra||{}).absenceType||'', driverBirthDate:(r.extra||{}).driverBirthDate||'', driverLicenseNumber:(r.extra||{}).driverLicenseNumber||'', driverEmploymentDate:(r.extra||{}).driverEmploymentDate||'', declarantName:(r.extra||{}).declarantName||'', declarantTitle:(r.extra||{}).declarantTitle||'', managerName:(r.extra||{}).managerName||'' })
 };
 
 // ===== LOADING =====
@@ -649,6 +725,8 @@ async function initApp() {
     DB.history   = (histR.data||[]).map(M.histFromRow);
     const ln = (settR.data||[]).find(s => s.key === 'lastNumber');
     DB.lastNumber = ln ? parseInt(ln.value)||0 : 0;
+    const zl = (settR.data||[]).find(s => s.key === 'zapovedLastNumber');
+    DB.zapovedLastNumber = zl ? parseInt(zl.value)||0 : 0;
     saveDB();
   } catch(e) {
     console.error('Supabase:', e);
@@ -657,6 +735,7 @@ async function initApp() {
   setLoading(false);
   setToday();
   autoNextNumber();
+  autoZapovedNumber();
   populateSelects();
   renderSettingsLists();
   renderHistory();
@@ -673,6 +752,10 @@ function autoNextNumber() {
   const next = Math.max(maxH, DB.lastNumber || 0) + 1;
   if (next > 1 || DB.lastNumber) document.getElementById('f-number').value = next;
 }
+function autoZapovedNumber() {
+  const next = (DB.zapovedLastNumber || 0) + 1;
+  document.getElementById('f-zapovedNo').value = next;
+}
 
 // ===== SELECTS =====
 function populateSelects() {
@@ -684,7 +767,6 @@ function populateSelects() {
 function selectDefaultCompany() {
   const sel = document.getElementById('f-company');
   if (sel.value || !DB.companies.length) return;
-  // prefer "Прогрестрейд", иначе първата въведена фирма
   const def = DB.companies.find(c => /прогрестрейд/i.test(c.name)) || DB.companies[0];
   sel.value = def.id;
   fillCompany();
@@ -705,7 +787,6 @@ function fillSel(id, items, labelFn, valFn, placeholder) {
 function fillCompany() {
   const co = DB.companies.find(c => c.id === document.getElementById('f-company').value);
   if (!co) return;
-  // fill first doc-type with company default if empty
   const dt = document.querySelector('.doc-type');
   if (dt && !dt.value.trim()) dt.value = co.transportType || 'Превоз за собствена сметка';
 }
@@ -741,6 +822,23 @@ function collectForm() {
     regno:     veh.regno  || document.getElementById('f-regno').value,
     driver:    drv.name  || '',
     docs,
+    // Заповед
+    zapovedNo:   document.getElementById('f-zapovedNo').value.trim(),
+    destCity:    document.getElementById('f-dest-city').value.trim(),
+    cargoType:   document.getElementById('f-cargo-type').value.trim() || 'железен скрап',
+    departTime:  document.getElementById('f-depart-time').value,
+    // Удостоверение
+    certFrom:    document.getElementById('f-cert-from').value,
+    certTo:      document.getElementById('f-cert-to').value,
+    absenceType: document.querySelector('input[name="absence"]:checked')?.value || '',
+    // от водача
+    driverBirthDate:       drv.birthDate || '',
+    driverLicenseNumber:   drv.licenseNumber || '',
+    driverEmploymentDate:  drv.employmentDate || '',
+    // от фирмата
+    declarantName:  co.declarantName || '',
+    declarantTitle: co.declarantTitle || '',
+    managerName:    co.managerName || '',
     createdAt: new Date().toISOString()
   };
 }
@@ -749,26 +847,26 @@ function collectForm() {
 async function saveAndPreview() {
   const data = collectForm();
   data.id = uid();
-  // optimistic local update
   DB.history.unshift(data);
   if (DB.history.length > 300) DB.history.pop();
   const n = parseInt(data.number);
   if (!isNaN(n) && n > (DB.lastNumber||0)) DB.lastNumber = n;
+  const zn = parseInt(data.zapovedNo);
+  if (!isNaN(zn) && zn > (DB.zapovedLastNumber||0)) DB.zapovedLastNumber = zn;
   saveDB();
   renderHistory();
   openPreview(data);
-  // async Supabase write
   try {
     const { error: he } = await sb.from('waybill_history').insert(M.histToRow(data));
     if (he) throw he;
-    const { error: se } = await sb.from('settings').upsert({ key:'lastNumber', value:String(DB.lastNumber) });
-    if (se) throw se;
+    await sb.from('settings').upsert({ key:'lastNumber', value:String(DB.lastNumber) });
+    await sb.from('settings').upsert({ key:'zapovedLastNumber', value:String(DB.zapovedLastNumber) });
   } catch(e) { console.error('Supabase save history:', e); }
 }
 
 // ===== PREVIEW =====
 function openPreview(data) {
-  document.getElementById('wb-content').innerHTML = buildWB(data);
+  document.getElementById('wb-content').innerHTML = buildWB(data) + buildZapoved(data) + buildUdostoverenie(data);
   document.getElementById('preview-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
   requestAnimationFrame(scaleWaybill);
@@ -781,6 +879,7 @@ function closePreview() {
   const wrap = document.getElementById('wb-wrap');
   if (wrap) wrap.style.height = '';
   autoNextNumber();
+  autoZapovedNumber();
 }
 function scaleWaybill() {
   const wrap = document.getElementById('wb-wrap');
@@ -802,6 +901,27 @@ window.addEventListener('resize', () => {
 });
 function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
 
+// ===== DATE HELPERS =====
+function fmtDateBG(s) {
+  if (!s) return '..........';
+  const parts = s.split('-');
+  if (parts.length !== 3) return s;
+  return `${parts[2]}.${parts[1]}.${parts[0]} г.`;
+}
+function fmtDateDisplay(s) {
+  if (!s) return ''; const d=new Date(s); return isNaN(d)?s:d.toLocaleDateString('bg-BG',{day:'2-digit',month:'2-digit',year:'numeric'});
+}
+function fmtDateTime(s) {
+  if (!s) return '..........';
+  const [date, time] = s.split('T');
+  if (!date) return s;
+  const parts = date.split('-');
+  return `${time||'....'}  /  ${parts[2]}.${parts[1]}.${parts[0]}`;
+}
+function fmtDoc(s) {
+  if(!s) return ''; const dt=new Date(s); return isNaN(dt)?s:dt.toLocaleDateString('bg-BG',{day:'2-digit',month:'2-digit',year:'numeric'});
+}
+
 // ===== BUILD WAYBILL HTML =====
 function buildWB(d) {
   const emptyDocRow = '<tr><td>&nbsp;</td><td></td></tr>';
@@ -811,7 +931,6 @@ function buildWB(d) {
   const totalDocRows = Math.max(6, (d.docs ? d.docs.length : 0));
   const extraEmpty = Array(Math.max(0, totalDocRows - (d.docs ? d.docs.length : 0))).fill(emptyDocRow).join('');
   const dRows = filledRows + extraEmpty;
-  const fmtDate = s => { if(!s) return ''; const dt=new Date(s); return isNaN(dt)?s:dt.toLocaleDateString('bg-BG',{day:'2-digit',month:'2-digit',year:'numeric'}); };
   const cell = (val, hint, w) => `<span class="wb-cell"${w?' style="width:'+w+'"':''}><span class="cl">${val||''}</span><span class="ch">${hint}</span></span>`;
 
   return `<div class="waybill-print">
@@ -849,7 +968,7 @@ function buildWB(d) {
 <div class="wb-row">
   <span class="lbl">Издал пътния лист:</span>
   ${cell(d.issuedBy,'(име, презиме, фамилия)','auto;flex:1')}
-  ${cell(fmtDate(d.date),'(дата)','32mm')}
+  ${cell(fmtDoc(d.date),'(дата)','32mm')}
   ${cell('','(подпис)','28mm')}
 </div>
 <div class="wb-row">
@@ -948,6 +1067,130 @@ function buildWB(d) {
 </div>`;
 }
 
+// ===== BUILD ЗАПОВЕД HTML =====
+function buildZapoved(d) {
+  return `<div class="waybill-print wb-back" style="font-size:10pt;font-family:Arial,sans-serif;line-height:1.8;display:flex;flex-direction:column">
+<div style="text-align:center;font-size:14pt;font-weight:bold;letter-spacing:3pt;margin-bottom:10mm">
+  З А П О В Е Д &nbsp; № ${d.zapovedNo||'......'} &nbsp;/&nbsp; ${fmtDoc(d.date)} г.
+</div>
+
+<div style="margin-bottom:6mm">
+  На основание чл.18 т.4 от Наредба Н-8 от 27.06.2008 г. за условията и реда за извършване на превоз на пътници и товари за собствена сметка.
+</div>
+
+<div style="text-align:center;font-size:13pt;font-weight:bold;letter-spacing:3pt;margin-bottom:8mm">
+  Н А Р Е Ж Д А М :
+</div>
+
+<div style="margin-bottom:4mm">
+  Да се извърши превоз за собствена сметка на <strong>${d.cargoType||'железен скрап'}</strong> на ${fmtDoc(d.date)} г. от шофьор:
+</div>
+
+<div style="font-size:12pt;font-weight:bold;padding-left:15mm;margin-bottom:6mm">
+  ${d.driver||''}
+</div>
+
+<div style="margin-bottom:6mm">
+  По маршрут: гр. София, НПЗ Военна рампа, ул. „Проф. Иван Георгов" №1 до гр. <strong>${d.destCity||'_______________'}</strong>
+</div>
+
+<div style="margin-bottom:10mm">
+  Час на тръгване: <strong>${d.departTime||'............'}</strong> часа от базата на „${d.companyName}", ${d.address}.
+</div>
+
+<div style="margin-bottom:20mm">
+  Препис от настоящата заповед да се доведе до знанието на шофьора и счетоводителя за сведение и изпълнение.
+</div>
+
+<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;padding-top:10mm">
+  <div>
+    ${fmtDoc(d.date)} г.<br>гр. София
+  </div>
+  <div style="text-align:right">
+    Управител: ............................................<br>
+    <span style="font-size:9pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/${d.managerName||''}/</span>
+  </div>
+</div>
+</div>`;
+}
+
+// ===== BUILD УДОСТОВЕРЕНИЕ HTML =====
+function buildUdostoverenie(d) {
+  const absences = [
+    'е бил/а в отпуск по болест',
+    'е бил/а в годишен отпуск',
+    'е бил/а в отпуск или почивка',
+    'е управлявал/а превозно средство, попадащо извън обхвата на Регламент (ЕО) 561/2006 или AETR',
+    'е извършвал/а друга работа, а не управление на превозно средство',
+    'е бил/а на разположение',
+  ];
+  const checkboxRows = absences.map(a => {
+    const checked = d.absenceType === a;
+    return `<tr>
+      <td style="width:16pt;text-align:center;border:0.5pt solid #000;padding:2pt;vertical-align:middle;font-size:10pt">${checked ? '☑' : '☐'}</td>
+      <td style="padding:2pt 5pt;font-size:8pt;vertical-align:middle">${a}***</td>
+    </tr>`;
+  }).join('');
+
+  const row = (lbl, val) => `<div class="wb-row" style="margin-bottom:4pt"><span class="lbl" style="min-width:75mm;font-size:8pt">${lbl}</span><span class="ln" style="font-size:8pt">${val||''}</span></div>`;
+
+  return `<div class="waybill-print wb-back" style="font-family:Arial,sans-serif;font-size:8.5pt">
+<div style="text-align:center;font-weight:bold;font-size:8pt;margin-bottom:1mm">ПРИЛОЖЕНИЕ</div>
+<div style="text-align:center;font-weight:bold;font-size:12pt;letter-spacing:1pt;margin-bottom:1mm">УДОСТОВЕРЕНИЕ ЗА ДЕЙНОСТИ</div>
+<div style="text-align:center;font-size:9pt;margin-bottom:2mm">(РЕГЛАМЕНТ (ЕО) 561/2006 ИЛИ AETR<sup>*</sup>)</div>
+<div style="text-align:center;font-size:7pt;font-style:italic;margin-bottom:1mm">Попълва се на машина и се подписва преди пътуване. Прилага се към оригиналните тахографски листове, когато тяхното запазване е задължително</div>
+<div style="text-align:center;font-size:7pt;font-weight:bold;color:#cc0000;margin-bottom:4mm">Подправени удостоверения представляват нарушение</div>
+
+<div style="border:0.75pt solid #000;padding:5pt 7pt;margin-bottom:4mm">
+  <div style="font-weight:bold;font-size:9pt;margin-bottom:3mm">Част, попълвана от предприятието</div>
+  ${row('Име на предприятието:', d.companyName)}
+  ${row('Адрес, пощенски код, град, държава:', d.address)}
+  ${row('Телефонен номер:', d.phone||'')}
+  ${row('Номер на факс:', d.fax||'')}
+  ${row('Адрес за електронна поща:', '')}
+
+  <div style="margin:4mm 0 2mm;font-style:italic;font-size:8pt">Долуподписаният/долуподписаната:</div>
+  ${row('Фамилно и собствено име:', d.declarantName||'')}
+  ${row('Длъжност в предприятието:', d.declarantTitle||'')}
+
+  <div style="margin:4mm 0 2mm;font-style:italic;font-size:8pt">декларирам, че водачът:</div>
+  ${row('Фамилно и собствено име:', d.driver||'')}
+  ${row('Дата на раждане (ден/месец/година):', fmtDateBG(d.driverBirthDate))}
+  ${row('Номер на СУМПС / ЛК / паспорт:', d.driverLicenseNumber||'')}
+  ${row('Започнал/а работа в предприятието на:', fmtDateBG(d.driverEmploymentDate))}
+
+  <div style="margin:4mm 0 1mm;font-size:8pt">за периода:</div>
+  ${row('от (час/ден/месец/година):', fmtDateTime(d.certFrom))}
+  ${row('до (час/ден/месец/година):', fmtDateTime(d.certTo))}
+
+  <table style="border-collapse:collapse;margin:4mm 0;width:100%">
+    ${checkboxRows}
+  </table>
+
+  <div style="display:flex;justify-content:space-between;margin-top:5mm;font-size:8pt">
+    <span>Място: гр. София</span>
+    <span>Дата: ${fmtDoc(d.date)}</span>
+    <span>Подпис: ..........................................</span>
+  </div>
+</div>
+
+<div style="font-size:8pt;margin-bottom:5mm;line-height:1.7">
+  Аз, водачът на превозно средство, потвърждавам, че по време на гореспоменатия период не съм управлявал/а превозно средство, попадащо в обхвата на Регламент (ЕО) 561/2006 или на AETR.
+</div>
+
+<div style="display:flex;justify-content:space-between;margin-bottom:8mm;font-size:8pt">
+  <span>Място: гр. София</span>
+  <span>Дата: ${fmtDoc(d.date)}</span>
+  <span>Подпис на водача: ..........................................</span>
+</div>
+
+<div style="font-size:7pt;color:#555;margin-top:6mm">
+  <sup>*</sup> Европейско споразумение за работата на екипажите на превозните средства, извършващи международни автомобилни превози.<br>
+  *** Да се отбележи само една клетка.
+</div>
+</div>`;
+}
+
 // ===== SETTINGS =====
 function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,5); }
 function showAlert(id, msg, type='ok') {
@@ -958,7 +1201,7 @@ function showAlert(id, msg, type='ok') {
   setTimeout(() => el.style.display='none', 3000);
 }
 
-// Company save (add or update if editing)
+// Company
 let editingCompanyId = null;
 async function saveCompany() {
   const name = document.getElementById('s-co-name').value.trim();
@@ -966,20 +1209,23 @@ async function saveCompany() {
   const co = {
     id: editingCompanyId || uid(),
     name,
-    address:       document.getElementById('s-co-addr').value.trim(),
-    phone:         document.getElementById('s-co-phone').value.trim(),
-    fax:           document.getElementById('s-co-fax').value.trim(),
-    issuedBy:      document.getElementById('s-co-issued').value.trim(),
-    mechanic:      document.getElementById('s-co-mechanic').value.trim(),
-    medic:         document.getElementById('s-co-medic').value.trim(),
-    checker:       document.getElementById('s-co-checker').value.trim(),
-    transportType: document.getElementById('s-co-transport').value.trim() || 'Превоз за собствена сметка'
+    address:        document.getElementById('s-co-addr').value.trim(),
+    phone:          document.getElementById('s-co-phone').value.trim(),
+    fax:            document.getElementById('s-co-fax').value.trim(),
+    issuedBy:       document.getElementById('s-co-issued').value.trim(),
+    mechanic:       document.getElementById('s-co-mechanic').value.trim(),
+    medic:          document.getElementById('s-co-medic').value.trim(),
+    checker:        document.getElementById('s-co-checker').value.trim(),
+    transportType:  document.getElementById('s-co-transport').value.trim() || 'Превоз за собствена сметка',
+    declarantName:  document.getElementById('s-co-declarant-name').value.trim(),
+    declarantTitle: document.getElementById('s-co-declarant-title').value.trim(),
+    managerName:    document.getElementById('s-co-manager').value.trim(),
   };
   if (editingCompanyId) { const i = DB.companies.findIndex(c => c.id===editingCompanyId); if(i>=0) DB.companies[i]=co; }
   else DB.companies.push(co);
   editingCompanyId = null;
   saveDB(); renderSettingsLists(); populateSelects();
-  ['s-co-name','s-co-addr','s-co-phone','s-co-fax','s-co-issued','s-co-mechanic','s-co-medic','s-co-checker'].forEach(id => document.getElementById(id).value='');
+  ['s-co-name','s-co-addr','s-co-phone','s-co-fax','s-co-issued','s-co-mechanic','s-co-medic','s-co-checker','s-co-declarant-name','s-co-declarant-title','s-co-manager'].forEach(id => document.getElementById(id).value='');
   document.getElementById('s-co-transport').value='Превоз за собствена сметка';
   showAlert('settings-alert','Записвам…');
   const { error } = await sb.from('companies').upsert(M.coToRow(co));
@@ -989,19 +1235,23 @@ function editCompany(id) {
   const co = DB.companies.find(c => c.id === id);
   if (!co) return;
   editingCompanyId = id;
-  document.getElementById('s-co-name').value      = co.name || '';
-  document.getElementById('s-co-addr').value      = co.address || '';
-  document.getElementById('s-co-phone').value     = co.phone || '';
-  document.getElementById('s-co-fax').value       = co.fax || '';
-  document.getElementById('s-co-issued').value    = co.issuedBy || '';
-  document.getElementById('s-co-mechanic').value  = co.mechanic || '';
-  document.getElementById('s-co-medic').value     = co.medic || '';
-  document.getElementById('s-co-checker').value   = co.checker || '';
-  document.getElementById('s-co-transport').value = co.transportType || 'Превоз за собствена сметка';
+  document.getElementById('s-co-name').value            = co.name || '';
+  document.getElementById('s-co-addr').value            = co.address || '';
+  document.getElementById('s-co-phone').value           = co.phone || '';
+  document.getElementById('s-co-fax').value             = co.fax || '';
+  document.getElementById('s-co-issued').value          = co.issuedBy || '';
+  document.getElementById('s-co-mechanic').value        = co.mechanic || '';
+  document.getElementById('s-co-medic').value           = co.medic || '';
+  document.getElementById('s-co-checker').value         = co.checker || '';
+  document.getElementById('s-co-transport').value       = co.transportType || 'Превоз за собствена сметка';
+  document.getElementById('s-co-declarant-name').value  = co.declarantName || '';
+  document.getElementById('s-co-declarant-title').value = co.declarantTitle || '';
+  document.getElementById('s-co-manager').value         = co.managerName || '';
   document.getElementById('s-co-name').focus();
   document.getElementById('s-co-name').scrollIntoView({ behavior:'smooth', block:'center' });
 }
 
+// Vehicles
 async function addVehicle() {
   const model = document.getElementById('s-veh-model').value.trim();
   const regno = document.getElementById('s-veh-regno').value.trim();
@@ -1015,17 +1265,64 @@ async function addVehicle() {
   const { error } = await sb.from('vehicles').insert(M.vehToRow(veh));
   showAlert('settings-alert', error ? '⚠️ Локално записано, облакът върна грешка.' : 'Автомобилът е добавен.', error ? 'err':'ok');
 }
-async function addDriver() {
+
+// Drivers
+let editingDriverId = null;
+async function saveDriver() {
   const name = document.getElementById('s-drv-name').value.trim();
   if (!name) return showAlert('settings-alert','Въведете имена.','err');
-  const drv = { id:uid(), name };
-  DB.drivers.push(drv); saveDB();
+  const drv = {
+    id:               editingDriverId || uid(),
+    name,
+    birthDate:        document.getElementById('s-drv-birth').value || '',
+    licenseNumber:    document.getElementById('s-drv-license').value.trim(),
+    employmentDate:   document.getElementById('s-drv-employment').value || '',
+  };
+  if (editingDriverId) {
+    const i = DB.drivers.findIndex(d => d.id===editingDriverId);
+    if (i>=0) DB.drivers[i]=drv;
+  } else {
+    DB.drivers.push(drv);
+  }
+  editingDriverId = null;
+  saveDB();
   document.getElementById('s-drv-name').value='';
+  document.getElementById('s-drv-birth').value='';
+  document.getElementById('s-drv-license').value='';
+  document.getElementById('s-drv-employment').value='';
+  document.getElementById('drv-form-title').textContent='Добави водач';
+  document.getElementById('drv-cancel-btn').style.display='none';
   renderSettingsLists(); populateSelects();
   showAlert('settings-alert','Записвам…');
-  const { error } = await sb.from('drivers').insert(M.drvToRow(drv));
-  showAlert('settings-alert', error ? '⚠️ Локално записано, облакът върна грешка.' : 'Водачът е добавен.', error ? 'err':'ok');
+  const { error } = editingDriverId
+    ? await sb.from('drivers').update(M.drvToRow(drv)).eq('id', drv.id)
+    : await sb.from('drivers').upsert(M.drvToRow(drv));
+  showAlert('settings-alert', error ? '⚠️ Локално записано, облакът върна грешка.' : 'Водачът е записан.', error ? 'err':'ok');
 }
+function editDriver(id) {
+  const drv = DB.drivers.find(d => d.id === id);
+  if (!drv) return;
+  editingDriverId = id;
+  document.getElementById('s-drv-name').value       = drv.name || '';
+  document.getElementById('s-drv-birth').value      = drv.birthDate || '';
+  document.getElementById('s-drv-license').value    = drv.licenseNumber || '';
+  document.getElementById('s-drv-employment').value = drv.employmentDate || '';
+  document.getElementById('drv-form-title').textContent = 'Редактирай водач';
+  document.getElementById('drv-cancel-btn').style.display = 'inline-flex';
+  document.getElementById('s-drv-name').focus();
+  document.getElementById('s-drv-name').scrollIntoView({ behavior:'smooth', block:'center' });
+}
+function cancelEditDriver() {
+  editingDriverId = null;
+  document.getElementById('s-drv-name').value='';
+  document.getElementById('s-drv-birth').value='';
+  document.getElementById('s-drv-license').value='';
+  document.getElementById('s-drv-employment').value='';
+  document.getElementById('drv-form-title').textContent='Добави водач';
+  document.getElementById('drv-cancel-btn').style.display='none';
+}
+
+// Delete
 const SB_TABLE = { companies:'companies', vehicles:'vehicles', drivers:'drivers' };
 async function deleteEntity(type, id) {
   if (!confirm('Изтриване?')) return;
@@ -1039,13 +1336,15 @@ function renderSettingsLists() {
   renderList('companies-list', DB.companies,
     c => c.name,
     c => `${c.address||''} ${c.phone?'· '+c.phone:''}`.trim(),
-    'companies', true);
+    'companies', true, false);
   renderList('vehicles-list', DB.vehicles,
-    v => v.model, v => v.regno, 'vehicles', false);
+    v => v.model, v => v.regno, 'vehicles', false, false);
   renderList('drivers-list', DB.drivers,
-    d => d.name, () => 'Водач', 'drivers', false);
+    d => d.name,
+    d => [d.birthDate ? fmtDateBG(d.birthDate) : '', d.licenseNumber||''].filter(Boolean).join(' · ') || 'Водач',
+    'drivers', false, true);
 }
-function renderList(listId, items, labelFn, metaFn, type, hasEdit) {
+function renderList(listId, items, labelFn, metaFn, type, hasEdit, hasDriverEdit) {
   const ul = document.getElementById(listId);
   if (!items.length) { ul.innerHTML=`<li class="empty-list">Няма записи</li>`; return; }
   ul.innerHTML = items.map(it => `
@@ -1053,6 +1352,7 @@ function renderList(listId, items, labelFn, metaFn, type, hasEdit) {
       <span><strong>${labelFn(it)}</strong> <span class="meta">· ${metaFn(it)}</span></span>
       <div style="display:flex;gap:6px;flex-shrink:0">
         ${hasEdit ? `<button class="btn btn-outline btn-sm" onclick="editCompany('${it.id}')">✏️</button>` : ''}
+        ${hasDriverEdit ? `<button class="btn btn-outline btn-sm" onclick="editDriver('${it.id}')">✏️</button>` : ''}
         <button class="btn btn-danger" onclick="deleteEntity('${type}','${it.id}')">✕</button>
       </div>
     </li>`).join('');
@@ -1074,9 +1374,6 @@ function renderHistory() {
       </div>
     </div>`).join('');
 }
-function fmtDateDisplay(s) {
-  if (!s) return ''; const d=new Date(s); return isNaN(d)?s:d.toLocaleDateString('bg-BG',{day:'2-digit',month:'2-digit',year:'numeric'});
-}
 function previewHistory(id) {
   const h = DB.history.find(x => x.id===id);
   if (h) openPreview(h);
@@ -1094,6 +1391,12 @@ function clearForm() {
   if (!confirm('Изчисти формата?')) return;
   ['f-company','f-vehicle','f-driver'].forEach(id => document.getElementById(id).value='');
   document.getElementById('f-regno').value='';
+  document.getElementById('f-dest-city').value='';
+  document.getElementById('f-cargo-type').value='железен скрап';
+  document.getElementById('f-depart-time').value='';
+  document.getElementById('f-cert-from').value='';
+  document.getElementById('f-cert-to').value='';
+  document.querySelectorAll('input[name="absence"]').forEach(r => r.checked=false);
   setToday();
   document.getElementById('doc-rows').innerHTML=`
     <div class="doc-row">
@@ -1101,6 +1404,7 @@ function clearForm() {
       <div class="field"><label>Документ №</label><input type="text" class="doc-num"></div>
     </div>`;
   autoNextNumber();
+  autoZapovedNumber();
 }
 
 // ===== ADD DOC ROW =====
