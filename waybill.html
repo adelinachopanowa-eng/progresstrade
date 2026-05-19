@@ -225,12 +225,14 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     display: block !important;
   }
   .preview-container { box-shadow: none !important; border-radius: 0 !important; width: auto !important; }
-  .preview-toolbar  { display: none !important; }
+  .preview-toolbar, .wb-scale-hint  { display: none !important; }
   .preview-container > .wb-wrap { padding: 0 !important; background: #fff !important; }
+  #wb-content { transform: none !important; height: auto !important; }
   .waybill-print {
-    width: auto !important; min-height: 0 !important;
-    border: none !important; margin: 0 !important; padding: 0 !important;
+    width: 194mm !important; min-height: 0 !important;
+    border: none !important; margin: 0 !important; padding: 6mm 7mm !important;
   }
+  .wb-back { margin-top: 0 !important; }
 }
 
 /* ===== PREVIEW OVERLAY ===== */
@@ -267,7 +269,39 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 }
 .preview-toolbar h2 { font-size: 0.9rem; }
 .preview-toolbar .btns { display: flex; gap: 8px; }
-.wb-wrap { padding: 8mm; background: #e8e8e8; overflow-x: auto; }
+.wb-wrap { padding: 8mm; background: #e8e8e8; overflow: auto; }
+.wb-scale-hint {
+  display: none;
+  text-align: center;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.65);
+  padding: 4px 0 8px;
+  letter-spacing: 0.02em;
+}
+@media (max-width: 750px) { .wb-scale-hint { display: block; } }
+
+/* back page */
+.wb-back { page-break-before: always; margin-top: 8mm; }
+.wb-back-table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin-bottom: 4mm; }
+.wb-back-table th, .wb-back-table td { border: 0.5pt solid #000; padding: 2pt 3pt; text-align: center; }
+.wb-back-table th { font-weight: bold; font-size: 7pt; vertical-align: middle; }
+.wb-back-table td { height: 14pt; }
+.wb-back-table .num-row td { font-weight: bold; background: #f5f5f5; }
+.wb-notes-label { font-size: 8pt; font-weight: bold; margin-bottom: 3mm; }
+.wb-dotline-full {
+  border-bottom: 0.5pt dotted #000;
+  height: 10pt;
+  margin-bottom: 4pt;
+}
+.wb-control-sig {
+  text-align: right;
+  font-size: 7pt;
+  font-style: italic;
+  margin-top: 3pt;
+  margin-bottom: 5mm;
+}
+.wb-instruction { font-size: 6.5pt; line-height: 1.5; }
+.wb-instruction u { font-weight: bold; }
 
 /* ===== WAYBILL PRINT LAYOUT ===== */
 .waybill-print {
@@ -513,8 +547,9 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
         <button class="btn btn-outline btn-sm" style="color:#fff;border-color:rgba(255,255,255,0.4)" onclick="closePreview()">✕</button>
       </div>
     </div>
-    <div class="wb-wrap">
-      <div class="waybill-print" id="wb-content"></div>
+    <div class="wb-scale-hint">← плъзнете за да видите целия документ →</div>
+    <div class="wb-wrap" id="wb-wrap">
+      <div id="wb-content"></div>
     </div>
   </div>
 </div>
@@ -639,12 +674,35 @@ function openPreview(data) {
   document.getElementById('wb-content').innerHTML = buildWB(data);
   document.getElementById('preview-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
+  requestAnimationFrame(scaleWaybill);
 }
 function closePreview() {
   document.getElementById('preview-overlay').classList.remove('open');
   document.body.style.overflow = '';
+  const wb = document.getElementById('wb-content');
+  wb.style.transform = ''; wb.style.transformOrigin = '';
+  const wrap = document.getElementById('wb-wrap');
+  if (wrap) wrap.style.height = '';
   autoNextNumber();
 }
+function scaleWaybill() {
+  const wrap = document.getElementById('wb-wrap');
+  const wb   = document.getElementById('wb-content');
+  if (!wrap || !wb) return;
+  wb.style.transform = ''; wb.style.transformOrigin = '';
+  wrap.style.height = '';
+  const wrapW  = wrap.clientWidth - 32;
+  const wbW    = wb.scrollWidth;
+  if (wrapW > 0 && wrapW < wbW) {
+    const scale = wrapW / wbW;
+    wb.style.transformOrigin = 'top left';
+    wb.style.transform = `scale(${scale})`;
+    wrap.style.height = Math.ceil(wb.scrollHeight * scale + 32) + 'px';
+  }
+}
+window.addEventListener('resize', () => {
+  if (document.getElementById('preview-overlay').classList.contains('open')) scaleWaybill();
+});
 function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
 
 // ===== BUILD WAYBILL HTML =====
@@ -655,7 +713,7 @@ function buildWB(d) {
   const fmtDate = s => { if(!s) return ''; const dt=new Date(s); return isNaN(dt)?s:dt.toLocaleDateString('bg-BG',{day:'2-digit',month:'2-digit',year:'numeric'}); };
   const cell = (val, hint, w) => `<span class="wb-cell"${w?' style="width:'+w+'"':''}><span class="cl">${val||''}</span><span class="ch">${hint}</span></span>`;
 
-  return `
+  return `<div class="waybill-print">
 <div class="wb-topbar">
   <div class="wb-co-left">
     <div class="wb-row"><span class="lbl">Фирма</span><span class="ln">${d.companyName}</span></div>
@@ -740,7 +798,53 @@ function buildWB(d) {
 <table class="wb-table">
   <thead><tr><th style="width:55%">Вид обществен превоз</th><th>Документи за превоза</th></tr></thead>
   <tbody>${dRows}</tbody>
-</table>`;
+</table>
+
+</div>
+
+<div class="waybill-print wb-back">
+
+<table class="wb-back-table">
+  <thead>
+    <tr>
+      <th style="width:22%">Фамилия на водача,<br>изпълнител на превоза</th>
+      <th style="width:36%">Маршрут<br>(от - до)</th>
+      <th style="width:10%">Тръгване<br>(ч. мин.)</th>
+      <th style="width:10%">Пристигане<br>(ч. мин.)</th>
+      <th style="width:11%">Престой<br>(ч. мин.)</th>
+      <th style="width:11%">Заверка</th>
+    </tr>
+    <tr class="num-row">
+      <td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td>
+    </tr>
+  </thead>
+  <tbody>
+    ${Array(15).fill('<tr><td></td><td></td><td></td><td></td><td></td><td></td></tr>').join('')}
+  </tbody>
+</table>
+
+<div class="wb-notes-label">Бележки на контролните органи:</div>
+<div class="wb-dotline-full"></div>
+<div class="wb-dotline-full"></div>
+<div class="wb-dotline-full"></div>
+<div style="text-align:right;margin-bottom:2mm">
+  <div class="wb-dotline-full" style="width:60%;display:inline-block"></div>
+</div>
+<div class="wb-control-sig">(подпис и печат на контролния орган)</div>
+
+<div class="wb-instruction">
+<u>Указание:</u><br>
+1. Пътният лист е документ за контрол и отчитане на работата на водачите и автомобилите.<br>
+2. Реквизитите в пътния лист се попълват с мастило или химикал ясно и четливо.<br>
+3. В зависимост от вида на изпълнявания превоз поле "Документи за превоза към пътния лист" се попълва както следва:<br>
+3.1. При превози на пътници:<br>
+а) в колона 1 - "Превоз по автобусна линия", а в колона 2 - "Разписание на линия ...", като се изписва наименованието на линията; при превоз по междуобластна линия се посочва и номерът на маршрутното разписание;<br>
+б) в колона 1 - "Специализиран превоз", а в колона 2 - "Разписание на специализиран превоз по линия ...", като се изписва наименованието на линията;<br>
+в) в колона 1 - "Случаен превоз", а в колона 2 - "Пътническа ведомост за случаен превоз" и "Фактура за платен случаен превоз".<br>
+3.2. При превози на товари в колона 1 се записва "Превоз на товари", в колона 2 - "Товарителница серия ... № ...".<br>
+4. Колона 1 на гърба се попълва, когато в пътния лист са вписани двама водачи.<br>
+5. Пътният лист се съхранява от превозвача една година.
+</div>`;
 }
 
 // ===== SETTINGS =====
