@@ -263,6 +263,18 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     border: none !important; margin: 0 !important; padding: 6mm 7mm !important;
   }
   .wb-back { margin-top: 0 !important; }
+
+  /* Selective printing */
+  body[data-print="waybill"] .doc-zapoved,
+  body[data-print="waybill"] .doc-uds { display: none !important; }
+
+  body[data-print="zapoved"] .doc-waybill,
+  body[data-print="zapoved"] .doc-uds { display: none !important; }
+  body[data-print="zapoved"] .doc-zapoved { page-break-before: avoid !important; }
+
+  body[data-print="uds"] .doc-waybill,
+  body[data-print="uds"] .doc-zapoved { display: none !important; }
+  body[data-print="uds"] .doc-uds { page-break-before: avoid !important; }
 }
 
 /* ===== PREVIEW OVERLAY ===== */
@@ -298,7 +310,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   z-index: 1;
 }
 .preview-toolbar h2 { font-size: 0.9rem; }
-.preview-toolbar .btns { display: flex; gap: 8px; }
+.preview-toolbar .btns { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
 .wb-wrap { padding: 8mm; background: #e8e8e8; overflow: auto; }
 .wb-scale-hint {
   display: none;
@@ -673,7 +685,9 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     <div class="preview-toolbar">
       <h2>Документи — преглед</h2>
       <div class="btns">
-        <button class="btn btn-yellow btn-sm" onclick="window.print()">🖨️ Печат</button>
+        <button class="btn btn-yellow btn-sm" style="font-size:0.78rem" onclick="printDoc('waybill')">🖨️ Пътен лист</button>
+        <button class="btn btn-yellow btn-sm" style="font-size:0.78rem" onclick="printDoc('zapoved')">🖨️ Заповед</button>
+        <button class="btn btn-yellow btn-sm" style="font-size:0.78rem" onclick="printDoc('uds')">🖨️ Удостоверение</button>
         <button class="btn btn-outline btn-sm" style="color:#fff;border-color:rgba(255,255,255,0.4)" onclick="closePreview()">✕</button>
       </div>
     </div>
@@ -931,6 +945,11 @@ window.addEventListener('resize', () => {
   if (document.getElementById('preview-overlay').classList.contains('open')) scaleWaybill();
 });
 function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
+function printDoc(type) {
+  document.body.dataset.print = type;
+  window.print();
+  delete document.body.dataset.print;
+}
 
 // ===== DATE HELPERS =====
 function fmtDateBG(s) {
@@ -964,7 +983,7 @@ function buildWB(d) {
   const dRows = filledRows + extraEmpty;
   const cell = (val, hint, w) => `<span class="wb-cell"${w?' style="width:'+w+'"':''}><span class="cl">${val||''}</span><span class="ch">${hint}</span></span>`;
 
-  return `<div class="waybill-print">
+  return `<div class="waybill-print doc-waybill">
 <div class="wb-topbar">
   <div class="wb-co-left">
     <div class="wb-row"><span class="lbl">Фирма</span><span class="ln">${d.companyName}</span></div>
@@ -1053,7 +1072,7 @@ function buildWB(d) {
 
 </div>
 
-<div class="waybill-print wb-back">
+<div class="waybill-print wb-back doc-waybill">
 
 <table class="wb-back-table">
   <thead>
@@ -1100,7 +1119,7 @@ function buildWB(d) {
 
 // ===== BUILD ЗАПОВЕД HTML =====
 function buildZapoved(d) {
-  return `<div class="waybill-print wb-back" style="font-size:10pt;font-family:Arial,sans-serif;line-height:1.8;display:flex;flex-direction:column">
+  return `<div class="waybill-print wb-back doc-zapoved" style="font-size:10pt;font-family:Arial,sans-serif;line-height:1.8;display:flex;flex-direction:column">
 <div style="text-align:center;font-size:14pt;font-weight:bold;letter-spacing:3pt;margin-bottom:10mm">
   З А П О В Е Д &nbsp; № ${d.zapovedNo||'......'} &nbsp;/&nbsp; ${fmtDoc(d.date)} г.
 </div>
@@ -1165,7 +1184,7 @@ function buildUdostoverenie(d) {
 
   const row = (lbl, val) => `<div class="wb-row" style="margin-bottom:4pt"><span class="lbl" style="min-width:75mm;font-size:8pt">${lbl}</span><span class="ln" style="font-size:8pt">${val||''}</span></div>`;
 
-  return `<div class="waybill-print wb-back" style="font-family:Arial,sans-serif;font-size:8.5pt">
+  return `<div class="waybill-print wb-back doc-uds" style="font-family:Arial,sans-serif;font-size:8.5pt">
 <div style="text-align:center;font-weight:bold;font-size:8pt;margin-bottom:1mm">ПРИЛОЖЕНИЕ</div>
 <div style="text-align:center;font-weight:bold;font-size:12pt;letter-spacing:1pt;margin-bottom:1mm">УДОСТОВЕРЕНИЕ ЗА ДЕЙНОСТИ</div>
 <div style="text-align:center;font-size:9pt;margin-bottom:2mm">(РЕГЛАМЕНТ (ЕО) 561/2006 ИЛИ AETR<sup>*</sup>)</div>
