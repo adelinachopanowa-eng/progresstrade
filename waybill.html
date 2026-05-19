@@ -108,7 +108,22 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   min-height: 44px;
 }
 .field input:focus, .field select:focus { outline: none; border-color: var(--green); }
-.field select { cursor: pointer; }
+.field select {
+  cursor: pointer;
+  width: 100%;
+  max-width: 100%;
+  padding-right: 36px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D'http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg'%20viewBox%3D'0%200%2012%208'%3E%3Cpath%20fill%3D'%23555'%20d%3D'M1%201l5%205%205-5'%20stroke%3D'%23555'%20stroke-width%3D'1.5'%20fill%3D'none'%2F%3E%3C%2Fsvg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+}
 
 /* ===== BUTTONS ===== */
 .btn {
