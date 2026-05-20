@@ -924,8 +924,14 @@ function closePreview() {
 function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
 function printDoc(type) {
   document.body.dataset.print = type;
+  const cleanup = () => {
+    delete document.body.dataset.print;
+    window.removeEventListener('afterprint', cleanup);
+  };
+  window.addEventListener('afterprint', cleanup);
+  // Safety fallback in case afterprint never fires (iOS share-sheet etc.)
+  setTimeout(cleanup, 30000);
   window.print();
-  delete document.body.dataset.print;
 }
 
 // ===== DATE HELPERS =====
