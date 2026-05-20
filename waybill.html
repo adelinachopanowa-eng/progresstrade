@@ -259,17 +259,8 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     background: #fff !important;
   }
   .wb-back { margin-top: 0 !important; page-break-before: always !important; }
-
-  body[data-print="waybill"] .doc-zapoved,
-  body[data-print="waybill"] .doc-uds { display: none !important; }
-
-  body[data-print="zapoved"] .doc-waybill,
-  body[data-print="zapoved"] .doc-uds { display: none !important; }
-  body[data-print="zapoved"] .doc-zapoved { page-break-before: avoid !important; }
-
-  body[data-print="uds"] .doc-waybill,
-  body[data-print="uds"] .doc-zapoved { display: none !important; }
-  body[data-print="uds"] .doc-uds { page-break-before: avoid !important; }
+  /* When only one document is rendered, drop the page-break */
+  .waybill-print:first-child { page-break-before: avoid !important; }
 }
 
 /* ===== PREVIEW — MOBILE BOTTOM SHEET ===== */
@@ -895,8 +886,9 @@ async function saveAndPreview() {
 }
 
 // ===== PREVIEW =====
+let currentPreviewData = null;
 function openPreview(data) {
-  document.getElementById('wb-content').innerHTML = buildWB(data) + buildZapoved(data) + buildUdostoverenie(data);
+  currentPreviewData = data;
   const d = data;
   const certPeriod = d.certFrom
     ? fmtDateTime(d.certFrom) + ' → ' + fmtDateTime(d.certTo)
@@ -930,14 +922,13 @@ function closePreview() {
 }
 function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
 function printDoc(type) {
-  document.body.dataset.print = type;
-  const cleanup = () => {
-    delete document.body.dataset.print;
-    window.removeEventListener('afterprint', cleanup);
-  };
-  window.addEventListener('afterprint', cleanup);
-  // Safety fallback in case afterprint never fires (iOS share-sheet etc.)
-  setTimeout(cleanup, 30000);
+  if (!currentPreviewData) return;
+  const d = currentPreviewData;
+  let html = '';
+  if (type === 'waybill')      html = buildWB(d);
+  else if (type === 'zapoved') html = buildZapoved(d);
+  else if (type === 'uds')     html = buildUdostoverenie(d);
+  document.getElementById('wb-content').innerHTML = html;
   window.print();
 }
 
