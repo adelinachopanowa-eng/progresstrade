@@ -242,6 +242,9 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 .hist-meta { font-size: 0.8rem; color: var(--soft); flex: 1; min-width: 100px; }
 .hist-btns { display: flex; gap: 6px; margin-left: auto; }
 
+/* ===== PRINT AREA (hidden on screen) ===== */
+#wb-print-area { display: none; }
+
 /* ===== PRINT STYLES (A4) ===== */
 @page { size: A4 portrait; margin: 8mm; }
 @media print {
@@ -249,9 +252,13 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   #wb-print-area { display: block !important; }
   .waybill-print {
     width: 194mm !important;
-    border: none !important; margin: 0 !important; padding: 6mm 7mm !important;
+    min-height: 0 !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 6mm 7mm !important;
+    background: #fff !important;
   }
-  .wb-back { margin-top: 0 !important; }
+  .wb-back { margin-top: 0 !important; page-break-before: always !important; }
 
   body[data-print="waybill"] .doc-zapoved,
   body[data-print="waybill"] .doc-uds { display: none !important; }
@@ -671,8 +678,8 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   </div>
 </div>
 
-<!-- Hidden area rendered only during print -->
-<div id="wb-print-area" style="display:none">
+<!-- Rendered only during print (hidden on screen via CSS) -->
+<div id="wb-print-area">
   <div id="wb-content"></div>
 </div>
 
