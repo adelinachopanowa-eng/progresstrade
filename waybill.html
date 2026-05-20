@@ -248,7 +248,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   body > *:not(#wb-print-area) { display: none !important; }
   #wb-print-area { display: block !important; }
   .waybill-print {
-    width: 194mm !important; min-height: 0 !important;
+    width: 194mm !important;
     border: none !important; margin: 0 !important; padding: 6mm 7mm !important;
   }
   .wb-back { margin-top: 0 !important; }
@@ -1102,7 +1102,7 @@ function buildWB(d) {
 
 // ===== BUILD ЗАПОВЕД HTML =====
 function buildZapoved(d) {
-  return `<div class="waybill-print wb-back doc-zapoved" style="font-size:10pt;font-family:Arial,sans-serif;line-height:1.8;display:flex;flex-direction:column">
+  return `<div class="waybill-print wb-back doc-zapoved" style="font-size:10pt;font-family:Arial,sans-serif;line-height:1.8;position:relative">
 <div style="text-align:center;font-size:14pt;font-weight:bold;letter-spacing:3pt;margin-bottom:10mm">
   З А П О В Е Д &nbsp; № ${d.zapovedNo||'......'} &nbsp;/&nbsp; ${fmtDoc(d.date)} г.
 </div>
@@ -1135,15 +1135,17 @@ function buildZapoved(d) {
   Препис от настоящата заповед да се доведе до знанието на шофьора и счетоводителя за сведение и изпълнение.
 </div>
 
-<div style="display:flex;justify-content:space-between;align-items:flex-end;margin-top:auto;padding-top:10mm">
-  <div>
-    ${fmtDoc(d.date)} г.<br>гр. София
-  </div>
-  <div style="text-align:right">
-    Управител: ............................................<br>
-    <span style="font-size:9pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/${d.managerName||''}/</span>
-  </div>
-</div>
+<table style="width:100%;margin-top:30mm;border-collapse:collapse">
+  <tr>
+    <td style="vertical-align:bottom;text-align:left">
+      ${fmtDoc(d.date)} г.<br>гр. София
+    </td>
+    <td style="vertical-align:bottom;text-align:right">
+      Управител: ............................................<br>
+      <span style="font-size:9pt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/${d.managerName||''}/</span>
+    </td>
+  </tr>
+</table>
 </div>`;
 }
 
