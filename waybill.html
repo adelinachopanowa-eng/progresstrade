@@ -245,70 +245,62 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 /* ===== PRINT STYLES (A4) ===== */
 @page { size: A4 portrait; margin: 8mm; }
 @media print {
-  html, body { background: #fff !important; }
-  header, .tabs, .tab-panel, .actions-bar { display: none !important; }
-  .preview-overlay {
-    position: static !important;
-    background: #fff !important;
-    padding: 0 !important;
-    overflow: visible !important;
-    display: block !important;
-  }
-  .preview-container { box-shadow: none !important; border-radius: 0 !important; width: auto !important; }
-  .preview-toolbar, .wb-scale-hint  { display: none !important; }
-  .preview-container > .wb-wrap { padding: 0 !important; background: #fff !important; }
-  #wb-content { transform: none !important; height: auto !important; }
+  body > *:not(#wb-print-area) { display: none !important; }
+  #wb-print-area { display: block !important; }
   .waybill-print {
     width: 194mm !important; min-height: 0 !important;
     border: none !important; margin: 0 !important; padding: 6mm 7mm !important;
   }
   .wb-back { margin-top: 0 !important; }
+
+  body[data-print="waybill"] .doc-zapoved,
+  body[data-print="waybill"] .doc-uds { display: none !important; }
+
+  body[data-print="zapoved"] .doc-waybill,
+  body[data-print="zapoved"] .doc-uds { display: none !important; }
+  body[data-print="zapoved"] .doc-zapoved { page-break-before: avoid !important; }
+
+  body[data-print="uds"] .doc-waybill,
+  body[data-print="uds"] .doc-zapoved { display: none !important; }
+  body[data-print="uds"] .doc-uds { page-break-before: avoid !important; }
 }
 
-/* ===== PREVIEW OVERLAY ===== */
+/* ===== PREVIEW — MOBILE BOTTOM SHEET ===== */
 .preview-overlay {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.65);
+  background: rgba(0,0,0,0.55);
   z-index: 100;
+  align-items: flex-end;
+  justify-content: center;
+}
+.preview-overlay.open { display: flex; }
+.preview-sheet {
+  background: #fff;
+  border-radius: 18px 18px 0 0;
+  width: 100%;
+  max-width: 600px;
+  max-height: 88vh;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  padding: 20px 12px 40px;
+  padding-bottom: 24px;
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.18);
 }
-.preview-overlay.open { display: flex; flex-direction: column; align-items: center; }
-.preview-container {
-  background: var(--white);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
-  border-radius: 6px;
-  overflow: hidden;
-  width: fit-content;
-  max-width: 100%;
+.preview-handle {
+  width: 40px; height: 4px; background: #ddd;
+  border-radius: 2px; margin: 12px auto 4px;
 }
-.preview-toolbar {
-  background: var(--green);
-  color: #fff;
-  padding: 12px 16px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  position: sticky;
-  top: 0;
-  z-index: 1;
+.preview-sheet-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 8px 16px 14px;
+  border-bottom: 1.5px solid var(--border);
 }
-.preview-toolbar h2 { font-size: 0.9rem; }
-.preview-toolbar .btns { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
-.wb-wrap { padding: 8mm; background: #e8e8e8; overflow: auto; }
-.wb-scale-hint {
-  display: none;
-  text-align: center;
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.65);
-  padding: 4px 0 8px;
-  letter-spacing: 0.02em;
-}
-@media (max-width: 750px) { .wb-scale-hint { display: block; } }
+.preview-sheet-header h2 { font-size: 1rem; font-weight: 800; color: var(--green); }
+.doc-card { padding: 16px 16px 14px; border-bottom: 1px solid #f0f0ee; }
+.doc-card-title { font-size: 0.95rem; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+.doc-card-meta { font-size: 0.78rem; color: var(--soft); margin-bottom: 4px; }
+.doc-card-hint { font-size: 0.72rem; color: #aaa; margin-bottom: 10px; font-style: italic; }
 
 /* back page / new pages */
 .wb-back { page-break-before: always; margin-top: 8mm; }
@@ -666,22 +658,22 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 </div>
 
 <!-- ================================================================
-     PRINT PREVIEW
+     PRINT PREVIEW (mobile bottom sheet)
 ================================================================= -->
 <div class="preview-overlay" id="preview-overlay" onclick="closePrevOnBg(event)">
-  <div class="preview-container" id="preview-container">
-    <div class="preview-toolbar">
-      <h2>Документи — преглед</h2>
-      <div class="btns">
-        <button class="btn btn-yellow btn-sm" onclick="window.print()">🖨️ Печат</button>
-        <button class="btn btn-outline btn-sm" style="color:#fff;border-color:rgba(255,255,255,0.4)" onclick="closePreview()">✕</button>
-      </div>
+  <div class="preview-sheet" onclick="event.stopPropagation()">
+    <div class="preview-handle"></div>
+    <div class="preview-sheet-header">
+      <h2>Готово за печат</h2>
+      <button class="btn btn-outline btn-sm" onclick="closePreview()">✕</button>
     </div>
-    <div class="wb-scale-hint">← плъзнете за да видите целия документ →</div>
-    <div class="wb-wrap" id="wb-wrap">
-      <div id="wb-content"></div>
-    </div>
+    <div id="preview-doc-list"></div>
   </div>
+</div>
+
+<!-- Hidden area rendered only during print -->
+<div id="wb-print-area" style="display:none">
+  <div id="wb-content"></div>
 </div>
 
 <script>
@@ -898,44 +890,43 @@ async function saveAndPreview() {
 // ===== PREVIEW =====
 function openPreview(data) {
   document.getElementById('wb-content').innerHTML = buildWB(data) + buildZapoved(data) + buildUdostoverenie(data);
+  const d = data;
+  const certPeriod = d.certFrom
+    ? fmtDateTime(d.certFrom) + ' → ' + fmtDateTime(d.certTo)
+    : 'период не е зададен';
+  const dest = [d.counterpartyName, d.destCity].filter(Boolean).join(' · ') || '—';
+  document.getElementById('preview-doc-list').innerHTML = `
+    <div class="doc-card">
+      <div class="doc-card-title">📄 Пътен лист № ${d.number||'—'}</div>
+      <div class="doc-card-meta">${fmtDateDisplay(d.date)} · ${d.companyName||''} · ${d.driver||''}</div>
+      <div class="doc-card-hint">Двустранно — лице + гръб на един лист</div>
+      <button class="btn btn-primary btn-full" onclick="printDoc('waybill')">🖨️ Печат пътен лист</button>
+    </div>
+    <div class="doc-card">
+      <div class="doc-card-title">📋 Заповед № ${d.zapovedNo||'—'}</div>
+      <div class="doc-card-meta">${d.cargoType||''}${dest !== '—' ? ' · ' + dest : ''}${d.departTime ? ' · ' + d.departTime + ' ч.' : ''}</div>
+      <button class="btn btn-primary btn-full" onclick="printDoc('zapoved')">🖨️ Печат заповед</button>
+    </div>
+    <div class="doc-card">
+      <div class="doc-card-title">📃 Удостоверение (ЕО 561/2006)</div>
+      <div class="doc-card-meta">${d.driver||'—'} · ${certPeriod}</div>
+      <button class="btn btn-primary btn-full" onclick="printDoc('uds')">🖨️ Печат удостоверение</button>
+    </div>`;
   document.getElementById('preview-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
-  requestAnimationFrame(scaleWaybill);
 }
 function closePreview() {
   document.getElementById('preview-overlay').classList.remove('open');
   document.body.style.overflow = '';
-  const wb = document.getElementById('wb-content');
-  wb.style.transform = ''; wb.style.transformOrigin = ''; wb.style.marginBottom = '';
-  const wrap = document.getElementById('wb-wrap');
-  if (wrap) { wrap.style.height = ''; wrap.style.overflow = ''; }
   autoNextNumber();
   autoZapovedNumber();
 }
-function scaleWaybill() {
-  const wrap = document.getElementById('wb-wrap');
-  const wb   = document.getElementById('wb-content');
-  if (!wrap || !wb) return;
-  wb.style.transform = '';
-  wb.style.transformOrigin = '';
-  wb.style.marginBottom = '';
-  wrap.style.overflow = '';
-  const wrapW = wrap.clientWidth - 32;
-  const wbW   = wb.scrollWidth;
-  if (wrapW > 0 && wrapW < wbW) {
-    const scale = wrapW / wbW;
-    const wbH   = wb.scrollHeight;
-    wb.style.transformOrigin = 'top left';
-    wb.style.transform = `scale(${scale})`;
-    // Negative margin-bottom makes the element's layout contribution = visual height,
-    // so the parent's scroll area matches the visible scaled content with no clipping.
-    wb.style.marginBottom = -Math.ceil(wbH * (1 - scale)) + 'px';
-  }
-}
-window.addEventListener('resize', () => {
-  if (document.getElementById('preview-overlay').classList.contains('open')) scaleWaybill();
-});
 function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
+function printDoc(type) {
+  document.body.dataset.print = type;
+  window.print();
+  delete document.body.dataset.print;
+}
 
 // ===== DATE HELPERS =====
 function fmtDateBG(s) {
