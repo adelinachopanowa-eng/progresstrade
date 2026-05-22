@@ -624,7 +624,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 <!-- actions bar (fixed bottom, shown on form tab) -->
 <div class="actions-bar visible" id="form-actions">
   <button class="btn btn-outline btn-sm" onclick="clearForm()">Изчисти</button>
-  <button class="btn btn-yellow" style="flex:1" onclick="saveAndPreview()">Запази и печат</button>
+  <button class="btn btn-yellow" style="flex:1" onclick="previewForm()">Преглед за печат</button>
 </div>
 
 <!-- ================================================================
@@ -963,10 +963,18 @@ function collectForm() {
   };
 }
 
-// ===== SAVE + PREVIEW =====
-async function saveAndPreview() {
+// ===== PREVIEW (without saving) =====
+let pendingSave = false;
+function previewForm() {
   const data = collectForm();
   data.id = uid();
+  pendingSave = true;
+  openPreview(data);
+}
+
+async function commitSave(data) {
+  if (!pendingSave) return;
+  pendingSave = false;
   DB.history.unshift(data);
   if (DB.history.length > 300) DB.history.pop();
   const n = parseInt(data.number);
@@ -975,7 +983,6 @@ async function saveAndPreview() {
   if (!isNaN(zn) && zn > (DB.zapovedLastNumber||0)) DB.zapovedLastNumber = zn;
   saveDB();
   renderHistory();
-  openPreview(data);
   try {
     const { error: he } = await sb.from('waybill_history').insert(M.histToRow(data));
     if (he) throw he;
@@ -1016,6 +1023,7 @@ function openPreview(data) {
 function closePreview() {
   document.getElementById('preview-overlay').classList.remove('open');
   document.body.style.overflow = '';
+  pendingSave = false;
   autoNextNumber();
   autoZapovedNumber();
 }
@@ -1028,6 +1036,7 @@ function printDoc(type) {
   else if (type === 'zapoved') html = buildZapoved(d);
   else if (type === 'uds')     html = buildUdostoverenie(d);
   document.getElementById('wb-content').innerHTML = html;
+  commitSave(d);
   window.print();
 }
 
