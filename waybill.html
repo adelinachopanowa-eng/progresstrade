@@ -29,9 +29,6 @@ header {
   background: var(--green);
   color: #fff;
   padding: 14px 20px 12px;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
   box-shadow: 0 2px 6px rgba(0,0,0,0.25);
 }
 header h1 { font-size: 1.1rem; font-weight: 800; letter-spacing: 0.01em; }
@@ -410,10 +407,73 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   .hist-btns { width: 100%; justify-content: flex-end; }
   header h1 { font-size: 1rem; }
 }
+
+/* ===== LOGIN SCREEN ===== */
+.login-screen {
+  display: none; position: fixed; inset: 0;
+  background: var(--green); z-index: 9999;
+  align-items: center; justify-content: center;
+}
+.login-screen.visible { display: flex; }
+.login-box {
+  background: #fff; border-radius: 14px;
+  padding: 36px 28px; width: 90%; max-width: 360px;
+  box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+}
+.login-box h2 {
+  font-size: 1.15rem; font-weight: 800; color: var(--green);
+  margin-bottom: 4px;
+}
+.login-box p.sub {
+  font-size: 0.78rem; color: var(--soft); margin-bottom: 24px;
+}
+.login-box .field { margin-bottom: 14px; }
+.login-box .field label { font-size: 0.75rem; font-weight: 700; color: var(--soft); display: block; margin-bottom: 5px; }
+.login-box .field input {
+  width: 100%; padding: 11px 13px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 0.95rem; font-family: inherit;
+  color: var(--text); background: #fff; transition: border-color .15s; min-height: 44px;
+}
+.login-box .field input:focus { outline: none; border-color: var(--green); }
+.login-err {
+  background: #fce4e4; color: #8b0000; border: 1px solid #f0a0a0;
+  border-radius: 8px; padding: 9px 13px; font-size: 0.82rem;
+  margin-bottom: 14px; display: none;
+}
+
+/* ===== HEADER with logout ===== */
+.header-row {
+  display: flex; align-items: center; justify-content: space-between; width: 100%;
+}
+.btn-logout {
+  background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.85); font-size: 0.75rem; font-weight: 700;
+  border-radius: 7px; padding: 6px 12px; cursor: pointer; min-height: 34px;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-logout:active { background: rgba(255,255,255,0.2); }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
 <body>
+
+<!-- LOGIN SCREEN -->
+<div class="login-screen" id="login-screen">
+  <div class="login-box">
+    <h2>Прогрестрейд ЕООД</h2>
+    <p class="sub">Вход в системата</p>
+    <div class="login-err" id="login-err"></div>
+    <div class="field">
+      <label>Имейл</label>
+      <input type="email" id="login-email" autocomplete="email" placeholder="example@mail.com">
+    </div>
+    <div class="field">
+      <label>Парола</label>
+      <input type="password" id="login-password" autocomplete="current-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()">
+    </div>
+    <button class="btn btn-primary btn-full" id="login-btn" onclick="doLogin()">Вход</button>
+  </div>
+</div>
 
 <div class="loading-overlay" id="loading-overlay">
   <div class="spinner"></div>
@@ -422,8 +482,13 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 
 <!-- HEADER -->
 <header>
-  <h1>Прогрестрейд ЕООД</h1>
-  <p>Управление на транспорта</p>
+  <div class="header-row">
+    <div>
+      <h1>Прогрестрейд ЕООД</h1>
+      <p>Управление на транспорта</p>
+    </div>
+    <button class="btn-logout" id="logout-btn" onclick="doLogout()" style="display:none">Изход</button>
+  </div>
 </header>
 
 <!-- TABS -->
@@ -707,6 +772,32 @@ const M = {
 // ===== LOADING =====
 function setLoading(on) { document.getElementById('loading-overlay').classList.toggle('on', on); }
 
+// ===== AUTH =====
+async function doLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errEl = document.getElementById('login-err');
+  const btn = document.getElementById('login-btn');
+  errEl.style.display = 'none';
+  if (!email || !password) { errEl.textContent = 'Моля въведете имейл и парола.'; errEl.style.display = 'block'; return; }
+  btn.disabled = true; btn.textContent = 'Влизане…';
+  const { error } = await sb.auth.signInWithPassword({ email, password });
+  btn.disabled = false; btn.textContent = 'Вход';
+  if (error) { errEl.textContent = error.message === 'Invalid login credentials' ? 'Грешен имейл или парола.' : error.message; errEl.style.display = 'block'; return; }
+  document.getElementById('login-screen').classList.remove('visible');
+  document.getElementById('logout-btn').style.display = '';
+  await initApp();
+}
+
+async function doLogout() {
+  await sb.auth.signOut();
+  document.getElementById('logout-btn').style.display = 'none';
+  document.getElementById('login-email').value = '';
+  document.getElementById('login-password').value = '';
+  document.getElementById('login-err').style.display = 'none';
+  document.getElementById('login-screen').classList.add('visible');
+}
+
 // ===== TABS =====
 function showTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -718,7 +809,15 @@ function showTab(id, btn) {
 }
 
 // ===== INIT =====
-window.addEventListener('DOMContentLoaded', () => initApp());
+window.addEventListener('DOMContentLoaded', async () => {
+  const { data: { session } } = await sb.auth.getSession();
+  if (!session) {
+    document.getElementById('login-screen').classList.add('visible');
+    return;
+  }
+  document.getElementById('logout-btn').style.display = '';
+  await initApp();
+});
 
 async function initApp() {
   setLoading(true);
