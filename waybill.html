@@ -474,6 +474,44 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   -webkit-tap-highlight-color: transparent;
 }
 .btn-logout:active { background: rgba(255,255,255,0.2); }
+
+/* ===== VEHICLE STATUS ===== */
+.veh-status-card {
+  background: var(--white); border-radius: var(--r);
+  padding: 16px 18px; margin-bottom: 14px; box-shadow: var(--shadow);
+}
+.veh-status-card h4 { font-size: 0.95rem; font-weight: 800; color: var(--green); margin-bottom: 2px; }
+.veh-status-card .veh-regno { font-size: 0.78rem; color: var(--soft); margin-bottom: 12px; }
+.doc-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 8px; }
+.doc-grid-2 { grid-template-columns: repeat(2,1fr); }
+.doc-cell {
+  border: 1.5px solid var(--border); border-radius: 8px;
+  padding: 8px 10px;
+}
+.doc-cell .doc-label {
+  font-size: 0.65rem; font-weight: 700; color: var(--soft);
+  text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px;
+}
+.doc-cell .doc-date { font-size: 0.8rem; font-weight: 600; }
+.doc-cell .doc-days { font-size: 0.7rem; margin-top: 2px; }
+.doc-cell.ok   { border-color: #a8d5b7; background: #f0f9f3; }
+.doc-cell.warn { border-color: #e0b030; background: #fffbea; }
+.doc-cell.bad  { border-color: #f0a0a0; background: #fff0f0; }
+.doc-cell .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; vertical-align: middle; flex-shrink: 0; }
+.doc-cell.ok   .dot { background: #27ae60; }
+.doc-cell.warn .dot { background: #e0b030; }
+.doc-cell.bad  .dot { background: #c0392b; }
+.doc-cell.ok   .doc-date { color: #1a4a2e; }
+.doc-cell.warn .doc-date { color: #7a5c00; }
+.doc-cell.bad  .doc-date { color: #8b0000; }
+.trailer-section-label {
+  font-size: 0.7rem; font-weight: 700; color: var(--soft);
+  text-transform: uppercase; letter-spacing: .05em;
+  margin: 10px 0 6px; padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.veh-edit-form { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
+.veh-edit-form .fields { margin-bottom: 10px; }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
@@ -519,6 +557,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   <button class="tab-btn active"  onclick="showTab('tab-form',this)">Нов лист</button>
   <button class="tab-btn"         onclick="showTab('tab-settings',this)">Настройки</button>
   <button class="tab-btn"         onclick="showTab('tab-history',this)">История</button>
+  <button class="tab-btn"         onclick="showTab('tab-vehicles',this)">МПС статус</button>
 </div>
 
 <!-- ================================================================
@@ -749,6 +788,13 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 </div>
 
 <!-- ================================================================
+     VEHICLES STATUS TAB
+================================================================= -->
+<div id="tab-vehicles" class="tab-panel">
+  <div id="vehicle-status-list"></div>
+</div>
+
+<!-- ================================================================
      PRINT PREVIEW (mobile bottom sheet)
 ================================================================= -->
 <div class="preview-overlay" id="preview-overlay" onclick="closePrevOnBg(event)">
@@ -787,8 +833,8 @@ let DB = loadDB();
 const M = {
   coToRow:   c => ({ id:c.id, name:c.name, address:c.address||'', phone:c.phone||'', fax:c.fax||'', issued_by:c.issuedBy||'', mechanic:c.mechanic||'', medic:c.medic||'', checker:c.checker||'', transport_type:c.transportType||'Превоз за собствена сметка', declarant_name:c.declarantName||'', declarant_title:c.declarantTitle||'', manager_name:c.managerName||'' }),
   coFromRow: r => ({ id:r.id, name:r.name, address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', transportType:r.transport_type||'Превоз за собствена сметка', declarantName:r.declarant_name||'', declarantTitle:r.declarant_title||'', managerName:r.manager_name||'' }),
-  vehToRow:   v => ({ id:v.id, model:v.model, regno:v.regno }),
-  vehFromRow: r => ({ id:r.id, model:r.model, regno:r.regno }),
+  vehToRow:   v => ({ id:v.id, model:v.model, regno:v.regno, trailer_regno:v.trailerRegno||'', insurance_expiry:v.insuranceExpiry||null, tech_expiry:v.techExpiry||null, tacho_expiry:v.tachoExpiry||null, trailer_insurance_expiry:v.trailerInsuranceExpiry||null, trailer_tech_expiry:v.trailerTechExpiry||null }),
+  vehFromRow: r => ({ id:r.id, model:r.model, regno:r.regno, trailerRegno:r.trailer_regno||'', insuranceExpiry:r.insurance_expiry||'', techExpiry:r.tech_expiry||'', tachoExpiry:r.tacho_expiry||'', trailerInsuranceExpiry:r.trailer_insurance_expiry||'', trailerTechExpiry:r.trailer_tech_expiry||'' }),
   drvToRow:   d => ({ id:d.id, name:d.name, birth_date:d.birthDate||null, license_number:d.licenseNumber||'', employment_date:d.employmentDate||null }),
   drvFromRow: r => ({ id:r.id, name:r.name, birthDate:r.birth_date||'', licenseNumber:r.license_number||'', employmentDate:r.employment_date||'' }),
   ctrToRow:   c => ({ id:c.id, name:c.name, city:c.city||'' }),
@@ -834,6 +880,7 @@ function showTab(id, btn) {
   btn.classList.add('active');
   document.getElementById('form-actions').className = 'actions-bar' + (id === 'tab-form' ? ' visible' : '');
   if (id === 'tab-history') renderHistory();
+  if (id === 'tab-vehicles') renderVehicleStatus();
 }
 
 // ===== INIT =====
@@ -1612,6 +1659,107 @@ function exportExcel() {
   const wb = XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb, ws, 'История');
   XLSX.writeFile(wb, 'пътни-листове.xlsx');
+}
+
+// ===== VEHICLE STATUS =====
+function docStatus(dateStr) {
+  if (!dateStr) return { cls:'bad', label:'Не е въведено', days: null };
+  const today = new Date(); today.setHours(0,0,0,0);
+  const exp   = new Date(dateStr);
+  const diff  = Math.round((exp - today) / 86400000);
+  if (diff < 0)  return { cls:'bad',  label: fmtDateDisplay(dateStr), days: 'Изтекло' };
+  if (diff <= 30) return { cls:'warn', label: fmtDateDisplay(dateStr), days: `${diff} дни` };
+  return { cls:'ok', label: fmtDateDisplay(dateStr), days: null };
+}
+
+function docCell(labelText, dateStr) {
+  const { cls, label, days } = docStatus(dateStr);
+  return `<div class="doc-cell ${cls}">
+    <div class="doc-label"><span class="dot"></span>${labelText}</div>
+    <div class="doc-date">${label}</div>
+    ${days ? `<div class="doc-days">${days}</div>` : ''}
+  </div>`;
+}
+
+function renderVehicleStatus() {
+  const el = document.getElementById('vehicle-status-list');
+  if (!DB.vehicles.length) { el.innerHTML='<p class="empty-list">Няма въведени автомобили.</p>'; return; }
+  el.innerHTML = DB.vehicles.map(v => {
+    const hasTrailer = !!v.trailerRegno;
+    return `<div class="veh-status-card" id="vsc-${v.id}">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start">
+        <div>
+          <h4>${v.model}</h4>
+          <div class="veh-regno">${v.regno}${hasTrailer ? ` + ${v.trailerRegno}` : ''}</div>
+        </div>
+        <button class="btn btn-outline btn-sm" onclick="editVehicleCompliance('${v.id}')">✏️ Редактирай</button>
+      </div>
+      <div class="doc-grid">
+        ${docCell('Застраховка', v.insuranceExpiry)}
+        ${docCell('Тех. преглед', v.techExpiry)}
+        ${docCell('Тахограф', v.tachoExpiry)}
+      </div>
+      ${hasTrailer ? `
+        <div class="trailer-section-label">Ремарке ${v.trailerRegno}</div>
+        <div class="doc-grid doc-grid-2">
+          ${docCell('Застраховка', v.trailerInsuranceExpiry)}
+          ${docCell('Тех. преглед', v.trailerTechExpiry)}
+        </div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+function editVehicleCompliance(id) {
+  const v = DB.vehicles.find(x => x.id === id);
+  if (!v) return;
+  const el = document.getElementById(`vsc-${id}`);
+  el.innerHTML = `
+    <h4>${v.model} <span style="font-weight:400;color:var(--soft)">${v.regno}</span></h4>
+    <div class="veh-edit-form">
+      <div class="fields col3" style="margin-bottom:12px">
+        <div class="field"><label>Застраховка до</label><input type="date" id="ve-ins-${id}" value="${v.insuranceExpiry||''}"></div>
+        <div class="field"><label>Тех. преглед до</label><input type="date" id="ve-tech-${id}" value="${v.techExpiry||''}"></div>
+        <div class="field"><label>Тахограф до</label><input type="date" id="ve-tacho-${id}" value="${v.tachoExpiry||''}"></div>
+      </div>
+      <div class="fields" style="margin-bottom:12px">
+        <div class="field"><label>Рег. № ремарке (остави празно ако няма)</label>
+          <input type="text" id="ve-trailer-${id}" value="${v.trailerRegno||''}" placeholder="СА 1234 АА">
+        </div>
+      </div>
+      <div id="ve-trailer-docs-${id}">
+        ${v.trailerRegno ? trailerDocFields(id, v) : ''}
+      </div>
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <button class="btn btn-primary btn-sm" onclick="saveVehicleCompliance('${id}')">Запази</button>
+        <button class="btn btn-outline btn-sm" onclick="renderVehicleStatus()">Отказ</button>
+      </div>
+    </div>`;
+  document.getElementById(`ve-trailer-${id}`).addEventListener('input', function() {
+    document.getElementById(`ve-trailer-docs-${id}`).innerHTML =
+      this.value.trim() ? trailerDocFields(id, v) : '';
+  });
+}
+
+function trailerDocFields(id, v) {
+  return `<div class="fields col2" style="margin-bottom:12px">
+    <div class="field"><label>Ремарке — Застраховка до</label><input type="date" id="ve-tins-${id}" value="${v.trailerInsuranceExpiry||''}"></div>
+    <div class="field"><label>Ремарке — Тех. преглед до</label><input type="date" id="ve-ttech-${id}" value="${v.trailerTechExpiry||''}"></div>
+  </div>`;
+}
+
+async function saveVehicleCompliance(id) {
+  const v = DB.vehicles.find(x => x.id === id);
+  if (!v) return;
+  v.insuranceExpiry = document.getElementById(`ve-ins-${id}`)?.value  || '';
+  v.techExpiry      = document.getElementById(`ve-tech-${id}`)?.value  || '';
+  v.tachoExpiry     = document.getElementById(`ve-tacho-${id}`)?.value || '';
+  v.trailerRegno    = document.getElementById(`ve-trailer-${id}`)?.value.trim() || '';
+  v.trailerInsuranceExpiry = document.getElementById(`ve-tins-${id}`)?.value  || '';
+  v.trailerTechExpiry      = document.getElementById(`ve-ttech-${id}`)?.value || '';
+  saveDB();
+  renderVehicleStatus();
+  const { error } = await sb.from('vehicles').update(M.vehToRow(v)).eq('id', id);
+  if (error) console.error('SB vehicle compliance:', error);
 }
 
 // ===== CLEAR FORM =====
