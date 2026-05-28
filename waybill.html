@@ -581,18 +581,8 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
     </div>
   </div>
 
-  <!-- Company -->
-  <div class="card">
-    <h3>Фирма</h3>
-    <div class="fields">
-      <div class="field">
-        <label>Фирма</label>
-        <select id="f-company" onchange="fillCompany()">
-          <option value="">— изберете фирма —</option>
-        </select>
-      </div>
-    </div>
-  </div>
+  <!-- Company (hidden, auto-selected) -->
+  <select id="f-company" style="display:none"></select>
 
   <!-- Vehicle + Driver -->
   <div class="card">
@@ -1765,7 +1755,8 @@ async function saveVehicleCompliance(id) {
 // ===== CLEAR FORM =====
 function clearForm() {
   if (!confirm('Изчисти формата?')) return;
-  ['f-company','f-vehicle','f-driver'].forEach(id => document.getElementById(id).value='');
+  ['f-vehicle','f-driver'].forEach(id => document.getElementById(id).value='');
+  selectDefaultCompany();
   document.getElementById('f-regno').value='';
   document.getElementById('f-counterparty').value='';
   document.getElementById('f-dest-city').value='';
