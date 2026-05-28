@@ -222,22 +222,45 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 }
 
 /* ===== HISTORY ===== */
-.hist-item {
-  background: var(--white);
-  border-radius: var(--r);
-  padding: 14px 16px;
-  margin-bottom: 10px;
-  box-shadow: var(--shadow);
-  cursor: pointer;
+.hist-export-bar {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  flex-wrap: wrap;
+  justify-content: flex-end;
+  margin-bottom: 12px;
 }
-.hist-item:active { opacity: 0.85; }
-.hist-no { font-size: 1.1rem; font-weight: 800; color: var(--green); white-space: nowrap; }
-.hist-meta { font-size: 0.8rem; color: var(--soft); flex: 1; min-width: 100px; }
-.hist-btns { display: flex; gap: 6px; margin-left: auto; }
+.hist-table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--r);
+  box-shadow: var(--shadow);
+  background: var(--white);
+}
+.hist-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+  min-width: 750px;
+}
+.hist-table th {
+  background: var(--green);
+  color: #fff;
+  padding: 9px 10px;
+  text-align: left;
+  font-size: 0.72rem;
+  font-weight: 700;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+}
+.hist-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+  color: var(--text);
+}
+.hist-table tr:last-child td { border-bottom: none; }
+.hist-table tr:nth-child(even) td { background: var(--cream); }
+.hist-table tr:hover td { background: #e8f0ec; }
+.hist-btns { display: flex; gap: 6px; white-space: nowrap; }
 
 /* ===== PRINT AREA (hidden on screen) ===== */
 #wb-print-area { display: none; }
@@ -404,7 +427,6 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 @media (max-width: 500px) {
   .fields.col2, .fields.col3 { grid-template-columns: 1fr; }
   .doc-row { grid-template-columns: 1fr; gap: 6px; }
-  .hist-btns { width: 100%; justify-content: flex-end; }
   header h1 { font-size: 1rem; }
 }
 
@@ -454,6 +476,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 .btn-logout:active { background: rgba(255,255,255,0.2); }
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 
@@ -717,7 +740,12 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
      HISTORY TAB
 ================================================================= -->
 <div id="tab-history" class="tab-panel">
-  <div id="history-list"><p class="empty-list">Няма записани листове.</p></div>
+  <div class="hist-export-bar">
+    <button class="btn btn-primary btn-sm" onclick="exportExcel()">⬇ Excel</button>
+  </div>
+  <div class="hist-table-wrap">
+    <div id="history-list"><p class="empty-list" style="padding:12px">Няма записани листове.</p></div>
+  </div>
 </div>
 
 <!-- ================================================================
@@ -1519,18 +1547,39 @@ function renderList(listId, items, labelFn, metaFn, type, hasEdit, hasDriverEdit
 // ===== HISTORY =====
 function renderHistory() {
   const el = document.getElementById('history-list');
-  if (!DB.history.length) { el.innerHTML='<p class="empty-list">Няма записани листове.</p>'; return; }
-  el.innerHTML = DB.history.map(h => `
-    <div class="hist-item">
-      <div>
-        <div class="hist-no">№ ${h.number||'—'}</div>
-        <div class="hist-meta">${fmtDateDisplay(h.date)} · ${h.vehicle||''} · ${h.driver||''}</div>
-      </div>
-      <div class="hist-btns">
-        <button class="btn btn-yellow btn-sm" onclick="previewHistory('${h.id}')">👁 Преглед</button>
-        <button class="btn btn-outline btn-sm" onclick="deleteHistory('${h.id}')">✕</button>
-      </div>
-    </div>`).join('');
+  if (!DB.history.length) {
+    el.innerHTML = '<p class="empty-list" style="padding:12px">Няма записани листове.</p>';
+    return;
+  }
+  const rows = DB.history.map(h => `
+    <tr>
+      <td>${h.number||'—'}</td>
+      <td style="white-space:nowrap">${fmtDateDisplay(h.date)}</td>
+      <td>${h.companyName||''}</td>
+      <td>${[h.vehicle, h.regno].filter(Boolean).join('<br>')}</td>
+      <td>${h.driver||''}</td>
+      <td>${h.counterpartyName||''}</td>
+      <td>${h.destCity||''}</td>
+      <td>${h.cargoType||''}</td>
+      <td style="white-space:nowrap">${h.departTime||''}</td>
+      <td>${h.zapovedNo||''}</td>
+      <td>
+        <div class="hist-btns">
+          <button class="btn btn-yellow btn-sm" onclick="previewHistory('${h.id}')">👁</button>
+          <button class="btn btn-outline btn-sm" onclick="deleteHistory('${h.id}')">✕</button>
+        </div>
+      </td>
+    </tr>`).join('');
+  el.innerHTML = `
+    <table class="hist-table">
+      <thead>
+        <tr>
+          <th>№</th><th>Дата</th><th>Фирма</th><th>МПС</th><th>Водач</th>
+          <th>Контрагент</th><th>Посока</th><th>Товар</th><th>Час</th><th>Заповед №</th><th></th>
+        </tr>
+      </thead>
+      <tbody>${rows}</tbody>
+    </table>`;
 }
 function previewHistory(id) {
   const h = DB.history.find(x => x.id===id);
@@ -1542,6 +1591,27 @@ async function deleteHistory(id) {
   saveDB(); renderHistory();
   const { error } = await sb.from('waybill_history').delete().eq('id', id);
   if (error) console.error('SB delete history:', error);
+}
+
+// ===== EXPORT =====
+function exportExcel() {
+  if (!DB.history.length) { alert('Няма записи за експорт.'); return; }
+  const rows = DB.history.map(h => ({
+    '№':          h.number || '',
+    'Дата':       h.date   || '',
+    'Фирма':      h.companyName || '',
+    'МПС':        [h.vehicle, h.regno].filter(Boolean).join(' '),
+    'Водач':      h.driver || '',
+    'Контрагент': h.counterpartyName || '',
+    'Посока':     h.destCity || '',
+    'Товар':      h.cargoType || '',
+    'Час':        h.departTime || '',
+    'Заповед №':  h.zapovedNo || '',
+  }));
+  const ws = XLSX.utils.json_to_sheet(rows);
+  const wb = XLSX.utils.book_new();
+  XLSX.utils.book_append_sheet(wb, ws, 'История');
+  XLSX.writeFile(wb, 'пътни-листове.xlsx');
 }
 
 // ===== CLEAR FORM =====
