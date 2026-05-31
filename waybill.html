@@ -269,7 +269,8 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 @page { size: A4 portrait; margin: 8mm; }
 @media print {
   body > *:not(#wb-print-area) { display: none !important; }
-  #wb-print-area { display: block !important; }
+  body, html { background: #fff !important; }
+  #wb-print-area { display: block !important; background: #fff !important; }
   .waybill-print {
     width: 194mm !important;
     min-height: 0 !important;
