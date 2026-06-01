@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://progresstrade.bg/sitemap.xml
