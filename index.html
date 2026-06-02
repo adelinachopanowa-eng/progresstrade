@@ -7,6 +7,7 @@
 <meta name="description" content="Изкупуване на железен скрап и черни метали в София — кв. Военна Рампа, Надежда, Подуяне. Коли за скрап (ИУМПС) и стари уреди. Плащаме веднага. Тел. 0877 77 55 77.">
 <meta name="keywords" content="изкупуване на скрап, железен скрап, черни метали, скрап София, коли за скрап, ИУМПС, стари електроуреди, ИУЕЕО, скрап Военна Рампа, скрап Надежда, скрап Подуяне, изкупуване на желязо">
 <link rel="canonical" href="https://progresstrade.bg/">
+<link rel="alternate" hreflang="bg" href="https://progresstrade.bg/">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph / споделяне в социални мрежи -->
@@ -18,8 +19,12 @@
 <meta property="og:image" content="https://progresstrade.bg/images/og-cover.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Progresstrade — изкупуване на железен скрап и черни метали в София">
 <meta property="og:locale" content="bg_BG">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://progresstrade.bg/images/og-cover.jpg">
+<meta name="twitter:image:alt" content="Progresstrade — изкупуване на железен скрап и черни метали в София">
+<meta name="theme-color" content="#1a4a2e">
 
 <!-- Favicon (зелено листо) -->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M32 56C20 50 14 40 16 24c10 2 18 8 18 22 0-18 8-28 22-30 1 18-8 32-24 40z' fill='%2334a853'/%3E%3Cpath d='M32 56C20 50 14 40 16 24c8 1.6 14.5 6 16.8 16.5C30 30 24 25 18 23' fill='%231a4a2e' opacity='.35'/%3E%3C/svg%3E">
@@ -29,31 +34,45 @@
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
+  "@id": "https://progresstrade.bg/#business",
   "name": "Progresstrade (Прогрестрейд)",
   "description": "Изкупуване на железен скрап, черни метали, коли за скрап и стари електроуреди в София.",
   "telephone": "+359877775577",
+  "url": "https://progresstrade.bg/",
+  "image": [
+    "https://progresstrade.bg/images/og-cover.jpg",
+    "https://progresstrade.bg/images/ploshtadka-progres-treyd.jpg"
+  ],
+  "priceRange": "$$",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "ул. Проф. Иван Георгов 1, кв. Военна Рампа",
     "addressLocality": "София",
     "addressCountry": "BG"
   },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 42.7366119,
+    "longitude": 23.3272831
+  },
+  "hasMap": "https://maps.app.goo.gl/C6KVEBHUQRiQYKrw5",
   "openingHoursSpecification": {
     "@type": "OpeningHoursSpecification",
     "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
     "opens": "09:00",
     "closes": "17:00"
   },
-  "url": "https://progresstrade.bg/",
-  "image": "https://progresstrade.bg/images/og-cover.jpg",
-  "priceRange": "$$",
-  "areaServed": "София",
+  "areaServed": ["София","Военна Рампа","Надежда","Подуяне"],
   "knowsAbout": ["изкупуване на железен скрап","черни метали","коли за скрап","газокислородно рязане"]
 }
 </script>
 
+<link rel="manifest" href="/manifest.json">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="image" href="images/zhelezen-skrap.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="dns-prefetch" href="https://www.google.com">
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Barlow+Condensed:wght@600;700;800&family=Montserrat:wght@900&display=swap" rel="stylesheet">
 
 
@@ -180,6 +199,14 @@ a{color:inherit;text-decoration:none}
 .price-card-name{font-family:var(--font-cond);font-size:22px;font-weight:800;color:var(--white);letter-spacing:-0.01em;margin-bottom:var(--space-1)}
 .price-card-note{font-size:13px;color:var(--text-white-soft);line-height:1.4}
 .price-card-price{margin-top:16px;padding-top:14px;border-top:1px solid rgba(255,255,255,0.12);font-family:var(--font-cond);font-size:16px;font-weight:700;color:var(--yellow);display:flex;align-items:center;gap:7px}
+
+.faq-list{max-width:760px;display:flex;flex-direction:column;gap:12px}
+.faq-item{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;padding:18px 22px;font-family:var(--font-cond);font-size:19px;font-weight:700;color:var(--green-deep);display:flex;justify-content:space-between;align-items:center;gap:14px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-size:26px;line-height:1;color:var(--green);font-weight:400;transition:transform .2s ease}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-answer{padding:0 22px 20px;color:var(--text-soft);line-height:1.6;font-size:15px}
 .price-amount{display:inline-flex;align-items:baseline;gap:4px;margin-top:var(--space-3);background:var(--yellow);color:var(--green-deep);border-radius:20px;padding:5px 16px;font-size:20px;font-weight:800;font-family:var(--font-cond)}
 .price-unit{font-size:12px;font-weight:600;opacity:0.75}
 .prices-disclaimer{margin-top:var(--space-4);font-size:13px;color:var(--text-white-soft);text-align:center}
@@ -253,6 +280,7 @@ a{color:inherit;text-decoration:none}
 </head>
 <body>
 
+<header>
 <div class="topbar">
   <div class="topbar-text">
     <span style="display:flex;align-items:center;gap:7px;">
@@ -275,6 +303,7 @@ a{color:inherit;text-decoration:none}
       <li><a href="#services">Какво изкупуваме</a></li>
       <li><a href="#cutting">Услуги</a></li>
       <li><a href="#about">За нас</a></li>
+      <li><a href="#faq">Въпроси</a></li>
       <li><a href="#contact">Контакти</a></li>
     </ul>
     <div class="nav-actions">
@@ -291,11 +320,14 @@ a{color:inherit;text-decoration:none}
     <a href="#services" onclick="toggleMenu()">Какво изкупуваме</a>
     <a href="#cutting" onclick="toggleMenu()">Услуги</a>
     <a href="#about" onclick="toggleMenu()">За нас</a>
+    <a href="#faq" onclick="toggleMenu()">Въпроси</a>
     <a href="#contact" onclick="toggleMenu()">Контакти</a>
     <a href="tel:0877775577" class="btn btn-primary" style="margin-top:8px;justify-content:center;"><svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="#0f2d1c"/></svg>0877 77 55 77</a>
   </div>
 </nav>
+</header>
 
+<main>
 <section class="hero">
   <div class="hero-content">
     <h1 class="hero-title">Максимална стойност<br>за вашите<br><em>железни отпадъци.</em></h1>
@@ -305,7 +337,7 @@ a{color:inherit;text-decoration:none}
     </div>
   </div>
   <div class="hero-img">
-    <img fetchpriority="high" decoding="async" src="images/zhelezen-skrap.jpg" alt="Изкупуване на железен скрап и черни метали в София" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+    <img fetchpriority="high" decoding="async" width="1400" height="934" src="images/zhelezen-skrap.jpg" alt="Изкупуване на железен скрап и черни метали в София" style="width:100%;height:100%;object-fit:cover;object-position:center;">
   </div>
 </section>
 
@@ -327,23 +359,23 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <img loading="lazy" decoding="async" class="service-img" src="images/platno-zhelyazo.jpg" alt="Плътно желязо">
+        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/platno-zhelyazo.jpg" alt="Плътно желязо">
         <div class="service-card-body"><h3>Плътно желязо</h3><p>Масивни метални конструкции, греди, профили и арматура.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" class="service-img" src="images/tanko-zhelyazo.jpg" alt="Тънко желязо">
+        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/tanko-zhelyazo.jpg" alt="Тънко желязо">
         <div class="service-card-body"><h3>Тънко желязо</h3><p>Ламарина и други отпадъци с дебелина под 3 мм.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" class="service-img" src="images/tehnologichen-otpadak.jpg" alt="Технологичен отпадък">
+        <img loading="lazy" decoding="async" width="900" height="900" class="service-img" src="images/tehnologichen-otpadak.jpg" alt="Технологичен отпадък">
         <div class="service-card-body"><h3>Технологичен отпадък</h3><p>От металообработващи предприятия — изрезки от лазерно рязане и др.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" class="service-img" src="images/koli-za-skrap.jpg" alt="Коли за скрап">
+        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/koli-za-skrap.jpg" alt="Коли за скрап">
         <div class="service-card-body"><h3>Коли за скрап (ИУМПС)</h3><p>Изкупуваме и разкомплектоваме автомобили за скрап. Всички документи за дерегистрация в КАТ.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" class="service-img" src="images/stari-elektrouredi.jpg" alt="Стари електроуреди">
+        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/stari-elektrouredi.jpg" alt="Стари електроуреди">
         <div class="service-card-body"><h3>Стари електроуреди (ИУЕЕО)</h3><p>Перални, хладилници, печки и друга домакинска техника.</p></div>
       </div>
     </div>
@@ -360,7 +392,7 @@ a{color:inherit;text-decoration:none}
         <a href="#contact" class="btn btn-white">Свържете се с нас</a>
       </div>
       <div class="feature-img">
-        <img loading="lazy" decoding="async" src="images/gazokislorodno-ryazane.jpg" alt="Газокислородно рязане" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block;">
+        <img loading="lazy" decoding="async" width="600" height="600" src="images/gazokislorodno-ryazane.jpg" alt="Газокислородно рязане" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block;">
       </div>
     </div>
   </div>
@@ -369,7 +401,7 @@ a{color:inherit;text-decoration:none}
 <section class="section about-section" id="about">
   <div class="container">
     <div class="about-grid">
-      <img loading="lazy" decoding="async" class="about-img" src="images/ploshtadka-progres-treyd.jpg" alt="Площадка Прогрестрейд">
+      <img loading="lazy" decoding="async" width="667" height="1000" class="about-img" src="images/ploshtadka-progres-treyd.jpg" alt="Площадка Прогрестрейд">
       <div class="about-content">
         <div>
           <div class="section-label-dark">За нас</div>
@@ -406,10 +438,10 @@ a{color:inherit;text-decoration:none}
       <h2 class="section-title-dark" style="text-align:center;">Работим с водещи компании</h2>
     </div>
     <div class="clients-grid">
-      <div class="client-logo"><img loading="lazy" decoding="async" src="images/erb-group.png" alt="ERB Group"></div>
-      <div class="client-logo"><img loading="lazy" decoding="async" src="images/geotechmin.png" alt="Geotechmin"></div>
-      <div class="client-logo"><img loading="lazy" decoding="async" src="images/skf.png" alt="SKF"></div>
-      <div class="client-logo"><img loading="lazy" decoding="async" src="images/se-ead.jpg" alt="СЕ ЕАД"></div>
+      <div class="client-logo"><img loading="lazy" decoding="async" width="400" height="227" src="images/erb-group.png" alt="ERB Group"></div>
+      <div class="client-logo"><img loading="lazy" decoding="async" width="400" height="84" src="images/geotechmin.png" alt="Geotechmin"></div>
+      <div class="client-logo"><img loading="lazy" decoding="async" width="400" height="103" src="images/skf.png" alt="SKF"></div>
+      <div class="client-logo"><img loading="lazy" decoding="async" width="400" height="172" src="images/se-ead.jpg" alt="СЕ ЕАД"></div>
     </div>
   </div>
 </section>
@@ -488,18 +520,90 @@ a{color:inherit;text-decoration:none}
         <a href="tel:0877775577" class="btn btn-primary">Свържете се за оферта</a>
       </div>
       <div class="feature-img">
-        <img loading="lazy" decoding="async" src="images/transport.jpg" alt="Транспорт" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block;">
+        <img loading="lazy" decoding="async" width="600" height="600" src="images/transport.jpg" alt="Транспорт" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block;">
       </div>
     </div>
   </div>
 </section>
+
+<section class="section section-cream" id="faq">
+  <div class="container">
+    <div class="section-label-dark">Въпроси и отговори</div>
+    <h2 class="section-title-dark" style="margin-bottom:32px;">Често задавани въпроси</h2>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Какви цени предлагате за железен скрап?</summary>
+        <div class="faq-answer">Цената зависи от вида, количеството и качеството на материала. Обадете се на 0877 77 55 77 за безплатна и актуална оферта без ангажимент.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Идвате ли на адрес за извозване?</summary>
+        <div class="faq-answer">Да. При по-големи количества организираме безплатен транспорт и товарене на ваш адрес в София и областта.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Изкупувате ли коли за скрап?</summary>
+        <div class="faq-answer">Да, изкупуваме и разкомплектоваме излезли от употреба автомобили (ИУМПС) и издаваме всички документи за дерегистрация в КАТ.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Как и кога се извършва плащането?</summary>
+        <div class="faq-answer">Плащаме веднага, в брой, при предаването на материала след претегляне и оценка.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Какви документи са необходими?</summary>
+        <div class="faq-answer">За физически лица е достатъчна лична карта. За автомобили са нужни талон и документ за собственост.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Какво е работното ви време?</summary>
+        <div class="faq-answer">Работим от понеделник до петък, от 9:00 до 17:00 ч. Адрес: ул. Проф. Иван Георгов 1, кв. Военна Рампа, София.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Какви цени предлагате за железен скрап?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Цената зависи от вида, количеството и качеството на материала. Обадете се на 0877 77 55 77 за безплатна и актуална оферта без ангажимент." }
+    },
+    {
+      "@type": "Question",
+      "name": "Идвате ли на адрес за извозване?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Да. При по-големи количества организираме безплатен транспорт и товарене на ваш адрес в София и областта." }
+    },
+    {
+      "@type": "Question",
+      "name": "Изкупувате ли коли за скрап?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Да, изкупуваме и разкомплектоваме излезли от употреба автомобили (ИУМПС) и издаваме всички документи за дерегистрация в КАТ." }
+    },
+    {
+      "@type": "Question",
+      "name": "Как и кога се извършва плащането?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Плащаме веднага, в брой, при предаването на материала след претегляне и оценка." }
+    },
+    {
+      "@type": "Question",
+      "name": "Какви документи са необходими?",
+      "acceptedAnswer": { "@type": "Answer", "text": "За физически лица е достатъчна лична карта. За автомобили са нужни талон и документ за собственост." }
+    },
+    {
+      "@type": "Question",
+      "name": "Какво е работното ви време?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Работим от понеделник до петък, от 9:00 до 17:00 ч. Адрес: ул. Проф. Иван Георгов 1, кв. Военна Рампа, София." }
+    }
+  ]
+}
+</script>
 
 <section class="contact-band" id="contact">
   <div class="container">
     <div class="section-label">Контакти</div>
     <h2 class="section-title" style="margin-bottom:40px;">Свържете се с нас</h2>
     <div class="contact-split">
-      <div class="contact-details">
+      <address class="contact-details" style="font-style:normal;">
         <div class="contact-item">
           <div class="contact-item-icon"><svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" stroke="#f0c040" stroke-width="1.8"/></svg></div>
           <div><div class="contact-item-label">Телефон</div><a href="tel:0877775577" class="contact-item-value" style="color:white;display:block;">0877 77 55 77</a></div>
@@ -516,20 +620,21 @@ a{color:inherit;text-decoration:none}
           <a href="tel:0877775577" class="btn btn-primary"><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="#0f2d1c"/></svg>Обадете се сега</a>
           <a href="https://maps.app.goo.gl/C6KVEBHUQRiQYKrw5" target="_blank" class="btn btn-outline-white">Отвори в Google Maps</a>
         </div>
-      </div>
+      </address>
       <div style="border-radius:var(--radius-card);overflow:hidden;min-height:340px;">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2930.446157495925!2d23.327283075978404!3d42.73661191122927!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40aa8fd07a9f8f55%3A0x1224d306438dfc1!2sPROGRESSTRADE%20LTD!5e0!3m2!1sbg!2sbg!4v1777668278746!5m2!1sbg!2sbg" title="Местоположение на Progresstrade в София" width="100%" height="100%" style="border:0;min-height:340px;border-radius:var(--radius-card);display:block;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
 </section>
+</main>
 
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
       <div>
         <div style="margin-bottom:12px;">
-          <img loading="lazy" decoding="async" src="images/progresstrade-2.png" alt="Progresstrade" style="height:32px;width:auto;display:block;">
+          <img loading="lazy" decoding="async" width="369" height="63" src="images/progresstrade-2.png" alt="Progresstrade" style="height:32px;width:auto;display:block;">
         </div>
         <p class="footer-desc">Изкупуване на железен скрап, черни метали, коли и стари уреди в София. Плащаме веднага — гарантирано най-добра цена.</p>
       </div>
@@ -549,6 +654,7 @@ a{color:inherit;text-decoration:none}
           <li><a href="#cutting">Услуги</a></li>
           <li><a href="#how">Как работим</a></li>
           <li><a href="#about">За нас</a></li>
+          <li><a href="#faq">Въпроси и отговори</a></li>
         </ul>
       </div>
       <div class="footer-col">
