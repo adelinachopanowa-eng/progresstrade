@@ -159,7 +159,7 @@ a{color:inherit;text-decoration:none}
 .services-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-3);margin-top:var(--space-6)}
 .service-card{background:var(--white);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
 .service-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.12)}
-.service-img{width:100%;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--cream-dark)}
+.service-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--cream-dark)}
 .service-card-body{padding:var(--space-4) var(--space-4) var(--space-5)}
 .service-card h3{font-size:17px;font-weight:700;color:var(--green);margin-bottom:var(--space-1);letter-spacing:-0.02em}
 .service-card p{font-size:14px;color:var(--text-soft);line-height:1.55}
@@ -268,7 +268,7 @@ a{color:inherit;text-decoration:none}
   .nav-hamburger{display:flex}
 }
 @media(max-width:560px){
-  .services-grid{grid-template-columns:1fr}
+  .services-grid{grid-template-columns:repeat(2,1fr);gap:12px}
   .advantages-grid{grid-template-columns:1fr}
   .clients-grid{grid-template-columns:1fr}
   .steps-grid{grid-template-columns:1fr}
