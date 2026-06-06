@@ -32,6 +32,8 @@
 <meta property="og:image:alt" content="Progresstrade — изкупуване на железен скрап и черни метали в София">
 <meta property="og:locale" content="bg_BG">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Прогрестрейд — Изкупуване на вторични суровини в София | Железен скрап на топ цени">
+<meta name="twitter:description" content="Изкупуваме вторични суровини в София на най-добри цени. Железен скрап и коли за скрап — плащаме веднага. Тел. 0877 77 55 77.">
 <meta name="twitter:image" content="https://progresstrade.bg/images/og-cover.jpg">
 <meta name="twitter:image:alt" content="Progresstrade — изкупуване на железен скрап и черни метали в София">
 <meta name="theme-color" content="#1a4a2e">
@@ -79,7 +81,22 @@
     "closes": "17:00"
   },
   "areaServed": ["София","Военна Рампа","Надежда","Подуяне"],
-  "knowsAbout": ["вторични суровини","изкупуване на железен скрап","скрап цени","цена на желязо","черни метали","коли за скрап","газокислородно рязане"]
+  "currenciesAccepted": "BGN",
+  "paymentAccepted": "В брой, банков превод",
+  "knowsAbout": ["вторични суровини","изкупуване на железен скрап","скрап цени","цена на желязо","черни метали","коли за скрап","газокислородно рязане"],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Изкупуване на вторични суровини и метали",
+    "itemListElement": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Изкупуване на плътно желязо", "description": "Масивни метални конструкции, греди, профили и арматура с дебелина над 3 мм." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Изкупуване на тънко желязо и ламарина", "description": "Ламарина и други отпадъци от черни метали с дебелина под 3 мм." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Изкупуване на технологичен отпадък", "description": "Изрезки и отпадъци от металообработващи предприятия и лазерно рязане." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Изкупуване на коли за скрап (ИУМПС)", "description": "Изкупуване и разкомплектоване на излезли от употреба автомобили с документи за дерегистрация в КАТ." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Изкупуване на стари електроуреди (ИУЕЕО)", "description": "Перални, хладилници, печки и друга домакинска техника." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Газокислородно рязане и демонтаж", "description": "Газокислородно рязане и демонтаж на обемни метални конструкции на място." } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Безплатен транспорт и извозване на скрап", "description": "Организиране на транспорт и товарене на адрес в София и региона при по-големи количества." } }
+    ]
+  }
 }
 </script>
 
@@ -89,7 +106,8 @@
   "@type": "WebSite",
   "name": "Прогрестрейд",
   "alternateName": "Progresstrade",
-  "url": "https://progresstrade.bg/"
+  "url": "https://progresstrade.bg/",
+  "inLanguage": "bg"
 }
 </script>
 
@@ -201,7 +219,7 @@ a{color:inherit;text-decoration:none}
 .advantage{display:flex;gap:var(--space-3);align-items:flex-start;padding:var(--space-4);background:var(--cream);border-radius:var(--radius-card);transition:transform .2s ease,box-shadow .2s ease}
 .advantage:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,0.08)}
 .advantage-icon{width:40px;height:40px;border-radius:50%;background:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.advantage h4{font-size:15px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:-0.01em}
+.advantage h3{font-size:15px;font-weight:700;color:var(--green);margin-bottom:4px;letter-spacing:-0.01em}
 .advantage p{font-size:13px;color:var(--text-soft);line-height:1.5}
 
 .clients-section{background:var(--cream)}
@@ -215,7 +233,7 @@ a{color:inherit;text-decoration:none}
 .steps-grid::before{content:'';position:absolute;top:32px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);height:2px;background:repeating-linear-gradient(90deg,var(--yellow) 0,var(--yellow) 8px,transparent 8px,transparent 16px)}
 .step-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-3);position:relative;z-index:1}
 .step-num{width:64px;height:64px;border-radius:50%;background:var(--yellow);color:var(--green-deep);font-family:var(--font-cond);font-size:26px;font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px var(--white),0 0 0 8px var(--yellow);flex-shrink:0}
-.step-card h4{font-size:15px;font-weight:700;color:var(--green);letter-spacing:-0.01em}
+.step-card h3{font-size:15px;font-weight:700;color:var(--green);letter-spacing:-0.01em}
 .step-card p{font-size:13px;color:var(--text-soft);line-height:1.5}
 
 .prices-band{background:var(--green);padding:var(--space-9) 0}
@@ -395,15 +413,15 @@ a{color:inherit;text-decoration:none}
         <div class="service-card-body"><h3>Тънко желязо</h3><p>Ламарина и други отпадъци с дебелина под 3 мм.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" width="900" height="900" class="service-img" src="images/tehnologichen-otpadak.jpg" alt="Технологичен отпадък">
+        <img loading="lazy" decoding="async" width="900" height="900" class="service-img" src="images/tehnologichen-otpadak.jpg" alt="Технологичен отпадък от металообработка за изкупуване">
         <div class="service-card-body"><h3>Технологичен отпадък</h3><p>От металообработващи предприятия — изрезки от лазерно рязане и др.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/koli-za-skrap.jpg" alt="Коли за скрап">
+        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/koli-za-skrap.jpg" alt="Коли за скрап (ИУМПС) за изкупуване">
         <div class="service-card-body"><h3>Коли за скрап (ИУМПС)</h3><p>Изкупуваме и разкомплектоваме автомобили за скрап. Всички документи за дерегистрация в КАТ.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/stari-elektrouredi.jpg" alt="Стари електроуреди">
+        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/stari-elektrouredi.jpg" alt="Стари електроуреди и бяла техника (ИУЕЕО) за изкупуване">
         <div class="service-card-body"><h3>Стари електроуреди (ИУЕЕО)</h3><p>Перални, хладилници, печки и друга домакинска техника.</p></div>
       </div>
     </div>
@@ -420,7 +438,7 @@ a{color:inherit;text-decoration:none}
         <a href="#contact" class="btn btn-white">Свържете се с нас</a>
       </div>
       <div class="feature-img">
-        <img loading="lazy" decoding="async" width="600" height="600" src="images/gazokislorodno-ryazane.jpg" alt="Газокислородно рязане" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block;">
+        <img loading="lazy" decoding="async" width="600" height="600" src="images/gazokislorodno-ryazane.jpg" alt="Газокислородно рязане и демонтаж на метални конструкции в София" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block;">
       </div>
     </div>
   </div>
@@ -429,7 +447,7 @@ a{color:inherit;text-decoration:none}
 <section class="section about-section" id="about">
   <div class="container">
     <div class="about-grid">
-      <img loading="lazy" decoding="async" width="667" height="1000" class="about-img" src="images/ploshtadka-progres-treyd.jpg" alt="Площадка Прогрестрейд">
+      <img loading="lazy" decoding="async" width="667" height="1000" class="about-img" src="images/ploshtadka-progres-treyd.jpg" alt="Площадка за изкупуване на скрап Прогрестрейд в София">
       <div class="about-content">
         <div>
           <div class="section-label-dark">За нас</div>
@@ -439,19 +457,19 @@ a{color:inherit;text-decoration:none}
         <div class="advantages-grid">
           <div class="advantage">
             <div class="advantage-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" fill="white"/></svg></div>
-            <div><h4>Най-високи цени в София</h4><p>Гарантирано конкурентни изкупни цени — сравнете и вижте разликата.</p></div>
+            <div><h3>Най-високи цени в София</h3><p>Гарантирано конкурентни изкупни цени — сравнете и вижте разликата.</p></div>
           </div>
           <div class="advantage">
             <div class="advantage-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M13 5H19V11H13V5ZM5 13H11V19H5V13ZM13 13H19V19H13V13ZM5 5H11V11H5V5Z" fill="white"/></svg></div>
-            <div><h4>Бързо и лесно разтоварване</h4><p>Нашата товаро-разтоварна техника прави разтоварването лесно и безпроблемно.</p></div>
+            <div><h3>Бързо и лесно разтоварване</h3><p>Нашата товаро-разтоварна техника прави разтоварването лесно и безпроблемно.</p></div>
           </div>
           <div class="advantage">
             <div class="advantage-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none"><path d="M11 3v3M11 16v3M3 11h3M16 11h3" stroke="white" stroke-width="1.6" stroke-linecap="round"/><circle cx="11" cy="11" r="4" stroke="white" stroke-width="1.6"/><circle cx="11" cy="11" r="1" fill="white"/></svg></div>
-            <div><h4>Точно измерване</h4><p>Калибрирани електронни везни и прозрачна процедура на приемане.</p></div>
+            <div><h3>Точно измерване</h3><p>Калибрирани електронни везни и прозрачна процедура на приемане.</p></div>
           </div>
           <div class="advantage">
             <div class="advantage-icon"><svg width="20" height="20" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="3.5" stroke="white" stroke-width="1.8"/><path d="M4 19c0-3.5 3-6 7-6s7 2.5 7 6" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg></div>
-            <div><h4>Дружелюбен персонал</h4><p>Опитните ни служители ще ви помогнат с всеки въпрос.</p></div>
+            <div><h3>Дружелюбен персонал</h3><p>Опитните ни служители ще ви помогнат с всеки въпрос.</p></div>
           </div>
         </div>
       </div>
@@ -479,10 +497,10 @@ a{color:inherit;text-decoration:none}
     <div style="text-align:center;margin-bottom:8px;"><div class="section-label-dark" style="display:inline-block;">Процес</div></div>
     <h2 class="section-title-dark" style="text-align:center;margin-bottom:0;">Как работи?</h2>
     <div class="steps-grid">
-      <div class="step-card"><div class="step-num">1</div><h4>Обадете се</h4><p>Свържете се с нас и ни опишете какво имате за продажба.</p></div>
-      <div class="step-card"><div class="step-num">2</div><h4>Оценка</h4><p>Даваме ви цена веднага — по телефона или след оглед на материала.</p></div>
-      <div class="step-card"><div class="step-num">3</div><h4>Докарвате отпадъка или ние го взимаме от адрес</h4><p>При по-големи количества организираме транспорт и товарене на ваш адрес.</p></div>
-      <div class="step-card"><div class="step-num">4</div><h4>Плащаме веднага</h4><p>Получавате мигновенно плащане.</p></div>
+      <div class="step-card"><div class="step-num">1</div><h3>Обадете се</h3><p>Свържете се с нас и ни опишете какво имате за продажба.</p></div>
+      <div class="step-card"><div class="step-num">2</div><h3>Оценка</h3><p>Даваме ви цена веднага — по телефона или след оглед на материала.</p></div>
+      <div class="step-card"><div class="step-num">3</div><h3>Докарвате отпадъка или ние го взимаме от адрес</h3><p>При по-големи количества организираме транспорт и товарене на ваш адрес.</p></div>
+      <div class="step-card"><div class="step-num">4</div><h3>Плащаме веднага</h3><p>Получавате мигновенно плащане.</p></div>
     </div>
   </div>
 </section>
@@ -548,7 +566,7 @@ a{color:inherit;text-decoration:none}
         <a href="tel:0877775577" class="btn btn-primary">Свържете се за оферта</a>
       </div>
       <div class="feature-img">
-        <img loading="lazy" decoding="async" width="600" height="600" src="images/transport.jpg" alt="Транспорт" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block;">
+        <img loading="lazy" decoding="async" width="600" height="600" src="images/transport.jpg" alt="Безплатен транспорт и извозване на скрап в София" style="width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block;">
       </div>
     </div>
   </div>
