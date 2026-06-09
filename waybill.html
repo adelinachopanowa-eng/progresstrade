@@ -932,8 +932,7 @@ function autoNextNumber() {
   if (next > 1 || DB.lastNumber) document.getElementById('f-number').value = next;
 }
 function autoZapovedNumber() {
-  const next = (DB.zapovedLastNumber || 0) + 1;
-  document.getElementById('f-zapovedNo').value = next;
+  document.getElementById('f-zapovedNo').value = '';
 }
 
 // ===== SELECTS =====
