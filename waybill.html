@@ -515,6 +515,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 .veh-edit-form .fields { margin-bottom: 10px; }
 
 /* ===== ТОВАРИТЕЛНИЦА CHECKBOX ===== */
+.tov-hint { font-size: 0.82rem; color: var(--soft); margin-bottom: 10px; }
 .tov-label {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 0.95rem; font-weight: 600; cursor: pointer;
@@ -660,14 +661,15 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   <!-- Transport docs -->
   <div class="card">
     <h3>Документи за превоза</h3>
+    <p class="tov-hint">Вид превоз: <strong>Превоз за собствена сметка</strong></p>
     <label class="tov-label">
-      <input type="checkbox" id="f-tov-check" onchange="toggleTovNum()">
+      <input type="checkbox" id="f-tov-check" checked onchange="toggleTovNum()">
       <span>Товарителница</span>
     </label>
-    <div id="tov-num-row" style="display:none;margin-top:8px">
+    <div id="tov-num-row" style="margin-top:8px">
       <div class="field">
-        <label>Товарителница №</label>
-        <input type="text" id="f-tov-num" placeholder="________">
+        <label>Товарителница № (по желание)</label>
+        <input type="text" id="f-tov-num" placeholder="незадължително">
       </div>
     </div>
     <div id="doc-rows" style="margin-top:10px"></div>
@@ -1071,9 +1073,13 @@ function collectForm() {
   const veh = DB.vehicles.find(v  => v.id === document.getElementById('f-vehicle').value) || {};
   const drv = DB.drivers.find(d   => d.id === document.getElementById('f-driver').value)  || {};
   const docs = [];
-  if (document.getElementById('f-tov-check').checked) {
-    docs.push({ type:'Товарителница', num: document.getElementById('f-tov-num').value.trim() });
-  }
+  // Видът превоз винаги е "Превоз за собствена сметка"; в колоната за документи обикновено стои "товарителница"
+  const tovChecked = document.getElementById('f-tov-check').checked;
+  const tovNum = document.getElementById('f-tov-num').value.trim();
+  let baseDocText = '';
+  if (tovChecked) baseDocText = 'товарителница' + (tovNum ? ' № ' + tovNum : '');
+  else if (tovNum) baseDocText = tovNum;
+  docs.push({ type:'Превоз за собствена сметка', num: baseDocText });
   document.querySelectorAll('.doc-row').forEach(r => {
     const t = r.querySelector('.doc-type')?.value.trim();
     const n = r.querySelector('.doc-num')?.value.trim();
@@ -1966,9 +1972,9 @@ function clearForm() {
   document.getElementById('f-cert-to').value='';
   document.querySelectorAll('input[name="absence"]').forEach(r => r.checked=false);
   setToday();
-  document.getElementById('f-tov-check').checked = false;
+  document.getElementById('f-tov-check').checked = true;
   document.getElementById('f-tov-num').value = '';
-  document.getElementById('tov-num-row').style.display = 'none';
+  document.getElementById('tov-num-row').style.display = 'block';
   document.getElementById('doc-rows').innerHTML = '';
   autoNextNumber();
   autoZapovedNumber();
