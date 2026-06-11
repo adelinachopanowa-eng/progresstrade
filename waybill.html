@@ -513,6 +513,42 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 }
 .veh-edit-form { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
 .veh-edit-form .fields { margin-bottom: 10px; }
+
+/* ===== VEHICLE WARNING (in form) ===== */
+.veh-warn-box { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; }
+.veh-warn-box .veh-warn-title { font-weight: 800; margin-bottom: 5px; }
+.veh-warn-box ul { margin: 0; padding-left: 18px; }
+.veh-warn-box li { margin: 2px 0; line-height: 1.35; }
+.veh-warn-bad  { background: #fdecea; border: 1.5px solid #f0a0a0; color: #8b0000; }
+.veh-warn-warn { background: #fff7e0; border: 1.5px solid #e0c060; color: #7a5c00; }
+
+/* ===== VEHICLE REPORT BAR ===== */
+.veh-report-bar { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+
+/* ===== DESKTOP ENHANCEMENTS (min-width — mobile untouched) ===== */
+@media (min-width: 768px) {
+  .tab-panel { max-width: 900px; padding: 26px 24px 90px; }
+  .tabs { max-width: 900px; margin: 0 auto; }
+  /* History gets the full width it needs */
+  #tab-history { max-width: 1180px; }
+  .hist-table { min-width: 0; font-size: 0.88rem; }
+  .hist-table th { font-size: 0.78rem; padding: 11px 12px; }
+  .hist-table td { padding: 10px 12px; }
+  /* Vehicle status cards in a 2-column grid */
+  #vehicle-status-list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  #vehicle-status-list .veh-status-card { margin-bottom: 0; }
+  /* Preview becomes a centered modal instead of a bottom sheet */
+  .preview-overlay { align-items: center; }
+  .preview-sheet { border-radius: 16px; max-width: 560px; max-height: 86vh; box-shadow: 0 12px 48px rgba(0,0,0,0.3); }
+  .preview-handle { display: none; }
+  /* Actions bar content aligns with the panel */
+  .actions-bar { justify-content: center; }
+  .actions-bar > * { max-width: 440px; }
+  .actions-bar > .btn-yellow { flex: 1; }
+}
+@media (min-width: 1100px) {
+  #tab-vehicles { max-width: 1100px; }
+}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
@@ -606,6 +642,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
         </select>
       </div>
     </div>
+    <div id="vehicle-warning" class="veh-warn-box" style="display:none"></div>
   </div>
 
   <!-- Transport docs -->
@@ -782,6 +819,11 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
      VEHICLES STATUS TAB
 ================================================================= -->
 <div id="tab-vehicles" class="tab-panel">
+  <div class="veh-report-bar">
+    <button class="btn btn-primary btn-sm" onclick="shareVehicleReport()">📤 Изпрати справка</button>
+    <button class="btn btn-outline btn-sm" onclick="copyVehicleReport()">📋 Копирай</button>
+    <button class="btn btn-outline btn-sm" onclick="printVehicleReport()">🖨️ Принтирай</button>
+  </div>
   <div id="vehicle-status-list"></div>
 </div>
 
@@ -976,6 +1018,39 @@ function fillCompany() {
 function fillVehicle() {
   const veh = DB.vehicles.find(v => v.id === document.getElementById('f-vehicle').value);
   document.getElementById('f-regno').value = veh ? veh.regno : '';
+  renderVehicleWarning(veh);
+}
+
+// Returns list of expired/expiring document alerts for a vehicle (and its trailer)
+function vehicleDocAlerts(veh) {
+  if (!veh || !veh.id) return [];
+  const checks = [
+    ['Застраховка', veh.insuranceExpiry],
+    ['Технически преглед', veh.techExpiry],
+    ['Тахограф', veh.tachoExpiry],
+  ];
+  if (veh.trailerRegno) {
+    checks.push(['Ремарке — Застраховка', veh.trailerInsuranceExpiry]);
+    checks.push(['Ремарке — Тех. преглед', veh.trailerTechExpiry]);
+  }
+  const alerts = [];
+  checks.forEach(([label, date]) => {
+    const st = docStatus(date);
+    if (st.cls === 'bad')  alerts.push({ level:'bad',  text: `${label}: ${date ? 'изтекъл на ' + fmtDateDisplay(date) : 'не е въведен'}` });
+    else if (st.cls === 'warn') alerts.push({ level:'warn', text: `${label}: изтича до ${st.days} (${fmtDateDisplay(date)})` });
+  });
+  return alerts;
+}
+
+function renderVehicleWarning(veh) {
+  const el = document.getElementById('vehicle-warning');
+  const alerts = vehicleDocAlerts(veh);
+  if (!alerts.length) { el.style.display = 'none'; el.innerHTML = ''; return; }
+  const hasBad = alerts.some(a => a.level === 'bad');
+  el.style.display = 'block';
+  el.className = 'veh-warn-box ' + (hasBad ? 'veh-warn-bad' : 'veh-warn-warn');
+  el.innerHTML = `<div class="veh-warn-title">${hasBad ? '⛔ Внимание — изтекли/липсващи документи!' : '⚠️ Документи изтичат скоро'}</div>
+    <ul>${alerts.map(a => `<li>${a.text}</li>`).join('')}</ul>`;
 }
 
 // ===== COLLECT DATA =====
@@ -1031,6 +1106,13 @@ function collectForm() {
 // ===== PREVIEW (without saving) =====
 let pendingSave = false;
 function previewForm() {
+  const veh = DB.vehicles.find(v => v.id === document.getElementById('f-vehicle').value);
+  const bad = vehicleDocAlerts(veh).filter(a => a.level === 'bad');
+  if (bad.length) {
+    if (!confirm('Внимание! Има изтекли или липсващи документи за това МПС:\n\n' +
+        bad.map(a => '• ' + a.text).join('\n') +
+        '\n\nЖелаете ли все пак да продължите?')) return;
+  }
   const data = collectForm();
   data.id = uid();
   pendingSave = true;
@@ -1752,11 +1834,114 @@ async function saveVehicleCompliance(id) {
   if (error) console.error('SB vehicle compliance:', error);
 }
 
+// ===== VEHICLE REPORT =====
+function buildVehicleReportText() {
+  const today = fmtDateDisplay(new Date().toISOString().split('T')[0]);
+  const lines = [];
+  lines.push('СПРАВКА — ВАЛИДНОСТ НА ДОКУМЕНТИ НА МПС');
+  lines.push('Прогрестрейд ЕООД · ' + today);
+  lines.push('');
+  if (!DB.vehicles.length) { lines.push('Няма въведени автомобили.'); return lines.join('\n'); }
+  const mark = st => st.cls === 'ok' ? '✓' : st.cls === 'warn' ? '⚠' : '✗';
+  const fmtRow = (label, date) => {
+    const st = docStatus(date);
+    const extra = st.cls === 'bad' ? (date ? ' — ИЗТЕКЪЛ' : ' — НЯМА') : (st.days ? ' — остават ' + st.days : '');
+    return `  ${mark(st)} ${label}: ${date ? fmtDateDisplay(date) : '—'}${extra}`;
+  };
+  DB.vehicles.forEach(v => {
+    lines.push(`${v.model} (${v.regno})`);
+    lines.push(fmtRow('Застраховка', v.insuranceExpiry));
+    lines.push(fmtRow('Тех. преглед', v.techExpiry));
+    lines.push(fmtRow('Тахограф', v.tachoExpiry));
+    if (v.trailerRegno) {
+      lines.push(`  Ремарке ${v.trailerRegno}:`);
+      lines.push(fmtRow('  Застраховка', v.trailerInsuranceExpiry));
+      lines.push(fmtRow('  Тех. преглед', v.trailerTechExpiry));
+    }
+    lines.push('');
+  });
+  return lines.join('\n').trim();
+}
+
+async function shareVehicleReport() {
+  const text = buildVehicleReportText();
+  if (navigator.share) {
+    try { await navigator.share({ title: 'Справка МПС документи', text }); }
+    catch(e) { /* потребителят отказа */ }
+  } else {
+    copyVehicleReport();
+  }
+}
+
+function copyVehicleReport() {
+  const text = buildVehicleReportText();
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(
+      () => alert('Справката е копирана. Поставете я в имейл, Viber или съобщение.'),
+      () => fallbackCopy(text)
+    );
+  } else { fallbackCopy(text); }
+}
+function fallbackCopy(text) {
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try { document.execCommand('copy'); alert('Справката е копирана.'); }
+  catch(e) { alert('Копирането не бе успешно.'); }
+  document.body.removeChild(ta);
+}
+
+function buildVehicleReportHTML() {
+  const today = fmtDateDisplay(new Date().toISOString().split('T')[0]);
+  const cellColor = st => st.cls === 'ok' ? '#1a7a3e' : st.cls === 'warn' ? '#9a6b00' : '#b3261e';
+  const cellBg    = st => st.cls === 'ok' ? '#eaf7ef' : st.cls === 'warn' ? '#fff7e0' : '#fdecea';
+  const row = (label, date) => {
+    const st = docStatus(date);
+    const note = st.cls === 'bad' ? (date ? 'ИЗТЕКЪЛ' : 'НЯМА') : (st.days ? 'остават ' + st.days : 'валиден');
+    return `<tr>
+      <td style="border:0.5pt solid #999;padding:3pt 6pt">${label}</td>
+      <td style="border:0.5pt solid #999;padding:3pt 6pt;text-align:center">${date ? fmtDateDisplay(date) : '—'}</td>
+      <td style="border:0.5pt solid #999;padding:3pt 6pt;text-align:center;color:${cellColor(st)};background:${cellBg(st)};font-weight:bold;-webkit-print-color-adjust:exact;print-color-adjust:exact">${note}</td>
+    </tr>`;
+  };
+  const blocks = DB.vehicles.map(v => {
+    let rows = row('Застраховка', v.insuranceExpiry) + row('Технически преглед', v.techExpiry) + row('Тахограф', v.tachoExpiry);
+    if (v.trailerRegno) {
+      rows += `<tr><td colspan="3" style="border:0.5pt solid #999;padding:3pt 6pt;font-weight:bold;background:#f0f0f0;-webkit-print-color-adjust:exact;print-color-adjust:exact">Ремарке ${v.trailerRegno}</td></tr>`;
+      rows += row('Застраховка', v.trailerInsuranceExpiry) + row('Технически преглед', v.trailerTechExpiry);
+    }
+    return `<div style="margin-bottom:6mm">
+      <div style="font-weight:bold;font-size:11pt;margin-bottom:2pt">${v.model} <span style="font-weight:normal">(${v.regno})</span></div>
+      <table style="width:100%;border-collapse:collapse;font-size:9pt">
+        <thead><tr>
+          <th style="border:0.5pt solid #999;padding:3pt 6pt;text-align:left;background:#e8efe9;-webkit-print-color-adjust:exact;print-color-adjust:exact">Документ</th>
+          <th style="border:0.5pt solid #999;padding:3pt 6pt;background:#e8efe9;-webkit-print-color-adjust:exact;print-color-adjust:exact">Валиден до</th>
+          <th style="border:0.5pt solid #999;padding:3pt 6pt;background:#e8efe9;-webkit-print-color-adjust:exact;print-color-adjust:exact">Статус</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+  }).join('');
+  return `<div class="waybill-print" style="font-family:Arial,sans-serif;color:#000">
+    <div style="text-align:center;margin-bottom:6mm">
+      <div style="font-size:14pt;font-weight:bold">СПРАВКА — ВАЛИДНОСТ НА ДОКУМЕНТИ НА МПС</div>
+      <div style="font-size:10pt">Прогрестрейд ЕООД · ${today}</div>
+    </div>
+    ${blocks || '<p>Няма въведени автомобили.</p>'}
+  </div>`;
+}
+
+function printVehicleReport() {
+  document.getElementById('wb-content').innerHTML = buildVehicleReportHTML();
+  window.print();
+}
+
 // ===== CLEAR FORM =====
 function clearForm() {
   if (!confirm('Изчисти формата?')) return;
   ['f-vehicle','f-driver'].forEach(id => document.getElementById(id).value='');
   selectDefaultCompany();
+  renderVehicleWarning(null);
   document.getElementById('f-regno').value='';
   document.getElementById('f-counterparty').value='';
   document.getElementById('f-dest-city').value='';
