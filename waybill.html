@@ -1077,7 +1077,7 @@ function collectForm() {
   const tovChecked = document.getElementById('f-tov-check').checked;
   const tovNum = document.getElementById('f-tov-num').value.trim();
   let baseDocText = '';
-  if (tovChecked) baseDocText = 'товарителница' + (tovNum ? ' № ' + tovNum : '');
+  if (tovChecked) baseDocText = 'Товарителница' + (tovNum ? ' № ' + tovNum : '');
   else if (tovNum) baseDocText = tovNum;
   docs.push({ type:'Превоз за собствена сметка', num: baseDocText });
   document.querySelectorAll('.doc-row').forEach(r => {
