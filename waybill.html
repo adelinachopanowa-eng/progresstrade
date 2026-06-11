@@ -514,6 +514,17 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 .veh-edit-form { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); }
 .veh-edit-form .fields { margin-bottom: 10px; }
 
+/* ===== ТОВАРИТЕЛНИЦА CHECKBOX ===== */
+.tov-label {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer;
+  padding: 6px 0;
+}
+.tov-label input[type="checkbox"] {
+  width: 20px; height: 20px; accent-color: var(--green);
+  flex-shrink: 0; cursor: pointer;
+}
+
 /* ===== VEHICLE WARNING (in form) ===== */
 .veh-warn-box { margin-top: 12px; padding: 10px 14px; border-radius: 8px; font-size: 0.82rem; }
 .veh-warn-box .veh-warn-title { font-weight: 800; margin-bottom: 5px; }
@@ -649,13 +660,18 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   <!-- Transport docs -->
   <div class="card">
     <h3>Документи за превоза</h3>
-    <div id="doc-rows">
-      <div class="doc-row">
-        <div class="field"><label>Вид превоз</label><input type="text" class="doc-type" value="Превоз за собствена сметка"></div>
-        <div class="field"><label>Документ №</label><input type="text" class="doc-num"></div>
+    <label class="tov-label">
+      <input type="checkbox" id="f-tov-check" onchange="toggleTovNum()">
+      <span>Товарителница</span>
+    </label>
+    <div id="tov-num-row" style="display:none;margin-top:8px">
+      <div class="field">
+        <label>Товарителница №</label>
+        <input type="text" id="f-tov-num" placeholder="________">
       </div>
     </div>
-    <button class="btn btn-outline btn-sm" onclick="addDocRow()" style="margin-top:4px">+ Ред</button>
+    <div id="doc-rows" style="margin-top:10px"></div>
+    <button class="btn btn-outline btn-sm" onclick="addDocRow()" style="margin-top:6px">+ Друг документ</button>
   </div>
 
   <!-- Заповед за собствен транспорт -->
@@ -1010,12 +1026,7 @@ function fillSel(id, items, labelFn, valFn, placeholder) {
 }
 
 // ===== AUTOFILL =====
-function fillCompany() {
-  const co = DB.companies.find(c => c.id === document.getElementById('f-company').value);
-  if (!co) return;
-  const dt = document.querySelector('.doc-type');
-  if (dt && !dt.value.trim()) dt.value = co.transportType || 'Превоз за собствена сметка';
-}
+function fillCompany() {}
 function fillVehicle() {
   const veh = DB.vehicles.find(v => v.id === document.getElementById('f-vehicle').value);
   document.getElementById('f-regno').value = veh ? veh.regno : '';
@@ -1060,6 +1071,9 @@ function collectForm() {
   const veh = DB.vehicles.find(v  => v.id === document.getElementById('f-vehicle').value) || {};
   const drv = DB.drivers.find(d   => d.id === document.getElementById('f-driver').value)  || {};
   const docs = [];
+  if (document.getElementById('f-tov-check').checked) {
+    docs.push({ type:'Товарителница', num: document.getElementById('f-tov-num').value.trim() });
+  }
   document.querySelectorAll('.doc-row').forEach(r => {
     const t = r.querySelector('.doc-type')?.value.trim();
     const n = r.querySelector('.doc-num')?.value.trim();
@@ -1952,13 +1966,19 @@ function clearForm() {
   document.getElementById('f-cert-to').value='';
   document.querySelectorAll('input[name="absence"]').forEach(r => r.checked=false);
   setToday();
-  document.getElementById('doc-rows').innerHTML=`
-    <div class="doc-row">
-      <div class="field"><label>Вид превоз</label><input type="text" class="doc-type" value="Превоз за собствена сметка"></div>
-      <div class="field"><label>Документ №</label><input type="text" class="doc-num"></div>
-    </div>`;
+  document.getElementById('f-tov-check').checked = false;
+  document.getElementById('f-tov-num').value = '';
+  document.getElementById('tov-num-row').style.display = 'none';
+  document.getElementById('doc-rows').innerHTML = '';
   autoNextNumber();
   autoZapovedNumber();
+}
+
+// ===== ТОВАРИТЕЛНИЦА TOGGLE =====
+function toggleTovNum() {
+  const show = document.getElementById('f-tov-check').checked;
+  document.getElementById('tov-num-row').style.display = show ? 'block' : 'none';
+  if (show) document.getElementById('f-tov-num').focus();
 }
 
 // ===== ADD DOC ROW =====
