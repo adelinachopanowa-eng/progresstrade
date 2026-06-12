@@ -1203,9 +1203,12 @@ function openPreview(data) {
 function closePreview() {
   document.getElementById('preview-overlay').classList.remove('open');
   document.body.style.overflow = '';
+  const wasPrinted = !pendingSave; // commitSave already set pendingSave=false if printed
   pendingSave = false;
-  autoNextNumber();
-  autoZapovedNumber();
+  if (wasPrinted) {
+    autoNextNumber();
+    autoZapovedNumber();
+  }
 }
 function closePrevOnBg(e) { if (e.target === document.getElementById('preview-overlay')) closePreview(); }
 function printDoc(type) {
