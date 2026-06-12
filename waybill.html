@@ -93,7 +93,7 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
 .fields.col3 { grid-template-columns: 1fr 1fr 1fr; }
 .field { display: flex; flex-direction: column; gap: 5px; }
 .field label { font-size: 0.75rem; font-weight: 700; color: var(--soft); }
-.field input, .field select {
+.field input, .field select, .field textarea {
   padding: 10px 12px;
   border: 1.5px solid var(--border);
   border-radius: 8px;
@@ -104,7 +104,8 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
   transition: border-color .15s;
   min-height: 44px;
 }
-.field input:focus, .field select:focus { outline: none; border-color: var(--green); }
+.field input:focus, .field select:focus, .field textarea:focus { outline: none; border-color: var(--green); }
+.field textarea { resize: vertical; min-height: 56px; line-height: 1.4; }
 .field select {
   cursor: pointer;
   width: 100%;
@@ -728,6 +729,15 @@ header p  { font-size: 0.78rem; opacity: 0.7; margin-top: 2px; }
       <label class="abs-opt"><input type="radio" name="absence" value="е бил/а на разположение"> е бил/а на разположение</label>
     </div>
   </div>
+
+  <!-- Забележка (само за вътрешна справка, не влиза в документите) -->
+  <div class="card">
+    <h3>Забележка</h3>
+    <div class="field">
+      <label>Само за историята — не се отпечатва в документите</label>
+      <textarea id="f-note" rows="2" placeholder="напр. товар за обект Х, спешен курс…"></textarea>
+    </div>
+  </div>
 </div>
 
 <!-- actions bar (fixed bottom, shown on form tab) -->
@@ -891,8 +901,8 @@ const M = {
   drvFromRow: r => ({ id:r.id, name:r.name, birthDate:r.birth_date||'', licenseNumber:r.license_number||'', employmentDate:r.employment_date||'' }),
   ctrToRow:   c => ({ id:c.id, name:c.name, city:c.city||'' }),
   ctrFromRow: r => ({ id:r.id, name:r.name, city:r.city||'' }),
-  histToRow:  h => ({ id:h.id, number:h.number||'', date:h.date||'', company_id:h.companyId||'', company_name:h.companyName||'', address:h.address||'', phone:h.phone||'', fax:h.fax||'', issued_by:h.issuedBy||'', mechanic:h.mechanic||'', medic:h.medic||'', checker:h.checker||'', vehicle:h.vehicle||'', regno:h.regno||'', driver:h.driver||'', docs:h.docs||[], extra: { zapovedNo:h.zapovedNo||'', destCity:h.destCity||'', counterpartyId:h.counterpartyId||'', counterpartyName:h.counterpartyName||'', cargoType:h.cargoType||'', departTime:h.departTime||'', certFrom:h.certFrom||'', certTo:h.certTo||'', absenceType:h.absenceType||'', driverBirthDate:h.driverBirthDate||'', driverLicenseNumber:h.driverLicenseNumber||'', driverEmploymentDate:h.driverEmploymentDate||'', declarantName:h.declarantName||'', declarantTitle:h.declarantTitle||'', managerName:h.managerName||'' } }),
-  histFromRow:r => ({ id:r.id, number:r.number, date:r.date, companyId:r.company_id||'', companyName:r.company_name||'', address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', vehicle:r.vehicle||'', regno:r.regno||'', driver:r.driver||'', docs:r.docs||[], createdAt:r.created_at, zapovedNo:(r.extra||{}).zapovedNo||'', destCity:(r.extra||{}).destCity||'', counterpartyId:(r.extra||{}).counterpartyId||'', counterpartyName:(r.extra||{}).counterpartyName||'', cargoType:(r.extra||{}).cargoType||'железен скрап', departTime:(r.extra||{}).departTime||'', certFrom:(r.extra||{}).certFrom||'', certTo:(r.extra||{}).certTo||'', absenceType:(r.extra||{}).absenceType||'', driverBirthDate:(r.extra||{}).driverBirthDate||'', driverLicenseNumber:(r.extra||{}).driverLicenseNumber||'', driverEmploymentDate:(r.extra||{}).driverEmploymentDate||'', declarantName:(r.extra||{}).declarantName||'', declarantTitle:(r.extra||{}).declarantTitle||'', managerName:(r.extra||{}).managerName||'' })
+  histToRow:  h => ({ id:h.id, number:h.number||'', date:h.date||'', company_id:h.companyId||'', company_name:h.companyName||'', address:h.address||'', phone:h.phone||'', fax:h.fax||'', issued_by:h.issuedBy||'', mechanic:h.mechanic||'', medic:h.medic||'', checker:h.checker||'', vehicle:h.vehicle||'', regno:h.regno||'', driver:h.driver||'', docs:h.docs||[], extra: { zapovedNo:h.zapovedNo||'', destCity:h.destCity||'', counterpartyId:h.counterpartyId||'', counterpartyName:h.counterpartyName||'', cargoType:h.cargoType||'', departTime:h.departTime||'', certFrom:h.certFrom||'', certTo:h.certTo||'', absenceType:h.absenceType||'', driverBirthDate:h.driverBirthDate||'', driverLicenseNumber:h.driverLicenseNumber||'', driverEmploymentDate:h.driverEmploymentDate||'', declarantName:h.declarantName||'', declarantTitle:h.declarantTitle||'', managerName:h.managerName||'', note:h.note||'' } }),
+  histFromRow:r => ({ id:r.id, number:r.number, date:r.date, companyId:r.company_id||'', companyName:r.company_name||'', address:r.address||'', phone:r.phone||'', fax:r.fax||'', issuedBy:r.issued_by||'', mechanic:r.mechanic||'', medic:r.medic||'', checker:r.checker||'', vehicle:r.vehicle||'', regno:r.regno||'', driver:r.driver||'', docs:r.docs||[], createdAt:r.created_at, zapovedNo:(r.extra||{}).zapovedNo||'', destCity:(r.extra||{}).destCity||'', counterpartyId:(r.extra||{}).counterpartyId||'', counterpartyName:(r.extra||{}).counterpartyName||'', cargoType:(r.extra||{}).cargoType||'железен скрап', departTime:(r.extra||{}).departTime||'', certFrom:(r.extra||{}).certFrom||'', certTo:(r.extra||{}).certTo||'', absenceType:(r.extra||{}).absenceType||'', driverBirthDate:(r.extra||{}).driverBirthDate||'', driverLicenseNumber:(r.extra||{}).driverLicenseNumber||'', driverEmploymentDate:(r.extra||{}).driverEmploymentDate||'', declarantName:(r.extra||{}).declarantName||'', declarantTitle:(r.extra||{}).declarantTitle||'', managerName:(r.extra||{}).managerName||'', note:(r.extra||{}).note||'' })
 };
 
 // ===== LOADING =====
@@ -1120,6 +1130,8 @@ function collectForm() {
     declarantName:  co.declarantName || '',
     declarantTitle: co.declarantTitle || '',
     managerName:    co.managerName || '',
+    // забележка — само за историята
+    note:      document.getElementById('f-note').value.trim(),
     createdAt: new Date().toISOString()
   };
 }
@@ -1685,6 +1697,9 @@ function renderList(listId, items, labelFn, metaFn, type, hasEdit, hasDriverEdit
 }
 
 // ===== HISTORY =====
+function escHtml(s) {
+  return String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+}
 function renderHistory() {
   const el = document.getElementById('history-list');
   if (!DB.history.length) {
@@ -1703,6 +1718,7 @@ function renderHistory() {
       <td>${h.cargoType||''}</td>
       <td style="white-space:nowrap">${h.departTime||''}</td>
       <td>${h.zapovedNo||''}</td>
+      <td>${escHtml(h.note||'')}</td>
       <td>
         <div class="hist-btns">
           <button class="btn btn-yellow btn-sm" onclick="previewHistory('${h.id}')">👁</button>
@@ -1715,7 +1731,7 @@ function renderHistory() {
       <thead>
         <tr>
           <th>№</th><th>Дата</th><th>Фирма</th><th>МПС</th><th>Водач</th>
-          <th>Контрагент</th><th>Посока</th><th>Товар</th><th>Час</th><th>Заповед №</th><th></th>
+          <th>Контрагент</th><th>Посока</th><th>Товар</th><th>Час</th><th>Заповед №</th><th>Забележка</th><th></th>
         </tr>
       </thead>
       <tbody>${rows}</tbody>
@@ -1747,6 +1763,7 @@ function exportExcel() {
     'Товар':      h.cargoType || '',
     'Час':        h.departTime || '',
     'Заповед №':  h.zapovedNo || '',
+    'Забележка':  h.note || '',
   }));
   const ws = XLSX.utils.json_to_sheet(rows);
   const wb = XLSX.utils.book_new();
@@ -1970,6 +1987,7 @@ function clearForm() {
   document.getElementById('f-depart-time').value='';
   document.getElementById('f-cert-from').value='';
   document.getElementById('f-cert-to').value='';
+  document.getElementById('f-note').value='';
   document.querySelectorAll('input[name="absence"]').forEach(r => r.checked=false);
   setToday();
   document.getElementById('f-tov-check').checked = true;
