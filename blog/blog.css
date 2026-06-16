@@ -16,7 +16,8 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{font-family:var(--font);color:var(--text);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
+img{max-width:100%;height:auto;display:block}
+.article-hero{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-card);margin:6px 0 6px}
 a{color:var(--green-accent)}
 .container{max-width:var(--max-w);margin:0 auto;padding:0 var(--gutter)}
 
