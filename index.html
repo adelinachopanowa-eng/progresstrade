@@ -134,7 +134,8 @@
   --white:#ffffff;--text:rgba(0,0,0,0.87);--text-soft:rgba(0,0,0,0.55);
   --text-white:rgba(255,255,255,1);--text-white-soft:rgba(255,255,255,0.70);
   --radius-card:12px;--radius-pill:50px;
-  --shadow-card:0 0 0.5px rgba(0,0,0,0.14),0 2px 6px rgba(0,0,0,0.10);
+  --shadow-card:0 1px 2px rgba(0,0,0,0.04),0 6px 16px rgba(0,0,0,0.07);
+  --shadow-hover:0 14px 34px rgba(0,0,0,0.13),0 6px 14px rgba(0,0,0,0.06);
   --shadow-nav:0 1px 3px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.08),0 0 2px rgba(0,0,0,0.06);
   --space-1:4px;--space-2:8px;--space-3:16px;--space-4:24px;
   --space-5:32px;--space-6:40px;--space-7:48px;--space-8:56px;--space-9:64px;
@@ -149,10 +150,11 @@ img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 .container{width:100%;max-width:var(--max-w);margin:0 auto;padding:0 var(--gutter)}
 
-.btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--radius-pill);padding:12px 28px;font-family:var(--font);font-size:15px;font-weight:600;letter-spacing:-0.01em;cursor:pointer;border:2px solid transparent;transition:transform .15s ease,background .15s ease,color .15s ease,border-color .15s ease;white-space:nowrap}
-.btn:active{transform:scale(0.95)}
+.btn{display:inline-flex;align-items:center;gap:8px;border-radius:var(--radius-pill);padding:12px 28px;font-family:var(--font);font-size:15px;font-weight:600;letter-spacing:-0.01em;cursor:pointer;border:2px solid transparent;transition:transform .18s ease,background .15s ease,color .15s ease,border-color .15s ease,box-shadow .18s ease;white-space:nowrap}
+.btn:hover{transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(0.98)}
 .btn-primary{background:var(--yellow);color:var(--green-deep);border-color:var(--yellow)}
-.btn-primary:hover{background:#e6b530;border-color:#e6b530}
+.btn-primary:hover{background:#e6b530;border-color:#e6b530;box-shadow:0 10px 22px rgba(240,192,64,0.34)}
 .btn-outline-dark{background:transparent;color:var(--green-deep);border-color:var(--green-deep)}
 .btn-outline-dark:hover{background:var(--green-deep);color:var(--white)}
 .btn-outline-white{background:transparent;color:var(--white);border-color:var(--white)}
@@ -180,11 +182,18 @@ a{color:inherit;text-decoration:none}
 .hero-title em{color:var(--yellow);font-style:normal}
 .hero-sub{font-size:17px;color:var(--text-white-soft);line-height:1.6;max-width:440px}
 .hero-actions{display:flex;gap:var(--space-2);flex-wrap:wrap}
+.hero-trust{display:flex;flex-wrap:wrap;gap:10px 22px;margin-top:24px;list-style:none;padding:0}
+.hero-trust li{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;color:rgba(255,255,255,0.88)}
+.hero-trust svg{flex-shrink:0}
+/* Движение при скрол */
+.js-reveal .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+.js-reveal .reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.js-reveal .reveal{opacity:1!important;transform:none!important;transition:none!important}}
 .hero-img{position:relative;overflow:hidden}
 @media(min-width:901px){
   .hero{background:linear-gradient(120deg,var(--green-accent) 0%,var(--green) 48%,var(--green-deep) 100%);position:relative}
   .hero-img{clip-path:polygon(78px 0,100% 0,100% 100%,0 100%)}
-  .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,45,28,0.35) 0%,rgba(15,45,28,0) 22%)}
+  .hero-img::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(15,45,28,0.55) 0%,rgba(15,45,28,0.12) 26%,rgba(15,45,28,0) 50%),linear-gradient(0deg,rgba(15,45,28,0.42) 0%,rgba(15,45,28,0) 42%)}
   .hero-sub{font-size:18px}
 }
 
@@ -206,7 +215,7 @@ a{color:inherit;text-decoration:none}
 
 .services-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--space-3);margin-top:var(--space-6)}
 .service-card{background:var(--white);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden;transition:transform .2s ease,box-shadow .2s ease}
-.service-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.12)}
+.service-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
 .service-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--cream-dark)}
 .service-card-body{padding:var(--space-4) var(--space-4) var(--space-5)}
 .service-card h3{font-size:17px;font-weight:700;color:var(--green);margin-bottom:var(--space-1);letter-spacing:-0.02em}
@@ -230,7 +239,7 @@ a{color:inherit;text-decoration:none}
 .clients-section{background:var(--cream)}
 .clients-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-5);align-items:center;max-width:1100px;margin:0 auto}
 .client-logo{display:flex;align-items:center;justify-content:center;background:var(--white);border-radius:var(--radius-card);padding:24px 28px;width:100%;height:130px;box-shadow:var(--shadow-card);transition:transform .2s ease,box-shadow .2s ease}
-.client-logo:hover{transform:translateY(-4px);box-shadow:0 6px 20px rgba(0,0,0,0.12)}
+.client-logo:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
 .client-logo img{max-width:100%;max-height:70px;width:auto;height:auto;object-fit:contain}
 
 .steps-section{background:var(--white)}
@@ -390,6 +399,11 @@ a{color:inherit;text-decoration:none}
     <div class="hero-actions">
       <a href="tel:+359877775577" class="btn btn-primary">Попитай за цена</a>
     </div>
+    <ul class="hero-trust">
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Над 20 години опит</li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Плащане веднага</li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Безплатен транспорт</li>
+    </ul>
   </div>
   <div class="hero-img">
     <img fetchpriority="high" decoding="async" width="1400" height="934" src="images/zhelezen-skrap.jpg" srcset="images/zhelezen-skrap-800.jpg 800w, images/zhelezen-skrap.jpg 1400w" sizes="(max-width:900px) 100vw, 45vw" alt="Изкупуване на железен скрап и черни метали в София" style="width:100%;height:100%;object-fit:cover;object-position:center;">
@@ -791,6 +805,24 @@ const observer = new IntersectionObserver((entries) => {
   });
 }, { rootMargin: '-50% 0px -50% 0px' });
 sections.forEach(s => observer.observe(s));
+
+/* Премиум: фино изплуване на елементите при скрол */
+(function () {
+  if (!('IntersectionObserver' in window)) return;
+  document.documentElement.classList.add('js-reveal');
+  var sel = '.section-label,.section-label-dark,.section-title,.section-title-dark,.section-body,.section-body-dark,.service-card,.advantage,.step-card,.price-card,.client-logo,.faq-item,.feature-img,.about-img,.checklist,.prices-disclaimer';
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+  [].forEach.call(document.querySelectorAll(sel), function (el) {
+    el.classList.add('reveal');
+    var idx = [].indexOf.call(el.parentElement.children, el);
+    el.style.transitionDelay = (Math.min(idx, 6) * 60) + 'ms';
+    io.observe(el);
+  });
+})();
 </script>
 
 </body>
