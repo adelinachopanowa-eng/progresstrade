@@ -84,11 +84,20 @@ a{color:var(--green-accent)}
 .cta h2{font-family:var(--font-cond);font-size:26px;font-weight:800;color:#fff;margin-bottom:8px}
 .cta p{color:rgba(255,255,255,.82);margin-bottom:18px;font-size:15.5px}
 
+/* Зелена заглавна лента за статиите */
+.article-top{background:var(--green);border-bottom:3px solid var(--yellow);padding:16px 0 32px}
+.article-top .crumb{color:rgba(255,255,255,0.6);padding:0 0 14px}
+.article-top .crumb a{color:rgba(255,255,255,0.82)}
+.article-top .crumb a:hover{color:var(--yellow)}
+.article-top .article-label{color:var(--yellow)}
+.article-top h1{font-family:var(--font-cond);font-size:clamp(30px,5vw,46px);font-weight:800;line-height:1.08;letter-spacing:-.01em;color:#fff;margin-bottom:14px}
+.article-top .article-meta{color:rgba(255,255,255,0.7)}
+
 /* Blog listing */
-.blog-hero{background:var(--white);color:var(--green-deep);padding:46px 0 38px;border-bottom:3px solid var(--yellow)}
-.blog-hero .article-label{color:var(--green-accent)}
-.blog-hero h1{font-family:var(--font-cond);font-size:clamp(32px,5vw,48px);font-weight:800;letter-spacing:-.01em;color:var(--green-deep)}
-.blog-hero p{color:var(--text-soft);margin-top:10px;max-width:620px}
+.blog-hero{background:var(--green);color:#fff;padding:46px 0 38px;border-bottom:3px solid var(--yellow)}
+.blog-hero .article-label{color:var(--yellow)}
+.blog-hero h1{font-family:var(--font-cond);font-size:clamp(32px,5vw,48px);font-weight:800;letter-spacing:-.01em;color:#fff}
+.blog-hero p{color:rgba(255,255,255,0.8);margin-top:10px;max-width:620px}
 .post-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;padding:40px 0 64px}
 .post-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--cream-dark);border-radius:var(--radius-card);padding:24px;text-decoration:none;color:inherit;box-shadow:var(--shadow-card);transition:transform .2s,box-shadow .2s}
 .post-card:hover{transform:translateY(-3px);box-shadow:0 8px 22px rgba(0,0,0,.10)}
