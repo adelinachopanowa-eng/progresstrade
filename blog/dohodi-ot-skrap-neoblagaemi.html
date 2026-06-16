@@ -46,18 +46,47 @@
 </script>
 </head>
 <body>
-<nav class="bnav">
-  <div class="bnav-inner">
-    <a href="/" class="logo"><img width="120" height="34" src="/images/progresstrade.png" alt="Progresstrade — изкупуване на скрап София"></a>
-    <ul class="bnav-links">
+<header>
+<div class="topbar">
+  <div class="topbar-text">
+    <span style="display:flex;align-items:center;gap:7px;">
+      <svg width="14" height="16" viewBox="0 0 14 18" fill="none"><path d="M7 1C4.24 1 2 3.24 2 6c0 4.25 5 11 5 11s5-6.75 5-11c0-2.76-2.24-5-5-5z" fill="#f0c040"/><circle cx="7" cy="6" r="2" fill="#0f2d1c"/></svg>
+      гр. София, кв. Военна Рампа, ул. „Проф. Иван Георгов" № 1
+    </span>
+  </div>
+  <span style="font-size:13px;font-weight:500;color:rgba(255,255,255,0.92);display:flex;align-items:center;gap:7px;">
+    <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#f0c040" stroke-width="1.6"/><polyline points="10,5 10,10 13,12" stroke="#f0c040" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>
+    <span style="color:var(--yellow);font-weight:700;">Понеделник – Петък:</span> 9:00 – 17:00
+  </span>
+</div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="/" class="logo"><img width="120" height="36" src="/images/progresstrade.png" alt="Progresstrade — изкупуване на скрап София"></a>
+    <ul class="nav-links">
       <li><a href="/#services">Какво изкупуваме</a></li>
       <li><a href="/#prices">Цени</a></li>
-      <li><a href="/blog/">Блог</a></li>
+      <li><a href="/#about">За нас</a></li>
+      <li><a href="/blog/" class="active">Блог</a></li>
       <li><a href="/#contact">Контакти</a></li>
     </ul>
-    <a href="tel:+359877775577" class="btn btn-primary btn-sm">0877 77 55 77</a>
+    <div class="nav-actions">
+      <a href="tel:+359877775577" class="btn btn-primary btn-sm" style="display:inline-flex;align-items:center;gap:7px;">
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="#0f2d1c"/></svg>
+        0877 77 55 77
+      </a>
+    </div>
+    <button class="nav-hamburger" aria-label="Меню" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/#services" onclick="toggleMenu()">Какво изкупуваме</a>
+    <a href="/#prices" onclick="toggleMenu()">Цени</a>
+    <a href="/#about" onclick="toggleMenu()">За нас</a>
+    <a href="/blog/" onclick="toggleMenu()">Блог</a>
+    <a href="/#contact" onclick="toggleMenu()">Контакти</a>
+    <a href="tel:+359877775577" class="btn btn-primary" style="margin-top:8px;justify-content:center;">0877 77 55 77</a>
   </div>
 </nav>
+</header>
 
 <div class="container">
   <nav class="crumb"><a href="/">Начало</a> › <a href="/blog/">Блог</a> › Доходи от скрап и данъци</nav>
@@ -122,13 +151,31 @@
   <div class="container">
     <div class="footer-grid">
       <div>
-        <p class="footer-desc">Прогрестрейд — изкупуване на вторични суровини в София. Железен скрап на актуални цени, плащане веднага.</p>
+        <div style="margin-bottom:12px;">
+          <img loading="lazy" decoding="async" width="369" height="63" src="/images/progresstrade-2.png" alt="Progresstrade" style="height:32px;width:auto;display:block;">
+        </div>
+        <p class="footer-desc">Изкупуване на вторични суровини в София. Железен скрап на актуални скрап цени — плащаме веднага.</p>
+        <a href="https://www.facebook.com/share/1EXEcweybi/" target="_blank" rel="noopener" aria-label="Facebook страница на Progresstrade" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:var(--yellow);font-size:14px;font-weight:600;text-decoration:none;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+          Последвайте ни във Facebook
+        </a>
       </div>
       <div class="footer-col">
-        <h5>Сайт</h5>
+        <h5>Услуги</h5>
         <ul>
-          <li><a href="/#services">Какво изкупуваме</a></li>
-          <li><a href="/#prices">Цени</a></li>
+          <li><a href="/#services">Изкупуване на черни метали</a></li>
+          <li><a href="/#services">Коли за скрап</a></li>
+          <li><a href="/#services">Стари електроуреди</a></li>
+          <li><a href="/#transport">Транспорт</a></li>
+          <li><a href="/#cutting">Рязане и демонтаж</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Информация</h5>
+        <ul>
+          <li><a href="/#services">Услуги</a></li>
+          <li><a href="/#how">Как работим</a></li>
+          <li><a href="/#about">За нас</a></li>
           <li><a href="/blog/">Блог</a></li>
           <li><a href="/#faq">Въпроси и отговори</a></li>
         </ul>
@@ -137,16 +184,17 @@
         <h5>Контакти</h5>
         <ul>
           <li><a href="tel:+359877775577">0877 77 55 77</a></li>
-          <li>ул. Проф. Иван Георгов 1, Военна Рампа, София</li>
+          <li><a href="https://maps.app.goo.gl/C6KVEBHUQRiQYKrw5" target="_blank" rel="noopener">ул. Проф. Иван Георгов 1, Военна Рампа, София</a></li>
           <li>Пон – Пет: 9:00 – 17:00</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Progresstrade. Всички права запазени.</p>
-      <p>Изкупуване на скрап · София · Военна Рампа</p>
+      <p>© 2026 Progresstrade. Всички права запазени. · ЕИК 130975863 · ДДС № BG130975863</p>
+      <p>Изкупуване на скрап · София · Военна Рампа · от 2002 г.</p>
     </div>
   </div>
 </footer>
+<script>function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open')}</script>
 </body>
 </html>
