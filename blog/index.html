@@ -65,7 +65,7 @@
         0877 77 55 77
       </a>
     </div>
-    <button class="nav-hamburger" aria-label="Меню" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
     <a href="/#services" onclick="toggleMenu()">Какво изкупуваме</a>
@@ -176,6 +176,6 @@
     </div>
   </div>
 </footer>
-<script>function toggleMenu(){document.getElementById('mobile-menu').classList.toggle('open')}</script>
+<script>function toggleMenu(){var o=document.getElementById('mobile-menu').classList.toggle('open');var h=document.getElementById('hamburger');if(h)h.setAttribute('aria-expanded',o?'true':'false');}</script>
 </body>
 </html>

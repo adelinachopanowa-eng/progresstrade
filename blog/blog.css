@@ -52,6 +52,11 @@ a{color:var(--green-accent)}
 .mobile-menu{display:none;flex-direction:column;background:var(--white);border-top:1px solid var(--cream-dark);padding:var(--space-3) var(--gutter) var(--space-4);gap:var(--space-3)}
 .mobile-menu.open{display:flex}
 .mobile-menu a{font-size:16px;font-weight:500;color:var(--text);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--cream-dark)}
+/* Достъпност + премиум детайли */
+a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:6px}
+.btn-primary:focus-visible{outline-color:var(--green-deep)}
+.logo{transition:opacity .15s ease}
+.logo:hover{opacity:.82}
 
 /* Breadcrumb */
 .crumb{font-size:13px;color:var(--text-soft);padding:18px 0 0}

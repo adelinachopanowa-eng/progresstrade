@@ -189,6 +189,12 @@ a{color:inherit;text-decoration:none}
 .js-reveal .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
 .js-reveal .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.js-reveal .reveal{opacity:1!important;transform:none!important;transition:none!important}}
+/* Достъпност + премиум детайли */
+a:focus-visible,.btn:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:6px}
+.btn-primary:focus-visible{outline-color:var(--green-deep)}
+section[id]{scroll-margin-top:88px}
+.logo{transition:opacity .15s ease}
+.logo:hover{opacity:.82}
 .hero-img{position:relative;overflow:hidden}
 @media(min-width:901px){
   .hero{background:linear-gradient(120deg,var(--green-accent) 0%,var(--green) 48%,var(--green-deep) 100%);position:relative}
@@ -197,11 +203,6 @@ a{color:inherit;text-decoration:none}
   .hero-sub{font-size:18px}
 }
 
-.ticker{background:var(--yellow);padding:14px 0;overflow:hidden}
-.ticker-inner{display:flex;justify-content:center;flex-wrap:wrap;gap:0}
-.ticker-item{display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700;color:var(--green-deep);padding:4px 28px;white-space:nowrap;letter-spacing:-0.01em}
-.ticker-item+.ticker-item{border-left:2px solid rgba(0,0,0,0.15)}
-.ticker-dot{width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
 
 .section{padding:var(--space-9) 0}
 .section-cream{background:var(--cream)}
@@ -332,9 +333,6 @@ a{color:inherit;text-decoration:none}
   .clients-grid{grid-template-columns:1fr}
   .steps-grid{grid-template-columns:1fr}
   .prices-grid{grid-template-columns:1fr}
-  .ticker-item+.ticker-item{border-left:none}
-  .ticker-inner{flex-direction:column;align-items:flex-start;gap:8px}
-  .ticker-item{padding:3px var(--gutter)}
   .footer-grid{grid-template-columns:1fr}
   .topbar{display:none}
 }
@@ -375,7 +373,7 @@ a{color:inherit;text-decoration:none}
         0877 77 55 77
       </a>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="Меню" onclick="toggleMenu()">
+    <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -400,24 +398,16 @@ a{color:inherit;text-decoration:none}
       <a href="tel:+359877775577" class="btn btn-primary">Попитай за цена</a>
     </div>
     <ul class="hero-trust">
-      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Над 20 години опит</li>
-      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Плащане веднага</li>
-      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Безплатен транспорт</li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Над 20 години опит</li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Най-високи цени</li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Плащане веднага</li>
+      <li><svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="9" stroke="#f0c040" stroke-width="1.6"/><polyline points="6,10.5 9,13.5 14,7" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Безплатен транспорт</li>
     </ul>
   </div>
   <div class="hero-img">
     <img fetchpriority="high" decoding="async" width="1400" height="934" src="images/zhelezen-skrap.jpg" srcset="images/zhelezen-skrap-800.jpg 800w, images/zhelezen-skrap.jpg 1400w" sizes="(max-width:900px) 100vw, 45vw" alt="Изкупуване на железен скрап и черни метали в София" style="width:100%;height:100%;object-fit:cover;object-position:center;">
   </div>
 </section>
-
-<div class="ticker">
-  <div class="ticker-inner">
-    <div class="ticker-item"><div class="ticker-dot"></div>Мигновено плащане</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Гарантирано най-висока цена</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Бързо и лесно разтоварване</div>
-    <div class="ticker-item"><div class="ticker-dot"></div>Точно измерване</div>
-  </div>
-</div>
 
 <section class="section section-cream" id="services">
   <div class="container">
@@ -784,7 +774,9 @@ a{color:inherit;text-decoration:none}
 
 <script>
 function toggleMenu() {
-  document.getElementById('mobile-menu').classList.toggle('open');
+  var open = document.getElementById('mobile-menu').classList.toggle('open');
+  var h = document.getElementById('hamburger');
+  if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
 
 
