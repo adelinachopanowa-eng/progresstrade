@@ -96,13 +96,13 @@ a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--
 .article-top .crumb a{color:rgba(255,255,255,0.82)}
 .article-top .crumb a:hover{color:var(--yellow)}
 .article-top .article-label{color:var(--yellow)}
-.article-top h1{font-family:var(--font-cond);font-size:clamp(30px,5vw,46px);font-weight:800;line-height:1.08;letter-spacing:-.01em;color:#fff;margin-bottom:14px}
+.article-top h1{font-family:var(--font-cond);font-size:clamp(30px,4.5vw,44px);font-weight:800;line-height:1.08;letter-spacing:-.01em;color:#fff;margin-bottom:14px}
 .article-top .article-meta{color:rgba(255,255,255,0.7)}
 
 /* Blog listing */
 .blog-hero{background:var(--green);color:#fff;padding:46px 0 38px;border-bottom:3px solid var(--yellow)}
 .blog-hero .article-label{color:var(--yellow)}
-.blog-hero h1{font-family:var(--font-cond);font-size:clamp(32px,5vw,48px);font-weight:800;letter-spacing:-.01em;color:#fff}
+.blog-hero h1{font-family:var(--font-cond);font-size:clamp(30px,4.5vw,44px);font-weight:800;letter-spacing:-.01em;color:#fff}
 .blog-hero p{color:rgba(255,255,255,0.8);margin-top:10px;max-width:620px}
 .post-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:22px;padding:40px 0 64px}
 .post-card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--cream-dark);border-radius:var(--radius-card);padding:24px;text-decoration:none;color:inherit;box-shadow:var(--shadow-card);transition:transform .2s,box-shadow .2s}
@@ -132,3 +132,9 @@ a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--
   .nav-hamburger{display:flex}
   .footer-grid{grid-template-columns:1fr}
 }
+
+/* --- Премиум детайли (синхрон с началната) --- */
+.nav-links a{position:relative}
+.nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:var(--green);border-radius:2px;transform:scaleX(0);transform-origin:left center;transition:transform .22s ease}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
+.article-label::after,.blog-hero .article-label::after{content:"";display:block;width:34px;height:3px;border-radius:2px;background:var(--yellow);margin-top:9px}
