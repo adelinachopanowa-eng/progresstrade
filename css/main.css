@@ -1,6 +1,6 @@
 :root {
   --green:#1a4a2e;--green-deep:#0f2d1c;--green-accent:#21603b;
-  --yellow:#f0c040;--yellow-soft:#fdf3c0;--cream:#f5f4ee;--cream-dark:#eceae2;
+  --yellow:#ebb73c;--yellow-soft:#fdf3c0;--cream:#f5f4ee;--cream-dark:#eceae2;
   --white:#ffffff;--text:rgba(0,0,0,0.87);--text-soft:rgba(0,0,0,0.55);
   --text-white:rgba(255,255,255,1);--text-white-soft:rgba(255,255,255,0.70);
   --radius-card:12px;--radius-pill:50px;
@@ -9,13 +9,13 @@
   --shadow-nav:0 1px 3px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.08),0 0 2px rgba(0,0,0,0.06);
   --space-1:4px;--space-2:8px;--space-3:16px;--space-4:24px;
   --space-5:32px;--space-6:40px;--space-7:48px;--space-8:56px;--space-9:64px;
-  --gutter:20px;--max-w:1200px;
+  --gutter:20px;--max-w:1200px;--section-pad:clamp(64px,9vw,112px);
   --font:'Barlow','Helvetica Neue',Helvetica,Arial,sans-serif;
   --font-cond:'Barlow Condensed','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--font);font-size:16px;line-height:1.5;color:var(--text);background:var(--cream);letter-spacing:-0.01em}
+body{font-family:var(--font);font-size:16px;line-height:1.6;color:var(--text);background:var(--cream)}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 .container{width:100%;max-width:var(--max-w);margin:0 auto;padding:0 var(--gutter)}
@@ -74,13 +74,13 @@ section[id]{scroll-margin-top:88px}
 }
 
 
-.section{padding:var(--space-9) 0}
+.section{padding:var(--section-pad) 0}
 .section-cream{background:var(--cream)}
 .section-white{background:var(--white)}
 .section-label{font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--yellow);margin-bottom:var(--space-2)}
 .section-label-dark{font-size:12px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--green);margin-bottom:var(--space-2)}
-.section-title{font-family:var(--font-cond);font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--white)}
-.section-title-dark{font-family:var(--font-cond);font-size:clamp(28px,4vw,42px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--green)}
+.section-title{font-family:var(--font-cond);font-size:clamp(30px,4.2vw,46px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--white)}
+.section-title-dark{font-family:var(--font-cond);font-size:clamp(30px,4.2vw,46px);font-weight:800;line-height:1.1;letter-spacing:-0.02em;color:var(--green)}
 .section-body{font-size:16px;line-height:1.65;color:var(--text-white-soft);max-width:520px}
 .section-body-dark{font-size:16px;line-height:1.65;color:var(--text-soft);max-width:520px}
 
@@ -89,10 +89,10 @@ section[id]{scroll-margin-top:88px}
 .service-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-hover)}
 .service-img{width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;display:block;background:var(--cream-dark)}
 .service-card-body{padding:var(--space-4) var(--space-4) var(--space-5)}
-.service-card h3{font-size:17px;font-weight:700;color:var(--green);margin-bottom:var(--space-1);letter-spacing:-0.02em}
+.service-card h3{font-size:18px;font-weight:800;color:var(--green);margin-bottom:var(--space-1);letter-spacing:-0.02em}
 .service-card p{font-size:14px;color:var(--text-soft);line-height:1.55}
 
-.feature-band{background:var(--green);padding:var(--space-9) 0}
+.feature-band{background:var(--green);padding:var(--section-pad) 0}
 .feature-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-7);align-items:center}
 .feature-img{border-radius:var(--radius-card);overflow:hidden;aspect-ratio:4/3}
 
@@ -121,7 +121,7 @@ section[id]{scroll-margin-top:88px}
 .step-card h3{font-size:15px;font-weight:700;color:var(--green);letter-spacing:-0.01em}
 .step-card p{font-size:13px;color:var(--text-soft);line-height:1.5}
 
-.prices-band{background:var(--green);padding:var(--space-9) 0}
+.prices-band{background:var(--green);padding:var(--section-pad) 0}
 .prices-intro{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:var(--space-6);gap:var(--space-4)}
 .prices-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)}
 .price-card{background:rgba(255,255,255,0.08);border:1.5px solid rgba(255,255,255,0.15);border-radius:var(--radius-card);padding:var(--space-4) var(--space-5);transition:background .2s,border-color .2s,transform .2s;display:flex;flex-direction:column}
@@ -129,7 +129,7 @@ section[id]{scroll-margin-top:88px}
 .price-card-label{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-white-soft);margin-bottom:var(--space-2)}
 .price-card-name{font-family:var(--font-cond);font-size:22px;font-weight:800;color:var(--white);letter-spacing:-0.01em;margin-bottom:var(--space-1)}
 .price-card-note{font-size:13px;color:var(--text-white-soft);line-height:1.4;margin-bottom:var(--space-4)}
-.price-card-price{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,0.12);font-family:var(--font-cond);font-size:24px;font-weight:800;color:var(--yellow);letter-spacing:-0.01em;line-height:1.1}
+.price-card-price{margin-top:auto;padding-top:14px;border-top:1px solid rgba(255,255,255,0.12);font-family:var(--font-cond);font-size:24px;font-weight:800;color:var(--yellow);letter-spacing:-0.01em;line-height:1.1;font-variant-numeric:tabular-nums}
 .price-card-price .unit{font-size:14px;font-weight:600;color:var(--text-white-soft)}
 .price-card-price .upto{display:block;font-family:var(--font);font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-white-soft);margin-bottom:3px}
 
@@ -144,13 +144,13 @@ section[id]{scroll-margin-top:88px}
 .price-unit{font-size:12px;font-weight:600;opacity:0.75}
 .prices-disclaimer{margin-top:var(--space-4);font-size:13px;color:var(--text-white-soft);text-align:center}
 
-.transport-band{background:var(--cream);padding:var(--space-9) 0}
+.transport-band{background:var(--cream);padding:var(--section-pad) 0}
 .transport-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-7);align-items:center}
 .checklist{list-style:none;display:flex;flex-direction:column;gap:var(--space-3);margin:var(--space-4) 0}
 .checklist li{display:flex;align-items:flex-start;gap:12px;font-size:15px;color:var(--text);line-height:1.5}
 .check-icon{width:22px;height:22px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 
-.contact-band{background:var(--green);padding:var(--space-9) 0}
+.contact-band{background:var(--green);padding:var(--section-pad) 0}
 .contact-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-7);align-items:center}
 .contact-details{display:flex;flex-direction:column;gap:var(--space-4)}
 .contact-item{display:flex;gap:var(--space-3);align-items:flex-start}
@@ -218,3 +218,18 @@ section[id]{scroll-margin-top:88px}
 /* #3 Споделени класове (заместват повтарящи се inline стилове) */
 .media-cover{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block}
 .icon-circle{width:36px;height:36px;border-radius:50%;background:rgba(240,192,64,0.15);border:1.5px solid rgba(240,192,64,0.3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+
+/* --- Премиум фаза 1 --- */
+/* Хайрлайн рамки на белите карти за остър ръб */
+.service-card{border:1px solid rgba(0,0,0,0.05)}
+.client-logo{border:1px solid rgba(0,0,0,0.04)}
+/* Hover-zoom на медийните карти */
+.service-img,.feature-img img{transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.service-card:hover .service-img,.feature-img:hover img{transform:scale(1.05)}
+/* Свиване/елевация на навигацията при скрол */
+.nav{transition:box-shadow .25s ease}
+.nav-inner{transition:height .25s ease}
+.nav.scrolled .nav-inner{height:58px}
+.nav.scrolled{box-shadow:0 6px 20px rgba(0,0,0,0.10)}
+/* Премиум селекция */
+::selection{background:var(--yellow);color:var(--green-deep)}

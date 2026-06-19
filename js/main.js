@@ -40,3 +40,12 @@ sections.forEach(s => observer.observe(s));
     io.observe(el);
   });
 })();
+
+/* Премиум: свиване/елевация на навигацията при скрол */
+(function () {
+  var nav = document.querySelector('.nav');
+  if (!nav) return;
+  var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 12); };
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+})();

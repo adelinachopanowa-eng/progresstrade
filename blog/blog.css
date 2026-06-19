@@ -1,7 +1,7 @@
 /* Прогрестрейд — споделен стил за блог страниците (огледало на началната страница) */
 :root{
   --green:#1a4a2e;--green-deep:#0f2d1c;--green-accent:#21603b;
-  --yellow:#f0c040;--yellow-soft:#fdf3c0;--cream:#f5f4ee;--cream-dark:#eceae2;
+  --yellow:#ebb73c;--yellow-soft:#fdf3c0;--cream:#f5f4ee;--cream-dark:#eceae2;
   --white:#fff;--text:rgba(0,0,0,0.87);--text-soft:rgba(0,0,0,0.55);
   --text-white:rgba(255,255,255,1);--text-white-soft:rgba(255,255,255,0.70);
   --radius-card:12px;--radius-pill:50px;
@@ -138,3 +138,10 @@ a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--
 .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:-7px;height:2px;background:var(--green);border-radius:2px;transform:scaleX(0);transform-origin:left center;transition:transform .22s ease}
 .nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1)}
 .article-label::after,.blog-hero .article-label::after{content:"";display:block;width:34px;height:3px;border-radius:2px;background:var(--yellow);margin-top:9px}
+
+/* --- Премиум фаза 1 (синхрон с началната) --- */
+.nav{transition:box-shadow .25s ease}
+.nav-inner{transition:height .25s ease}
+.nav.scrolled .nav-inner{height:58px}
+.nav.scrolled{box-shadow:0 6px 20px rgba(0,0,0,0.10)}
+::selection{background:var(--yellow);color:var(--green-deep)}
