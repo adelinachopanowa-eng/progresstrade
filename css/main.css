@@ -235,3 +235,8 @@ section[id]{scroll-margin-top:88px}
 .nav.scrolled{box-shadow:0 6px 20px rgba(0,0,0,0.10)}
 /* Премиум селекция */
 ::selection{background:var(--yellow);color:var(--green-deep)}
+
+/* Лого: векторно листо + текстов wordmark */
+.logo-leaf{height:32px;width:auto;display:block;flex-shrink:0}
+.logo-word{font-family:var(--font);font-weight:800;font-size:24px;letter-spacing:-0.03em;line-height:1;color:var(--green-deep);white-space:nowrap}
+.footer .logo-word{color:#fff}
