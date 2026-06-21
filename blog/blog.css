@@ -41,6 +41,7 @@ a{color:var(--green-accent)}
 .nav{position:sticky;top:0;z-index:100;background:var(--white);box-shadow:var(--shadow-nav)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 var(--gutter);max-width:var(--max-w);margin:0 auto}
 .logo{display:flex;align-items:center;gap:9px;line-height:1}
+.logo img{height:36px;width:auto;display:block}
 .nav-links{display:flex;align-items:center;gap:var(--space-5);list-style:none}
 .nav-links a{font-size:14px;font-weight:500;color:var(--text);text-decoration:none;transition:color .15s}
 .nav-links a:hover{color:var(--green)}
@@ -144,8 +145,3 @@ a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--
 .nav.scrolled .nav-inner{height:58px}
 .nav.scrolled{box-shadow:0 6px 20px rgba(0,0,0,0.10)}
 ::selection{background:var(--yellow);color:var(--green-deep)}
-
-/* Лого: векторно листо + текстов wordmark */
-.logo-leaf{height:32px;width:auto;display:block;flex-shrink:0}
-.logo-word{font-family:var(--font);font-weight:800;font-size:24px;letter-spacing:-0.03em;line-height:1;color:var(--green-deep);white-space:nowrap}
-.footer .logo-word{color:#fff}
