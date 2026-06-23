@@ -118,7 +118,7 @@
 
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5">
-<link rel="preload" as="image" href="images/zhelezen-skrap.jpg" imagesrcset="images/zhelezen-skrap-800.jpg 800w, images/zhelezen-skrap.jpg 1400w" imagesizes="(max-width:900px) 100vw, 45vw" fetchpriority="high">
+<link rel="preload" as="image" type="image/webp" imagesrcset="images/zhelezen-skrap-800.webp 800w, images/zhelezen-skrap.webp 1400w" imagesizes="(max-width:900px) 100vw, 45vw" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://www.google.com">
@@ -197,7 +197,10 @@
     </ul>
   </div>
   <div class="hero-img">
-    <img fetchpriority="high" decoding="async" width="1400" height="934" src="images/zhelezen-skrap.jpg" srcset="images/zhelezen-skrap-800.jpg 800w, images/zhelezen-skrap.jpg 1400w" sizes="(max-width:900px) 100vw, 45vw" alt="Изкупуване на железен скрап и черни метали в София" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+    <picture>
+      <source type="image/webp" srcset="images/zhelezen-skrap-800.webp 800w, images/zhelezen-skrap.webp 1400w" sizes="(max-width:900px) 100vw, 45vw">
+      <img fetchpriority="high" decoding="async" width="1400" height="934" src="images/zhelezen-skrap.jpg" srcset="images/zhelezen-skrap-800.jpg 800w, images/zhelezen-skrap.jpg 1400w" sizes="(max-width:900px) 100vw, 45vw" alt="Изкупуване на железен скрап и черни метали в София" style="width:100%;height:100%;object-fit:cover;object-position:center;">
+    </picture>
   </div>
 </section>
 
@@ -210,23 +213,23 @@
     </div>
     <div class="services-grid">
       <div class="service-card">
-        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/platno-zhelyazo.jpg" alt="Плътно желязо">
+        <picture><source type="image/webp" srcset="images/platno-zhelyazo.webp"><img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/platno-zhelyazo.jpg" alt="Плътно желязо"></picture>
         <div class="service-card-body"><h3>Плътно желязо</h3><p>Масивни метални конструкции, греди, профили и арматура.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/tanko-zhelyazo.jpg" alt="Тънко желязо">
+        <picture><source type="image/webp" srcset="images/tanko-zhelyazo.webp"><img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/tanko-zhelyazo.jpg" alt="Тънко желязо"></picture>
         <div class="service-card-body"><h3>Тънко желязо</h3><p>Ламарина и други отпадъци с дебелина под 3 мм.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" width="900" height="900" class="service-img" src="images/tehnologichen-otpadak.jpg" alt="Технологичен отпадък от металообработка за изкупуване">
+        <picture><source type="image/webp" srcset="images/tehnologichen-otpadak.webp"><img loading="lazy" decoding="async" width="900" height="900" class="service-img" src="images/tehnologichen-otpadak.jpg" alt="Технологичен отпадък от металообработка за изкупуване"></picture>
         <div class="service-card-body"><h3>Технологичен отпадък</h3><p>От металообработващи предприятия — изрезки от лазерно рязане и др.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/koli-za-skrap.jpg" alt="Коли за скрап (ИУМПС) за изкупуване">
+        <picture><source type="image/webp" srcset="images/koli-za-skrap.webp"><img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/koli-za-skrap.jpg" alt="Коли за скрап (ИУМПС) за изкупуване"></picture>
         <div class="service-card-body"><h3>Коли за скрап (ИУМПС)</h3><p>Изкупуваме и разкомплектоваме автомобили за скрап. Всички документи за дерегистрация в КАТ.</p></div>
       </div>
       <div class="service-card">
-        <img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/stari-elektrouredi.jpg" alt="Стари електроуреди и бяла техника (ИУЕЕО) за изкупуване">
+        <picture><source type="image/webp" srcset="images/stari-elektrouredi.webp"><img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/stari-elektrouredi.jpg" alt="Стари електроуреди и бяла техника (ИУЕЕО) за изкупуване"></picture>
         <div class="service-card-body"><h3>Стари електроуреди (ИУЕЕО)</h3><p>Перални, хладилници, печки и друга домакинска техника.</p></div>
       </div>
     </div>
@@ -243,7 +246,7 @@
         <a href="#contact" class="btn btn-white">Свържете се с нас</a>
       </div>
       <div class="feature-img">
-        <img loading="lazy" decoding="async" width="600" height="600" src="images/gazokislorodno-ryazane.jpg" alt="Газокислородно рязане и демонтаж на метални конструкции в София" class="media-cover">
+        <picture><source type="image/webp" srcset="images/gazokislorodno-ryazane.webp"><img loading="lazy" decoding="async" width="600" height="600" src="images/gazokislorodno-ryazane.jpg" alt="Газокислородно рязане и демонтаж на метални конструкции в София" class="media-cover"></picture>
       </div>
     </div>
   </div>
@@ -252,7 +255,7 @@
 <section class="section about-section" id="about">
   <div class="container">
     <div class="about-grid">
-      <img loading="lazy" decoding="async" width="667" height="1000" class="about-img" src="images/ploshtadka-progres-treyd.jpg" alt="Площадка за изкупуване на скрап Прогрестрейд в София">
+      <picture><source type="image/webp" srcset="images/ploshtadka-progres-treyd.webp"><img loading="lazy" decoding="async" width="667" height="1000" class="about-img" src="images/ploshtadka-progres-treyd.jpg" alt="Площадка за изкупуване на скрап Прогрестрейд в София"></picture>
       <div class="about-content">
         <div>
           <div class="section-label-dark">За нас</div>
@@ -289,10 +292,10 @@
       <h2 class="section-title-dark" style="text-align:center;">Работим с водещи компании</h2>
     </div>
     <div class="clients-grid">
-      <div class="client-logo"><img loading="lazy" decoding="async" width="400" height="227" src="images/erb-group.png" alt="ERB Group"></div>
-      <div class="client-logo"><img loading="lazy" decoding="async" width="400" height="84" src="images/geotechmin.png" alt="Geotechmin"></div>
-      <div class="client-logo"><img loading="lazy" decoding="async" width="400" height="103" src="images/skf.png" alt="SKF"></div>
-      <div class="client-logo"><img loading="lazy" decoding="async" width="400" height="172" src="images/se-ead.jpg" alt="СЕ ЕАД"></div>
+      <div class="client-logo"><picture><source type="image/webp" srcset="images/erb-group.webp"><img loading="lazy" decoding="async" width="400" height="227" src="images/erb-group.png" alt="ERB Group"></picture></div>
+      <div class="client-logo"><picture><source type="image/webp" srcset="images/geotechmin.webp"><img loading="lazy" decoding="async" width="400" height="84" src="images/geotechmin.png" alt="Geotechmin"></picture></div>
+      <div class="client-logo"><picture><source type="image/webp" srcset="images/skf.webp"><img loading="lazy" decoding="async" width="400" height="103" src="images/skf.png" alt="SKF"></picture></div>
+      <div class="client-logo"><picture><source type="image/webp" srcset="images/se-ead.webp"><img loading="lazy" decoding="async" width="400" height="172" src="images/se-ead.jpg" alt="СЕ ЕАД"></picture></div>
     </div>
   </div>
 </section>
@@ -378,7 +381,7 @@
         <a href="tel:+359877775577" class="btn btn-primary">Свържете се за оферта</a>
       </div>
       <div class="feature-img">
-        <img loading="lazy" decoding="async" width="600" height="600" src="images/transport.jpg" alt="Безплатен транспорт и извозване на скрап в София" class="media-cover">
+        <picture><source type="image/webp" srcset="images/transport.webp"><img loading="lazy" decoding="async" width="600" height="600" src="images/transport.jpg" alt="Безплатен транспорт и извозване на скрап в София" class="media-cover"></picture>
       </div>
     </div>
   </div>
