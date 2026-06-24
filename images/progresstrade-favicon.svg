@@ -2,7 +2,7 @@
   <title>Progresstrade — favicon 64</title>
   <circle cx="32" cy="32" r="32" fill="#1a4a2e"></circle>
   <g transform="scale(0.64)">
-    <path d="M 61.43 14.81 A 37 37 0 0 1 73.78 78.34 L 77.32 82.56 L 59.58 79.48 L 62.53 64.94 L 66.07 69.15 A 25 25 0 0 0 57.73 26.22 Z" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>
-    <path d="M 38.57 85.19 A 37 37 0 0 1 26.22 21.66 L 22.68 17.44 L 40.42 20.52 L 37.47 35.06 L 33.93 30.85 A 25 25 0 0 0 42.27 73.78 Z" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>
+    <g transform="translate(50 50) scale(0.85) translate(-50 -50)"><path d="M 61.43 14.81 A 37 37 0 0 1 73.78 78.34 L 77.32 82.56 L 59.58 79.48 L 62.53 64.94 L 66.07 69.15 A 25 25 0 0 0 57.73 26.22 Z" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path>
+    <path d="M 38.57 85.19 A 37 37 0 0 1 26.22 21.66 L 22.68 17.44 L 40.42 20.52 L 37.47 35.06 L 33.93 30.85 A 25 25 0 0 0 42.27 73.78 Z" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"></path></g>
   </g>
 </svg>
