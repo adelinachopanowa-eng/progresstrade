@@ -73,46 +73,16 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://progresstrade.bg/poveritelnost/</loc>
+    <lastmod>2026-06-27</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
     <loc>https://progresstrade.bg/blog/</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/brakuvane-dma-otpisvane-prodazhba.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/brakuvane-mashini-saorazheniya.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/brakuvane-oborudvane-proizvodstvo.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/brakuvane-sluzhebni-avtomobili.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/dds-brakuvani-aktivi-obratno-nachislyavane.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/demontazh-gazokislorodno-ryazane.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://progresstrade.bg/blog/dohodi-ot-skrap-neoblagaemi.html</loc>
@@ -121,49 +91,7 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://progresstrade.bg/blog/firma-predava-metalen-otpadak-dokumenti.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/izkupuvane-selskostopanska-tehnika-otdalechena-lokacia.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://progresstrade.bg/blog/kak-se-opredelya-cenata-na-skrapa.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/konteyner-stroitelen-obekt.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/obratno-nachislyavane-dds-metalen-otpadak.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/po-dobra-cena-tehnologichen-otpadak-sortirane.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/protokol-za-brak-na-aktivi.html</loc>
-    <lastmod>2026-06-27</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://progresstrade.bg/blog/sertifikat-za-proizhod-metalen-otpadak.html</loc>
     <lastmod>2026-06-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
