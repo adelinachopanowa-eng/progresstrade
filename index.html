@@ -392,6 +392,123 @@ section[id]{scroll-margin-top:88px}
 .nav.scrolled{box-shadow:0 6px 20px rgba(0,0,0,0.10)}
 /* Премиум селекция */
 ::selection{background:var(--yellow);color:var(--green-deep)}
+
+/* ============ Споделени компоненти за вътрешните страници ============ */
+/* Падащо меню в навигацията */
+.nav-links li.has-dd{position:relative}
+.nav-links .dd-toggle{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
+.nav-links .dd-toggle::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;transition:transform .2s;opacity:.65}
+.nav-links li.has-dd:hover .dd-toggle::after,.nav-links li.has-dd:focus-within .dd-toggle::after{transform:rotate(225deg);margin-top:2px}
+.dd-menu{position:absolute;top:calc(100% + 14px);left:50%;transform:translateX(-50%) translateY(8px);min-width:288px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:14px;box-shadow:var(--shadow-hover);padding:10px;opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;z-index:120}
+.nav-links li.has-dd:hover .dd-menu,.nav-links li.has-dd:focus-within .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%) translateY(0)}
+.dd-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px}
+.dd-menu a{display:block;padding:11px 14px;border-radius:9px;font-size:14px;font-weight:600;color:var(--green-deep);line-height:1.3;transition:background .15s,color .15s}
+.dd-menu a span{display:block;font-size:12px;font-weight:500;color:var(--text-soft);margin-top:2px}
+.dd-menu a:hover{background:var(--cream)}
+.dd-menu a::after{display:none}
+.dd-sep{height:1px;background:var(--cream-dark);margin:8px 6px}
+.dd-menu a.dd-biz{color:var(--green);font-weight:700}
+.dd-menu a.dd-biz::after{content:" →";display:inline}
+
+/* Breadcrumb */
+.crumb{font-size:13px;line-height:1.5}
+.crumb a{transition:color .15s}
+.page-hero .crumb{color:rgba(255,255,255,.62);margin-bottom:16px}
+.page-hero .crumb a{color:rgba(255,255,255,.85)}
+.page-hero .crumb a:hover{color:var(--yellow)}
+
+/* Вътрешен hero (по-нисък от началния) */
+.page-hero{background:linear-gradient(120deg,var(--green-accent) 0%,var(--green) 52%,var(--green-deep) 100%);position:relative;overflow:hidden;padding:46px 0 56px}
+.page-hero::before{content:"";position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px}
+.page-hero .container{position:relative;z-index:1}
+.page-hero h1{font-family:var(--font-cond);font-size:clamp(32px,4.6vw,52px);font-weight:800;line-height:1.04;color:#fff;letter-spacing:-.02em;max-width:880px;text-wrap:balance}
+.page-hero p{font-size:17px;color:var(--text-white-soft);line-height:1.6;max-width:600px;margin-top:16px}
+.page-hero .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+
+/* Решетки */
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-4)}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4)}
+.grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3)}
+
+/* Информационна карта (икона + заглавие + текст) */
+.icard{background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4);transition:transform .2s,box-shadow .2s}
+.icard:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.icard .ic{width:46px;height:46px;border-radius:12px;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.icard h3{font-size:17px;font-weight:800;color:var(--green);letter-spacing:-.01em;margin-bottom:6px}
+.icard p{font-size:14px;color:var(--text-soft);line-height:1.55}
+
+/* Сегментна карта (с връзка) */
+.seg-card{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4);transition:transform .2s,box-shadow .2s}
+.seg-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
+.seg-card .ic{width:46px;height:46px;border-radius:12px;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+.seg-card h3{font-size:18px;font-weight:800;color:var(--green);letter-spacing:-.01em;margin-bottom:6px}
+.seg-card p{font-size:14px;color:var(--text-soft);line-height:1.55;flex:1}
+.seg-card .more{margin-top:14px;font-size:14px;font-weight:700;color:var(--green-accent)}
+.seg-card:hover .more{color:var(--green)}
+
+/* „Познато ли ви е?" */
+.pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3)}
+.pain-card{background:var(--cream);border-left:3px solid var(--yellow);border-radius:10px;padding:var(--space-4);font-size:15px;color:var(--text);line-height:1.5}
+
+/* Документи (Компонент B) */
+.docs{max-width:780px;display:flex;flex-direction:column;gap:12px;margin-top:var(--space-5)}
+.doc-row{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:16px 18px}
+.doc-row .ck{width:24px;height:24px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.doc-row b{color:var(--green-deep)}
+.doc-row span{color:var(--text-soft);font-size:14px}
+
+/* Списък „Какво изкупуваме" */
+.buy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;margin-top:var(--space-4);list-style:none}
+.buy-grid li{display:flex;align-items:flex-start;gap:10px;font-size:15px;color:var(--text);line-height:1.5;padding:6px 0;border-bottom:1px solid var(--cream-dark)}
+.buy-grid li::before{content:"";width:18px;height:18px;border-radius:50%;background:var(--green);flex-shrink:0;margin-top:2px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' viewBox='0 0 18 18'%3E%3Cpolyline points='4,9.5 7.5,13 14,5' fill='none' stroke='%23fff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:center}
+
+/* Компонент A — защо нас */
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-3);margin-top:var(--space-6)}
+
+/* Бизнес тийзър на началната */
+.biz-teaser{background:var(--white)}
+.biz-mini{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3);margin-top:var(--space-5)}
+.biz-chip{display:flex;flex-direction:column;gap:8px;background:var(--cream);border-radius:var(--radius-card);padding:var(--space-4);transition:transform .2s,box-shadow .2s}
+.biz-chip:hover{transform:translateY(-3px);box-shadow:var(--shadow-hover)}
+.biz-chip .ic{width:40px;height:40px;border-radius:10px;background:var(--green);display:flex;align-items:center;justify-content:center}
+.biz-chip h3{font-size:15px;font-weight:800;color:var(--green);letter-spacing:-.01em}
+.biz-chip p{font-size:13px;color:var(--text-soft);line-height:1.5}
+
+/* Форма за оферта (Компонент D) */
+.qform{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:var(--shadow-card);padding:clamp(22px,3vw,38px);max-width:780px}
+.qform .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.qform .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.qform label{font-size:13px;font-weight:700;color:var(--green-deep)}
+.qform input,.qform select,.qform textarea{font-family:var(--font);font-size:15px;color:var(--text);background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:10px;padding:12px 14px;width:100%;transition:border-color .15s,background .15s}
+.qform input:focus,.qform select:focus,.qform textarea:focus{outline:none;border-color:var(--green-accent);background:#fff}
+.qform textarea{min-height:110px;resize:vertical}
+.qform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.qform .form-note{font-size:12px;color:var(--text-soft);margin-top:8px}
+.qform .req{color:#b87a06}
+
+/* Помощни */
+.lead{font-size:19px;line-height:1.6;color:var(--text);max-width:760px}
+.center-head{text-align:center;max-width:720px;margin:0 auto var(--space-6)}
+.center-head .section-label-dark,.center-head .section-label{display:inline-block}
+.section-tight{padding:clamp(48px,7vw,80px) 0}
+.note-band{background:var(--yellow-soft);border:1px solid rgba(235,183,60,.4);border-radius:var(--radius-card);padding:18px 22px;font-size:15px;color:var(--green-deep);line-height:1.55;max-width:820px}
+.draft-badge{display:inline-block;background:var(--yellow-soft);border:1px solid rgba(235,183,60,.5);color:#8a6500;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px}
+
+@media(max-width:900px){
+  .grid-3,.grid-4,.why-grid,.pain-grid,.biz-mini{grid-template-columns:repeat(2,1fr)}
+  .grid-2{grid-template-columns:1fr}
+  .buy-grid{grid-template-columns:1fr}
+  .qform .row{grid-template-columns:1fr}
+  .nav-links li.has-dd{position:static}
+}
+@media(max-width:560px){
+  .grid-3,.grid-4,.why-grid,.pain-grid,.biz-mini{grid-template-columns:1fr}
+}
+/* Мобилно меню — подменю на услугите */
+.mm-sub{display:flex;flex-direction:column}
+.mm-sub a{padding-left:14px;font-size:15px;color:var(--text-soft)!important}
+.mm-head{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);padding:10px 0 2px;border:none!important}
+
 </style>
 </head>
 <body>
@@ -408,39 +525,49 @@ section[id]{scroll-margin-top:88px}
     <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="#f0c040" stroke-width="1.6"/><polyline points="10,5 10,10 13,12" stroke="#f0c040" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg>
     <span style="color:var(--yellow);font-weight:700;">Понеделник – Петък:</span> 9:00 – 17:00
   </span>
-</div>
-
-<nav class="nav" id="main-nav">
+</div><nav class="nav" id="main-nav">
   <div class="nav-inner">
     <a href="/" class="logo" aria-label="Progresstrade — изкупуване на скрап София">
       <img class="logo-mark" src="/images/progresstrade-mark.svg?v=3" alt="" width="34" height="34">
       <span class="logo-word"><span class="lw-a">progress</span><span class="lw-b">trade</span></span>
     </a>
     <ul class="nav-links">
-      <li><a href="#services">Какво изкупуваме</a></li>
-      <li><a href="#cutting">Услуги</a></li>
-      <li><a href="#about">За нас</a></li>
-      <li><a href="#faq">Въпроси</a></li>
+      <li><a href="/kakvo-izkupuvame/">Какво изкупуваме</a></li>
+      <li class="has-dd">
+        <a href="/izkupuvane-metal/" class="dd-toggle" aria-haspopup="true">Услуги</a>
+        <div class="dd-menu" role="menu">
+          <a href="/izkupuvane-metal/" role="menuitem">Изкупуване на метален отпадък<span>За фирми — договори, контейнери, демонтаж</span></a>
+          <a href="/uslugi/demontazh/" role="menuitem">Демонтаж и газокислородно рязане<span>На място, в София и областта</span></a>
+          <a href="/uslugi/konteyneri/" role="menuitem">Контейнери и извозване<span>До 30 куб. м при редовни количества</span></a>
+          <div class="dd-sep"></div>
+          <a href="/izkupuvane-metal/" class="dd-biz" role="menuitem">За бизнеса</a>
+        </div>
+      </li>
+      <li><a href="/za-nas/">За нас</a></li>
       <li><a href="/blog/">Блог</a></li>
-      <li><a href="#contact">Контакти</a></li>
+      <li><a href="/kontakti/">Контакти</a></li>
     </ul>
     <div class="nav-actions">
-      <a href="tel:+359877775577" class="btn btn-primary btn-sm" style="display:inline-flex;align-items:center;gap:7px;">
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="#0f2d1c"/></svg>
-        0877 77 55 77
+      <a href="tel:+359877775577" class="btn btn-sm" style="background:transparent;color:var(--green-deep);border-color:transparent;padding-right:6px;gap:7px;font-weight:700;">
+        <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="#0f2d1c"/></svg>0877 77 55 77
       </a>
+      <a href="/zayavka/" class="btn btn-primary btn-sm">Заявка за оферта</a>
     </div>
-    <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
-    </button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
   </div>
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#services" onclick="toggleMenu()">Какво изкупуваме</a>
-    <a href="#cutting" onclick="toggleMenu()">Услуги</a>
-    <a href="#about" onclick="toggleMenu()">За нас</a>
-    <a href="#faq" onclick="toggleMenu()">Въпроси</a>
-    <a href="/blog/" onclick="toggleMenu()">Блог</a>
-    <a href="#contact" onclick="toggleMenu()">Контакти</a>
+    <a href="/zayavka/" class="btn btn-primary" style="justify-content:center;margin-bottom:4px;">Заявка за оферта</a>
+    <a href="/kakvo-izkupuvame/">Какво изкупуваме</a>
+    <div class="mm-head">Услуги</div>
+    <div class="mm-sub">
+      <a href="/izkupuvane-metal/">Изкупуване на метален отпадък</a>
+      <a href="/uslugi/demontazh/">Демонтаж и газокислородно рязане</a>
+      <a href="/uslugi/konteyneri/">Контейнери и извозване</a>
+      <a href="/izkupuvane-metal/">За бизнеса →</a>
+    </div>
+    <a href="/za-nas/">За нас</a>
+    <a href="/blog/">Блог</a>
+    <a href="/kontakti/">Контакти</a>
     <a href="tel:+359877775577" class="btn btn-primary" style="margin-top:8px;justify-content:center;"><svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="#0f2d1c"/></svg>0877 77 55 77</a>
   </div>
 </nav>
@@ -498,6 +625,23 @@ section[id]{scroll-margin-top:88px}
         <div class="service-card-body"><h3>Стари електроуреди (ИУЕЕО)</h3><p>Перални, хладилници, печки и друга домакинска техника.</p></div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section biz-teaser">
+  <div class="container">
+    <div class="section-label-dark">За бизнеса</div>
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;">
+      <h2 class="section-title-dark">Работите с метален отпадък по занятие?</h2>
+      <p class="section-body-dark" style="max-width:440px;">За фирми предлагаме договори, контейнери на обекта, демонтаж и пълна документация — с индивидуална оферта след оглед.</p>
+    </div>
+    <div class="biz-mini">
+      <a href="/izkupuvane-metal/stroitelstvo/" class="biz-chip"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="2" width="16" height="20" rx="1.5"/><path d="M9 7h0M15 7h0M9 11h0M15 11h0M9 15h0M15 15h0"/><path d="M10 22v-4h4v4"/></svg></div><h3>Строителство</h3><p>Арматура, кофраж и метал от обекти и събаряне.</p></a>
+      <a href="/izkupuvane-metal/proizvodstvo/" class="biz-chip"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 20h20"/><path d="M4 20V9l6 4V9l6 4V6l4 2v12"/><path d="M7 16h0M13 16h0"/></svg></div><h3>Производство и металообработка</h3><p>Изрезки, стружки и технологичен отпадък.</p></a>
+      <a href="/izkupuvane-metal/zemedelie/" class="biz-chip"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7" cy="17" r="3"/><circle cx="18" cy="17" r="2"/><path d="M4 17V7h6l3 6h5"/><path d="M10 7V5h4"/></svg></div><h3>Земеделие</h3><p>Бракувана техника, инвентар и конструкции.</p></a>
+      <a href="/izkupuvane-metal/brakuvane/" class="biz-chip"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m14 13-7.5 7.5a2.12 2.12 0 0 1-3-3L11 10"/><path d="m16 16 6-6"/><path d="m8 8 6-6"/><path d="m9 7 8 8"/><path d="m21 11-8-8"/></svg></div><h3>Бракуване на активи</h3><p>Машини, съоръжения и ДМА — оценка и търгове.</p></a>
+    </div>
+    <div style="margin-top:28px;"><a href="/izkupuvane-metal/" class="btn btn-primary">Решения за бизнеса →</a></div>
   </div>
 </section>
 
@@ -774,7 +918,7 @@ section[id]{scroll-margin-top:88px}
             <span class="logo-word"><span class="lw-a">progress</span><span class="lw-b">trade</span></span>
           </a>
         </div>
-        <p class="footer-desc">Изкупуване на вторични суровини в София. Железен скрап на актуални скрап цени — плащаме веднага.</p>
+        <p class="footer-desc">Изкупуване на черни метали и вторични суровини в София. Договори, контейнери, демонтаж и пълна документация за фирми. От 2002 г.</p>
         <a href="https://www.facebook.com/share/1EXEcweybi/" target="_blank" rel="noopener" aria-label="Facebook страница на Progresstrade" style="display:inline-flex;align-items:center;gap:8px;margin-top:14px;color:var(--yellow);font-size:14px;font-weight:600;">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.77-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
           Последвайте ни във Facebook
@@ -783,59 +927,37 @@ section[id]{scroll-margin-top:88px}
       <div class="footer-col">
         <h5>Услуги</h5>
         <ul>
-          <li><a href="#services">Изкупуване на черни метали</a></li>
-          <li><a href="#services">Коли за скрап</a></li>
-          <li><a href="#services">Стари електроуреди</a></li>
-          <li><a href="#transport">Транспорт</a></li>
-          <li><a href="#cutting">Рязане и демонтаж</a></li>
+          <li><a href="/izkupuvane-metal/">Изкупуване на метален отпадък</a></li>
+          <li><a href="/uslugi/demontazh/">Демонтаж и рязане</a></li>
+          <li><a href="/uslugi/konteyneri/">Контейнери и извозване</a></li>
+          <li><a href="/kakvo-izkupuvame/">Какво изкупуваме</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Информация</h5>
+        <h5>Решения за бизнеса</h5>
         <ul>
-          <li><a href="#services">Услуги</a></li>
-          <li><a href="#how">Как работим</a></li>
-          <li><a href="#about">За нас</a></li>
-          <li><a href="/blog/">Блог</a></li>
-          <li><a href="#faq">Въпроси и отговори</a></li>
+          <li><a href="/izkupuvane-metal/stroitelstvo/">Строителство</a></li>
+          <li><a href="/izkupuvane-metal/proizvodstvo/">Производство и металообработка</a></li>
+          <li><a href="/izkupuvane-metal/zemedelie/">Земеделие</a></li>
+          <li><a href="/izkupuvane-metal/brakuvane/">Бракуване на активи</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Контакти</h5>
         <ul>
-          <li>
-            <a href="tel:+359877775577" style="display:flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:16px;">
-              <span class="icon-circle">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-              </span>
-              <div>
-                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:2px;">Телефон</div>
-                <div style="font-size:17px;font-weight:700;color:#fff;">0877 77 55 77</div>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="https://maps.app.goo.gl/C6KVEBHUQRiQYKrw5" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;text-decoration:none;">
-              <span class="icon-circle">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg>
-              </span>
-              <div>
-                <div style="font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--yellow);margin-bottom:2px;">Адрес</div>
-                <div style="font-size:14px;font-weight:500;color:#fff;line-height:1.4;">ул. Проф. Иван Георгов 1<br>Военна Рампа, София</div>
-              </div>
-            </a>
-          </li>
+          <li><a href="tel:+359877775577" style="display:flex;align-items:center;gap:10px;margin-bottom:10px;"><span class="icon-circle"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f0c040" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><div><div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow);">Телефон</div><div style="font-size:16px;font-weight:700;color:#fff;">0877 77 55 77</div></div></a></li>
+          <li><a href="mailto:[ЗА ПОПЪЛВАНЕ: имейл за заявки]" style="color:rgba(255,255,255,.82);">[ЗА ПОПЪЛВАНЕ: имейл за заявки]</a></li>
+          <li><a href="https://maps.app.goo.gl/C6KVEBHUQRiQYKrw5" target="_blank" rel="noopener">ул. Проф. Иван Георгов 1, Военна Рампа, София</a></li>
+          <li style="color:rgba(255,255,255,.6);font-size:14px;">Пон – Пет: 9:00 – 17:00</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Progresstrade. Всички права запазени. · ЕИК 130975863 · ДДС № BG130975863</p>
-      <p>Изкупуване на скрап · София · Военна Рампа · от 2002 г.</p>
+      <p>© 2026 Progresstrade · ЕИК 130975863 · ДДС № BG130975863</p>
+      <p>Изкупуване на метален отпадък · София · от 2002 г.</p>
     </div>
   </div>
 </footer>
-
-<script src="/js/main.js?v=1" defer></script>
-
+<script src="/js/main.js?v=2" defer></script>
 </body>
 </html>
