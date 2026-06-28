@@ -49,3 +49,36 @@ sections.forEach(s => observer.observe(s));
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 })();
+
+/* Форма за заявка: AJAX изпращане към Formspree, със задържане на сайта */
+(function () {
+  var forms = document.querySelectorAll('form.qform');
+  if (!forms.length) return;
+  forms.forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      if (!f.action || f.action.indexOf('formspree') === -1) return; // друг action — нормален submit
+      e.preventDefault();
+      var btn = f.querySelector('button[type=submit]');
+      if (btn) { btn.disabled = true; btn.dataset.t = btn.textContent; btn.textContent = 'Изпращане…'; }
+      fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } })
+        .then(function (r) {
+          if (r.ok) { window.location.href = '/blagodarim/'; }
+          else { throw new Error('bad'); }
+        })
+        .catch(function () {
+          if (btn) { btn.disabled = false; btn.textContent = btn.dataset.t || 'Изпрати заявка'; }
+          var n = f.querySelector('.form-note');
+          if (n) { n.innerHTML = 'Възникна проблем при изпращането. Моля, обадете се на <a href="tel:+359877775577" style="color:var(--green);font-weight:700;">0877 77 55 77</a> или пишете на progresstradesofia@gmail.com.'; n.style.color = '#b00020'; }
+        });
+    });
+  });
+})();
+
+/* Мобилно меню: затваряне при клик на връзка и при Escape */
+(function () {
+  var mm = document.getElementById('mobile-menu'), h = document.getElementById('hamburger');
+  if (!mm) return;
+  function close() { mm.classList.remove('open'); if (h) h.setAttribute('aria-expanded', 'false'); }
+  mm.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+})();

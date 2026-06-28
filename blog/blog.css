@@ -1,69 +1,9 @@
-/* Прогрестрейд — споделен стил за блог страниците (огледало на началната страница) */
-:root{
-  --green:#1a4a2e;--green-deep:#0f2d1c;--green-accent:#21603b;
-  --yellow:#ebb73c;--yellow-soft:#fdf3c0;--cream:#f5f4ee;--cream-dark:#eceae2;
-  --white:#fff;--text:rgba(0,0,0,0.87);--text-soft:rgba(0,0,0,0.55);
-  --text-white:rgba(255,255,255,1);--text-white-soft:rgba(255,255,255,0.70);
-  --radius-card:12px;--radius-pill:50px;
-  --shadow-card:0 1px 2px rgba(0,0,0,0.04),0 6px 16px rgba(0,0,0,0.07);
-  --shadow-hover:0 14px 34px rgba(0,0,0,0.13),0 6px 14px rgba(0,0,0,0.06);
-  --shadow-nav:0 1px 3px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.08),0 0 2px rgba(0,0,0,0.06);
-  --space-1:4px;--space-2:8px;--space-3:16px;--space-4:24px;--space-5:32px;
-  --space-6:40px;--space-7:48px;--space-8:56px;--space-9:64px;
-  --gutter:20px;--max-w:1200px;--content-w:760px;
-  --font:'Barlow','Helvetica Neue',Helvetica,Arial,sans-serif;
-  --font-cond:'Barlow Condensed','Helvetica Neue',Helvetica,Arial,sans-serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:var(--font);color:var(--text);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased}
-img{max-width:100%;height:auto;display:block}
-.article-hero{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-card);margin:6px 0 6px}
+/* Блог-специфични стилове. Общата рамка (nav, footer, бутони, токени)
+   идва от /css/site.css — зареден преди този файл. */
+body{line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:var(--green-accent)}
-.container{max-width:var(--max-w);margin:0 auto;padding:0 var(--gutter)}
-
-/* Buttons (огледало на сайта) */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:var(--radius-pill);padding:12px 28px;font-family:var(--font);font-size:15px;font-weight:600;letter-spacing:-0.01em;cursor:pointer;border:2px solid transparent;text-decoration:none;transition:transform .15s ease,background .15s ease,color .15s ease,border-color .15s ease;white-space:nowrap}
-.btn:active{transform:scale(0.95)}
-.btn-primary{background:var(--yellow);color:var(--green-deep);border-color:var(--yellow)}
-.btn-primary:hover{background:#e6b530;border-color:#e6b530}
-.btn-outline-white{background:transparent;color:var(--white);border-color:var(--white)}
-.btn-outline-white:hover{background:rgba(255,255,255,0.12)}
-.btn-white{background:var(--white);color:var(--green);border-color:var(--white)}
-.btn-white:hover{background:var(--yellow);color:var(--green-deep);border-color:var(--yellow)}
-.btn-sm{padding:8px 20px;font-size:13px}
-
-/* Topbar */
-.topbar{background:var(--green-deep);padding:9px var(--gutter);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(240,192,64,0.2)}
-.topbar-text{font-size:13px;color:rgba(255,255,255,0.92);display:flex;align-items:center;gap:20px;font-weight:500}
-
-/* Nav (бял, като сайта) */
-.nav{position:sticky;top:0;z-index:100;background:var(--white);box-shadow:var(--shadow-nav)}
-.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;padding:0 var(--gutter);max-width:var(--max-w);margin:0 auto}
-.logo{display:flex;align-items:center;gap:10px;line-height:1;text-decoration:none}
-.logo img{height:30px;width:auto;display:block}
-@font-face{font-family:'Montserrat Logo';font-style:normal;font-weight:700;font-display:swap;src:url(data:font/woff2;base64,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) format('woff2')}
-.logo-mark{height:30px;width:30px;display:block;flex-shrink:0}
-.logo-word{font-family:'Montserrat Logo','Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;letter-spacing:-0.01em;transform:translateY(-2px);white-space:nowrap}
-.logo-word .lw-a{color:#1a4a2e}
-.logo-word .lw-b{color:#b87a06}
-.footer .logo-word .lw-a{color:#fff}
-.footer .logo-word .lw-b{color:#f0c040}
-.nav-links{display:flex;align-items:center;gap:var(--space-5);list-style:none}
-.nav-links a{font-size:14px;font-weight:500;color:var(--text);text-decoration:none;transition:color .15s}
-.nav-links a:hover{color:var(--green)}
-.nav-links a.active{color:var(--green);font-weight:700}
-.nav-actions{display:flex;gap:var(--space-2);align-items:center}
-.nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;background:none;border:none}
-.nav-hamburger span{display:block;width:24px;height:2px;background:var(--green-deep);border-radius:2px}
-.mobile-menu{display:none;flex-direction:column;background:var(--white);border-top:1px solid var(--cream-dark);padding:var(--space-3) var(--gutter) var(--space-4);gap:var(--space-3)}
-.mobile-menu.open{display:flex}
-.mobile-menu a{font-size:16px;font-weight:500;color:var(--text);text-decoration:none;padding:8px 0;border-bottom:1px solid var(--cream-dark)}
-/* Достъпност + премиум детайли */
-a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:6px}
-.btn-primary:focus-visible{outline-color:var(--green-deep)}
-.logo{transition:opacity .15s ease}
-.logo:hover{opacity:.82}
+img{height:auto}
+.article-hero{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-card);margin:6px 0 6px}
 
 /* Breadcrumb */
 .crumb{font-size:13px;color:var(--text-soft);padding:18px 0 0}
@@ -152,28 +92,5 @@ a:focus-visible,.btn:focus-visible,button:focus-visible{outline:3px solid var(--
 .nav.scrolled .nav-inner{height:58px}
 .nav.scrolled{box-shadow:0 6px 20px rgba(0,0,0,0.10)}
 ::selection{background:var(--yellow);color:var(--green-deep)}
-
-
-/* ==== падащо меню за услуги ==== */
-/* Падащо меню в навигацията */
-.nav-links li.has-dd{position:relative}
-.nav-links .dd-toggle{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
-.nav-links .dd-toggle::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;transition:transform .2s;opacity:.65}
-.nav-links li.has-dd:hover .dd-toggle::after,.nav-links li.has-dd:focus-within .dd-toggle::after{transform:rotate(225deg);margin-top:2px}
-.dd-menu{position:absolute;top:calc(100% + 14px);left:0;transform:translateY(8px);width:max-content;max-width:360px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:14px;box-shadow:var(--shadow-hover);padding:8px;opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;z-index:120}
-.nav-links li.has-dd:hover .dd-menu,.nav-links li.has-dd:focus-within .dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
-.dd-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px}
-.dd-menu a{display:block;padding:11px 14px;border-radius:9px;font-size:14px;font-weight:600;color:var(--green-deep);line-height:1.3;transition:background .15s,color .15s}
-.dd-menu a span{display:block;font-size:12px;font-weight:500;color:var(--text-soft);margin-top:2px}
-.dd-menu a:hover{background:var(--cream)}
-.dd-menu a::after{display:none}
-.dd-sep{height:1px;background:var(--cream-dark);margin:8px 6px}
-.dd-menu a.dd-biz{color:var(--green);font-weight:700}
-.dd-menu a.dd-biz::after{content:" →";display:inline}
-/* Мобилно меню — подменю на услугите */
-.mm-sub{display:flex;flex-direction:column}
-.mm-sub a{padding-left:14px;font-size:15px;color:var(--text-soft)!important}
-.mm-head{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);padding:10px 0 2px;border:none!important}
-@media(max-width:900px){.nav-links li.has-dd{position:static}}
 
 .draft-badge{display:inline-block;background:var(--yellow-soft);border:1px solid rgba(235,183,60,.5);color:#8a6500;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px}
