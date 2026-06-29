@@ -337,6 +337,20 @@ section[id]{scroll-margin-top:88px}
 .qform .form-note{font-size:12px;color:var(--text-soft);margin-top:8px}
 .qform .req{color:#8a5e00}
 
+/* Затваряща CTA лента — зелена, с жълт бутон (единен стил на призива) */
+.cta-band{background:var(--green)}
+.cta-band .cta-text h2{color:#fff}
+.cta-band .cta-text p{color:rgba(255,255,255,.75)}
+
+/* Контакти във футъра — подредени редове с икони */
+.footer-contact ul{gap:14px}
+.footer-contact li{display:flex}
+.footer-contact li a,.footer-contact .fc-row{display:flex;align-items:flex-start;gap:10px;color:rgba(255,255,255,.82)}
+.footer-contact li a:hover{color:var(--yellow)}
+.footer-contact .ic-sm{width:30px;height:30px;border-radius:50%;background:rgba(240,192,64,.14);border:1px solid rgba(240,192,64,.3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.footer-contact .fc-l{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow)}
+.footer-contact .fc-v{font-size:14px;color:#fff;line-height:1.4}
+
 /* Помощни */
 .lead{font-size:19px;line-height:1.6;color:var(--text);max-width:760px}
 .center-head{text-align:center;max-width:720px;margin:0 auto var(--space-6)}
