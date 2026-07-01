@@ -370,6 +370,12 @@ section[id]{scroll-margin-top:88px}
 
 /* Плейсхолдър за снимка */
 .photo-ph{background:var(--cream-dark);border:2px dashed rgba(0,0,0,.12);border-radius:var(--radius-card);min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-soft);font-size:14px;padding:20px}
+.material-photo{margin:0}
+.material-photo img{display:block;width:100%;height:auto;border-radius:var(--radius-card);aspect-ratio:3/2;object-fit:cover}
+.photo-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.photo-gallery figure{margin:0}
+.photo-gallery img{display:block;width:100%;height:auto;border-radius:var(--radius-card);aspect-ratio:3/2;object-fit:cover}
+@media(max-width:640px){.photo-gallery{grid-template-columns:1fr}}
 
 @media(max-width:700px){.accept-grid{grid-template-columns:1fr}}
 
