@@ -351,6 +351,28 @@ section[id]{scroll-margin-top:88px}
 .footer-contact .fc-l{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow)}
 .footer-contact .fc-v{font-size:14px;color:#fff;line-height:1.4}
 
+/* Спец-лента (ключови факти за материала) */
+.spec-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+.spec-pill{background:var(--cream);border:1px solid var(--cream-dark);border-radius:50px;padding:8px 16px;font-size:14px;font-weight:600;color:var(--green-deep)}
+.spec-pill b{color:var(--green)}
+
+/* „Приемаме / Не приемаме" */
+.accept-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-top:var(--space-5)}
+.accept-col{background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4)}
+.accept-col h3{font-size:16px;font-weight:800;margin-bottom:12px;letter-spacing:-.01em}
+.accept-col.yes h3{color:var(--green)}
+.accept-col.no h3{color:#b00020}
+.accept-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.accept-col li{display:flex;gap:9px;align-items:flex-start;font-size:14px;color:var(--text);line-height:1.5}
+.accept-col li::before{font-weight:800;flex-shrink:0}
+.accept-col.yes li::before{content:"✓";color:var(--green)}
+.accept-col.no li::before{content:"✕";color:#b00020}
+
+/* Плейсхолдър за снимка */
+.photo-ph{background:var(--cream-dark);border:2px dashed rgba(0,0,0,.12);border-radius:var(--radius-card);min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-soft);font-size:14px;padding:20px}
+
+@media(max-width:700px){.accept-grid{grid-template-columns:1fr}}
+
 /* Минималистична таблица с цени */
 .price-table{width:100%;border-collapse:collapse;font-size:16px}
 .price-table th{text-align:left;font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-soft);padding:0 0 10px;border-bottom:2px solid var(--cream-dark)}
