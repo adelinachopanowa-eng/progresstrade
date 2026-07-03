@@ -104,7 +104,7 @@
 </div></section><section class="section section-cream" id="zayavka">
   <div class="container">
     <div class="center-head"><div class="section-label-dark">Заявка</div><h2 class="section-title-dark">Заявете оферта или оглед</h2><p class="section-body-dark" style="margin:10px auto 0;">Връщаме се с оферта в рамките на работния ден.</p></div>
-    <form class="qform" style="margin:0 auto;" action="https://formspree.io/f/[ЗА ПОПЪЛВАНЕ: Formspree ID]" method="POST">
+    <form class="qform" style="margin:0 auto;" action="https://formspree.io/f/mwvdaokw" method="POST">
       <input type="hidden" name="_subject" value="Нова заявка от progresstrade.bg">
       <input type="hidden" name="_next" value="https://progresstrade.bg/blagodarim/">
       <div class="row">
@@ -153,6 +153,19 @@
       <p class="form-note">Полетата с <span class="req">*</span> са задължителни. Заявката се изпраща защитено до progresstradesofia@gmail.com. Може и направо на тел. <a href="tel:+359877775577" style="color:var(--green);font-weight:700;">0877 77 55 77</a>.</p>
     </form>
   </div>
+<script>
+document.querySelectorAll('form.qform').forEach(function(f){
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    var btn=f.querySelector('button[type="submit"]');
+    btn.disabled=true;btn.textContent='Изпращане…';
+    fetch(f.action,{method:'POST',body:new FormData(f),headers:{'Accept':'application/json'}})
+      .then(function(r){if(r.ok){window.location='/blagodarim/';}else{throw new Error();}})
+      .catch(function(){btn.disabled=false;btn.textContent='Изпрати заявка';
+        alert('Изпращането не успя. Моля, опитайте отново или се обадете на 0877 77 55 77.');});
+  });
+});
+</script>
 </section></main><footer class="footer">
   <div class="container">
     <div class="footer-grid">
