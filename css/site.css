@@ -419,3 +419,5 @@ section[id]{scroll-margin-top:88px}
 .mm-sub{display:flex;flex-direction:column}
 .mm-sub a{padding-left:14px;font-size:15px;color:var(--text-soft)!important}
 .mm-head{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);padding:10px 0 2px;border:none!important}
+
+.seg-card{display:flex;flex-direction:column}.seg-card .more{margin-top:auto;padding-top:10px}
