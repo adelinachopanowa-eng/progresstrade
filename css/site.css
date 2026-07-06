@@ -374,7 +374,7 @@ section[id]{scroll-margin-top:88px}
 .material-photo img{display:block;width:100%;height:auto;border-radius:var(--radius-card);aspect-ratio:3/2;object-fit:cover}
 .photo-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
 .photo-gallery figure{margin:0}
-.photo-gallery img{display:block;width:100%;height:auto;border-radius:var(--radius-card);aspect-ratio:3/2;object-fit:cover}
+.photo-gallery img{display:block;width:100%;height:auto;border-radius:var(--radius-card)}
 @media(max-width:640px){.photo-gallery{grid-template-columns:1fr}}
 
 @media(max-width:700px){.accept-grid{grid-template-columns:1fr}}
