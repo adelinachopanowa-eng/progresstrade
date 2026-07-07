@@ -421,3 +421,14 @@ section[id]{scroll-margin-top:88px}
 .mm-head{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--green);padding:10px 0 2px;border:none!important}
 
 .seg-card{display:flex;flex-direction:column}.seg-card .more{margin-top:auto;padding-top:10px}
+
+.sticky-cta{display:none}
+@media(max-width:768px){
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:90;display:flex;gap:1px;box-shadow:0 -2px 14px rgba(0,0,0,.18)}
+.sticky-cta a{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 10px;font-weight:700;font-size:15px;text-decoration:none}
+.sticky-cta .sc-call{background:var(--green);color:#fff}
+.sticky-cta .sc-form{background:var(--yellow);color:var(--green-deep)}
+body{padding-bottom:50px}
+}
+
+html,body{overflow-x:clip}
