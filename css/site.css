@@ -178,7 +178,7 @@ section[id]{scroll-margin-top:88px}
 .footer{background:var(--green-deep);padding:var(--space-8) 0 var(--space-5);border-top:2px solid var(--yellow)}
 .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:var(--space-6);padding-bottom:var(--space-6);border-bottom:1px solid rgba(240,192,64,0.18)}
 .footer-desc{font-size:14px;color:rgba(255,255,255,0.82);line-height:1.6;max-width:240px}
-.footer-col h5{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:var(--space-3)}
+.footer-col h5,.footer-col .footer-h{font-size:12px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:var(--space-3)}
 .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:10px}
 .footer-col ul li a{font-size:14px;color:rgba(255,255,255,0.82);transition:color .15s}
 .footer-col ul li a:hover{color:var(--yellow)}
@@ -424,10 +424,16 @@ section[id]{scroll-margin-top:88px}
 
 .call-fab{display:none}
 @media(max-width:768px){
-.call-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:90;width:58px;height:58px;border-radius:50%;background:var(--yellow);color:var(--green-deep);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);animation:fab-pulse 2.8s ease-out infinite}
+.call-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:90;width:58px;height:58px;border-radius:50%;background:var(--yellow);color:var(--green-deep);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);overflow:visible}
 .call-fab svg{width:25px;height:25px}
 }
-@keyframes fab-pulse{0%{box-shadow:0 6px 18px rgba(0,0,0,.28),0 0 0 0 rgba(235,183,60,.45)}70%{box-shadow:0 6px 18px rgba(0,0,0,.28),0 0 0 15px rgba(235,183,60,0)}100%{box-shadow:0 6px 18px rgba(0,0,0,.28),0 0 0 0 rgba(235,183,60,0)}}
+
 @media(prefers-reduced-motion:reduce){.call-fab{animation:none}}
 
 html,body{overflow-x:clip}
+
+@media(max-width:768px){
+.call-fab::after{content:"";position:absolute;inset:-2px;border-radius:50%;border:2px solid rgba(235,183,60,.55);animation:fab-ring 2.8s ease-out infinite;will-change:transform,opacity}
+}
+@keyframes fab-ring{0%{transform:scale(1);opacity:.8}70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+@media(prefers-reduced-motion:reduce){.call-fab::after{animation:none;display:none}}
