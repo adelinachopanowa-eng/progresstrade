@@ -1,7 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="64" height="64">
-  <title>Progresstrade — favicon</title>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 470 100" width="470" height="100">
+  <title>Progresstrade — lockup for light background</title>
+  
   <circle cx="50" cy="50" r="50" fill="#1a4a2e"></circle>
   <path d="M 59.79 15.88 A 35.5 35.5 0 0 1 84.45 58.59 L 89.78 59.92 L 73.64 68.47 L 68.44 54.60 L 73.77 55.93 A 24.5 24.5 0 0 0 56.75 26.45 Z" fill="#ffffff"></path>
   <path d="M 15.55 58.59 A 35.5 35.5 0 0 1 40.21 15.88 L 38.70 10.59 L 54.18 20.29 L 44.76 31.74 L 43.25 26.45 A 24.5 24.5 0 0 0 26.23 55.93 Z" fill="#ffffff"></path>
   <path d="M 74.66 75.54 A 35.5 35.5 0 0 1 25.34 75.54 L 21.52 79.49 L 22.18 61.24 L 36.80 63.67 L 32.98 67.62 A 24.5 24.5 0 0 0 67.02 67.62 Z" fill="#ffffff"></path>
+  <text x="128" y="64" font-family="Montserrat, &#39;Helvetica Neue&#39;, Arial, sans-serif" font-weight="700" font-size="46" letter-spacing="-0.9" dominant-baseline="middle"><tspan fill="#1a4a2e">progress</tspan><tspan fill="#c79a10">trade</tspan></text>
 </svg>
