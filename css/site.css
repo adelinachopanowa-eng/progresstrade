@@ -437,3 +437,23 @@ html,body{overflow-x:clip}
 }
 @keyframes fab-ring{0%{transform:scale(1);opacity:.8}70%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
 @media(prefers-reduced-motion:reduce){.call-fab::after{animation:none;display:none}}
+
+/* mobile-type-scale — по-компактна типография на телефон (текстът да не изяжда екрана) */
+@media(max-width:640px){
+  .hero-title{font-size:30px;line-height:1.08;letter-spacing:-.02em}
+  .hero-sub{font-size:15.5px;line-height:1.55;margin-top:12px}
+  .hero{min-height:auto}
+  .hero-content{padding-top:26px;padding-bottom:30px}
+  .hero-trust{gap:8px 14px;margin-top:18px}
+  .hero-trust li{font-size:13px}
+  .page-hero{padding:26px 0 32px}
+  .page-hero h1{font-size:26px;line-height:1.12}
+  .page-hero p{font-size:15.5px;line-height:1.55;margin-top:11px}
+  .page-hero .crumb{margin-bottom:11px;font-size:12.5px}
+  .page-hero .hero-actions{margin-top:18px}
+  .section-title,.section-title-dark{font-size:25px;line-height:1.15}
+  .section-body-dark{font-size:15.5px}
+  .section-label-dark{font-size:11px;margin-bottom:6px}
+  h2{text-wrap:balance}
+  .btn{padding:11px 22px;font-size:14.5px}
+}
