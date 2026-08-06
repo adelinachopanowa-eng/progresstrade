@@ -488,3 +488,23 @@ html,body{overflow-x:clip}
   .page-hero--split .hero-copy{padding:34px var(--gutter) 40px}
   .page-hero--split .hero-copy h1{font-size:28px}
 }
+
+/* ── спецификации на материала ── */
+.spec-card{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden;max-width:540px;margin-top:var(--space-4)}
+.spec-card dl{display:grid;grid-template-columns:1fr auto;margin:0}
+.spec-card dt{padding:14px 20px;font-size:14.5px;color:var(--text-soft);border-bottom:1px solid var(--cream-dark)}
+.spec-card dd{padding:14px 20px;margin:0;font-size:14.5px;font-weight:700;color:var(--green-deep);text-align:right;border-bottom:1px solid var(--cream-dark)}
+.spec-card dt:nth-last-of-type(1),.spec-card dd:nth-last-of-type(1){border-bottom:0}
+@media(max-width:560px){.spec-card dt{padding:12px 14px;font-size:13.5px}.spec-card dd{padding:12px 14px;font-size:13.5px;white-space:nowrap}}
+
+/* ── класове, които не бива да се смесват (с връзки) ── */
+.class-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--space-4);list-style:none;padding:0}
+.class-links a{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--cream-dark);border-radius:50px;padding:9px 17px;font-size:14px;font-weight:600;color:var(--green-deep);text-decoration:none;transition:border-color .15s,color .15s}
+.class-links a:hover{border-color:var(--green);color:var(--green)}
+.class-links a::after{content:"→";color:var(--green);font-weight:700;opacity:.55}
+
+/* ── единичен отказ (само съдове под налягане) ── */
+.reject-note{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid rgba(190,60,60,.22);border-left:4px solid #be3c3c;border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:17px 20px;max-width:640px;margin-top:var(--space-4)}
+.reject-note .xm{width:24px;height:24px;border-radius:50%;background:rgba(190,60,60,.1);color:#be3c3c;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:14px;margin-top:1px}
+.reject-note b{color:#a03232;display:block;margin-bottom:3px}
+.reject-note span{color:var(--text-soft);font-size:14.5px;line-height:1.55}
