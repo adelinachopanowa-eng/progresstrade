@@ -472,8 +472,8 @@ html,body{overflow-x:clip}
   .page-hero--split{display:flex;flex-direction:column;min-height:auto}
   .page-hero--split .hero-copy{padding:30px var(--gutter) 34px}
   .page-hero--split .hero-figure{height:215px;width:100%}
-  .page-hero--split .hero-figure img{object-position:center 62%}
-  .page-hero--split .hero-figure::after{background:linear-gradient(180deg,rgba(15,45,28,.55) 0%,rgba(15,45,28,.08) 42%,rgba(15,45,28,0) 100%)}
+  .page-hero--split .hero-figure img{object-position:center center}
+  .page-hero--split .hero-figure::after{background:linear-gradient(180deg,var(--green-deep) 0%,rgba(15,45,28,.62) 16%,rgba(15,45,28,.18) 44%,rgba(15,45,28,0) 78%)}
 }
 @media(max-width:640px){
   .page-hero--split .hero-copy{padding:26px var(--gutter) 30px}
