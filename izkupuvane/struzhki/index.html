@@ -33,7 +33,7 @@
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Начало","item":"https://progresstrade.bg/"},{"@type":"ListItem","position":2,"name":"Какво изкупуваме","item":"https://progresstrade.bg/kakvo-izkupuvame/"},{"@type":"ListItem","position":3,"name":"Стружки"}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Приемате ли стружки с масло?","acceptedAnswer":{"@type":"Answer","text":"Да — но остатъчното масло и емулсията се отразяват на оценката. Отцедените стружки получават по-добра цена."}},{"@type":"Question","name":"Приемате ли алуминиеви или месингови стружки?","acceptedAnswer":{"@type":"Answer","text":"Не — работим само с черни метали. Приемаме стоманени и чугунени стружки."}},{"@type":"Question","name":"Как да докарам стружките?","acceptedAnswer":{"@type":"Answer","text":"Насипно, в чували или в биг-бег — както ви е удобно. За редовни количества оставяме контейнер."}}]}
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Приемате ли стружки с масло?", "acceptedAnswer": {"@type": "Answer", "text": "Да, но маслото и охлаждащата емулсия се приспадат от доставеното количество. Отцедените стружки носят осезаемо повече."}}, {"@type": "Question", "name": "Как се доставят стружките?", "acceptedAnswer": {"@type": "Answer", "text": "Насипно, в чували или в биг-бег. За производства с постоянен поток оставяме съдове на място и извозваме по график."}}, {"@type": "Question", "name": "Приемате ли стружки от цветни метали?", "acceptedAnswer": {"@type": "Answer", "text": "Не. Алуминиевите, месинговите и медните стружки не се изкупуват — работим само с черни метали."}}, {"@type": "Question", "name": "Трябва ли стоманените и чугунените да са разделени?", "acceptedAnswer": {"@type": "Answer", "text": "Разделените стружки се оценяват по-точно и се претеглят като две групи. При смесена доставка съотношението се определя при окачествяването на място."}}, {"@type": "Question", "name": "Има ли минимално количество?", "acceptedAnswer": {"@type": "Answer", "text": "За еднократни доставки няма праг, но при над 2000 кг осигуряваме безплатен транспорт и товарене от вашия адрес."}}]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"Service","serviceType":"Изкупуване на стружки","name":"Изкупуване на стружки","description":"Изкупуване на стоманени и чугунени стружки от механична обработка — насипно, в чували или биг-бег. Условия и цена.","areaServed":{"@type":"City","name":"София"},"provider":{"@id":"https://progresstrade.bg/#business"},"url":"https://progresstrade.bg/izkupuvane/struzhki/"}
@@ -82,35 +82,58 @@
     <a href="tel:+359877775577" class="btn btn-primary" style="margin-top:8px;justify-content:center;"><svg width="15" height="15" viewBox="0 0 20 20" fill="none"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="#0f2d1c"/></svg>0877 77 55 77</a>
   </div>
 </nav>
-</header><main><section class="page-hero">
-  <div class="container">
-    <nav class="crumb" aria-label="Навигация"><a href="/">Начало</a> › <a href="/kakvo-izkupuvame/">Какво изкупуваме</a> › Стружки</nav>
-    <h1>Изкупуване на стружки</h1>
-    <p>Стоманени и чугунени стружки от струговане, фрезоване и пробиване — от сервизи, работилници и производства.</p>
-    <div class="hero-actions">
-        <a href="/zayavka/" class="btn btn-primary">Заявка за оферта</a>
-      </div>
+</header><main><section class="page-hero page-hero--split">
+  <div class="hero-copy">
+    <h1>Изкупуване на <span class="hl">стружки</span></h1>
+    <p>Стоманени и чугунени стружки от струговане и фрезоване.</p>
+    <div class="hero-actions"><a href="/zayavka/" class="btn btn-primary">Заявка за оферта</a></div>
   </div>
-</section><section class="section-tight section-white"><div class="container">
-  <p class="lead">Приемаме железни стружки от механична обработка — насипно, в чували или в биг-бег. Претегляме на калибрирана везна и плащаме на място.</p>
-  <div class="spec-strip"><span class="spec-pill">Стоманени и чугунени</span><span class="spec-pill">Насипно или в биг-бег</span></div>
-</div></section><section class="section section-cream"><div class="container">
+  <div class="hero-figure">
+    <picture>
+      <source type="image/webp" media="(max-width:900px)" srcset="/images/stomaneni-struzhki-hero-sm.webp">
+      <source type="image/jpeg" media="(max-width:900px)" srcset="/images/stomaneni-struzhki-hero-sm.jpg">
+      <source type="image/webp" srcset="/images/stomaneni-struzhki-hero.webp">
+      <img src="/images/stomaneni-struzhki-hero.jpg" width="1200" height="800" alt="Стоманени стружки от струговане за изкупуване" fetchpriority="high" decoding="async">
+    </picture>
+  </div>
+</section><section class="section section-white"><div class="container">
+  <p class="lead" style="max-width:840px;">Стружките са отпадъкът от механичната обработка на метал. Приемат се насипно, в чували или в биг-бег, като стоманените и чугунените се претеглят като отделни групи.</p>
+  <div class="spec-card"><dl><dt>Видове</dt><dd>стоманени и чугунени</dd><dt>Доставка</dt><dd>насипно, в чували или биг-бег</dd><dt>Изкупна цена</dt><dd>до 75 €/тон</dd></dl></div>
+</div></section>
+
+<section class="section section-cream"><div class="container">
   <div class="section-label-dark">Условия за приемане</div>
-  <h2 class="section-title-dark" style="margin-bottom:6px;">Какво приемаме</h2>
-  <div class="accept-grid">
-    <div class="accept-col yes"><h3>Приемаме</h3><ul><li>Стоманени стружки от струговане и фрезоване</li><li>Чугунени стружки</li><li>Смесени железни стружки — след уточнение</li><li>Редовни количества от производства — по график</li></ul></div>
-    <div class="accept-col no"><h3>Не приемаме / сваля цената</h3><ul><li>Обилно масло и охлаждаща емулсия</li><li>Стружки от цветни метали (алуминий, месинг)</li><li>Примеси — парцали и битови отпадъци</li></ul></div>
-  </div>
-  
-<figure class="material-photo" style="margin-top:var(--space-4);"><picture><source type="image/webp" srcset="/images/stomaneni-struzhki.webp"><img loading="lazy" decoding="async" width="1920" height="1280" src="/images/stomaneni-struzhki.jpg" alt="Стоманени стружки от механична обработка"></picture></figure></div></section><section class="section-tight section-white"><div class="container">
-  <div class="section-label-dark">Какво влияе на цената</div>
-  <ul class="buy-grid" style="grid-template-columns:1fr;max-width:760px;"><li>Остатъчно масло и влага</li><li>Вид на стружката — стомана или чугун</li><li>Количество и редовност на доставките</li></ul>
-  <p class="note-band" style="max-width:760px;margin-top:18px;"><b>Съвет:</b> Отцедете маслото и дръжте стружките разделени по вид — чистите, отцедени стружки получават по-добра цена. Обадете се преди да докарате — важат <a href="/ceni/" style="color:var(--green);font-weight:700;">цените от таблицата</a>, а за по-големи количества правим оферта. Вижте всички <a href="/izkupuvane-zhelyazo/" style="color:var(--green);font-weight:700;">видове желязо и цени</a>.</p>
+  <h2 class="section-title-dark" style="margin-bottom:6px;">Какво приемаме в този клас</h2>
+  <ul class="buy-grid" style="max-width:900px;"><li>Стоманени стружки от струговане и фрезоване</li><li>Чугунени стружки от механична обработка</li><li>Стружки от пробиване и шлифоване</li><li>Отцедени стружки в чували или биг-бег</li><li>Редовни количества от производства, по график</li></ul>
+
+  <h2 class="section-title-dark" style="margin:38px 0 6px;">Какво не приемаме</h2>
+  <div class="reject-note"><span class="xm">✕</span><div><b>Цветни метали</b><span>Мед, алуминий, месинг и бронз не се изкупуват. Работим само с черни метали — желязо, стомана и чугун.</span></div></div><div class="reject-note"><span class="xm">✕</span><div><b>Съдове под налягане</b><span>Газови и кислородни бутилки не се приемат в никакво състояние — включително празни или нарязани. Това е въпрос на безопасност при рязането и претопяването.</span></div></div>
+
+  <h2 class="section-title-dark" style="margin:38px 0 6px;">Не смесвайте с този клас</h2>
+  <p class="section-body-dark" style="max-width:840px;">Тези материали се изкупуват, но в собствения си клас и на своя цена. Ако попаднат в доставката, се разделят и претеглят поотделно, а при силно смесен материал съотношението се определя при окачествяването.</p>
+  <ul class="class-links"><li><a href="/izkupuvane/platno-zhelyazo/">Плътно желязо над 4 мм</a></li><li><a href="/izkupuvane/tanko-zhelyazo/">Тънко желязо под 3 мм</a></li><li><a href="/izkupuvane/chugun/">Чугун</a></li><li><a href="/izkupuvane/tehnologichen-otpadak/">Технологичен скрап</a></li></ul>
+  <p class="section-body-dark" style="max-width:840px;margin-top:16px;">Стоманените и чугунените стружки се претеглят поотделно — при смесена доставка съотношението се определя при окачествяването.</p>
+
+  <figure class="material-photo" style="margin-top:var(--space-5);"><picture><source type="image/webp" srcset="/images/stomaneni-struzhki.webp"><img loading="lazy" decoding="async" width="1600" height="1066" src="/images/stomaneni-struzhki.jpg" alt="Стоманени стружки от струговане за изкупуване"></picture></figure>
+</div></section>
+
+<section class="section section-white"><div class="container">
+  <div class="section-label-dark">Цена</div>
+  <h2 class="section-title-dark" style="margin-bottom:12px;">От какво зависи цената</h2>
+  <p class="section-body-dark" style="max-width:840px;">Маслото и охлаждащата емулсия се приспадат от доставеното количество, затова отцедените стружки носят осезаемо повече от мокрите. Разделянето по вид също влияе — смесените стоманени и чугунени стружки се оценяват по-предпазливо от разделените. Парцали, битов отпадък и пръст също се приспадат.</p>
+  <p class="section-body-dark" style="max-width:840px;margin-top:14px;">Стандартното ограничение за едно парче е до 500 кг, при размери до 1,5 × 0,5 × 0,5 м. По-едрите парчета също се изкупуват — от цената се приспада услугата по нарязване, която се определя според конкретния материал.</p>
+  <p class="note-band" style="max-width:760px;margin-top:20px;">Обадете се преди да докарате — важат <a href="/ceni/" style="color:var(--green);font-weight:700;">цените от таблицата</a>, а за по-големи количества правим оферта.</p>
+</div></section>
+
+<section class="section section-cream"><div class="container">
+  <div class="section-label-dark">След предаването</div>
+  <h2 class="section-title-dark" style="margin-bottom:12px;">Какво става с материала</h2>
+  <p class="section-body-dark" style="max-width:840px;">Стружките са дребни и с голяма повърхност, затова преди претопяване се пресоват на брикети или се подават директно в пещта в контролирано количество. Чугунените стружки отиват в леярните, а стоманените — в стоманодобива. Заради формата си стружките изискват повече подготовка от едрия скрап, което обяснява по-ниската им цена.</p>
 </div></section><section class="section section-cream" id="faq">
   <div class="container">
     <div class="section-label-dark">Въпроси и отговори</div>
     <h2 class="section-title-dark" style="margin-bottom:28px;">Често задавани въпроси</h2>
-    <div class="faq-list"><details class="faq-item"><summary>Приемате ли стружки с масло?</summary><div class="faq-answer">Да — но остатъчното масло и емулсията се отразяват на оценката. Отцедените стружки получават по-добра цена.</div></details><details class="faq-item"><summary>Приемате ли алуминиеви или месингови стружки?</summary><div class="faq-answer">Не — работим само с черни метали. Приемаме стоманени и чугунени стружки.</div></details><details class="faq-item"><summary>Как да докарам стружките?</summary><div class="faq-answer">Насипно, в чували или в биг-бег — както ви е удобно. За редовни количества оставяме контейнер.</div></details></div>
+    <div class="faq-list"><details class="faq-item"><summary>Приемате ли стружки с масло?</summary><div class="faq-answer">Да, но маслото и охлаждащата емулсия се приспадат от доставеното количество. Отцедените стружки носят осезаемо повече.</div></details><details class="faq-item"><summary>Как се доставят стружките?</summary><div class="faq-answer">Насипно, в чували или в биг-бег. За производства с постоянен поток оставяме съдове на място и извозваме по график.</div></details><details class="faq-item"><summary>Приемате ли стружки от цветни метали?</summary><div class="faq-answer">Не. Алуминиевите, месинговите и медните стружки не се изкупуват — работим само с черни метали.</div></details><details class="faq-item"><summary>Трябва ли стоманените и чугунените да са разделени?</summary><div class="faq-answer">Разделените стружки се оценяват по-точно и се претеглят като две групи. При смесена доставка съотношението се определя при окачествяването на място.</div></details><details class="faq-item"><summary>Има ли минимално количество?</summary><div class="faq-answer">За еднократни доставки няма праг, но при над 2000 кг осигуряваме безплатен транспорт и товарене от вашия адрес.</div></details></div>
   </div>
 </section><section class="section-tight section-cream"><div class="container">
   <div class="section-label-dark">Свързани услуги</div>
