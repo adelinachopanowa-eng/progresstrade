@@ -478,11 +478,13 @@ html,body{overflow-x:clip}
   /* снимката отива най-отгоре, както в примера */
   .page-hero--split .hero-figure{order:-1;height:300px;width:100%}
   .page-hero--split .hero-figure::after{display:none}
-  .page-hero--split .hero-copy{padding:34px var(--gutter) 40px}
+  .page-hero--split .hero-copy{padding:38px var(--gutter) 44px}
+  .page-hero--split .hero-copy h1{font-size:29px;line-height:1.14}
   .hero-eyebrow{margin-bottom:13px}
   .hl{background-size:100% 6px}
 }
 @media(max-width:640px){
   .page-hero--split .hero-figure{height:250px}
-  .page-hero--split .hero-copy{padding:30px var(--gutter) 34px}
+  .page-hero--split .hero-copy{padding:34px var(--gutter) 40px}
+  .page-hero--split .hero-copy h1{font-size:28px}
 }
