@@ -425,7 +425,7 @@ section[id]{scroll-margin-top:88px}
 
 .call-fab{display:none}
 @media(max-width:768px){
-.call-fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:90;width:58px;height:58px;border-radius:50%;background:var(--yellow);color:var(--green-deep);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);overflow:visible}
+.call-fab{position:fixed;right:16px;bottom:calc(22px + env(safe-area-inset-bottom));transition:transform .18s ease;will-change:transform;z-index:90;width:58px;height:58px;border-radius:50%;background:var(--yellow);color:var(--green-deep);display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.28);overflow:visible}
 .call-fab svg{width:25px;height:25px}
 }
 

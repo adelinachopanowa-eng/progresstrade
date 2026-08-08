@@ -82,3 +82,18 @@ sections.forEach(s => observer.observe(s));
   mm.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
 })();
+
+/* Бутонът за обаждане да не остава под лентата на браузъра при скрол */
+(function () {
+  var fab = document.querySelector('.call-fab');
+  if (!fab || !window.visualViewport) return;
+  var vv = window.visualViewport;
+  var fit = function () {
+    var hidden = window.innerHeight - vv.height - vv.offsetTop;
+    fab.style.transform = hidden > 1 ? 'translateY(' + -Math.round(hidden) + 'px)' : '';
+  };
+  vv.addEventListener('resize', fit, { passive: true });
+  vv.addEventListener('scroll', fit, { passive: true });
+  addEventListener('orientationchange', fit, { passive: true });
+  fit();
+})();
