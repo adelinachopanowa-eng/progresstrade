@@ -140,15 +140,8 @@
 <link rel="dns-prefetch" href="https://www.google.com">
 <!-- Шрифтовете се зареждат след LCP, за да не се борят с hero изображението за честотната лента.
      Кирилицата ползва системен шрифт, така че визуалната разлика е минимална. -->
-<script>
-  addEventListener('load', function(){
-    var l = document.createElement('link');
-    l.rel = 'stylesheet';
-    l.href = 'https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap';
-    document.head.appendChild(l);
-  });
-</script>
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@600;700;800&display=swap"></noscript>
+
+<noscript></noscript>
 
 
 <link rel="stylesheet" href="/css/site.min.css">
@@ -245,11 +238,11 @@
     </div>
     <div class="services-grid">
       <a class="service-card" href="/izkupuvane/platno-zhelyazo/">
-        <picture><source type="image/webp" srcset="images/platno-zhelyazo.webp"><img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/platno-zhelyazo.jpg" alt="Плътно желязо"></picture>
+        <picture><source type="image/webp" media="(max-width:640px)" srcset="/images/platno-zhelyazo-340.webp"><source type="image/jpeg" media="(max-width:640px)" srcset="/images/platno-zhelyazo-340.jpg"><source type="image/webp" srcset="/images/platno-zhelyazo-480.webp"><img width="480" height="480" src="/images/platno-zhelyazo-480.jpg" loading="lazy" decoding="async" class="service-img"  alt="Плътно желязо"></picture>
         <div class="service-card-body"><h3>Плътно (дебело) желязо</h3><p>Масивни метални конструкции, греди, профили и арматура.</p></div>
       </a>
       <a class="service-card" href="/izkupuvane/tanko-zhelyazo/">
-        <picture><source type="image/webp" srcset="images/tanko-zhelyazo.webp"><img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/tanko-zhelyazo.jpg" alt="Тънко желязо"></picture>
+        <picture><source type="image/webp" media="(max-width:640px)" srcset="/images/tanko-zhelyazo-340.webp"><source type="image/jpeg" media="(max-width:640px)" srcset="/images/tanko-zhelyazo-340.jpg"><source type="image/webp" srcset="/images/tanko-zhelyazo-480.webp"><img width="480" height="480" src="/images/tanko-zhelyazo-480.jpg" loading="lazy" decoding="async" class="service-img"  alt="Тънко желязо"></picture>
         <div class="service-card-body"><h3>Тънко желязо</h3><p>Ламарина и други отпадъци с дебелина под 3 мм.</p></div>
       </a>
       <a class="service-card" href="/izkupuvane/tehnologichen-otpadak/">
@@ -257,11 +250,11 @@
         <div class="service-card-body"><h3>Технологичен отпадък</h3><p>От металообработващи предприятия — изрезки от лазерно рязане и др.</p></div>
       </a>
       <a class="service-card" href="/izkupuvane/koli-za-skrap/">
-        <picture><source type="image/webp" srcset="images/koli-za-skrap.webp"><img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/koli-za-skrap.jpg" alt="Коли за скрап (ИУМПС) за изкупуване"></picture>
+        <picture><source type="image/webp" media="(max-width:640px)" srcset="/images/koli-za-skrap-340.webp"><source type="image/jpeg" media="(max-width:640px)" srcset="/images/koli-za-skrap-340.jpg"><source type="image/webp" srcset="/images/koli-za-skrap-480.webp"><img width="480" height="480" src="/images/koli-za-skrap-480.jpg" loading="lazy" decoding="async" class="service-img"  alt="Коли за скрап (ИУМПС) за изкупуване"></picture>
         <div class="service-card-body"><h3>Коли за скрап (ИУМПС)</h3><p>Изкупуваме и разкомплектоваме автомобили за скрап. Всички документи за дерегистрация в КАТ.</p></div>
       </a>
       <a class="service-card" href="/izkupuvane/elektrouredi/">
-        <picture><source type="image/webp" srcset="images/stari-elektrouredi.webp"><img loading="lazy" decoding="async" width="600" height="600" class="service-img" src="images/stari-elektrouredi.jpg" alt="Стари електроуреди и бяла техника (ИУЕЕО) за изкупуване"></picture>
+        <picture><source type="image/webp" media="(max-width:640px)" srcset="/images/stari-elektrouredi-340.webp"><source type="image/jpeg" media="(max-width:640px)" srcset="/images/stari-elektrouredi-340.jpg"><source type="image/webp" srcset="/images/stari-elektrouredi-480.webp"><img width="480" height="480" src="/images/stari-elektrouredi-480.jpg" loading="lazy" decoding="async" class="service-img"  alt="Стари електроуреди и бяла техника (ИУЕЕО) за изкупуване"></picture>
         <div class="service-card-body"><h3>Стари електроуреди (ИУЕЕО)</h3><p>Перални, хладилници, печки и друга домакинска техника.</p></div>
       </a>
     </div>
@@ -431,7 +424,7 @@
         <a href="/uslugi/konteyneri/" style="color:var(--green);font-weight:700;display:inline-flex;align-items:center;gap:6px">Контейнери и транспорт →</a>
       </div>
       <div class="feature-img">
-        <picture><source type="image/webp" srcset="images/transport.webp"><img loading="lazy" decoding="async" width="600" height="600" src="images/transport.jpg" alt="Безплатен транспорт при над 2000 кг и извозване на скрап в София" class="media-cover"></picture>
+        <picture><source type="image/webp" media="(max-width:640px)" srcset="/images/transport-340.webp"><source type="image/jpeg" media="(max-width:640px)" srcset="/images/transport-340.jpg"><source type="image/webp" srcset="/images/transport-480.webp"><img width="480" height="480" src="/images/transport-480.jpg" loading="lazy" decoding="async"  alt="Безплатен транспорт при над 2000 кг и извозване на скрап в София" class="media-cover"></picture>
       </div>
     </div>
   </div>
