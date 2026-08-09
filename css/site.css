@@ -4,7 +4,7 @@
 
 :root {
   --green:#1a4a2e;--green-deep:#0f2d1c;--green-accent:#21603b;
-  --yellow:#ebb73c;--yellow-soft:#fdf3c0;--cream:#f5f4ee;--cream-dark:#eceae2;
+  --yellow:#ebb73c;--yellow-dark:#e0ad2c;--yellow-soft:#fdf3c0;--red:#b00020;--brand-gold:#9c6604;--cream:#f5f4ee;--cream-dark:#eceae2;
   --white:#ffffff;--text:rgba(0,0,0,0.87);--text-soft:rgba(0,0,0,0.55);
   --text-white:rgba(255,255,255,1);--text-white-soft:rgba(255,255,255,0.70);
   --radius-card:12px;--radius-pill:50px;
@@ -28,7 +28,7 @@ a{color:inherit;text-decoration:none}
 .btn:hover{transform:translateY(-2px)}
 .btn:active{transform:translateY(0) scale(0.98)}
 .btn-primary{background:var(--yellow);color:var(--green-deep);border-color:var(--yellow)}
-.btn-primary:hover{background:#e6b530;border-color:#e6b530;box-shadow:0 10px 22px rgba(240,192,64,0.34)}
+.btn-primary:hover{background:var(--yellow-dark);border-color:var(--yellow-dark);box-shadow:0 10px 22px rgba(235,183,60,0.34)}
 .btn-outline-dark{background:transparent;color:var(--green-deep);border-color:var(--green-deep)}
 .btn-outline-dark:hover{background:var(--green-deep);color:var(--white)}
 .btn-outline-white{background:transparent;color:var(--white);border-color:var(--white)}
@@ -37,7 +37,7 @@ a{color:inherit;text-decoration:none}
 .btn-white:hover{background:var(--yellow);color:var(--green-deep);border-color:var(--yellow)}
 .btn-sm{padding:8px 20px;font-size:13px}
 
-.topbar{background:var(--green-deep);padding:9px var(--gutter);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(240,192,64,0.2)}
+.topbar{background:var(--green-deep);padding:9px var(--gutter);display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(235,183,60,0.2)}
 .topbar-text{font-size:13px;color:rgba(255,255,255,0.92);display:flex;align-items:center;gap:20px;font-weight:500}
 
 .nav{position:sticky;top:0;z-index:100;background:var(--white);box-shadow:var(--shadow-nav)}
@@ -47,9 +47,9 @@ a{color:inherit;text-decoration:none}
 .logo-mark{height:30px;width:30px;display:block;flex-shrink:0}
 .logo-word{font-family:'Montserrat Logo','Helvetica Neue',Arial,sans-serif;font-weight:700;font-size:22px;line-height:1;letter-spacing:-0.01em;transform:translateY(-2px);white-space:nowrap}
 .logo-word .lw-a{color:#1a4a2e}
-.logo-word .lw-b{color:#b87a06}
-.footer .logo-word .lw-a{color:#fff}
-.footer .logo-word .lw-b{color:#f0c040}
+.logo-word .lw-b{color:var(--brand-gold)}
+.footer .logo-word .lw-a{color:var(--white)}
+.footer .logo-word .lw-b{color:var(--yellow)}
 .nav-links{display:flex;align-items:center;gap:var(--space-5);list-style:none}
 .nav-links a{font-size:14px;font-weight:500;color:var(--text);transition:color .15s}
 .nav-links a:hover{color:var(--green)}
@@ -167,7 +167,7 @@ section[id]{scroll-margin-top:88px}
 .contact-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-7);align-items:center}
 .contact-details{display:flex;flex-direction:column;gap:var(--space-4)}
 .contact-item{display:flex;gap:var(--space-3);align-items:flex-start}
-.contact-item-icon{width:44px;height:44px;border-radius:50%;background:rgba(240,192,64,0.15);border:1.5px solid rgba(240,192,64,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.contact-item-icon{width:44px;height:44px;border-radius:50%;background:rgba(235,183,60,0.15);border:1.5px solid rgba(235,183,60,0.3);display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .contact-item-label{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:3px}
 .contact-item-value{font-size:16px;font-weight:600;color:var(--white);line-height:1.4}
 .contact-item-sub{font-size:13px;color:var(--text-white-soft);margin-top:2px}
@@ -230,7 +230,7 @@ section[id]{scroll-margin-top:88px}
 
 /* #3 Споделени класове (заместват повтарящи се inline стилове) */
 .media-cover{width:100%;height:100%;object-fit:cover;border-radius:var(--radius-card);display:block}
-.icon-circle{width:36px;height:36px;border-radius:50%;background:rgba(240,192,64,0.15);border:1.5px solid rgba(240,192,64,0.3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.icon-circle{width:36px;height:36px;border-radius:50%;background:rgba(235,183,60,0.15);border:1.5px solid rgba(235,183,60,0.3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
 
 /* --- Премиум фаза 1 --- */
 /* Хайрлайн рамки на белите карти за остър ръб */
@@ -253,7 +253,7 @@ section[id]{scroll-margin-top:88px}
 .nav-links .dd-toggle{display:inline-flex;align-items:center;gap:5px;cursor:pointer}
 .nav-links .dd-toggle::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;transition:transform .2s;opacity:.65}
 .nav-links li.has-dd:hover .dd-toggle::after,.nav-links li.has-dd:focus-within .dd-toggle::after{transform:rotate(225deg);margin-top:2px}
-.dd-menu{position:absolute;top:calc(100% + 14px);left:0;transform:translateY(8px);width:max-content;max-width:360px;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:14px;box-shadow:var(--shadow-hover);padding:8px;opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;z-index:120}
+.dd-menu{position:absolute;top:calc(100% + 14px);left:0;transform:translateY(8px);width:max-content;max-width:360px;background:var(--white);border:1px solid rgba(0,0,0,.06);border-radius:14px;box-shadow:var(--shadow-hover);padding:8px;opacity:0;visibility:hidden;transition:opacity .2s ease,transform .2s ease;z-index:120}
 .nav-links li.has-dd:hover .dd-menu,.nav-links li.has-dd:focus-within .dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
 .dd-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px}
 .dd-menu a{display:block;padding:11px 14px;border-radius:9px;font-size:14px;font-weight:600;color:var(--green-deep);line-height:1.3;transition:background .15s,color .15s}
@@ -275,7 +275,7 @@ section[id]{scroll-margin-top:88px}
 .page-hero{background:linear-gradient(120deg,var(--green-accent) 0%,var(--green) 52%,var(--green-deep) 100%);position:relative;overflow:hidden;padding:46px 0 56px}
 .page-hero::before{content:"";position:absolute;inset:0;opacity:.13;mix-blend-mode:overlay;pointer-events:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");background-size:160px 160px}
 .page-hero .container{position:relative;z-index:1}
-.page-hero h1{font-family:var(--font-cond);font-size:clamp(30px,3.9vw,44px);font-weight:800;line-height:1.04;color:#fff;letter-spacing:-.02em;max-width:880px;text-wrap:balance}
+.page-hero h1{font-family:var(--font-cond);font-size:clamp(30px,3.9vw,44px);font-weight:800;line-height:1.04;color:var(--white);letter-spacing:-.02em;max-width:880px;text-wrap:balance}
 .page-hero p{font-size:17px;color:var(--text-white-soft);line-height:1.6;max-width:600px;margin-top:16px}
 .page-hero .hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
 
@@ -285,14 +285,14 @@ section[id]{scroll-margin-top:88px}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-3)}
 
 /* Информационна карта (икона + заглавие + текст) */
-.icard{background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4);transition:transform .2s,box-shadow .2s}
+.icard{background:var(--white);border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4);transition:transform .2s,box-shadow .2s}
 .icard:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
 .icard .ic{width:46px;height:46px;border-radius:12px;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .icard h3{font-size:17px;font-weight:800;color:var(--green);letter-spacing:-.01em;margin-bottom:6px}
 .icard p{font-size:14px;color:var(--text-soft);line-height:1.55}
 
 /* Сегментна карта (с връзка) */
-.seg-card{display:flex;flex-direction:column;background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4);transition:transform .2s,box-shadow .2s}
+.seg-card{display:flex;flex-direction:column;background:var(--white);border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4);transition:transform .2s,box-shadow .2s}
 .seg-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover)}
 .seg-card .ic{width:46px;height:46px;border-radius:12px;background:var(--green);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
 .seg-card h3{font-size:18px;font-weight:800;color:var(--green);letter-spacing:-.01em;margin-bottom:6px}
@@ -306,7 +306,7 @@ section[id]{scroll-margin-top:88px}
 
 /* Документи (Компонент B) */
 .docs{max-width:780px;display:flex;flex-direction:column;gap:12px;margin-top:var(--space-5)}
-.doc-row{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:16px 18px}
+.doc-row{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:16px 18px}
 .doc-row .ck{width:24px;height:24px;border-radius:50%;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .doc-row b{color:var(--green-deep)}
 .doc-row span{color:var(--text-soft);font-size:14px}
@@ -329,12 +329,12 @@ section[id]{scroll-margin-top:88px}
 .biz-chip p{font-size:13px;color:var(--text-soft);line-height:1.5}
 
 /* Форма за оферта (Компонент D) */
-.qform{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:var(--shadow-card);padding:clamp(22px,3vw,38px);max-width:780px}
+.qform{background:var(--white);border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:var(--shadow-card);padding:clamp(22px,3vw,38px);max-width:780px}
 .qform .row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .qform .field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
 .qform label{font-size:13px;font-weight:700;color:var(--green-deep)}
 .qform input,.qform select,.qform textarea{font-family:var(--font);font-size:15px;color:var(--text);background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:10px;padding:12px 14px;width:100%;transition:border-color .15s,background .15s}
-.qform input:focus,.qform select:focus,.qform textarea:focus{outline:none;border-color:var(--green-accent);background:#fff}
+.qform input:focus,.qform select:focus,.qform textarea:focus{outline:none;border-color:var(--green-accent);background:var(--white)}
 .qform textarea{min-height:110px;resize:vertical}
 .qform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .qform .form-note{font-size:12px;color:var(--text-soft);margin-top:8px}
@@ -342,7 +342,7 @@ section[id]{scroll-margin-top:88px}
 
 /* Затваряща CTA лента — зелена, с жълт бутон (единен стил на призива) */
 .cta-band{background:var(--green)}
-.cta-band .cta-text h2{color:#fff}
+.cta-band .cta-text h2{color:var(--white)}
 .cta-band .cta-text p{color:rgba(255,255,255,.75)}
 
 /* Контакти във футъра — подредени редове с икони */
@@ -352,7 +352,7 @@ section[id]{scroll-margin-top:88px}
 .footer-contact li a:hover{color:var(--yellow)}
 .footer-contact .ic-sm{width:30px;height:30px;border-radius:50%;background:rgba(240,192,64,.14);border:1px solid rgba(240,192,64,.3);display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
 .footer-contact .fc-l{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow)}
-.footer-contact .fc-v{font-size:14px;color:#fff;line-height:1.4}
+.footer-contact .fc-v{font-size:14px;color:var(--white);line-height:1.4}
 
 /* Спец-лента (ключови факти за материала) */
 .spec-strip{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
@@ -361,15 +361,15 @@ section[id]{scroll-margin-top:88px}
 
 /* „Приемаме / Не приемаме" */
 .accept-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-3);margin-top:var(--space-5)}
-.accept-col{background:#fff;border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4)}
+.accept-col{background:var(--white);border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:var(--space-4)}
 .accept-col h3{font-size:16px;font-weight:800;margin-bottom:12px;letter-spacing:-.01em}
 .accept-col.yes h3{color:var(--green)}
-.accept-col.no h3{color:#b00020}
+.accept-col.no h3{color:var(--red)}
 .accept-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
 .accept-col li{display:flex;gap:9px;align-items:flex-start;font-size:14px;color:var(--text);line-height:1.5}
 .accept-col li::before{font-weight:800;flex-shrink:0}
 .accept-col.yes li::before{content:"✓";color:var(--green)}
-.accept-col.no li::before{content:"✕";color:#b00020}
+.accept-col.no li::before{content:"✕";color:var(--red)}
 
 /* Плейсхолдър за снимка */
 .photo-ph{background:var(--cream-dark);border:2px dashed rgba(0,0,0,.12);border-radius:var(--radius-card);min-height:220px;display:flex;align-items:center;justify-content:center;text-align:center;color:var(--text-soft);font-size:14px;padding:20px}
@@ -390,11 +390,11 @@ section[id]{scroll-margin-top:88px}
 .price-table td:last-child{font-family:var(--font-cond);font-weight:800;font-size:20px;color:var(--green);white-space:nowrap}
 
 /* Калкулатор за ориентировъчна цена */
-.calc{max-width:560px;margin:0 auto;background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:var(--shadow-hover);padding:clamp(22px,3vw,34px)}
+.calc{max-width:560px;margin:0 auto;background:var(--white);border:1px solid rgba(0,0,0,.06);border-radius:16px;box-shadow:var(--shadow-hover);padding:clamp(22px,3vw,34px)}
 .calc-row{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
 .calc-row label{font-size:13px;font-weight:700;color:var(--green-deep)}
 .calc-row select,.calc-row input{font-family:var(--font);font-size:16px;color:var(--text);background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:10px;padding:13px 14px;width:100%}
-.calc-row select:focus,.calc-row input:focus{outline:none;border-color:var(--green-accent);background:#fff}
+.calc-row select:focus,.calc-row input:focus{outline:none;border-color:var(--green-accent);background:var(--white)}
 .calc-out{margin-top:6px;background:var(--green);border-radius:12px;padding:18px 20px;display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .calc-out span{font-size:14px;font-weight:600;color:var(--text-white-soft)}
 .calc-out b{font-family:var(--font-cond);font-size:32px;font-weight:800;color:var(--yellow);letter-spacing:-.01em;font-variant-numeric:tabular-nums}
@@ -493,7 +493,7 @@ html,body{overflow-x:clip}
 }
 
 /* ── спецификации на материала ── */
-.spec-card{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden;max-width:540px;margin-top:var(--space-4)}
+.spec-card{background:var(--white);border:1px solid rgba(0,0,0,.06);border-radius:var(--radius-card);box-shadow:var(--shadow-card);overflow:hidden;max-width:540px;margin-top:var(--space-4)}
 .spec-card dl{display:grid;grid-template-columns:1fr auto;margin:0}
 .spec-card dt{padding:14px 20px;font-size:14.5px;color:var(--text-soft);border-bottom:1px solid var(--cream-dark)}
 .spec-card dd{padding:14px 20px;margin:0;font-size:14.5px;font-weight:700;color:var(--green-deep);text-align:right;border-bottom:1px solid var(--cream-dark)}
@@ -502,12 +502,12 @@ html,body{overflow-x:clip}
 
 /* ── класове, които не бива да се смесват (с връзки) ── */
 .class-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--space-4);list-style:none;padding:0}
-.class-links a{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--cream-dark);border-radius:50px;padding:9px 17px;font-size:14px;font-weight:600;color:var(--green-deep);text-decoration:none;transition:border-color .15s,color .15s}
+.class-links a{display:inline-flex;align-items:center;gap:8px;background:var(--white);border:1px solid var(--cream-dark);border-radius:50px;padding:9px 17px;font-size:14px;font-weight:600;color:var(--green-deep);text-decoration:none;transition:border-color .15s,color .15s}
 .class-links a:hover{border-color:var(--green);color:var(--green)}
 .class-links a::after{content:"→";color:var(--green);font-weight:700;opacity:.55}
 
 /* ── единичен отказ (само съдове под налягане) ── */
-.reject-note{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid rgba(190,60,60,.22);border-left:4px solid #be3c3c;border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:17px 20px;max-width:640px;margin-top:var(--space-4)}
-.reject-note .xm{width:24px;height:24px;border-radius:50%;background:rgba(190,60,60,.1);color:#be3c3c;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:14px;margin-top:1px}
+.reject-note{display:flex;gap:14px;align-items:flex-start;background:var(--white);border:1px solid rgba(176,0,32,.20);border-left:4px solid var(--red);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:17px 20px;max-width:640px;margin-top:var(--space-4)}
+.reject-note .xm{width:24px;height:24px;border-radius:50%;background:rgba(176,0,32,.08);color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:14px;margin-top:1px}
 .reject-note b{color:#a03232;display:block;margin-bottom:3px}
 .reject-note span{color:var(--text-soft);font-size:14.5px;line-height:1.55}
