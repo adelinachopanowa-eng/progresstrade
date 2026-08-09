@@ -511,3 +511,19 @@ html,body{overflow-x:clip}
 .reject-note .xm{width:24px;height:24px;border-radius:50%;background:rgba(176,0,32,.08);color:var(--red);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-weight:800;font-size:14px;margin-top:1px}
 .reject-note b{color:#a03232;display:block;margin-bottom:3px}
 .reject-note span{color:var(--text-soft);font-size:14.5px;line-height:1.55}
+
+/* ── фактори за цената: три карти вместо абзаци ── */
+.factor-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:var(--space-5)}
+.factor{background:var(--white);border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:20px 22px}
+.factor .fh{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.factor .fn{width:26px;height:26px;border-radius:50%;background:var(--yellow);color:var(--green-deep);display:flex;align-items:center;justify-content:center;font:800 13px/1 var(--font);flex-shrink:0}
+.factor b{font-size:15.5px;font-weight:800;color:var(--green-deep);letter-spacing:-.01em}
+.factor p{font-size:14.5px;line-height:1.55;color:var(--text-soft);margin:0}
+@media(max-width:860px){.factor-grid{grid-template-columns:1fr;gap:12px}}
+
+/* ── път на материала: компактни стъпки в редица ── */
+.flow{display:flex;flex-wrap:wrap;gap:10px;margin-top:var(--space-4);list-style:none;padding:0;counter-reset:fl}
+.flow li{flex:1 1 190px;display:flex;gap:11px;align-items:flex-start;background:var(--white);border:1px solid rgba(0,0,0,.05);border-radius:var(--radius-card);box-shadow:var(--shadow-card);padding:15px 17px;font-size:14.5px;line-height:1.5;color:var(--text)}
+.flow li::before{counter-increment:fl;content:counter(fl);width:24px;height:24px;border-radius:50%;background:var(--green);color:var(--white);display:flex;align-items:center;justify-content:center;font:800 12.5px/1 var(--font);flex-shrink:0;margin-top:1px}
+.flow li b{color:var(--green-deep);display:block;margin-bottom:2px;font-size:14.5px}
+@media(max-width:640px){.flow li{flex:1 1 100%}}
