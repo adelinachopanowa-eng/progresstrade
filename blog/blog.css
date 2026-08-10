@@ -94,3 +94,27 @@ img{height:auto}
 ::selection{background:var(--yellow);color:var(--green-deep)}
 
 .draft-badge{display:inline-block;background:var(--yellow-soft);border:1px solid rgba(235,183,60,.5);color:#8a6500;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:5px 12px;border-radius:20px;margin-bottom:14px}
+
+/* ── картите със снимка и водеща статия ── */
+.post-card{padding:0;overflow:hidden}
+.post-card picture{display:block}
+.post-card img{width:100%;aspect-ratio:16/10;object-fit:cover;display:block;margin:0;border-radius:0;background:var(--cream-dark)}
+.post-card .pc-body{padding:20px 22px 24px;display:flex;flex-direction:column;flex:1}
+.post-card .tag{display:inline-block;align-self:flex-start;background:var(--cream);border:1px solid var(--cream-dark);color:var(--green);padding:6px 11px;border-radius:50px;margin-bottom:12px}
+.post-card h2{font-family:var(--font-cond);font-size:19px;font-weight:700;line-height:1.25;color:var(--green-deep);letter-spacing:-.01em;margin:0 0 9px}
+.post-card p{font-size:14.5px;line-height:1.55;color:var(--text-soft);margin:0}
+.post-card .more{margin-top:14px;font-size:14px;font-weight:700;color:var(--green-accent)}
+
+.post-card--lead{grid-column:1 / -1;display:grid;grid-template-columns:minmax(0,46%) minmax(0,1fr);align-items:stretch;padding:0}
+.post-card--lead picture{overflow:hidden;min-height:0}
+.post-card--lead img{width:100%;height:100%;aspect-ratio:auto;min-height:260px}
+.post-card--lead .pc-body{justify-content:center;padding:30px 34px}
+.post-card--lead h2{font-size:26px;line-height:1.18;margin-bottom:11px}
+.post-card--lead p{font-size:15.5px}
+
+@media(max-width:900px){
+  .post-card--lead{display:flex;flex-direction:column}
+  .post-card--lead img{min-height:0;aspect-ratio:16/10}
+  .post-card--lead .pc-body{padding:22px}
+  .post-card--lead h2{font-size:21px}
+}
