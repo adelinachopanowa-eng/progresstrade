@@ -527,3 +527,8 @@ html,body{overflow-x:clip}
 .flow li::before{counter-increment:fl;content:counter(fl);width:24px;height:24px;border-radius:50%;background:var(--green);color:var(--white);display:flex;align-items:center;justify-content:center;font:800 12.5px/1 var(--font);flex-shrink:0;margin-top:1px}
 .flow li b{color:var(--green-deep);display:block;margin-bottom:2px;font-size:14.5px}
 @media(max-width:640px){.flow li{flex:1 1 100%}}
+
+/* ── значка „обновено на" над таблицата с цени ── */
+.price-updated{display:inline-flex;align-items:center;gap:9px;background:var(--yellow-soft);border:1px solid rgba(235,183,60,.5);border-radius:50px;padding:9px 18px;font:600 14px/1 var(--font);color:var(--green-deep);margin-bottom:16px}
+.price-updated svg{flex-shrink:0}
+.price-updated b{font-weight:800}
