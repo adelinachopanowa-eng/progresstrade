@@ -122,12 +122,14 @@ section[id]{scroll-margin-top:88px}
     .service-card{grid-row:span 3;display:grid;grid-template-rows:subgrid;row-gap:0}
     .service-card-body{grid-row:span 2;display:grid;grid-template-rows:subgrid;row-gap:var(--space-1);align-content:start}
     .service-card h3{margin-bottom:0}
-    /* Иконка, заглавие, текст и връзка лягат на общи линии */
-    .grid-4 > .seg-card{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0}
-    .grid-4 > .icard{grid-row:span 3;display:grid;grid-template-rows:subgrid;row-gap:0;align-content:start}
-    .grid-4 > .icard h3,.grid-4 > .seg-card h3{margin-bottom:0;align-self:end;padding-bottom:6px}
-    .grid-4 > .seg-card p{flex:none}
-    .grid-4 > .seg-card .more{margin-top:0;align-self:end}
+    /* Иконка (или снимка), заглавие, текст и връзка лягат на общи линии.
+       54 от 58-те .seg-card са в .grid-3, затова покриваме и трите решетки. */
+    :is(.grid-2,.grid-3,.grid-4) > .seg-card{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0}
+    :is(.grid-3,.grid-4) > .icard,.biz-mini > .biz-chip{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:0;align-content:start}
+    :is(.grid-2,.grid-3,.grid-4) > .seg-card h3,
+    :is(.grid-3,.grid-4) > .icard h3,.biz-mini > .biz-chip h3{margin-bottom:0;align-self:end;padding-bottom:6px}
+    :is(.grid-2,.grid-3,.grid-4) > .seg-card p{flex:none}
+    :is(.grid-2,.grid-3,.grid-4) > .seg-card .more{margin-top:0;align-self:end}
     .steps-grid > .step-card{grid-row:span 3;display:grid;grid-template-rows:subgrid;row-gap:0;justify-items:center;align-items:start}
     .steps-grid > .step-card h3{align-self:start;padding:var(--space-3) 0 6px}
   }
@@ -280,12 +282,14 @@ section[id]{scroll-margin-top:88px}
   .service-card h3{font-size:var(--fs-6);margin-bottom:2px}
   .service-card p{font-size:var(--fs-3)}
   .grid-4,.grid-3,.why-grid,.pain-grid,.biz-mini,.factor-grid{grid-template-columns:1fr;gap:var(--space-2-5)}
-  .icard,.seg-card{display:grid;grid-template-columns:auto 1fr;column-gap:var(--space-3);align-items:start;padding:var(--space-3)}
-  .icard .ic,.seg-card .ic{width:40px;height:40px;margin-bottom:0;grid-row:1/span 3}
-  .icard h3,.seg-card h3{font-size:var(--fs-4);align-self:center}
-  .seg-card p{flex:none}
-  .seg-card .more{padding-top:var(--space-2)}
-  .icard h3:only-of-type + p,.seg-card h3 + p{align-self:start}
+  /* Само картите с иконка стават редове. :has() дава тежест 0,2,0 и бие
+     по-късното .seg-card{display:flex}, а картите със снимка остават непокътнати. */
+  .icard:has(> .ic),.seg-card:has(> .ic){display:grid;grid-template-columns:auto 1fr;
+    column-gap:var(--space-3);align-items:start;padding:var(--space-3)}
+  .icard:has(> .ic) > .ic,.seg-card:has(> .ic) > .ic{width:40px;height:40px;margin-bottom:0;grid-row:1/span 3}
+  .icard:has(> .ic) h3,.seg-card:has(> .ic) h3{font-size:var(--fs-4)}
+  .seg-card:has(> .ic) p{flex:none}
+  .seg-card:has(> .ic) .more{margin-top:0;padding-top:var(--space-2)}
 }
 @media(max-width:400px){
   .service-card{grid-template-columns:96px 1fr}
