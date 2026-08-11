@@ -13,7 +13,7 @@
   --shadow-nav:0 1px 3px rgba(0,0,0,0.12),0 2px 4px rgba(0,0,0,0.08),0 0 2px rgba(0,0,0,0.06);
   --space-1:4px;--space-2:8px;--space-3:16px;--space-4:24px;
   --space-5:32px;--space-6:40px;--space-7:48px;--space-8:56px;--space-9:64px;
-  --gutter:20px;--max-w:1200px;--section-pad:clamp(64px,9vw,112px);
+  --gutter:20px;--max-w:1200px;--content-w:720px;--section-pad:clamp(64px,9vw,112px);
   --font:'Commissioner','Helvetica Neue',Helvetica,Arial,sans-serif;
   --font-cond:'Geologica','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
@@ -533,3 +533,8 @@ html,body{overflow-x:clip}
 .price-updated svg{flex-shrink:0}
 .price-updated b{font-weight:800}
 
+
+/* ── таблици с превъртане на тесен екран ── */
+.tablewrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-top:var(--space-4)}
+.tablewrap table{min-width:420px}
+.policy-p{font-size:15.5px;line-height:1.65;color:var(--text);margin:0 0 14px;max-width:820px}
