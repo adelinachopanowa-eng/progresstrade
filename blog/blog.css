@@ -3,7 +3,7 @@
 body{line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:var(--green-accent)}
 img{height:auto}
-.article-hero{width:100%;aspect-ratio:16/9;object-fit:cover;border-radius:var(--radius-card);margin:4px 0 4px}
+.article-hero{width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:var(--radius-card);margin:4px 0 4px}
 
 /* Breadcrumb */
 .crumb{font-size:13px;color:var(--text-soft);padding:16px 0 0}
