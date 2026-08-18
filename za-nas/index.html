@@ -3,6 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- Google tag (gtag.js) — зарежда се след load, за да не блокира първоначалното рисуване -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DRJJ977F6T');
+  (function(){
+    var loaded = false;
+    function loadGA(){
+      if (loaded) return; loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T';
+      document.head.appendChild(s);
+    }
+    ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
+      window.addEventListener(ev, loadGA, {once:true, passive:true});
+    });
+    if (document.readyState === 'complete') loadGA();
+    else window.addEventListener('load', loadGA);
+  })();
+</script>
 <title>За Прогрестрейд — изкупуване на черни метали от 2002 г. | Прогрестрейд</title>
 <meta name="description" content="Прогрестрейд изкупува черни метали и вторични суровини в София от 2002 г. Лицензирана площадка, напълно легално, с точно измерване.">
 <link rel="canonical" href="https://progresstrade.bg/za-nas/">

@@ -3,6 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- Google tag (gtag.js) — зарежда се след load, за да не блокира първоначалното рисуване -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DRJJ977F6T');
+  (function(){
+    var loaded = false;
+    function loadGA(){
+      if (loaded) return; loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T';
+      document.head.appendChild(s);
+    }
+    ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
+      window.addEventListener(ev, loadGA, {once:true, passive:true});
+    });
+    if (document.readyState === 'complete') loadGA();
+    else window.addEventListener('load', loadGA);
+  })();
+</script>
 <title>Фирма за изкупуване на скрап и метални отпадъци | Прогрестрейд</title>
 <meta name="description" content="Изкупуване на производствен, строителен и технологичен метален отпадък от фирми в София. Контейнер, рязане, извозване и документите вместо вас.">
 <link rel="canonical" href="https://progresstrade.bg/izkupuvane-metal/">
@@ -89,7 +112,7 @@
     <p>За компания метален отпадък е логистика и безопасност, не само цена. Поемаме целия процес. Оставяме контейнер на обекта, режем обемното на място, извозваме със собствена техника и подготвяме документите. Плащаме по банков път, на цена след оглед.</p>
     <div class="hero-actions">
         <a href="/zayavka/" class="btn btn-primary">Заявка за оферта</a>
-      </div>
+      <a href="tel:+359877775577" class="btn btn-outline-white">0877 77 55 77</a></div>
   </div>
 </section><section class="section section-cream">
   <div class="container">

@@ -3,6 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- Google tag (gtag.js) — зарежда се след load, за да не блокира първоначалното рисуване -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DRJJ977F6T');
+  (function(){
+    var loaded = false;
+    function loadGA(){
+      if (loaded) return; loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T';
+      document.head.appendChild(s);
+    }
+    ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
+      window.addEventListener(ev, loadGA, {once:true, passive:true});
+    });
+    if (document.readyState === 'complete') loadGA();
+    else window.addEventListener('load', loadGA);
+  })();
+</script>
 <title>Пункт за вторични суровини в София — цени и работно време | Прогрестрейд</title>
 <meta name="description" content="Пункт за вторични суровини в София, кв. Военна рампа. Изкупни цени, работно време, локация и обслужвани райони. Приемаме от частни лица и фирми.">
 <link rel="canonical" href="https://progresstrade.bg/punkt-vtorichni-surovini/">

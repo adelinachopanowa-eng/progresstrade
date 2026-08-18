@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<!-- Google tag (gtag.js) — зарежда се отложено, за да не блокира първоначалното зареждане -->
+<!-- Google tag (gtag.js) — зарежда се след load, за да не блокира първоначалното рисуване -->
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -22,7 +22,8 @@
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
       window.addEventListener(ev, loadGA, {once:true, passive:true});
     });
-    window.addEventListener('load', function(){ setTimeout(loadGA, 10000); });
+    if (document.readyState === 'complete') loadGA();
+    else window.addEventListener('load', loadGA);
   })();
 </script>
 
@@ -222,10 +223,7 @@
     </ul>
   </div>
   <div class="hero-img">
-    <picture>
-      <source type="image/webp" srcset="images/zhelezen-skrap-800.webp 800w, images/zhelezen-skrap.webp 1400w" sizes="(max-width:900px) 100vw, 45vw">
-      <picture><source type="image/webp" srcset="images/zhelezen-skrap-800.webp 800w, images/zhelezen-skrap.webp 1400w" sizes="(max-width:900px) 100vw, 45vw"><img fetchpriority="high" decoding="async" width="1400" height="934" src="images/zhelezen-skrap.jpg" srcset="images/zhelezen-skrap-800.jpg 800w, images/zhelezen-skrap.jpg 1400w" sizes="(max-width:900px) 100vw, 45vw" alt="Изкупуване на железен скрап и черни метали в София" style="width:100%;height:100%;object-fit:cover;object-position:center;"></picture>
-    </picture>
+    <picture><source type="image/webp" srcset="images/zhelezen-skrap-800.webp 800w, images/zhelezen-skrap.webp 1400w" sizes="(max-width:900px) 100vw, 45vw"><img fetchpriority="high" decoding="async" width="1400" height="934" src="images/zhelezen-skrap.jpg" srcset="images/zhelezen-skrap-800.jpg 800w, images/zhelezen-skrap.jpg 1400w" sizes="(max-width:900px) 100vw, 45vw" alt="Изкупуване на железен скрап и черни метали в София" style="width:100%;height:100%;object-fit:cover;object-position:center;"></picture>
   </div>
 </section>
 

@@ -84,3 +84,26 @@ sections.forEach(s => observer.observe(s));
 })();
 
 
+
+/* Измерване: обаждане, Viber и изпратена заявка.
+   Без тези три събития не се вижда кое на сайта носи запитвания. */
+(function () {
+  function track(name, params) {
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+  }
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('tel:') === 0) {
+      track('obazhdane', { mqsto: a.closest('.call-fab') ? 'plavasht-buton' : (a.closest('.nav') ? 'navigaciya' : 'stranica'), stranica: location.pathname });
+    } else if (href.indexOf('viber:') === 0) {
+      track('viber', { stranica: location.pathname });
+    }
+  }, { passive: true });
+  document.querySelectorAll('form.qform').forEach(function (f) {
+    f.addEventListener('submit', function () {
+      track('zayavka_izpratena', { stranica: location.pathname });
+    });
+  });
+})();

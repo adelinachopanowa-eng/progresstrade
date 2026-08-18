@@ -3,6 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+
+<!-- Google tag (gtag.js) — зарежда се след load, за да не блокира първоначалното рисуване -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-DRJJ977F6T');
+  (function(){
+    var loaded = false;
+    function loadGA(){
+      if (loaded) return; loaded = true;
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T';
+      document.head.appendChild(s);
+    }
+    ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
+      window.addEventListener(ev, loadGA, {once:true, passive:true});
+    });
+    if (document.readyState === 'complete') loadGA();
+    else window.addEventListener('load', loadGA);
+  })();
+</script>
 <title>Политика за поверителност | Прогрестрейд</title>
 <meta name="description" content="Как Прогрестрейд обработва личните данни от формата за заявка, телефон и имейл — основания, срокове, споделяне и вашите права.">
 <link rel="canonical" href="https://progresstrade.bg/poveritelnost/">
@@ -97,11 +120,11 @@
     <h2 style="font-family:var(--font-cond);font-size:26px;color:var(--green-deep);margin:30px 0 10px;letter-spacing:-.01em">Срок на съхранение</h2>
     <p>Пазим данните само толкова, колкото е необходимо за целите по-горе и за изпълнение на законовите ни задължения:</p><ul class="buy-grid" style="grid-template-columns:1fr;max-width:760px;margin:12px 0;"><li><b>Запитвания без сключена сделка</b> — до 12 месеца от последния контакт.</li><li><b>Данни по сключени сделки и документи</b> — 5 години съгласно Закона за счетоводството и данъчното законодателство; при документи по Закона за управление на отпадъците — за нормативно определения срок.</li><li><b>Счетоводни и данъчни документи</b> — 10 години, когато законът го изисква.</li><li><b>Статистически данни от Google Analytics</b> — до 14 месеца.</li></ul><p class="policy-p">След изтичане на срока данните се изтриват или анонимизират.</p>
     <h2 style="font-family:var(--font-cond);font-size:26px;color:var(--green-deep);margin:30px 0 10px;letter-spacing:-.01em">С кого ги споделяме</h2>
-    <p>При нужда — със счетоводни и транспортни партньори, обработващи данни от наше име, и с компетентни държавни органи, когато законът го изисква. Конкретно ползваме: <b>Formspree</b> (обработва изпратените чрез формата запитвания), <b>Google Analytics</b> (анонимна статистика за посещенията), <b>Google Maps</b> (вградена карта на страница Контакти), <b>Google Fonts</b> (шрифтове) и <b>GitHub Pages</b> (хостинг на сайта). Тези доставчици обработват данни от наше име съгласно своите политики за поверителност.</p>
+    <p>При нужда — със счетоводни и транспортни партньори, обработващи данни от наше име, и с компетентни държавни органи, когато законът го изисква. Конкретно ползваме: <b>Formspree</b> (обработва изпратените чрез формата запитвания), <b>Google Analytics</b> (анонимна статистика за посещенията), <b>Google Maps</b> (вградена карта на страница Контакти) и <b>GitHub Pages</b> (хостинг на сайта). Шрифтовете се зареждат от нашия сървър, а не от външен доставчик. Тези доставчици обработват данни от наше име съгласно своите политики за поверителност.</p>
     <h2 style="font-family:var(--font-cond);font-size:26px;color:var(--green-deep);margin:30px 0 10px;letter-spacing:-.01em">Вашите права</h2>
     <p>Имате право на достъп, корекция, изтриване и ограничаване на обработката, право на възражение и преносимост, както и право да оттеглите съгласието си по всяко време. Можете да подадете и жалба до надзорния орган (Комисия за защита на личните данни). За да упражните правата си, пишете ни на <a href="mailto:progresstradesofia@gmail.com" class="link-green">progresstradesofia@gmail.com</a>.</p>
     <h2 style="font-family:var(--font-cond);font-size:26px;color:var(--green-deep);margin:30px 0 10px;letter-spacing:-.01em">Бисквитки</h2>
-    <p>Сайтът използва бисквитки за основната си работа и за анонимна статистика:</p><ul class="buy-grid" style="grid-template-columns:1fr;max-width:760px;margin:12px 0;"><li><b>Необходими</b> — за правилното зареждане и работа на страниците.</li><li><b>Аналитични (Google Analytics, _ga)</b> — брой посещения и поведение на сайта, в анонимизиран вид. Срок до 14 месеца.</li><li><b>Външни услуги</b> — Google Maps и Google Fonts могат да поставят собствени бисквитки при зареждане на картата и шрифтовете.</li></ul><p class="policy-p">Можете по всяко време да изтриете или блокирате бисквитките от настройките на браузъра си. Блокирането на необходимите бисквитки може да наруши работата на сайта.</p>
+    <p>Сайтът използва бисквитки за основната си работа и за анонимна статистика:</p><ul class="buy-grid" style="grid-template-columns:1fr;max-width:760px;margin:12px 0;"><li><b>Необходими</b> — за правилното зареждане и работа на страниците.</li><li><b>Аналитични (Google Analytics, _ga)</b> — брой посещения и поведение на сайта, в анонимизиран вид. Срок до 14 месеца.</li><li><b>Външни услуги</b> — Google Maps може да постави собствени бисквитки при зареждане на картата на страница Контакти.</li></ul><p class="policy-p">Можете по всяко време да изтриете или блокирате бисквитките от настройките на браузъра си. Блокирането на необходимите бисквитки може да наруши работата на сайта.</p>
     <p style="margin-top:24px;color:var(--text-soft);font-size:14px;">Последна актуализация: 31 юли 2026 г.</p>
   </div>
 </div></section></main><footer class="footer">
