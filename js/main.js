@@ -62,7 +62,10 @@ sections.forEach(s => observer.observe(s));
       if (btn) { btn.disabled = true; btn.dataset.t = btn.textContent; btn.textContent = 'Изпращане…'; }
       fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } })
         .then(function (r) {
-          if (r.ok) { window.location.href = '/blagodarim/'; }
+          if (r.ok) {
+            if (window.ptTrack) window.ptTrack('zapitvane', { forma: f.getAttribute('data-forma') || 'zayavka' });
+            window.location.href = '/blagodarim/';
+          }
           else { throw new Error('bad'); }
         })
         .catch(function () {
@@ -84,26 +87,65 @@ sections.forEach(s => observer.observe(s));
 })();
 
 
-
-/* Измерване: обаждане, Viber и изпратена заявка.
-   Без тези три събития не се вижда кое на сайта носи запитвания. */
+/* ── Измерване ─────────────────────────────────────────────────────────────
+   Събития, по които се вижда кое на сайта носи клиенти:
+     obazhdane      клик на телефонен номер
+     viber          клик на Viber
+     imeyl          клик на имейл
+     upatvane       клик за упътване в Google Maps
+     zapitvane      успешно изпратена заявка (не просто натиснат бутон)
+     zadarzhane_10s посетителят е останал поне 10 секунди
+   Параметърът „mqsto" казва откъде е дошъл кликът, „stranica" — от коя страница. */
+window.ptTrack = function (name, params) {
+  if (typeof gtag === 'function') {
+    gtag('event', name, Object.assign({ stranica: location.pathname }, params || {}));
+  }
+};
 (function () {
-  function track(name, params) {
-    if (typeof gtag === 'function') gtag('event', name, params || {});
+  function mqsto(a) {
+    if (a.closest('.call-fab')) return 'plavasht-buton';
+    if (a.closest('.nav') || a.closest('.topbar')) return 'gorna-lenta';
+    if (a.closest('.mobile-menu')) return 'menu';
+    if (a.closest('.footer')) return 'futar';
+    if (a.closest('.hero-actions') || a.closest('.page-hero')) return 'hero';
+    return 'stranica';
   }
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');
     if (!a) return;
     var href = a.getAttribute('href') || '';
-    if (href.indexOf('tel:') === 0) {
-      track('obazhdane', { mqsto: a.closest('.call-fab') ? 'plavasht-buton' : (a.closest('.nav') ? 'navigaciya' : 'stranica'), stranica: location.pathname });
-    } else if (href.indexOf('viber:') === 0) {
-      track('viber', { stranica: location.pathname });
-    }
+    if (href.indexOf('tel:') === 0) window.ptTrack('obazhdane', { mqsto: mqsto(a) });
+    else if (href.indexOf('viber:') === 0) window.ptTrack('viber', { mqsto: mqsto(a) });
+    else if (href.indexOf('mailto:') === 0) window.ptTrack('imeyl', { mqsto: mqsto(a) });
+    else if (href.indexOf('maps.app.goo.gl') > -1 || href.indexOf('google.com/maps') > -1)
+      window.ptTrack('upatvane', { mqsto: mqsto(a) });
   }, { passive: true });
-  document.querySelectorAll('form.qform').forEach(function (f) {
-    f.addEventListener('submit', function () {
-      track('zayavka_izpratena', { stranica: location.pathname });
-    });
-  });
+
+  /* Задържане над 10 секунди. Таймерът спира, ако разделът мине на заден план,
+     за да не се броят отворени и забравени табове. */
+  var spent = 0, last = Date.now(), fired = false, t = setInterval(function () {
+    if (document.visibilityState === 'visible') spent += Date.now() - last;
+    last = Date.now();
+    if (!fired && spent >= 10000) { fired = true; clearInterval(t); window.ptTrack('zadarzhane_10s'); }
+  }, 1000);
+})();
+
+/* ── Работно време ─────────────────────────────────────────────────────────
+   Пон–Пет 9:00–17:00 по българско време. Извън него показваме честно
+   известие и насочваме към Viber и заявка, вместо да каним към обаждане,
+   на което няма кой да отговори. Часът се чете за София, не по часовника
+   на устройството — иначе клиент от друга часова зона вижда грешно. */
+(function () {
+  var notes = document.querySelectorAll('[data-closed-note]');
+  if (!notes.length) return;
+  var d;
+  try {
+    d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Sofia' }));
+  } catch (e) { d = new Date(); }
+  var den = d.getDay(), chas = d.getHours() + d.getMinutes() / 60;
+  var otvoreno = den >= 1 && den <= 5 && chas >= 9 && chas < 17;
+  if (!otvoreno) {
+    notes.forEach(function (n) { n.classList.add('on'); });
+    if (window.ptTrack) window.ptTrack('izvan_rabotno_vreme');
+  }
 })();

@@ -135,8 +135,8 @@
         <div class="field"><label for="f-lice">Лице за контакт <span class="req">*</span></label><input id="f-lice" type="text" name="lice" autocomplete="name" required></div>
       </div>
       <div class="row">
-        <div class="field"><label for="f-tel">Телефон <span class="req">*</span></label><input id="f-tel" type="tel" name="telefon" autocomplete="tel" required></div>
-        <div class="field"><label for="f-email">Имейл</label><input id="f-email" type="email" name="email" autocomplete="email"></div>
+        <div class="field"><label for="f-tel">Телефон <span class="req">*</span></label><input id="f-tel" type="tel" name="telefon" autocomplete="tel" inputmode="tel" required></div>
+        <div class="field"><label for="f-email">Имейл</label><input id="f-email" type="email" name="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"></div>
       </div>
       <div class="row">
         <div class="field"><label for="f-material">Вид материал</label>
@@ -155,7 +155,7 @@
         <div class="field"><label for="f-kol">Приблизително количество</label><input id="f-kol" type="text" name="kolichestvo" placeholder="напр. 5 тона / един контейнер"></div>
       </div>
       <div class="row">
-        <div class="field"><label for="f-lok">Локация / обект</label><input id="f-lok" type="text" name="lokacia"></div>
+        <div class="field"><label for="f-lok">Локация / обект</label><input id="f-lok" type="text" name="lokacia" autocomplete="address-level2"></div>
         <div class="field"><label for="f-nujda">Тип нужда</label>
           <select id="f-nujda" name="nujda">
             <option value="">Изберете…</option>
