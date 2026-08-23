@@ -79,6 +79,9 @@ a{color:inherit;text-decoration:none}
 @media(prefers-reduced-motion:reduce){.js-reveal .reveal{opacity:1!important;transform:none!important;transition:none!important}}
 /* Достъпност + премиум детайли */
 a:focus-visible,.btn:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:6px}
+/* Клавиатурният потребител минаваше през целия хедър преди съдържанието. */
+.skip-link{position:absolute;left:8px;top:-60px;z-index:200;background:var(--green-deep);color:var(--white);padding:10px 16px;border-radius:0 0 6px 6px;font-size:var(--fs-3);font-weight:600;transition:top var(--dur-fast) ease}
+.skip-link:focus{top:0}
 .btn-primary:focus-visible{outline-color:var(--green-deep)}
 section[id]{scroll-margin-top:88px}
 .logo{transition:opacity var(--dur-fast) ease}
@@ -414,6 +417,16 @@ section[id]{scroll-margin-top:88px}
 .qform input,.qform select,.qform textarea{font-family:var(--font);font-size:var(--fs-5);color:var(--text);background:var(--cream);border:1.5px solid var(--cream-dark);border-radius:var(--radius-sm);padding:12px 12px;width:100%;transition:border-color var(--dur-fast),background var(--dur-fast)}
 .qform input:focus,.qform select:focus,.qform textarea:focus{outline:none;border-color:var(--green-accent);background:var(--white)}
 .qform textarea{min-height:110px;resize:vertical}
+/* Полетата губеха контура си и оставаха само с цвят на рамката. Контурът се
+   връща, а рамката остава — фокусът вече не зависи само от цветоусещане. */
+.qform input:focus-visible,.qform select:focus-visible,.qform textarea:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+/* Съгласието е задължително поле, а нативният чекбокс пренебрегва border-color
+   и background. Без свои правила той оставаше 13x13 px и без никакъв признак,
+   че е на фокус. */
+.qform .consent{flex-direction:row;align-items:flex-start;gap:10px;margin-bottom:18px}
+.qform .consent input[type=checkbox]{appearance:auto;accent-color:var(--green-accent);width:24px;height:24px;min-width:24px;padding:0;margin:1px 0 0;background:none;border:none;border-radius:0;flex-shrink:0;cursor:pointer}
+.qform .consent input[type=checkbox]:focus-visible{outline:3px solid var(--yellow);outline-offset:3px}
+.qform .consent label{font-weight:500;font-size:var(--fs-2);line-height:1.5;cursor:pointer}
 .qform .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .qform .form-note{font-size:var(--fs-1);color:var(--text-soft);margin-top:8px}
 .qform .req{color:#8a5e00}
