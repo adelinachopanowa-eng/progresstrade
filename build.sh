@@ -1,5 +1,16 @@
 #!/bin/sh
-# Минифицира CSS и JS. Изпълнявай след ВСЯКА промяна в css/site.css или js/main.js.
+# Пълна подготовка преди публикуване. Изпълнявай след ВСЯКА промяна
+# в css/site.css, js/main.js или в текста на страниците.
+#
+#   1. минифицира CSS и JS
+#   2. обновява <lastmod> в sitemap.xml от git
+#   3. слага версия на CSS/JS в адресите, за да не се сервира кеширан стил
+#
+# Редът има значение: sitemap се пуска преди стъпването на версиите, за да
+# вижда кои страници наистина са променени, а не кои са пипнати от стъпването.
+set -e
+cd "$(dirname "$0")"
+
 python3 - <<'PY'
 import re
 c=open('css/site.css').read()
@@ -16,3 +27,6 @@ j=re.sub(r'\n\s*\n','\n',j)
 open('js/main.min.js','w').write(re.sub(r'^\s+','',j,flags=re.M))
 print('минифицирани: css/site.min.css, js/main.min.js')
 PY
+
+python3 build/sitemap.py
+python3 build/stamp-assets.py
