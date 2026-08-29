@@ -101,6 +101,7 @@ sections.forEach(s => observer.observe(s));
 
    Диагностика извън фунията (не се дедуплицира, показва кой бутон работи):
      telefon_klik, nomer_kopiran, viber_klik, imeyl_klik, upatvane_klik, adres_kopiran
+     nomer_viden — знаменателят: колко души изобщо са видели номера
 
    Уникалността е в прозорец от 30 минути без активност — толкова е и сесията
    при Google. Паметта на раздела не става: който затвори и се върне след 5 минути,
@@ -182,6 +183,29 @@ sections.forEach(s => observer.observe(s));
       kontakt('adres');
     }
   });
+
+  /* ── видян ли е изобщо номерът ──
+     Без този знаменател telefon_klik не значи нищо: 5 клика при 50 души,
+     видели номера, е друго нещо от 5 клика при 500. Праща се веднъж на
+     посещение, при поне половин секунда в полезрението. */
+  if ('IntersectionObserver' in window) {
+    var teli = document.querySelectorAll('a[href^="tel:"]');
+    if (teli.length) {
+      var tajmer = null;
+      var vio = new IntersectionObserver(function (entries) {
+        var vidim = entries.some(function (e) { return e.isIntersecting; });
+        if (vidim && !tajmer) {
+          tajmer = setTimeout(function () {
+            if (vednaj('nomer_viden')) pratiI('nomer_viden', { broi: teli.length });
+            vio.disconnect();
+          }, 500);
+        } else if (!vidim && tajmer) {
+          clearTimeout(tajmer); tajmer = null;
+        }
+      }, { threshold: 0.5 });
+      [].forEach.call(teli, function (el) { vio.observe(el); });
+    }
+  }
 
   /* ── калкулаторът: човекът смята парите си ── */
   document.querySelectorAll('.calc select, .calc input').forEach(function (el) {
