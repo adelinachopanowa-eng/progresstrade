@@ -668,6 +668,16 @@ html,body{overflow-x:clip}
 .btn-viber svg{flex-shrink:0}
 .quick-contact{display:flex;flex-wrap:wrap;gap:var(--space-2-5);align-items:center;margin-top:var(--space-4)}
 .quick-contact .qc-note{font-size:var(--fs-2);color:var(--text-soft);line-height:var(--lh-normal);flex:1 1 220px}
+/* Лента за годишен отпуск — показва се само от скрипта, в зададените дни.
+   Датите са в js/main.js; след последния ден лентата изчезва сама. */
+.vacation-bar{display:none;background:var(--yellow);color:var(--green-deep);
+  padding:10px var(--gutter);font-size:var(--fs-3);font-weight:600;line-height:var(--lh-normal);
+  text-align:center;border-bottom:1px solid rgba(15,45,28,.18)}
+.vacation-bar.on{display:block}
+@media(max-width:560px){.vacation-bar{padding:8px 14px;font-size:var(--fs-2);line-height:1.45}}
+.vacation-bar b{font-weight:800}
+.vacation-bar a{color:var(--green-deep);text-decoration:underline;font-weight:800;white-space:nowrap}
+
 /* Известие извън работно време — показва се само от скрипта */
 .closed-note{display:none;align-items:flex-start;gap:10px;background:var(--yellow-soft);
   border:1px solid rgba(235,183,60,.5);border-radius:var(--radius-card);padding:12px 16px;

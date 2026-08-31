@@ -236,22 +236,53 @@ sections.forEach(s => observer.observe(s));
   }, 1000);
 })();
 
-/* ── Работно време ─────────────────────────────────────────────────────────
+/* ── Работно време и отпуск ─────────────────────────────────────────────────
    Пон–Пет 9:00–17:00 по българско време. Извън него показваме честно
    известие и насочваме към Viber и заявка, вместо да каним към обаждане,
    на което няма кой да отговори. Часът се чете за София, не по часовника
-   на устройството — иначе клиент от друга часова зона вижда грешно. */
+   на устройството — иначе клиент от друга часова зона вижда грешно.
+
+   ОТПУСК: датите по-долу са единственото, което се пипа. Лентата в хедъра
+   се показва само в този период и изчезва сама след последния ден, затова
+   не остава да виси стар текст, ако някой забрави да я махне. Разметката
+   стои скрита в HTML — ако скриптът не се изпълни, лентата просто не се
+   показва, вместо да лъже. За да се спре напълно, се изтриват двата реда
+   с датите. */
 (function () {
-  var notes = document.querySelectorAll('[data-closed-note]');
-  if (!notes.length) return;
+  var OTPUSK_OT = '2026-08-31';       // първи ден включително
+  var OTPUSK_DO = '2026-09-04';       // последен ден включително
+
   var d;
   try {
     d = new Date(new Date().toLocaleString('en-US', { timeZone: 'Europe/Sofia' }));
   } catch (e) { d = new Date(); }
+
+  function iso(x) {
+    return x.getFullYear() + '-' +
+      ('0' + (x.getMonth() + 1)).slice(-2) + '-' + ('0' + x.getDate()).slice(-2);
+  }
+  var dnes = iso(d);
+  var vOtpusk = OTPUSK_OT && OTPUSK_DO && dnes >= OTPUSK_OT && dnes <= OTPUSK_DO;
+
+  if (vOtpusk) {
+    var bar = document.querySelector('[data-vacation]');
+    if (bar) bar.classList.add('on');
+    if (window.ptTrack) window.ptTrack('otpusk_lenta');
+  }
+
+  var notes = document.querySelectorAll('[data-closed-note]');
+  if (!notes.length) return;
   var den = d.getDay(), chas = d.getHours() + d.getMinutes() / 60;
-  var otvoreno = den >= 1 && den <= 5 && chas >= 9 && chas < 17;
+  var otvoreno = !vOtpusk && den >= 1 && den <= 5 && chas >= 9 && chas < 17;
   if (!otvoreno) {
+    if (vOtpusk) {
+      notes.forEach(function (n) {
+        var t = n.querySelector('span') || n;
+        t.textContent = 'В годишен отпуск сме до 4 септември. Оставете заявка или ' +
+          'пишете на Viber — отговаряме веднага след това.';
+      });
+    }
     notes.forEach(function (n) { n.classList.add('on'); });
-    if (window.ptTrack) window.ptTrack('izvan_rabotno_vreme');
+    if (window.ptTrack) window.ptTrack(vOtpusk ? 'otpusk_izvestie' : 'izvan_rabotno_vreme');
   }
 })();
