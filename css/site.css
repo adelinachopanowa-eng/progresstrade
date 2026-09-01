@@ -692,6 +692,9 @@ html,body{overflow-x:clip}
 .link-cell{color:var(--green-deep);font-weight:600}
 .link-cta--light{color:var(--yellow)}
 .price-table td a{display:flex;align-items:center;min-height:40px}
+/* Цената за килограм под тази за тон — второ ниво в същата клетка,
+   за да не се налага трета колона, която на телефон не се събира. */
+.price-table .per-kg{display:block;font-family:var(--font);font-size:var(--fs-2);font-weight:600;color:var(--text-soft);letter-spacing:0}
 .link-green{color:var(--green);font-weight:700}
 .measure{max-width:820px}
 .measure-wide{max-width:840px}
