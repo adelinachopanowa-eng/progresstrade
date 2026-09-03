@@ -181,6 +181,10 @@ section[id]{scroll-margin-top:88px}
 .price-card-price .upto{display:block;font-family:var(--font);font-size:var(--fs-1);font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-white-soft);margin-bottom:3px}
 
 .faq-list{max-width:760px;display:flex;flex-direction:column;gap:12px}
+/* На широк екран въпросите вървяха като тесен стълб отляво и оставяха
+   мъртво поле отдясно. В две колони блокът е наполовина по-нисък и
+   страницата спира да изглежда като списък без край. */
+@media(min-width:901px){.faq-list{max-width:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}}
 .faq-item{background:var(--white);border:1px solid var(--cream-dark);border-radius:var(--radius-card);overflow:hidden}
 .faq-item summary{list-style:none;cursor:pointer;padding:16px 20px;font-family:var(--font-cond);font-size:var(--fs-6);font-weight:700;color:var(--green-deep);display:flex;justify-content:space-between;align-items:center;gap:12px}
 .faq-item summary::-webkit-details-marker{display:none}
