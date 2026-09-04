@@ -163,13 +163,25 @@ section[id]{scroll-margin-top:88px}
 .client-logo img{max-width:100%;max-height:70px;width:auto;height:auto;object-fit:contain}
 
 .steps-section{background:var(--white)}
-.steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-top:var(--space-6);position:relative}
-/* Стъпките са четири на страниците за фирми и за коли, но три на началната.
-   Заковани четири колони караха третата карта да виси вляво, а чертата
-   продължаваше в празното поле вдясно. */
-.steps-grid:has(> .step-card:nth-child(2):last-child){grid-template-columns:repeat(2,1fr)}
-.steps-grid:has(> .step-card:nth-child(3):last-child){grid-template-columns:repeat(3,1fr)}
-.steps-grid:has(> .step-card:nth-child(5):last-child){grid-template-columns:repeat(5,1fr)}
+/* Броят колони следва броя стъпки: три на началната, четири на страниците за
+   фирми и за коли за скрап. Закованите четири колони караха третата карта на
+   началната да виси вляво. От 561 до 900 px четирите не се побират в един ред
+   — заглавието на четвъртата излизаше извън контейнера — затова стават 2x2. */
+.steps-grid{display:grid;grid-template-columns:1fr;gap:var(--space-4);margin-top:var(--space-6);position:relative}
+@media(min-width:561px){.steps-grid{grid-template-columns:repeat(2,1fr)}}
+/* Три стъпки не се делят на две — до 700 px вървят една под друга. */
+@media(min-width:561px) and (max-width:699px){
+  .steps-grid:has(> .step-card:nth-child(3):last-child){grid-template-columns:1fr}
+}
+/* От 700 px нататък трите се подреждат в ред и остават така. */
+@media(min-width:700px){
+  .steps-grid:has(> .step-card:nth-child(3):last-child){grid-template-columns:repeat(3,1fr)}
+}
+@media(min-width:901px){
+  .steps-grid{grid-template-columns:repeat(4,1fr)}
+  .steps-grid:has(> .step-card:nth-child(2):last-child){grid-template-columns:repeat(2,1fr)}
+  .steps-grid:has(> .step-card:nth-child(5):last-child){grid-template-columns:repeat(5,1fr)}
+}
 /* Чертата се подрязва според броя колони, за да свършва в кръгчето на
    последната стъпка, а не в празното поле. */
 .steps-grid::before{content:'';position:absolute;top:32px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);height:1px;background:rgba(0,0,0,.12)}
