@@ -164,7 +164,18 @@ section[id]{scroll-margin-top:88px}
 
 .steps-section{background:var(--white)}
 .steps-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--space-4);margin-top:var(--space-6);position:relative}
+/* Стъпките са четири на страниците за фирми и за коли, но три на началната.
+   Заковани четири колони караха третата карта да виси вляво, а чертата
+   продължаваше в празното поле вдясно. */
+.steps-grid:has(> .step-card:nth-child(2):last-child){grid-template-columns:repeat(2,1fr)}
+.steps-grid:has(> .step-card:nth-child(3):last-child){grid-template-columns:repeat(3,1fr)}
+.steps-grid:has(> .step-card:nth-child(5):last-child){grid-template-columns:repeat(5,1fr)}
+/* Чертата се подрязва според броя колони, за да свършва в кръгчето на
+   последната стъпка, а не в празното поле. */
 .steps-grid::before{content:'';position:absolute;top:32px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);height:1px;background:rgba(0,0,0,.12)}
+.steps-grid:has(> .step-card:nth-child(2):last-child)::before{left:calc(25% + 20px);right:calc(25% + 20px)}
+.steps-grid:has(> .step-card:nth-child(3):last-child)::before{left:calc(16.6667% + 20px);right:calc(16.6667% + 20px)}
+.steps-grid:has(> .step-card:nth-child(5):last-child)::before{left:calc(10% + 20px);right:calc(10% + 20px)}
 .step-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:var(--space-3);position:relative;z-index:1}
 .step-num{width:64px;height:64px;border-radius:50%;background:var(--green);color:var(--white);font-family:var(--font-cond);font-size:var(--fs-8);font-weight:800;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px var(--cream),0 0 0 7px rgba(0,0,0,.10);flex-shrink:0}
 .step-card h3{font-size:var(--fs-4);font-weight:700;color:var(--green);letter-spacing:-0.01em}

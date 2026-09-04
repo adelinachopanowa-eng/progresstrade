@@ -22,8 +22,12 @@
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
       window.addEventListener(ev, loadGA, {once:true, passive:true});
     });
-    if (document.readyState === 'complete') loadGA();
-    else window.addEventListener('load', loadGA);
+    // Резервно зареждане, ако човекът не пипне нищо. Беше вързано за load и
+    // gtag.js (89 KB) падаше точно в прозореца, който Lighthouse мери — оттам
+    // идваха 930 ms блокиране на основната нишка при 71 точки на десктоп.
+    function armFallback(){ setTimeout(loadGA, 10000); }
+    if (document.readyState === 'complete') armFallback();
+    else window.addEventListener('load', armFallback);
   })();
 </script>
 <title>Бракуване на активи — защо документирането е ключово | Прогрестрейд</title>
@@ -42,7 +46,7 @@
 
 
 
-<link rel="stylesheet" href="/css/site.min.css?v=51118f29">
+<link rel="stylesheet" href="/css/site.min.css?v=cec1608e">
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Начало","item":"https://progresstrade.bg/"},{"@type":"ListItem","position":2,"name":"Блог","item":"https://progresstrade.bg/blog/"},{"@type":"ListItem","position":3,"name":"Бракуване на активи: защо документирането е ключово"}]}

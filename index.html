@@ -22,8 +22,12 @@
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
       window.addEventListener(ev, loadGA, {once:true, passive:true});
     });
-    if (document.readyState === 'complete') loadGA();
-    else window.addEventListener('load', loadGA);
+    // Резервно зареждане, ако човекът не пипне нищо. Беше вързано за load и
+    // gtag.js (89 KB) падаше точно в прозореца, който Lighthouse мери — оттам
+    // идваха 930 ms блокиране на основната нишка при 71 точки на десктоп.
+    function armFallback(){ setTimeout(loadGA, 10000); }
+    if (document.readyState === 'complete') armFallback();
+    else window.addEventListener('load', armFallback);
   })();
 </script>
 
@@ -145,7 +149,7 @@
 <noscript></noscript>
 
 
-<link rel="stylesheet" href="/css/site.min.css?v=51118f29">
+<link rel="stylesheet" href="/css/site.min.css?v=cec1608e">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","name":"Прогрестрейд","url":"https://progresstrade.bg/","inLanguage":"bg","publisher":{"@id":"https://progresstrade.bg/#business"}}
 </script>
@@ -256,7 +260,7 @@
         <div class="service-card-body"><h3>Тънко желязо</h3><p>Ламарина и профили под 3 мм.</p></div>
       </a>
       <a class="service-card" href="/izkupuvane/tehnologichen-otpadak/">
-        <picture><source type="image/webp" srcset="images/tehnologichen-otpadak-800.webp 800w, images/tehnologichen-otpadak.webp 900w, images/tehnologichen-otpadak-1200.webp 1200w" sizes="(max-width:640px) 112px, (max-width:900px) 47vw, 217px"><img src="images/tehnologichen-otpadak-800.jpg" srcset="images/tehnologichen-otpadak-800.jpg 800w, images/tehnologichen-otpadak.jpg 900w, images/tehnologichen-otpadak-1200.jpg 1200w" sizes="(max-width:640px) 112px, (max-width:900px) 47vw, 217px" loading="lazy" decoding="async" width="900" height="900" class="service-img" alt="Технологичен отпадък от металообработка за изкупуване"></picture>
+        <picture><source type="image/webp" srcset="/images/tehnologichen-otpadak-340.webp 340w, /images/tehnologichen-otpadak-480.webp 480w, /images/tehnologichen-otpadak-800.webp 800w" sizes="(max-width:640px) 112px, (max-width:900px) 47vw, 217px"><img src="/images/tehnologichen-otpadak-340.jpg" srcset="/images/tehnologichen-otpadak-340.jpg 340w, /images/tehnologichen-otpadak-480.jpg 480w, /images/tehnologichen-otpadak-800.jpg 800w" sizes="(max-width:640px) 112px, (max-width:900px) 47vw, 217px" loading="lazy" decoding="async" width="480" height="480" class="service-img" alt="Технологичен отпадък от металообработка за изкупуване"></picture>
         <div class="service-card-body"><h3>Технологичен отпадък</h3><p>Изрезки от лазерно рязане и производствен отпадък.</p></div>
       </a>
       <a class="service-card" href="/izkupuvane/koli-za-skrap/">

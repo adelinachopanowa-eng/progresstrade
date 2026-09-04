@@ -22,8 +22,12 @@
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
       window.addEventListener(ev, loadGA, {once:true, passive:true});
     });
-    if (document.readyState === 'complete') loadGA();
-    else window.addEventListener('load', loadGA);
+    // Резервно зареждане, ако човекът не пипне нищо. Беше вързано за load и
+    // gtag.js (89 KB) падаше точно в прозореца, който Lighthouse мери — оттам
+    // идваха 930 ms блокиране на основната нишка при 71 точки на десктоп.
+    function armFallback(){ setTimeout(loadGA, 10000); }
+    if (document.readyState === 'complete') armFallback();
+    else window.addEventListener('load', armFallback);
   })();
 </script>
 <title>Достъп за камион на обекта: как да подготвите мястото | Прогрестрейд</title>
@@ -41,7 +45,7 @@
 
 
 
-<link rel="stylesheet" href="/css/site.min.css?v=51118f29">
+<link rel="stylesheet" href="/css/site.min.css?v=cec1608e">
 <link rel="stylesheet" href="/blog/blog.css">
 <script type="application/ld+json">
 {"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Достъп за камион на обекта: как да подготвите мястото", "description": "Какво е нужно, за да влезе камион с кран или контейнеровоз на обекта — ширина, височина, място за маневра и къде да е металът, за да се натовари.", "image": "https://progresstrade.bg/images/og-demontazh-tovarene-rezervoar-skrap.jpg", "datePublished": "2026-08-09", "dateModified": "2026-08-09", "inLanguage": "bg", "author": {"@type": "Organization", "name": "Прогрестрейд"}, "publisher": {"@type": "Organization", "name": "Прогрестрейд", "logo": {"@type": "ImageObject", "url": "https://progresstrade.bg/images/progresstrade.png"}}, "mainEntityOfPage": "https://progresstrade.bg/blog/dostap-za-kamion-na-obekta.html", "url": "https://progresstrade.bg/blog/dostap-za-kamion-na-obekta.html"}
