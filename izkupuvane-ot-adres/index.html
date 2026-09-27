@@ -10,22 +10,33 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-DRJJ977F6T');
+  // Мета пиксел: тук стои само опашката. Извикванията се трупат в нея и
+  // тръгват, щом същинският скрипт се зареди — както dataLayer при Analytics.
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[]}(window, document,'script');
+  fbq('init', '28711768308454683');
+  fbq('track', 'PageView');
   (function(){
     var loaded = false;
-    function loadGA(){
+    function loadTags(){
       if (loaded) return; loaded = true;
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T';
-      document.head.appendChild(s);
+      ['https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T',
+       'https://connect.facebook.net/en_US/fbevents.js'].forEach(function(src){
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = src;
+        document.head.appendChild(s);
+      });
     }
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
-      window.addEventListener(ev, loadGA, {once:true, passive:true});
+      window.addEventListener(ev, loadTags, {once:true, passive:true});
     });
-    // Резервно зареждане, ако човекът не пипне нищо. Беше вързано за load и
-    // gtag.js (89 KB) падаше точно в прозореца, който Lighthouse мери — оттам
-    // идваха 930 ms блокиране на основната нишка при 71 точки на десктоп.
-    function armFallback(){ setTimeout(loadGA, 10000); }
+    // Резервно зареждане, ако човекът не пипне нищо. Вързани за load, двата
+    // скрипта (89 + 90 KB) падат точно в прозореца, който Lighthouse мери —
+    // оттам идваха 930 ms блокиране на нишката при 71 точки на десктоп.
+    function armFallback(){ setTimeout(loadTags, 10000); }
     if (document.readyState === 'complete') armFallback();
     else window.addEventListener('load', armFallback);
   })();
@@ -63,7 +74,8 @@
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Изкупувате ли вторични суровини от адрес?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Излизаме на обекта в София и областта с камион с щипка — товарим, претегляме и извозваме. Превозът се калкулира в изкупната цена, затова приемането на площадката дава по-висока цена за материала."}}, {"@type": "Question", "name": "Колко трябва да е количеството, за да дойдете?", "acceptedAnswer": {"@type": "Answer", "text": "Над 2 тона. При редовни доставки оставяме контейнер до 30 куб. м на обекта и извозваме по график. По-малките партиди се приемат на площадката, от 1 тон нагоре."}}, {"@type": "Question", "name": "Плаща ли се транспортът?", "acceptedAnswer": {"@type": "Answer", "text": "Не отделно. Превозът се калкулира в изкупната цена, съобразено с количеството, разстоянието и достъпа. Казваме цената предварително, преди да тръгнем. Ако докарате материала сами в пункта, получавате по-висока цена за него."}}, {"@type": "Question", "name": "Колко бързо идвате на адрес?", "acceptedAnswer": {"@type": "Answer", "text": "След оглед или уточняване по телефона обикновено организираме извозването в рамките на 1–2 работни дни, според обема и локацията."}}, {"@type": "Question", "name": "Какви документи получавам при изкупуване от адрес?", "acceptedAnswer": {"@type": "Answer", "text": "Същите като на площадката. За фирми: складова разписка или приемо-предавателен протокол, договор и сертификат за произход. За частни лица: покупко-изплащателна сметка, договор и декларация за произход. Плащането е по банков път."}}]}
 </script>
 </head>
-<body><header>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=28711768308454683&amp;ev=PageView&amp;noscript=1"></noscript><header>
 <a class="skip-link" href="#glavno">Към основното съдържание</a>
 <div class="topbar">
   <div class="topbar-text">

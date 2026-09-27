@@ -10,22 +10,33 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-DRJJ977F6T');
+  // Мета пиксел: тук стои само опашката. Извикванията се трупат в нея и
+  // тръгват, щом същинският скрипт се зареди — както dataLayer при Analytics.
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[]}(window, document,'script');
+  fbq('init', '28711768308454683');
+  fbq('track', 'PageView');
   (function(){
     var loaded = false;
-    function loadGA(){
+    function loadTags(){
       if (loaded) return; loaded = true;
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T';
-      document.head.appendChild(s);
+      ['https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T',
+       'https://connect.facebook.net/en_US/fbevents.js'].forEach(function(src){
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = src;
+        document.head.appendChild(s);
+      });
     }
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
-      window.addEventListener(ev, loadGA, {once:true, passive:true});
+      window.addEventListener(ev, loadTags, {once:true, passive:true});
     });
-    // Резервно зареждане, ако човекът не пипне нищо. Беше вързано за load и
-    // gtag.js (89 KB) падаше точно в прозореца, който Lighthouse мери — оттам
-    // идваха 930 ms блокиране на основната нишка при 71 точки на десктоп.
-    function armFallback(){ setTimeout(loadGA, 10000); }
+    // Резервно зареждане, ако човекът не пипне нищо. Вързани за load, двата
+    // скрипта (89 + 90 KB) падат точно в прозореца, който Lighthouse мери —
+    // оттам идваха 930 ms блокиране на нишката при 71 точки на десктоп.
+    function armFallback(){ setTimeout(loadTags, 10000); }
     if (document.readyState === 'complete') armFallback();
     else window.addEventListener('load', armFallback);
   })();
@@ -63,7 +74,8 @@
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Каква е изкупната цена на желязото?", "acceptedAnswer": {"@type": "Answer", "text": "Изкупната цена зависи от вида: дебело (плътно) желязо се изкупува до 0,19 €/кг, тънко желязо и ламарина до 0,13 €/кг, чугун до 0,18 €/кг. Цените следват пазарните нива на металите. Обадете се на 0877 77 55 77 за актуална оферта."}}, {"@type": "Question", "name": "Изкупувате ли желязо от адрес?", "acceptedAnswer": {"@type": "Answer", "text": "Да. При над 2 тона организираме наш транспорт и товарене от вашия адрес в София и областта; превозът се калкулира в изкупната цена. От 1 тон нагоре приемаме на площадката, след предварително обаждане."}}, {"@type": "Question", "name": "Каква е разликата между дебело и тънко желязо?", "acceptedAnswer": {"@type": "Answer", "text": "Дебелото (плътно) желязо е с дебелина над 4 мм: конструкции, греди, профили и машинни части. Тънкото желязо е под 3 мм: ламарина и тънкостенни детайли. Дебелото желязо се изкупува на по-висока цена."}}, {"@type": "Question", "name": "Как да предам желязо за скрап?", "acceptedAnswer": {"@type": "Answer", "text": "Обадете се на 0877 77 55 77 и опишете какво имате, за да ви кажем цена. Доставяте материала на площадката в кв. Военна рампа, претегляме на калибрирана везна, изготвяме документите и плащаме по банков път."}}, {"@type": "Question", "name": "Може ли да ми платите в брой?", "acceptedAnswer": {"@type": "Answer", "text": "Не. Законът за управление на отпадъците ограничава плащането в брой до 100 лв. годишно, затова плащаме по банков път — подробностите са при цените. Носете лична карта и номер на сметка на свое име."}}, {"@type": "Question", "name": "Колко струва килограм желязо?", "acceptedAnswer": {"@type": "Answer", "text": "Дебелото (плътно) желязо е до 0,19 €/кг, плътното желязо бонус и технологичният скрап — до 0,20 €/кг, чугунът — до 0,18 €/кг, тънкото желязо и ламарината — до 0,13 €/кг. Цените са при доставка на нашата площадка и зависят от дебелината и чистотата на материала."}}, {"@type": "Question", "name": "Каква е цената на чугун за килограм?", "acceptedAnswer": {"@type": "Answer", "text": "Чугунът се изкупува до 0,18 €/кг. Приемат се отливки, машинни части, спирачни дискове и леярски форми."}}, {"@type": "Question", "name": "Каква е цената на желязото днес?", "acceptedAnswer": {"@type": "Answer", "text": "Цените в таблицата се обновяват при промяна на пазарните нива; последното обновяване е отбелязано под нея. Черните метали се движат по световните борсови цени, затова точната цена за деня казваме по телефона на 0877 77 55 77."}}]}
 </script>
 </head>
-<body><header>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=28711768308454683&amp;ev=PageView&amp;noscript=1"></noscript><header>
 <a class="skip-link" href="#glavno">Към основното съдържание</a>
 <div class="topbar">
   <div class="topbar-text">

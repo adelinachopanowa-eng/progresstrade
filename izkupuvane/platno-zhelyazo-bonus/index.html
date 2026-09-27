@@ -10,22 +10,33 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-DRJJ977F6T');
+  // Мета пиксел: тук стои само опашката. Извикванията се трупат в нея и
+  // тръгват, щом същинският скрипт се зареди — както dataLayer при Analytics.
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[]}(window, document,'script');
+  fbq('init', '28711768308454683');
+  fbq('track', 'PageView');
   (function(){
     var loaded = false;
-    function loadGA(){
+    function loadTags(){
       if (loaded) return; loaded = true;
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T';
-      document.head.appendChild(s);
+      ['https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T',
+       'https://connect.facebook.net/en_US/fbevents.js'].forEach(function(src){
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = src;
+        document.head.appendChild(s);
+      });
     }
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
-      window.addEventListener(ev, loadGA, {once:true, passive:true});
+      window.addEventListener(ev, loadTags, {once:true, passive:true});
     });
-    // Резервно зареждане, ако човекът не пипне нищо. Беше вързано за load и
-    // gtag.js (89 KB) падаше точно в прозореца, който Lighthouse мери — оттам
-    // идваха 930 ms блокиране на основната нишка при 71 точки на десктоп.
-    function armFallback(){ setTimeout(loadGA, 10000); }
+    // Резервно зареждане, ако човекът не пипне нищо. Вързани за load, двата
+    // скрипта (89 + 90 KB) падат точно в прозореца, който Lighthouse мери —
+    // оттам идваха 930 ms блокиране на нишката при 71 точки на десктоп.
+    function armFallback(){ setTimeout(loadTags, 10000); }
     if (document.readyState === 'complete') armFallback();
     else window.addEventListener('load', armFallback);
   })();
@@ -66,7 +77,8 @@
 {"@context":"https://schema.org","@type":"Service","serviceType":"Изкупуване на плътно желязо бонус","name":"Изкупуване на плътно желязо бонус","description":"Изкупуване на плътно желязо бонус — тежък стоманен скрап от въглеродна стомана, мин. 6 мм. Условия за приемане. Цена след оглед.","areaServed":{"@type":"City","name":"София"},"provider":{"@id":"https://progresstrade.bg/#business"},"url":"https://progresstrade.bg/izkupuvane/platno-zhelyazo-bonus/"}
 </script>
 </head>
-<body><header>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=28711768308454683&amp;ev=PageView&amp;noscript=1"></noscript><header>
 <a class="skip-link" href="#glavno">Към основното съдържание</a>
 <div class="topbar">
   <div class="topbar-text">

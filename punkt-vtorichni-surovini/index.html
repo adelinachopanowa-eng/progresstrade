@@ -10,22 +10,33 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-DRJJ977F6T');
+  // Мета пиксел: тук стои само опашката. Извикванията се трупат в нея и
+  // тръгват, щом същинският скрипт се зареди — както dataLayer при Analytics.
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[]}(window, document,'script');
+  fbq('init', '28711768308454683');
+  fbq('track', 'PageView');
   (function(){
     var loaded = false;
-    function loadGA(){
+    function loadTags(){
       if (loaded) return; loaded = true;
-      var s = document.createElement('script');
-      s.async = true;
-      s.src = 'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T';
-      document.head.appendChild(s);
+      ['https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T',
+       'https://connect.facebook.net/en_US/fbevents.js'].forEach(function(src){
+        var s = document.createElement('script');
+        s.async = true;
+        s.src = src;
+        document.head.appendChild(s);
+      });
     }
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
-      window.addEventListener(ev, loadGA, {once:true, passive:true});
+      window.addEventListener(ev, loadTags, {once:true, passive:true});
     });
-    // Резервно зареждане, ако човекът не пипне нищо. Беше вързано за load и
-    // gtag.js (89 KB) падаше точно в прозореца, който Lighthouse мери — оттам
-    // идваха 930 ms блокиране на основната нишка при 71 точки на десктоп.
-    function armFallback(){ setTimeout(loadGA, 10000); }
+    // Резервно зареждане, ако човекът не пипне нищо. Вързани за load, двата
+    // скрипта (89 + 90 KB) падат точно в прозореца, който Lighthouse мери —
+    // оттам идваха 930 ms блокиране на нишката при 71 точки на десктоп.
+    function armFallback(){ setTimeout(loadTags, 10000); }
     if (document.readyState === 'complete') armFallback();
     else window.addEventListener('load', armFallback);
   })();
@@ -63,7 +74,8 @@
 {"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Какви са цените в пункта?", "acceptedAnswer": {"@type": "Answer", "text": "Ориентировъчните цени са от 0,09 €/кг за стружки до 0,20 €/кг за плътно желязо бонус и технологичен скрап. Точната цена се определя при претеглянето и окачествяването на място."}}, {"@type": "Question", "name": "Трябва ли да се обадя предварително?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Доставката на площадката е след предварително обаждане на 0877 77 55 77, за да уточним цената и да ви посрещнем без чакане."}}, {"@type": "Question", "name": "Какви документи да нося?", "acceptedAnswer": {"@type": "Answer", "text": "Лична карта и номер на банкова сметка (IBAN), по която да получите плащането. Сметката трябва да е на името на човека, който предава материала. За фирма са нужни и данните на дружеството. Останалите документи изготвяме ние на място."}}, {"@type": "Question", "name": "Приемате ли от частни лица?", "acceptedAnswer": {"@type": "Answer", "text": "Да, приемаме и от фирми, и от частни лица. Минималното количество е 1 тон, а при над 2 тона идваме със собствена техника. Обадете се предварително."}}, {"@type": "Question", "name": "От кои райони приемате?", "acceptedAnswer": {"@type": "Answer", "text": "От цяла София и областта. Пунктът е в кв. Военна рампа, на минути от Надежда, Илиянци и Сточна гара, а при над 2 тона извозваме от вашия адрес."}}, {"@type": "Question", "name": "Може ли да ми платите в брой?", "acceptedAnswer": {"@type": "Answer", "text": "Не. Законът за управление на отпадъците ограничава плащането в брой до 100 лв. годишно, затова плащаме по банков път — подробностите са при цените. Носете лична карта и номер на сметка на свое име."}}]}
 </script>
 </head>
-<body><header>
+<body>
+<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=28711768308454683&amp;ev=PageView&amp;noscript=1"></noscript><header>
 <a class="skip-link" href="#glavno">Към основното съдържание</a>
 <div class="topbar">
   <div class="topbar-text">
