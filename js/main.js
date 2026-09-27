@@ -120,6 +120,13 @@ sections.forEach(s => observer.observe(s));
       transport_type: 'beacon'
     }, params || {}));
   }
+  /* Мета пиксел. fbq съществува още преди fbevents.js да се зареди —
+     извикването отива в опашката и тръгва, щом скриптът дойде. */
+  function pratiFB(name, params) {
+    if (typeof fbq !== 'function') return;
+    fbq('track', name, params || {});
+  }
+
   window.ptTrack = pratiI;
   window.ptKanal = function (name, kanal, params) { kanalUnikalen(name, kanal, params); };
 
@@ -139,7 +146,10 @@ sections.forEach(s => observer.observe(s));
   }
   function kontakt(kanal) {
     interes('kontakt');                            // контактът винаги значи интерес
-    if (vednaj('kontakt_opit')) pratiI('kontakt_opit', { kanal: kanal });
+    if (vednaj('kontakt_opit')) {
+      pratiI('kontakt_opit', { kanal: kanal });
+      pratiFB('Contact', { content_category: kanal });   // веднъж на посещение, като в Google
+    }
   }
   function kanalUnikalen(name, kanal, params) {
     kontakt(kanal);
@@ -206,6 +216,12 @@ sections.forEach(s => observer.observe(s));
       [].forEach.call(teli, function (el) { vio.observe(el); });
     }
   }
+
+  /* ── заявката е изпратена ──
+     „Благодарим“ се вижда само след успешно изпращане на формата и е noindex,
+     тоест никой не идва там от търсачка. Дедупликира се, защото презареждане
+     на страницата е по-вероятно от втора заявка в рамките на половин час. */
+  if (location.pathname.indexOf('/blagodarim') === 0 && vednaj('lead')) pratiFB('Lead');
 
   /* ── калкулаторът: човекът смята парите си ── */
   document.querySelectorAll('.calc select, .calc input').forEach(function (el) {
