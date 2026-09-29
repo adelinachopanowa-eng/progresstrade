@@ -113,12 +113,18 @@ sections.forEach(s => observer.observe(s));
   var KLYUCH = 'pt_ev';
 
   function pratiI(name, params) {
-    if (typeof gtag !== 'function') return;
-    gtag('event', name, Object.assign({
+    var obshti = {
       stranica: location.pathname,
-      ustroystvo: matchMedia('(pointer:coarse)').matches ? 'mobilen' : 'desktop',
-      transport_type: 'beacon'
-    }, params || {}));
+      ustroystvo: matchMedia('(pointer:coarse)').matches ? 'mobilen' : 'desktop'
+    };
+    /* Tag Manager чете само обекти с ключ event. Бутаме го винаги — дори
+       контейнерът още да не е зареден, буталото го изчаква в опашката.
+       Докато трае преходът, същото събитие тръгва и по двата пътя; щом
+       маркерите в GTM заработят, директното извикване на gtag отпада. */
+    (window.dataLayer = window.dataLayer || []).push(
+      Object.assign({ event: name }, obshti, params || {}));
+    if (typeof gtag !== 'function') return;
+    gtag('event', name, Object.assign({ transport_type: 'beacon' }, obshti, params || {}));
   }
   /* Мета пиксел. fbq съществува още преди fbevents.js да се зареди —
      извикването отива в опашката и тръгва, щом скриптът дойде. */
