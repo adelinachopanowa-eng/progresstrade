@@ -89,19 +89,33 @@ sections.forEach(s => observer.observe(s));
 
 /* ── Измерване: фуния от посещение до контакт ──────────────────────────────
 
-   Стъпките са вложени: всяка по-долна включва принудително по-горната.
-   Иначе се получават абсурди — повече опити за контакт, отколкото заинтересовани.
+   Сайтът не праща нищо сам. Всичко излиза в dataLayer като обект с ключ
+   event; кое къде отива се решава с маркери в Tag Manager (GTM-P4TPVP33).
 
-     1. session_start        Google, вградено
-     2. ангажирана сесия     Google, вградено (10 сек / 2 стр. / конверсия)
-     3. interes              наше, веднъж на посещение
-     4. kontakt_opit         наше, веднъж на посещение
-     5. по канал             zapitvane, telefon_unikalen, viber_unikalen,
-                             upatvane_unikalno, imeyl_unikalen
+   Всяко събитие носи и два общи параметъра:
+     stranica    пътят на страницата
+     ustroystvo  mobilen | desktop (по pointer:coarse)
 
-   Диагностика извън фунията (не се дедуплицира, показва кой бутон работи):
-     telefon_klik, nomer_kopiran, viber_klik, imeyl_klik, upatvane_klik, adres_kopiran
+   Фунията. Стъпките са вложени: всяка по-долна включва принудително
+   по-горната, иначе се получават абсурди — повече опити за контакт,
+   отколкото заинтересовани.
+
+     1. interes             веднъж на посещение; носи povod:
+                            kontakt | chzv | kalkulator | skrol_cena | vtora_cenova
+     2. kontakt_opit        веднъж на посещение; носи kanal
+     3. по канал, веднъж:   zapitvane, telefon_unikalen, viber_unikalen,
+                            upatvane_unikalno, imeyl_unikalen
+
+   Конверсия:
+     zayavka_izpratena      зареждане на „Благодарим“ след изпратена форма;
+                            оцелява след пренасочването, за разлика от zapitvane
+
+   Диагностика извън фунията (не се дедуплицира, показва кой бутон работи;
+   носи mqsto — от кой елемент е кликът):
+     telefon_klik, viber_klik, imeyl_klik, upatvane_klik,
+     nomer_kopiran, adres_kopiran
      nomer_viden — знаменателят: колко души изобщо са видели номера
+     zadarzhane_10s — 10 секунди при видим раздел
 
    Уникалността е в прозорец от 30 минути без активност — толкова е и сесията
    при Google. Паметта на раздела не става: който затвори и се върне след 5 минути,
@@ -112,25 +126,15 @@ sections.forEach(s => observer.observe(s));
   var PROZOREC = 30 * 60 * 1000;         // 30 минути
   var KLYUCH = 'pt_ev';
 
+  /* Единственият изход на проследяването. Tag Manager чете обекти с ключ
+     event; събития, пуснати преди контейнерът да се е вдигнал, чакат в
+     масива и се обработват по реда си, щом той се зареди. */
   function pratiI(name, params) {
-    var obshti = {
+    (window.dataLayer = window.dataLayer || []).push(Object.assign({
+      event: name,
       stranica: location.pathname,
       ustroystvo: matchMedia('(pointer:coarse)').matches ? 'mobilen' : 'desktop'
-    };
-    /* Tag Manager чете само обекти с ключ event. Бутаме го винаги — дори
-       контейнерът още да не е зареден, буталото го изчаква в опашката.
-       Докато трае преходът, същото събитие тръгва и по двата пътя; щом
-       маркерите в GTM заработят, директното извикване на gtag отпада. */
-    (window.dataLayer = window.dataLayer || []).push(
-      Object.assign({ event: name }, obshti, params || {}));
-    if (typeof gtag !== 'function') return;
-    gtag('event', name, Object.assign({ transport_type: 'beacon' }, obshti, params || {}));
-  }
-  /* Мета пиксел. fbq съществува още преди fbevents.js да се зареди —
-     извикването отива в опашката и тръгва, щом скриптът дойде. */
-  function pratiFB(name, params) {
-    if (typeof fbq !== 'function') return;
-    fbq('track', name, params || {});
+    }, params || {}));
   }
 
   window.ptTrack = pratiI;
@@ -152,10 +156,7 @@ sections.forEach(s => observer.observe(s));
   }
   function kontakt(kanal) {
     interes('kontakt');                            // контактът винаги значи интерес
-    if (vednaj('kontakt_opit')) {
-      pratiI('kontakt_opit', { kanal: kanal });
-      pratiFB('Contact', { content_category: kanal });   // веднъж на посещение, като в Google
-    }
+    if (vednaj('kontakt_opit')) pratiI('kontakt_opit', { kanal: kanal });
   }
   function kanalUnikalen(name, kanal, params) {
     kontakt(kanal);
@@ -227,7 +228,8 @@ sections.forEach(s => observer.observe(s));
      „Благодарим“ се вижда само след успешно изпращане на формата и е noindex,
      тоест никой не идва там от търсачка. Дедупликира се, защото презареждане
      на страницата е по-вероятно от втора заявка в рамките на половин час. */
-  if (location.pathname.indexOf('/blagodarim') === 0 && vednaj('lead')) pratiFB('Lead');
+  if (location.pathname.indexOf('/blagodarim') === 0 && vednaj('zayavka'))
+    pratiI('zayavka_izpratena');
 
   /* ── калкулаторът: човекът смята парите си ── */
   document.querySelectorAll('.calc select, .calc input').forEach(function (el) {

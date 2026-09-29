@@ -4,41 +4,29 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<!-- Google tag (gtag.js) — зарежда се след load, за да не блокира първоначалното рисуване -->
+<!-- Google Tag Manager — отложено зареждане, виж коментара в скрипта -->
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-DRJJ977F6T');
-  // Мета пиксел: тук стои само опашката. Извикванията се трупат в нея и
-  // тръгват, щом същинският скрипт се зареди — както dataLayer при Analytics.
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[]}(window, document,'script');
-  fbq('init', '28711768308454683');
-  fbq('track', 'PageView');
+  /* Контейнерът се вдига при първо докосване на страницата или резервно на
+     10-ата секунда. Сложен както го дава Google — най-горе в head — gtm.js
+     пада точно в прозореца, който Lighthouse мери, и връща 930-те ms
+     блокиране на нишката, които струваха 30 точки на десктоп.
+     Събитията, пуснати преди това, чакат в dataLayer и контейнерът ги
+     обработва по реда им, щом се зареди. */
   (function(){
     var loaded = false;
-    function loadTags(){
+    function loadGTM(){
       if (loaded) return; loaded = true;
       dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-      ['https://www.googletagmanager.com/gtm.js?id=GTM-P4TPVP33',
-       'https://www.googletagmanager.com/gtag/js?id=G-DRJJ977F6T',
-       'https://connect.facebook.net/en_US/fbevents.js'].forEach(function(src){
-        var s = document.createElement('script');
-        s.async = true;
-        s.src = src;
-        document.head.appendChild(s);
-      });
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4TPVP33';
+      document.head.appendChild(s);
     }
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
-      window.addEventListener(ev, loadTags, {once:true, passive:true});
+      window.addEventListener(ev, loadGTM, {once:true, passive:true});
     });
-    // Резервно зареждане, ако човекът не пипне нищо. Вързани за load, трите
-    // скрипта падат точно в прозореца, който Lighthouse мери — оттам идваха
-    // 930 ms блокиране на нишката при 71 точки на десктоп.
-    function armFallback(){ setTimeout(loadTags, 10000); }
+    function armFallback(){ setTimeout(loadGTM, 10000); }
     if (document.readyState === 'complete') armFallback();
     else window.addEventListener('load', armFallback);
   })();
@@ -74,8 +62,7 @@
 </script>
 </head>
 <body>
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4TPVP33" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
-<noscript><img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=28711768308454683&amp;ev=PageView&amp;noscript=1"></noscript><header>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4TPVP33" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript><header>
 <a class="skip-link" href="#glavno">Към основното съдържание</a>
 <div class="topbar">
   <div class="topbar-text">
@@ -188,7 +175,7 @@
     </div>
   </div>
 </footer>
-<script src="/js/main.min.js?v=919389e4" defer></script>
+<script src="/js/main.min.js?v=6ce34547" defer></script>
 <a href="tel:+359877775577" class="call-fab" aria-label="Обадете се на 0877 77 55 77" data-tel="fab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></a>
 </body>
 </html>
