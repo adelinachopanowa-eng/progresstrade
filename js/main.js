@@ -105,9 +105,11 @@ sections.forEach(s => observer.observe(s));
    Така един и същи човек не дава интерес втори път, докато обикаля сайта,
    но връщане след седмица се брои наново.
 
-   Сайтът не праща нищо сам. Бута в dataLayer; маркерите в Tag Manager
-   решават кое отива към Meta и кое към Google Analytics. Събития, пуснати
-   преди контейнерът да се е вдигнал, го чакат в масива. */
+   Към Meta се праща направо от тук: fbq('trackCustom','Interest') и
+   fbq('track','Contact',{method}). Затова в Tag Manager НЕ бива да има
+   маркери за пиксела върху тези две събития — ще се броят двойно.
+   Паралелно всяко събитие отива и в dataLayer, откъдето маркерите в GTM
+   го подават на Google Analytics. */
 (function () {
   var KEY = 'pt_poseshtenie';
   var PROZOREC = 30 * 60 * 1000;         // 30 минути без активност
@@ -145,13 +147,51 @@ sections.forEach(s => observer.observe(s));
     }, params || {}));
   }
 
+  /* Пикселът живее в маркер вътре в контейнера, а контейнерът се вдига при
+     първо докосване на страницата. Тоест точно при първия клик fbq още го
+     няма. Затова събитието чака в опашка и тръгва в мига, в който fbq се
+     появи. Ако пикселът изобщо не дойде (блокиран), отказваме се след 30
+     секунди, вместо да въртим таймер до безкрай. */
+  var chakat = [], nabliudava = null;
+
+  /* Не стига fbq да съществува — трябва да е минало и fbq('init'), иначе
+     събитието тръгва без пиксел, към който да се отнесе. Проверяваме и
+     двете състояния: вече зареден скрипт (getState) или init, който още
+     чака в опашката на самия fbq. */
+  function pikselGotov() {
+    var f = window.fbq;
+    if (typeof f !== 'function') return false;
+    if (typeof f.callMethod === 'function') return true;   // fbevents.js е поел
+    var q = f.queue || [];                                 // още чака в опашката,
+    for (var i = 0; i < q.length; i++)                     // но init вече е подаден
+      if (q[i] && q[i][0] === 'init') return true;
+    return false;
+  }
+
+  function kamMeta(fn) {
+    if (pikselGotov()) { fn(); return; }
+    chakat.push(fn);
+    if (nabliudava) return;
+    var broi = 0;
+    nabliudava = setInterval(function () {
+      if (pikselGotov()) {
+        clearInterval(nabliudava); nabliudava = null;
+        while (chakat.length) chakat.shift()();
+      } else if (++broi > 60) { clearInterval(nabliudava); nabliudava = null; chakat.length = 0; }
+    }, 300);
+  }
+
   function interest() {
-    if (vednaj('interest')) push('interest');
+    if (!vednaj('interest')) return;
+    push('interest');                                    // за Analytics през GTM
+    kamMeta(function () { window.fbq('trackCustom', 'Interest'); });
   }
 
   function contact(method) {
     interest();
-    if (vednaj('contact')) push('contact', { method: method });
+    if (!vednaj('contact')) return;
+    push('contact', { method: method });
+    kamMeta(function () { window.fbq('track', 'Contact', { method: method }); });
   }
 
   /* ── кликове ──
