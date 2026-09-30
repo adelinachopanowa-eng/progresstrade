@@ -88,22 +88,54 @@ sections.forEach(s => observer.observe(s));
 
 /* ── Измерване: интерес и контакт ──────────────────────────────────────────
 
-   Две събития, всяко веднъж на сесия (sessionStorage, тоест на раздел):
+   Две събития, всяко веднъж на посещение:
 
      interest   първото от: клик на телефон, имейл или Viber; клик към
-                картата; клик към /zayavka/; 20 секунди видимо на страницата
+                картата; клик към /zayavka/; 20 секунди видимо време,
+                сумирано за целия сайт, а не за отделна страница
      contact    само при кликовете горе (без таймера), с параметър method:
                 phone | email | viber | maps | quote_form
 
    Контактът винаги пуска и интерес, ако още не е пуснат — иначе се получава
    абсурдът повече контакти, отколкото заинтересовани.
 
+   Броенето е в localStorage, а не в sessionStorage: sessionStorage е на
+   раздел и човек с два отворени таба щеше да даде два интереса. Посещението
+   свършва след 30 минути без активност — толкова е и сесията при Google.
+   Така един и същи човек не дава интерес втори път, докато обикаля сайта,
+   но връщане след седмица се брои наново.
+
    Сайтът не праща нищо сам. Бута в dataLayer; маркерите в Tag Manager
    решават кое отива към Meta и кое към Google Analytics. Събития, пуснати
    преди контейнерът да се е вдигнал, го чакат в масива. */
 (function () {
-  var KEY = 'pt_';
-  var pamet = {};                        // резерва, ако хранилището е блокирано
+  var KEY = 'pt_poseshtenie';
+  var PROZOREC = 30 * 60 * 1000;         // 30 минути без активност
+  var CEL = 20000;                       // 20 секунди видимо време
+  var pamet = null;                      // резерва, ако хранилището е блокирано
+
+  function sesiya() {
+    var st = null;
+    try { st = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) {}
+    if (!st || typeof st !== 'object') st = pamet;
+    if (!st || typeof st !== 'object') st = {};
+    if (st.t && Date.now() - st.t > PROZOREC) st = {};   // изтекло — ново посещение
+    return st;
+  }
+
+  function zapishi(st) {
+    st.t = Date.now();
+    pamet = st;
+    try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {}
+  }
+
+  /* Връща true само първия път в рамките на посещението. */
+  function vednaj(name) {
+    var st = sesiya();
+    if (st[name]) { zapishi(st); return false; }        // активен е — удължаваме
+    st[name] = 1; zapishi(st);
+    return true;
+  }
 
   function push(name, params) {
     (window.dataLayer = window.dataLayer || []).push(Object.assign({
@@ -111,17 +143,6 @@ sections.forEach(s => observer.observe(s));
       stranica: location.pathname,
       ustroystvo: matchMedia('(pointer:coarse)').matches ? 'mobilen' : 'desktop'
     }, params || {}));
-  }
-
-  /* Връща true само първия път в рамките на сесията на раздела. */
-  function vednaj(name) {
-    if (pamet[name]) return false;
-    try {
-      if (sessionStorage.getItem(KEY + name)) { pamet[name] = 1; return false; }
-      sessionStorage.setItem(KEY + name, '1');
-    } catch (e) { /* частен режим: пазим поне в паметта на страницата */ }
-    pamet[name] = 1;
-    return true;
   }
 
   function interest() {
@@ -153,19 +174,33 @@ sections.forEach(s => observer.observe(s));
   if (/^\/zayavka\/?$/.test(location.pathname) &&
       document.referrer.indexOf(location.origin) === 0) contact('quote_form');
 
-  /* ── 20 секунди видимо на страницата ──
-     Скритият раздел не се брои: отворен и забравен прозорец не е интерес. */
-  var vidimo = 0, posledno = Date.now();
-  var taymer = setInterval(function () {
-    if (document.visibilityState === 'visible') vidimo += Date.now() - posledno;
-    posledno = Date.now();
-    if (vidimo >= 20000) { clearInterval(taymer); interest(); }
-  }, 1000);
+  /* ── 20 секунди видимо време, сумирано за целия сайт ──
+     Натрупаното стои в записа на посещението, затова осем секунди на една
+     страница и дванайсет на следващата правят двайсет. Скритият раздел не
+     се брои: отворен и забравен прозорец не е интерес. */
+  (function () {
+    if (sesiya().interest) return;                      // вече е пуснат
+    var posledno = Date.now();
+    document.addEventListener('visibilitychange', function () { posledno = Date.now(); });
+    var taymer = setInterval(function () {
+      var sega = Date.now(), delta = Math.min(sega - posledno, 2000);
+      posledno = sega;                                  // таймерът в скрит раздел
+      if (document.visibilityState !== 'visible') return;  // се забавя или спира,
+      var st = sesiya();                                // затова делтата е с таван
+      if (st.interest) { clearInterval(taymer); return; }  // друг раздел го е пуснал
+      st.vidimo = (st.vidimo || 0) + delta;
+      if (st.vidimo >= CEL) {
+        clearInterval(taymer);
+        st.interest = 1; zapishi(st); push('interest');
+      } else {
+        zapishi(st);
+      }
+    }, 1000);
+  })();
 
   /* ── заявката е изпратена ──
      „Благодарим“ се вижда само след успешно изпращане на формата и е noindex,
-     тоест никой не идва там от търсачка. Това е истинската конверсия и не се
-     дедуплицира със сесията на interest/contact. */
+     тоест никой не идва там от търсачка. Това е истинската конверсия. */
   if (location.pathname.indexOf('/blagodarim') === 0 && vednaj('zayavka'))
     push('zayavka_izpratena');
 })();
