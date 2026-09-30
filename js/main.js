@@ -181,17 +181,38 @@ sections.forEach(s => observer.observe(s));
     }, 300);
   }
 
+  /* Два отделни белега на събитие: единият казва „преброено е за Analytics“,
+     другият — „доставено е до пиксела“. Метовият се записва чак в мига на
+     самото извикване. Иначе клик към /zayavka/ сменя страницата, преди
+     пикселът да е готов, събитието се губи, а записът вече го е отбелязал
+     за изпратено и повече никой не опитва. */
+  function kamGoogle(ime, params) {
+    if (vednaj(ime)) push(ime, params);
+  }
+
+  function kamMetaVednaj(beleg, fn) {
+    if (sesiya()[beleg]) return;
+    kamMeta(function () {
+      var st = sesiya();
+      if (st[beleg]) return;                             // друг раздел е изпреварил
+      st[beleg] = 1; zapishi(st);
+      fn();
+    });
+  }
+
   function interest() {
-    if (!vednaj('interest')) return;
-    push('interest');                                    // за Analytics през GTM
-    kamMeta(function () { window.fbq('trackCustom', 'Interest'); });
+    kamGoogle('interest');
+    kamMetaVednaj('interest_fb', function () {
+      window.fbq('trackCustom', 'Interest');
+    });
   }
 
   function contact(method) {
     interest();
-    if (!vednaj('contact')) return;
-    push('contact', { method: method });
-    kamMeta(function () { window.fbq('track', 'Contact', { method: method }); });
+    kamGoogle('contact', { method: method });
+    kamMetaVednaj('contact_fb', function () {
+      window.fbq('track', 'Contact', { method: method });
+    });
   }
 
   /* ── кликове ──
