@@ -63,7 +63,6 @@ sections.forEach(s => observer.observe(s));
       fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } })
         .then(function (r) {
           if (r.ok) {
-            if (window.ptKanal) window.ptKanal('zapitvane', 'zapitvane', { forma: f.getAttribute('data-forma') || 'zayavka' });
             window.location.href = '/blagodarim/';
           }
           else { throw new Error('bad'); }
@@ -87,49 +86,26 @@ sections.forEach(s => observer.observe(s));
 })();
 
 
-/* ── Измерване: фуния от посещение до контакт ──────────────────────────────
+/* ── Измерване: интерес и контакт ──────────────────────────────────────────
 
-   Сайтът не праща нищо сам. Всичко излиза в dataLayer като обект с ключ
-   event; кое къде отива се решава с маркери в Tag Manager (GTM-P4TPVP33).
+   Две събития, всяко веднъж на сесия (sessionStorage, тоест на раздел):
 
-   Всяко събитие носи и два общи параметъра:
-     stranica    пътят на страницата
-     ustroystvo  mobilen | desktop (по pointer:coarse)
+     interest   първото от: клик на телефон, имейл или Viber; клик към
+                картата; клик към /zayavka/; 20 секунди видимо на страницата
+     contact    само при кликовете горе (без таймера), с параметър method:
+                phone | email | viber | maps | quote_form
 
-   Фунията. Стъпките са вложени: всяка по-долна включва принудително
-   по-горната, иначе се получават абсурди — повече опити за контакт,
-   отколкото заинтересовани.
+   Контактът винаги пуска и интерес, ако още не е пуснат — иначе се получава
+   абсурдът повече контакти, отколкото заинтересовани.
 
-     1. interes             веднъж на посещение; носи povod:
-                            kontakt | chzv | kalkulator | skrol_cena | vtora_cenova
-     2. kontakt_opit        веднъж на посещение; носи kanal
-     3. по канал, веднъж:   zapitvane, telefon_unikalen, viber_unikalen,
-                            upatvane_unikalno, imeyl_unikalen
-
-   Конверсия:
-     zayavka_izpratena      зареждане на „Благодарим“ след изпратена форма;
-                            оцелява след пренасочването, за разлика от zapitvane
-
-   Диагностика извън фунията (не се дедуплицира, показва кой бутон работи;
-   носи mqsto — от кой елемент е кликът):
-     telefon_klik, viber_klik, imeyl_klik, upatvane_klik,
-     nomer_kopiran, adres_kopiran
-     nomer_viden — знаменателят: колко души изобщо са видели номера
-     zadarzhane_10s — 10 секунди при видим раздел
-
-   Уникалността е в прозорец от 30 минути без активност — толкова е и сесията
-   при Google. Паметта на раздела не става: който затвори и се върне след 5 минути,
-   за Google е същата сесия, а за нас щеше да е нов човек. */
+   Сайтът не праща нищо сам. Бута в dataLayer; маркерите в Tag Manager
+   решават кое отива към Meta и кое към Google Analytics. Събития, пуснати
+   преди контейнерът да се е вдигнал, го чакат в масива. */
 (function () {
-  var TEL = '877775577';                 // без код на държава и водеща нула
-  var ADRES = 'иван георгов';
-  var PROZOREC = 30 * 60 * 1000;         // 30 минути
-  var KLYUCH = 'pt_ev';
+  var KEY = 'pt_';
+  var pamet = {};                        // резерва, ако хранилището е блокирано
 
-  /* Единственият изход на проследяването. Tag Manager чете обекти с ключ
-     event; събития, пуснати преди контейнерът да се е вдигнал, чакат в
-     масива и се обработват по реда си, щом той се зареди. */
-  function pratiI(name, params) {
+  function push(name, params) {
     (window.dataLayer = window.dataLayer || []).push(Object.assign({
       event: name,
       stranica: location.pathname,
@@ -137,127 +113,61 @@ sections.forEach(s => observer.observe(s));
     }, params || {}));
   }
 
-  window.ptTrack = pratiI;
-  window.ptKanal = function (name, kanal, params) { kanalUnikalen(name, kanal, params); };
-
-  /* Веднъж на посещение. Връща true само първия път в рамките на прозореца. */
+  /* Връща true само първия път в рамките на сесията на раздела. */
   function vednaj(name) {
-    var now = Date.now(), st = {};
-    try { st = JSON.parse(localStorage.getItem(KLYUCH) || '{}'); } catch (e) { st = {}; }
-    if (st.t && now - st.t > PROZOREC) st = {};   // прозорецът е изтекъл — нова сесия
-    st.t = now;
-    if (st[name]) { save(st); return false; }
-    st[name] = 1; save(st); return true;
-    function save(o) { try { localStorage.setItem(KLYUCH, JSON.stringify(o)); } catch (e) {} }
+    if (pamet[name]) return false;
+    try {
+      if (sessionStorage.getItem(KEY + name)) { pamet[name] = 1; return false; }
+      sessionStorage.setItem(KEY + name, '1');
+    } catch (e) { /* частен режим: пазим поне в паметта на страницата */ }
+    pamet[name] = 1;
+    return true;
   }
 
-  function interes(povod) {
-    if (vednaj('interes')) pratiI('interes', { povod: povod });
-  }
-  function kontakt(kanal) {
-    interes('kontakt');                            // контактът винаги значи интерес
-    if (vednaj('kontakt_opit')) pratiI('kontakt_opit', { kanal: kanal });
-  }
-  function kanalUnikalen(name, kanal, params) {
-    kontakt(kanal);
-    if (vednaj(name)) pratiI(name, params);
+  function interest() {
+    if (vednaj('interest')) push('interest');
   }
 
-  /* ── кликове ── */
+  function contact(method) {
+    interest();
+    if (vednaj('contact')) push('contact', { method: method });
+  }
+
+  /* ── кликове ──
+     capture, за да се брои дори ако друг обработчик спре събитието. */
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a[href]');
-    if (a) {
-      var href = a.getAttribute('href') || '';
-      var mqsto = a.getAttribute('data-tel') || 'stranica';
-      if (href.indexOf('tel:') === 0) {
-        pratiI('telefon_klik', { mqsto: mqsto });
-        kanalUnikalen('telefon_unikalen', 'telefon', { mqsto: mqsto });
-      } else if (href.indexOf('viber:') === 0) {
-        pratiI('viber_klik', { mqsto: mqsto });
-        kanalUnikalen('viber_unikalen', 'viber', { mqsto: mqsto });
-      } else if (href.indexOf('mailto:') === 0) {
-        pratiI('imeyl_klik', { mqsto: mqsto });
-        kanalUnikalen('imeyl_unikalen', 'imeyl', { mqsto: mqsto });
-      } else if (href.indexOf('maps.app.goo.gl') > -1 || href.indexOf('google.com/maps') > -1) {
-        pratiI('upatvane_klik', { mqsto: mqsto });
-        kanalUnikalen('upatvane_unikalno', 'upatvane', { mqsto: mqsto });
-      }
-      return;
-    }
-    /* Отваряне на въпрос от ЧЗВ — човекът има конкретен въпрос. */
-    var s = e.target.closest && e.target.closest('.faq-item summary');
-    if (s && !s.parentElement.open) interes('chzv');
-  }, { passive: true });
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('tel:') === 0) contact('phone');
+    else if (href.indexOf('mailto:') === 0) contact('email');
+    else if (href.indexOf('viber:') === 0) contact('viber');
+    else if (href.indexOf('maps.app.goo.gl') > -1 || href.indexOf('google.com/maps') > -1) contact('maps');
+    else if (a.host === location.host && /^\/zayavka\/?$/.test(a.pathname)) contact('quote_form');
+  }, { passive: true, capture: true });
 
-  /* ── копиране на номера или адреса ── */
-  document.addEventListener('copy', function () {
-    var sel = (window.getSelection() + '');
-    if (sel.replace(/\D/g, '').indexOf(TEL) > -1) {
-      pratiI('nomer_kopiran');
-      kanalUnikalen('telefon_unikalen', 'telefon', { mqsto: 'kopirane' });
-    } else if (sel.toLowerCase().indexOf(ADRES) > -1) {
-      pratiI('adres_kopiran');
-      kontakt('adres');
-    }
-  });
+  /* Кликът към /zayavka/ напуска страницата и заявката на пиксела може да не
+     успее. Затова същото се проверява и при зареждане на самата страница —
+     дедупликацията гарантира, че се брои веднъж. Изисква се идване от сайта:
+     който влиза направо от реклама или търсене, не е кликал нищо. */
+  if (/^\/zayavka\/?$/.test(location.pathname) &&
+      document.referrer.indexOf(location.origin) === 0) contact('quote_form');
 
-  /* ── видян ли е изобщо номерът ──
-     Без този знаменател telefon_klik не значи нищо: 5 клика при 50 души,
-     видели номера, е друго нещо от 5 клика при 500. Праща се веднъж на
-     посещение, при поне половин секунда в полезрението. */
-  if ('IntersectionObserver' in window) {
-    var teli = document.querySelectorAll('a[href^="tel:"]');
-    if (teli.length) {
-      var tajmer = null;
-      var vio = new IntersectionObserver(function (entries) {
-        var vidim = entries.some(function (e) { return e.isIntersecting; });
-        if (vidim && !tajmer) {
-          tajmer = setTimeout(function () {
-            if (vednaj('nomer_viden')) pratiI('nomer_viden', { broi: teli.length });
-            vio.disconnect();
-          }, 500);
-        } else if (!vidim && tajmer) {
-          clearTimeout(tajmer); tajmer = null;
-        }
-      }, { threshold: 0.5 });
-      [].forEach.call(teli, function (el) { vio.observe(el); });
-    }
-  }
+  /* ── 20 секунди видимо на страницата ──
+     Скритият раздел не се брои: отворен и забравен прозорец не е интерес. */
+  var vidimo = 0, posledno = Date.now();
+  var taymer = setInterval(function () {
+    if (document.visibilityState === 'visible') vidimo += Date.now() - posledno;
+    posledno = Date.now();
+    if (vidimo >= 20000) { clearInterval(taymer); interest(); }
+  }, 1000);
 
   /* ── заявката е изпратена ──
      „Благодарим“ се вижда само след успешно изпращане на формата и е noindex,
-     тоест никой не идва там от търсачка. Дедупликира се, защото презареждане
-     на страницата е по-вероятно от втора заявка в рамките на половин час. */
+     тоест никой не идва там от търсачка. Това е истинската конверсия и не се
+     дедуплицира със сесията на interest/contact. */
   if (location.pathname.indexOf('/blagodarim') === 0 && vednaj('zayavka'))
-    pratiI('zayavka_izpratena');
-
-  /* ── калкулаторът: човекът смята парите си ── */
-  document.querySelectorAll('.calc select, .calc input').forEach(function (el) {
-    el.addEventListener('change', function () { interes('kalkulator'); }, { once: true });
-  });
-
-  /* ── страници с цена: скрол до 60% и втора такава страница ── */
-  var cenova = /^\/(ceni|izkupuvane\/[^/]+)\/$/.test(location.pathname);
-  if (cenova) {
-    var broi = 0;
-    try { broi = +(sessionStorage.getItem('pt_cen') || 0); } catch (e) {}
-    try { sessionStorage.setItem('pt_cen', broi + 1); } catch (e) {}
-    if (broi + 1 >= 2) interes('vtora_cenova');
-    var skrol = false;
-    addEventListener('scroll', function () {
-      if (skrol) return;
-      var d = document.documentElement;
-      var p = (scrollY + innerHeight) / d.scrollHeight;
-      if (p >= 0.6) { skrol = true; interes('skrol_cena'); }
-    }, { passive: true });
-  }
-
-  /* ── задържане над 10 секунди; таймерът спира при скрит раздел ── */
-  var spent = 0, last = Date.now(), fired = false, t = setInterval(function () {
-    if (document.visibilityState === 'visible') spent += Date.now() - last;
-    last = Date.now();
-    if (!fired && spent >= 10000) { fired = true; clearInterval(t); pratiI('zadarzhane_10s'); }
-  }, 1000);
+    push('zayavka_izpratena');
 })();
 
 /* ── Работно време и отпуск ─────────────────────────────────────────────────
@@ -291,7 +201,6 @@ sections.forEach(s => observer.observe(s));
   if (vOtpusk) {
     var bar = document.querySelector('[data-vacation]');
     if (bar) bar.classList.add('on');
-    if (window.ptTrack) window.ptTrack('otpusk_lenta');
   }
 
   var notes = document.querySelectorAll('[data-closed-note]');
@@ -307,6 +216,5 @@ sections.forEach(s => observer.observe(s));
       });
     }
     notes.forEach(function (n) { n.classList.add('on'); });
-    if (window.ptTrack) window.ptTrack(vOtpusk ? 'otpusk_izvestie' : 'izvan_rabotno_vreme');
   }
 })();
