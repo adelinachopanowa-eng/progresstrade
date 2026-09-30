@@ -92,7 +92,8 @@ sections.forEach(s => observer.observe(s));
 
      interest   първото от: клик на телефон, имейл или Viber; клик към
                 картата; клик към /zayavka/; 20 секунди видимо време,
-                сумирано за целия сайт, а не за отделна страница
+                сумирано за целия сайт; превъртане до половината на
+                страницата; втора отворена страница в посещението
      contact    само при кликовете горе (без таймера), с параметър method:
                 phone | email | viber | maps | quote_form
 
@@ -190,14 +191,24 @@ sections.forEach(s => observer.observe(s));
     if (vednaj(ime)) push(ime, params);
   }
 
+  var chakashti = {};
   function kamMetaVednaj(beleg, fn) {
-    if (sesiya()[beleg]) return;
+    if (chakashti[beleg] || sesiya()[beleg]) return;     // вече чака на тази страница
+    chakashti[beleg] = 1;
     kamMeta(function () {
       var st = sesiya();
       if (st[beleg]) return;                             // друг раздел е изпреварил
       st[beleg] = 1; zapishi(st);
       fn();
     });
+  }
+
+  /* Интересът е приключен само когато и Analytics го е преброил, и пикселът
+     го е получил. Проверката на единия белег беше причината таймерът да не
+     праща нищо към Meta, ако Analytics вече го е отчел по-рано. */
+  function interesGotov() {
+    var st = sesiya();
+    return !!(st.interest && st.interest_fb);
   }
 
   function interest() {
@@ -240,23 +251,52 @@ sections.forEach(s => observer.observe(s));
      страница и дванайсет на следващата правят двайсет. Скритият раздел не
      се брои: отворен и забравен прозорец не е интерес. */
   (function () {
-    if (sesiya().interest) return;                      // вече е пуснат
+    if (interesGotov()) return;
     var posledno = Date.now();
     document.addEventListener('visibilitychange', function () { posledno = Date.now(); });
     var taymer = setInterval(function () {
       var sega = Date.now(), delta = Math.min(sega - posledno, 2000);
       posledno = sega;                                  // таймерът в скрит раздел
       if (document.visibilityState !== 'visible') return;  // се забавя или спира,
-      var st = sesiya();                                // затова делтата е с таван
-      if (st.interest) { clearInterval(taymer); return; }  // друг раздел го е пуснал
+      if (interesGotov()) { clearInterval(taymer); return; }   // затова има таван
+      var st = sesiya();
       st.vidimo = (st.vidimo || 0) + delta;
-      if (st.vidimo >= CEL) {
-        clearInterval(taymer);
-        st.interest = 1; zapishi(st); push('interest');
-      } else {
-        zapishi(st);
-      }
+      zapishi(st);
+      if (st.vidimo >= CEL) { clearInterval(taymer); interest(); }
     }, 1000);
+  })();
+
+  /* ── половината от страницата ──
+     Процентът сам по себе си не е надежден: на къса страница едно плъзване
+     с пръст минава половината, а страница, която се побира в екрана, изобщо
+     няма скрол. Затова искаме и двете — половината от превъртаемото и поне
+     600 px изминати, — а страниците без достатъчно скрол ги оставяме на
+     останалите сигнали. */
+  (function () {
+    var maks = 0;
+    addEventListener('scroll', function () {
+      var d = document.documentElement;
+      var prevartaemo = d.scrollHeight - innerHeight;
+      if (prevartaemo < 400) return;
+      var y = window.scrollY || d.scrollTop || 0;
+      if (y <= maks) return;
+      maks = y;
+      if (y >= prevartaemo * 0.5 && y >= 600) interest();
+    }, { passive: true });
+  })();
+
+  /* ── втора страница в посещението ──
+     Който отвори втора страница, не е случаен минувач. Това е единственият
+     сигнал, който не зависи нито от дължината на страницата, нито от
+     устройството, нито от това колко бързо чете човекът. Броят се различни
+     адреси, за да не мине презареждане за втора страница. */
+  (function () {
+    var st = sesiya();
+    if (!st.pati) st.pati = [];
+    if (st.pati.indexOf(location.pathname) < 0 && st.pati.length < 3)
+      st.pati.push(location.pathname);
+    zapishi(st);
+    if (st.pati.length >= 2) interest();
   })();
 
   /* ── заявката е изпратена ──
