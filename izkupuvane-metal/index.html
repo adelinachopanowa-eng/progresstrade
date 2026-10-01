@@ -26,7 +26,7 @@
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
       window.addEventListener(ev, loadGTM, {once:true, passive:true});
     });
-    function armFallback(){ setTimeout(loadGTM, 10000); }
+    function armFallback(){ setTimeout(loadGTM, 3000); }
     if (document.readyState === 'complete') armFallback();
     else window.addEventListener('load', armFallback);
   })();
