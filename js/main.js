@@ -152,12 +152,12 @@ sections.forEach(s => observer.observe(s));
      първо докосване на страницата. Тоест точно при първия клик fbq още го
      няма. Затова събитието чака в опашка и тръгва в мига, в който fbq се
      появи. Ако пикселът изобщо не дойде (блокиран), отказваме се след 30
-     секунди, вместо да въртим таймер до безкрай. */
+     секунди (100 × 300 ms), вместо да въртим таймер до безкрай. */
   var chakat = [], nabliudava = null;
 
   /* Не стига fbq да съществува — трябва да е минало и fbq('init'), иначе
      събитието тръгва без пиксел, към който да се отнесе. Проверяваме и
-     двете състояния: вече зареден скрипт (getState) или init, който още
+     двете състояния: fbevents.js вече е поел (callMethod) или init още
      чака в опашката на самия fbq. */
   function pikselGotov() {
     var f = window.fbq;
@@ -178,7 +178,7 @@ sections.forEach(s => observer.observe(s));
       if (pikselGotov()) {
         clearInterval(nabliudava); nabliudava = null;
         while (chakat.length) chakat.shift()();
-      } else if (++broi > 60) { clearInterval(nabliudava); nabliudava = null; chakat.length = 0; }
+      } else if (++broi > 100) { clearInterval(nabliudava); nabliudava = null; chakat.length = 0; }
     }, 300);
   }
 
@@ -273,15 +273,16 @@ sections.forEach(s => observer.observe(s));
      600 px изминати, — а страниците без достатъчно скрол ги оставяме на
      останалите сигнали. */
   (function () {
-    var maks = 0;
+    var maks = 0, pusnat = false;
     addEventListener('scroll', function () {
-      var d = document.documentElement;
+      if (pusnat) return;              // иначе всяко ново дъно чете и пише в
+      var d = document.documentElement;   // хранилището насред самото скролване
       var prevartaemo = d.scrollHeight - innerHeight;
       if (prevartaemo < 400) return;
       var y = window.scrollY || d.scrollTop || 0;
       if (y <= maks) return;
       maks = y;
-      if (y >= prevartaemo * 0.5 && y >= 600) interest();
+      if (y >= prevartaemo * 0.5 && y >= 600) { pusnat = true; interest(); }
     }, { passive: true });
   })();
 
