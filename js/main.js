@@ -106,11 +106,10 @@ sections.forEach(s => observer.observe(s));
    Така един и същи човек не дава интерес втори път, докато обикаля сайта,
    но връщане след седмица се брои наново.
 
-   Към Meta се праща направо от тук: fbq('trackCustom','Interest') и
-   fbq('track','Contact',{method}). Затова в Tag Manager НЕ бива да има
-   маркери за пиксела върху тези две събития — ще се броят двойно.
-   Паралелно всяко събитие отива и в dataLayer, откъдето маркерите в GTM
-   го подават на Google Analytics. */
+   Сайтът не праща нищо сам. Всяко събитие излиза в dataLayer и контейнерът
+   решава накъде да го подаде. Така Meta и Analytics тръгват от един и същи
+   тригер в един и същи миг и броят едно и също. Събития, пуснати преди
+   контейнерът да се е вдигнал, го чакат в масива. */
 (function () {
   var KEY = 'pt_poseshtenie';
   var PROZOREC = 30 * 60 * 1000;         // 30 минути без активност
@@ -148,82 +147,13 @@ sections.forEach(s => observer.observe(s));
     }, params || {}));
   }
 
-  /* Пикселът живее в маркер вътре в контейнера, а контейнерът се вдига при
-     първо докосване на страницата. Тоест точно при първия клик fbq още го
-     няма. Затова събитието чака в опашка и тръгва в мига, в който fbq се
-     появи. Ако пикселът изобщо не дойде (блокиран), отказваме се след 30
-     секунди (100 × 300 ms), вместо да въртим таймер до безкрай. */
-  var chakat = [], nabliudava = null;
-
-  /* Не стига fbq да съществува — трябва да е минало и fbq('init'), иначе
-     събитието тръгва без пиксел, към който да се отнесе. Проверяваме и
-     двете състояния: fbevents.js вече е поел (callMethod) или init още
-     чака в опашката на самия fbq. */
-  function pikselGotov() {
-    var f = window.fbq;
-    if (typeof f !== 'function') return false;
-    if (typeof f.callMethod === 'function') return true;   // fbevents.js е поел
-    var q = f.queue || [];                                 // още чака в опашката,
-    for (var i = 0; i < q.length; i++)                     // но init вече е подаден
-      if (q[i] && q[i][0] === 'init') return true;
-    return false;
-  }
-
-  function kamMeta(fn) {
-    if (pikselGotov()) { fn(); return; }
-    chakat.push(fn);
-    if (nabliudava) return;
-    var broi = 0;
-    nabliudava = setInterval(function () {
-      if (pikselGotov()) {
-        clearInterval(nabliudava); nabliudava = null;
-        while (chakat.length) chakat.shift()();
-      } else if (++broi > 100) { clearInterval(nabliudava); nabliudava = null; chakat.length = 0; }
-    }, 300);
-  }
-
-  /* Два отделни белега на събитие: единият казва „преброено е за Analytics“,
-     другият — „доставено е до пиксела“. Метовият се записва чак в мига на
-     самото извикване. Иначе клик към /zayavka/ сменя страницата, преди
-     пикселът да е готов, събитието се губи, а записът вече го е отбелязал
-     за изпратено и повече никой не опитва. */
-  function kamGoogle(ime, params) {
-    if (vednaj(ime)) push(ime, params);
-  }
-
-  var chakashti = {};
-  function kamMetaVednaj(beleg, fn) {
-    if (chakashti[beleg] || sesiya()[beleg]) return;     // вече чака на тази страница
-    chakashti[beleg] = 1;
-    kamMeta(function () {
-      var st = sesiya();
-      if (st[beleg]) return;                             // друг раздел е изпреварил
-      st[beleg] = 1; zapishi(st);
-      fn();
-    });
-  }
-
-  /* Интересът е приключен само когато и Analytics го е преброил, и пикселът
-     го е получил. Проверката на единия белег беше причината таймерът да не
-     праща нищо към Meta, ако Analytics вече го е отчел по-рано. */
-  function interesGotov() {
-    var st = sesiya();
-    return !!(st.interest && st.interest_fb);
-  }
-
   function interest() {
-    kamGoogle('interest');
-    kamMetaVednaj('interest_fb', function () {
-      window.fbq('trackCustom', 'Interest');
-    });
+    if (vednaj('interest')) push('interest');
   }
 
   function contact(method) {
-    interest();
-    kamGoogle('contact', { method: method });
-    kamMetaVednaj('contact_fb', function () {
-      window.fbq('track', 'Contact', { method: method });
-    });
+    interest();                                          // контактът значи и интерес
+    if (vednaj('contact')) push('contact', { method: method });
   }
 
   /* ── кликове ──
@@ -236,13 +166,12 @@ sections.forEach(s => observer.observe(s));
     else if (href.indexOf('mailto:') === 0) contact('email');
     else if (href.indexOf('viber:') === 0) contact('viber');
     else if (href.indexOf('maps.app.goo.gl') > -1 || href.indexOf('google.com/maps') > -1) contact('maps');
-    else if (a.host === location.host && /^\/zayavka\/?$/.test(a.pathname)) contact('quote_form');
   }, { passive: true, capture: true });
 
-  /* Кликът към /zayavka/ напуска страницата и заявката на пиксела може да не
-     успее. Затова същото се проверява и при зареждане на самата страница —
-     дедупликацията гарантира, че се брои веднъж. Изисква се идване от сайта:
-     който влиза направо от реклама или търсене, не е кликал нищо. */
+  /* Заявката се брои при кацане на /zayavka/, а не при клика към нея.
+     Кликът напуска страницата и маркерът може да не успее да изпрати
+     заявката си — при кацането такава гонка няма. Изисква се идване от
+     сайта: който влиза направо от реклама или търсене, не е кликал нищо. */
   if (/^\/zayavka\/?$/.test(location.pathname) &&
       document.referrer.indexOf(location.origin) === 0) contact('quote_form');
 
@@ -251,14 +180,14 @@ sections.forEach(s => observer.observe(s));
      страница и дванайсет на следващата правят двайсет. Скритият раздел не
      се брои: отворен и забравен прозорец не е интерес. */
   (function () {
-    if (interesGotov()) return;
+    if (sesiya().interest) return;
     var posledno = Date.now();
     document.addEventListener('visibilitychange', function () { posledno = Date.now(); });
     var taymer = setInterval(function () {
       var sega = Date.now(), delta = Math.min(sega - posledno, 2000);
       posledno = sega;                                  // таймерът в скрит раздел
       if (document.visibilityState !== 'visible') return;  // се забавя или спира,
-      if (interesGotov()) { clearInterval(taymer); return; }   // затова има таван
+      if (sesiya().interest) { clearInterval(taymer); return; }  // затова има таван
       var st = sesiya();
       st.vidimo = (st.vidimo || 0) + delta;
       zapishi(st);
