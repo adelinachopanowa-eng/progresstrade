@@ -404,6 +404,10 @@ section[id]{scroll-margin-top:88px}
 .seg-card h3{font-size:var(--fs-6);font-weight:800;color:var(--green);letter-spacing:-.01em;margin-bottom:6px}
 .seg-card p{font-size:var(--fs-3);color:var(--text-soft);line-height:var(--lh-normal);flex:1}
 .seg-card > picture img{height:auto}
+/* Плочка вместо снимка: същата геометрия като <img> в картата, за да лягат
+   всички карти на общи линии в субрешетката, докато няма истинска снимка. */
+.mat-tile{width:100%;aspect-ratio:3/2;border-radius:10px;margin-bottom:14px;background:var(--cream);border:1px solid var(--cream-dark);display:flex;align-items:center;justify-content:center}
+.mat-tile svg{width:88px;height:88px;stroke:var(--green);stroke-width:1.2;opacity:.8}
 .seg-card .more{margin-top:14px;font-size:var(--fs-3);font-weight:700;color:var(--green-accent)}
 /* Десетата карта оставаше сама на реда и две трети стояха празни. */
 .mat-cta{grid-column:span 2;background:var(--green);border-radius:var(--radius-card);padding:var(--space-4);display:flex;flex-direction:column;justify-content:center;gap:10px;align-items:flex-start}
