@@ -260,6 +260,9 @@ section[id]{scroll-margin-top:88px}
 .mobile-menu{display:none;flex-direction:column;background:var(--white);border-top:1px solid var(--cream-dark);padding:var(--space-3) var(--gutter) var(--space-4);gap:var(--space-3)}
 .mobile-menu.open{display:flex}
 .mobile-menu a{font-size:var(--fs-5);font-weight:500;color:var(--text);padding:8px 0;border-bottom:1px solid var(--cream-dark)}
+/* Бутонът в менюто е .btn-primary, но ".mobile-menu a" го биеше по
+   специфичност и текстът му излизаше почти черен върху жълтото. */
+.mobile-menu a.btn{color:var(--green-deep);border-bottom:0}
 
 
 @media(max-width:900px){
@@ -358,8 +361,11 @@ section[id]{scroll-margin-top:88px}
 /* Падащо меню в навигацията */
 .nav-links li.has-dd{position:relative}
 .nav-links .dd-toggle{display:inline-flex;align-items:center;gap:4px;cursor:pointer}
-.nav-links .dd-toggle::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);margin-top:-3px;transition:transform var(--dur);opacity:.65}
-.nav-links li.has-dd:hover .dd-toggle::after,.nav-links li.has-dd:focus-within .dd-toggle::after{transform:rotate(225deg);margin-top:2px}
+/* Шеврон със заоблени краища. Върти се около центъра си, затова не иска
+   подпиране с margin като завъртяния квадрат, който беше тук преди. */
+.nav-links .dd-caret{flex:none;opacity:.55;transform-origin:50% 50%;
+  transition:transform var(--dur) cubic-bezier(.4,0,.2,1),opacity var(--dur-fast)}
+.nav-links li.has-dd:hover .dd-caret,.nav-links li.has-dd:focus-within .dd-caret{transform:rotate(180deg);opacity:1}
 .dd-menu{position:absolute;top:calc(100% + 14px);left:0;transform:translateY(8px);width:max-content;max-width:360px;background:var(--white);border:1px solid rgba(0,0,0,.10);border-radius:var(--radius-card);box-shadow:var(--shadow-hover);padding:8px;opacity:0;visibility:hidden;transition:opacity var(--dur) ease,transform var(--dur) ease;z-index:120}
 .nav-links li.has-dd:hover .dd-menu,.nav-links li.has-dd:focus-within .dd-menu{opacity:1;visibility:visible;transform:translateY(0)}
 .dd-menu::before{content:"";position:absolute;top:-14px;left:0;right:0;height:14px}
