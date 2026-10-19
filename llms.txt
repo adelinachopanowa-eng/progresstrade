@@ -73,6 +73,7 @@
 - [Енергетика и електроразпределение](https://progresstrade.bg/izkupuvane-metal/energetika/): трансформатори, медни шини, силови кабели и стълбове
 - [Общини и институции](https://progresstrade.bg/izkupuvane-metal/obshtini/): улично осветление, площадки и бракувано общинско имущество, с протоколи
 - [Транспорт и логистика](https://progresstrade.bg/izkupuvane-metal/transport-i-logistika/): ремаркета, каросерии, части и метал от ремонтни бази
+- [Добивна промишленост](https://progresstrade.bg/izkupuvane-metal/dobivna-promishlenost/): бракувана добивна техника, трошачно-пресевни инсталации, транспортни ленти и конструкции от кариери и рудници
 
 ## Документи
 
