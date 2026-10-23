@@ -73,6 +73,54 @@ img{height:auto}
 .post-card--lead h2{font-size:clamp(24px,2.4vw,32px);line-height:1.15;letter-spacing:-.02em;margin-bottom:12px}
 .post-card--lead p{font-size:var(--fs-5)}
 
+/* Съдържание в началото на дълга статия */
+.toc{background:var(--cream);border-radius:20px;padding:22px 26px;margin:28px 0 8px}
+.toc-h{font-size:var(--fs-1);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.toc ol{margin:0;padding-left:22px;columns:2;column-gap:32px}
+.toc li{margin:0 0 6px;break-inside:avoid;font-size:15.5px}
+.toc li::marker{color:var(--gold-ink);font-weight:600}
+.toc a{color:var(--ink);text-decoration:none}
+.toc a:hover{color:var(--green);text-decoration:underline;text-underline-offset:3px}
+.article-body h2[id]{scroll-margin-top:96px}
+
+/* Снимки в текста с надпис */
+.article-figure{margin:32px 0}
+.article-figure img{display:block;width:100%;height:auto;border-radius:var(--radius-card)}
+.article-figure figcaption,.article-gallery figcaption{font-size:var(--fs-2);color:var(--text-soft);line-height:1.5;margin-top:10px}
+.article-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:28px 0}
+.article-gallery figure{margin:0}
+.article-gallery img{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:16px}
+
+/* Карта с числа */
+.stat-box{background:var(--green-deep);color:var(--white);border-radius:var(--radius-card);padding:26px 28px;margin:20px 0 28px}
+.stat-box .stat-intro{color:var(--text-white-soft);margin:0 0 18px;font-size:var(--fs-4)}
+.stat-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat{background:rgba(255,255,255,.06);border:1px solid var(--line-white);border-radius:16px;padding:16px 14px}
+.stat b{display:block;font-family:var(--font-cond);font-size:28px;font-weight:600;letter-spacing:-.02em;color:var(--yellow);line-height:1.1}
+.stat span{display:block;font-size:14px;color:var(--text-white-soft);margin-top:4px}
+.stat-box .stat-src{font-size:13px;color:rgba(255,255,255,.55);margin:16px 0 0}
+
+/* Подредени стъпки и списък със съвети */
+.article-body .steps-list{list-style:none;margin:0 0 18px;padding:0;counter-reset:st}
+.article-body .steps-list li{counter-increment:st;position:relative;padding:12px 0 12px 48px;border-bottom:1px solid var(--line);margin:0}
+.article-body .steps-list li::before{content:counter(st);position:absolute;left:0;top:10px;width:32px;height:32px;border-radius:50%;background:var(--yellow-soft);color:var(--gold-ink);font-weight:700;font-size:15px;display:flex;align-items:center;justify-content:center}
+.article-body .check-list{list-style:none;margin:0 0 18px;padding:0}
+.article-body .check-list li{position:relative;padding-left:34px;margin-bottom:12px}
+.article-body .check-list li::before{content:"";position:absolute;left:0;top:4px;width:22px;height:22px;border-radius:50%;background:var(--yellow-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14'%3E%3Cpolyline points='3,7 6,10 11,4' fill='none' stroke='%238a5a00' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+
+/* Таблица с материали: на телефон редовете стават карти */
+.article-body .tablewrap{margin:8px 0 24px}
+.article-body .tablewrap table{margin:0}
+
+/* Източници */
+.sources{border-top:1px solid var(--line);margin-top:40px;padding-top:20px;font-size:var(--fs-2);color:var(--text-soft)}
+.sources-h{font-weight:600;color:var(--ink);margin-bottom:8px}
+.article-body .sources ul{margin:0 0 0 18px}
+.article-body .sources li{margin-bottom:6px}
+.article-body .sources a{font-weight:500}
+
+.cta-row{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+
 @media(max-width:900px){
   .post-card--lead{display:flex;flex-direction:column}
   .post-card--lead img{min-height:0;aspect-ratio:16/10}
@@ -80,9 +128,25 @@ img{height:auto}
   .post-card--lead h2{font-size:var(--fs-7)}
 }
 @media(max-width:640px){
+  .toc ol{columns:1}
+  .toc{padding:18px 20px}
+  .article-gallery{grid-template-columns:1fr}
+  .article-gallery img{aspect-ratio:3/2}
+  .stat-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat-box{padding:22px 18px}
+  .article-body table:has(td[data-label]),.article-body table:has(td[data-label]) tbody,.article-body table:has(td[data-label]) tr,.article-body table:has(td[data-label]) td{display:block;width:100%}
+  .article-body table:has(td[data-label]) thead{display:none}
+  .article-body table:has(td[data-label]) tr{border-bottom:1px solid var(--line);padding:14px 16px}
+  .article-body table:has(td[data-label]) tr:last-child{border-bottom:0}
+  .article-body table:has(td[data-label]) td{border:0;padding:3px 0}
+  .article-body table:has(td[data-label]) td:first-child{font-size:17px;font-weight:600;color:var(--ink);margin-bottom:2px}
+  .article-body table:has(td[data-label]) td:not(:first-child)::before{content:attr(data-label);display:block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text-soft);margin-top:6px}
+  .cta-row .btn{width:100%}
   .article{padding:28px var(--gutter) 72px}
   .article-top{padding:16px 0 36px}
-  .article-top h1{font-size:32px;line-height:1.1}
+  .article-top h1{font-size:30px;line-height:1.12}
   .article-body{font-size:16.5px}
   .cta{padding:32px 22px}
 }
+.sources .photo-credit{margin:12px 0 0;font-size:13px}
+@media(max-width:400px){.article-top h1{font-size:27px}.article-body h2{font-size:22px}}
