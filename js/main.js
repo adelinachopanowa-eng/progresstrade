@@ -1,8 +1,31 @@
+/* Мобилното меню покрива екрана под навигацията. Горният му ръб се взима от
+   самата навигация в момента на отваряне — над нея може да стои горната лента
+   или лентата за отпуск, затова фиксирано число би покрило бутона за затваряне.
+   Докато менюто е отворено, страницата отдолу не се превърта. */
 function toggleMenu() {
-  var open = document.getElementById('mobile-menu').classList.toggle('open');
+  var mm = document.getElementById('mobile-menu');
+  var nav = document.getElementById('main-nav');
+  var open = mm.classList.toggle('open');
+  if (open && nav) mm.style.top = Math.max(0, Math.round(nav.getBoundingClientRect().bottom)) + 'px';
+  document.documentElement.classList.toggle('menu-open', open);
   var h = document.getElementById('hamburger');
   if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
+
+/* Текущият раздел в менюто получава златна черта отдолу. Страниците за
+   отделните материали са под „Какво изкупуваме“. */
+(function () {
+  var path = location.pathname;
+  var links = document.querySelectorAll('.nav-links > li > a');
+  [].forEach.call(links, function (a) {
+    var href = a.getAttribute('href') || '';
+    if (href === '/' || href.charAt(0) !== '/') return;
+    var hit = path.indexOf(href) === 0;
+    if (!hit && href === '/kakvo-izkupuvame/')
+      hit = /^\/(izkupuvane\/|izkupuvane-zhelyazo\/|izkupuvane-cvetni-metali\/)/.test(path);
+    if (hit) a.setAttribute('aria-current', 'page');
+  });
+})();
 
 
 const sections = document.querySelectorAll('section[id]');
@@ -80,9 +103,18 @@ sections.forEach(s => observer.observe(s));
 (function () {
   var mm = document.getElementById('mobile-menu'), h = document.getElementById('hamburger');
   if (!mm) return;
-  function close() { mm.classList.remove('open'); if (h) h.setAttribute('aria-expanded', 'false'); }
+  function close() {
+    mm.classList.remove('open');
+    document.documentElement.classList.remove('menu-open');
+    if (h) h.setAttribute('aria-expanded', 'false');
+  }
   mm.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  /* При завъртане на таблета към широк екран менюто изчезва от CSS —
+     затваряме го и тук, иначе страницата остава заключена за превъртане. */
+  var wide = window.matchMedia('(min-width:1025px)');
+  var onWide = function () { if (wide.matches) close(); };
+  if (wide.addEventListener) wide.addEventListener('change', onWide); else if (wide.addListener) wide.addListener(onWide);
 })();
 
 
