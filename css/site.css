@@ -244,16 +244,18 @@ section[id]{scroll-margin-top:104px}
 .sect-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:20px}
 .sect-grid--3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .sect-card{display:flex;flex-direction:column;padding:8px;background:var(--white);border:1px solid var(--line);border-radius:var(--radius-card);transition:transform var(--dur) var(--ease),box-shadow var(--dur),border-color var(--dur)}
-.sect-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:transparent}
+a.sect-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-hover);border-color:transparent}
 .sect-media{position:relative;aspect-ratio:16/10;overflow:hidden;border-radius:18px;background:var(--mint-100)}
 .sect-media img{width:100%;height:100%;object-fit:cover;display:block;transition:transform var(--dur-slow) var(--ease)}
-.sect-card:hover .sect-media img{transform:scale(1.05)}
+a.sect-card:hover .sect-media img{transform:scale(1.05)}
 .sect-media::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(16,48,31,0) 40%,rgba(16,48,31,.30) 62%,rgba(16,48,31,.86) 100%)}
 .sect-media h3{position:absolute;z-index:2;left:18px;right:18px;bottom:14px;margin:0;font-family:var(--font-cond);font-size:19px;font-weight:600;line-height:1.2;letter-spacing:-.015em;color:var(--white);text-wrap:balance;text-shadow:0 1px 12px rgba(0,0,0,.3)}
 .sect-body{display:flex;flex-direction:column;flex:1;padding:16px 14px 14px}
 .sect-body p{font-size:15px;color:var(--text-soft);line-height:1.6;margin:0}
 .sect-body .more{margin-top:var(--space-3);align-self:start}
 @media (max-width:1100px){.sect-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* точно четири карти: 2×2 вместо три и една сама на втори ред */
+@media (min-width:561px) and (max-width:1100px){.sect-grid:has(> .sect-card:nth-child(4):last-child){grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:900px){.sect-grid,.sect-grid--3{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.sect-grid,.sect-grid--3{grid-template-columns:1fr;gap:var(--space-2-5)}
   .sect-media{aspect-ratio:2/1}
