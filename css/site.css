@@ -703,14 +703,9 @@ html.menu-open{overflow:hidden}
   .grid-3,.grid-4,.why-grid,.pain-grid,.biz-mini{grid-template-columns:1fr}
 }
 
-.call-fab{display:none}
 @media(max-width:768px){
-  .call-fab{position:fixed;right:16px;bottom:calc(64px + env(safe-area-inset-bottom));transition:transform var(--dur) ease;will-change:transform;z-index:90;width:58px;height:58px;border-radius:50%;background:var(--yellow);color:var(--ink);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px rgba(235,183,60,.18),0 14px 28px -10px rgba(16,48,31,.45);overflow:visible}
-  .call-fab svg{width:24px;height:24px}
-  .footer-bottom{flex-direction:column;align-items:flex-start;gap:var(--space-2);padding-bottom:calc(56px + env(safe-area-inset-bottom))}
+  .footer-bottom{flex-direction:column;align-items:flex-start;gap:var(--space-2);padding-bottom:env(safe-area-inset-bottom)}
 }
-@media(prefers-reduced-motion:reduce){.call-fab{animation:none}}
-html.menu-open .call-fab{display:none}
 
 html,body{overflow-x:clip}
 
@@ -779,7 +774,7 @@ html,body{overflow-x:clip}
 .post-card:focus-visible,.seg-card:focus-visible,.service-card:focus-visible,.icard:focus-visible,.sect-card:focus-visible,.biz-chip:focus-visible,.client-logo:focus-visible,
 .class-links a:focus-visible,.dd-menu a:focus-visible,.price-table a:focus-visible,.logo:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:var(--radius-card)}
 .class-links a:focus-visible{border-radius:var(--radius-pill)}
-.call-fab:focus-visible{outline:3px solid var(--ink);outline-offset:3px;border-radius:50%}
+
 .faq-item summary:focus-visible{border-radius:var(--radius-sm);outline-offset:2px}
 .biz-chip:focus-visible{outline-color:var(--yellow)}
 
