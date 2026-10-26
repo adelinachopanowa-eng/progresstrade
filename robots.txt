@@ -24,4 +24,7 @@ Allow: /
 User-agent: CCBot
 Allow: /
 
+# Кратко описание на фирмата и страниците за езикови модели:
+# https://progresstrade.bg/llms.txt
+
 Sitemap: https://progresstrade.bg/sitemap.xml
