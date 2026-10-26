@@ -103,6 +103,7 @@
 - [За нас](https://progresstrade.bg/za-nas/): опит от 2002 г., площадка и техника
 - [Контакти](https://progresstrade.bg/kontakti/): адрес, телефон и карта
 - [Заявка за оферта](https://progresstrade.bg/zayavka/): форма за запитване и оглед
+- [Обслужвани райони](https://progresstrade.bg/rayoni/): районите на София и областта, в които извозваме
 
 ## Полезно
 
@@ -110,3 +111,5 @@
 - [Видове железен скрап](https://progresstrade.bg/blog/vidove-zhelezen-skrap.html): разликата между класовете черен метал
 - [Бракуване на активи и документиране](https://progresstrade.bg/blog/brakuvane-dma-otpisvane-prodazhba.html): ЗКПО, ЗДДС и обратно начисляване
 - [Облагат ли се доходите от скрап](https://progresstrade.bg/blog/dohodi-ot-skrap-neoblagaemi.html): необлагаеми доходи за физически лица от 2024 г.
+- [Разкомплектоване на автобуси](https://progresstrade.bg/blog/razkomplektovane-avtobusi-gradski-transport.html): какво се случва с градските автобуси след бракуване
+- [Достъп за камион на обекта](https://progresstrade.bg/blog/dostap-za-kamion-na-obekta.html): как се подготвя мястото за товарене
