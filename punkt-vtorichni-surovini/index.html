@@ -9,7 +9,7 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   /* Контейнерът се вдига при първо докосване на страницата или резервно на
-     10-ата секунда. Сложен както го дава Google — най-горе в head — gtm.js
+     3-ата секунда. Сложен както го дава Google — най-горе в head — gtm.js
      пада точно в прозореца, който Lighthouse мери, и връща 930-те ms
      блокиране на нишката, които струваха 30 точки на десктоп.
      Събитията, пуснати преди това, чакат в dataLayer и контейнерът ги
@@ -24,8 +24,17 @@
       s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4TPVP33';
       document.head.appendChild(s);
     }
+    /* Страниците, на които се мери конверсия, не чакат: на „Благодарим“
+       събитието е вече в dataLayer, а човек често затваря таба веднага. */
+    if (/^\/(blagodarim|zayavka)\/?$/.test(location.pathname)) { loadGTM(); return; }
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
       window.addEventListener(ev, loadGTM, {once:true, passive:true});
+    });
+    /* Ако посетителят си тръгва преди резервния срок, вдигаме контейнера
+       сега — иначе прегледът му остава неброен. */
+    window.addEventListener('pagehide', loadGTM, {once:true});
+    document.addEventListener('visibilitychange', function(){
+      if (document.visibilityState === 'hidden') loadGTM();
     });
     function armFallback(){ setTimeout(loadGTM, 3000); }
     if (document.readyState === 'complete') armFallback();
