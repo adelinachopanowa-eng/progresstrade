@@ -3,6 +3,7 @@
 
 User-agent: *
 Allow: /
+Disallow: /social/   # работни файлове за постове, не са част от сайта
 
 # AI / отговорни машини (изрично разрешени)
 User-agent: GPTBot
