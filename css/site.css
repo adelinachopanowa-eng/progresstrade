@@ -110,6 +110,14 @@ a[href^="tel:"]{white-space:nowrap}
 .nav-links > li > a.dd-toggle::after{right:20px}
 .nav-links > li > a[aria-current]{font-weight:600}
 .nav-actions{display:flex;gap:8px;align-items:center}
+/* ── Превключвател на езика ──
+   Надписът е кодът на другия език (EN на българските страници, BG на
+   английските). Адресът в HTML-а е резервен — сочи началната страница на
+   другия език. При зареждане main.js го заменя с точния превод на текущата
+   страница, който стои в <link rel="alternate" hreflang>. */
+.lang-switch{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:40px;padding:0 11px;border:1px solid var(--line-2);border-radius:var(--radius-pill);font-size:var(--fs-2);font-weight:700;letter-spacing:.08em;color:var(--green);background:var(--white);transition:background-color var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast)}
+.lang-switch:hover{background:var(--green);border-color:var(--green);color:var(--white)}
+.mobile-menu > a.mm-lang{font-family:var(--font);font-size:var(--fs-4);font-weight:600;color:var(--text-soft);min-height:56px;letter-spacing:0}
 .nav-hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;width:44px;height:44px;margin-right:-4px;background:var(--cream);border:none;border-radius:14px;transition:background-color var(--dur-fast)}
 .nav-hamburger span{display:block;width:20px;height:1.8px;background:var(--ink);border-radius:2px;transition:transform var(--dur) var(--ease),opacity var(--dur-fast),width var(--dur) var(--ease),background-color var(--dur-fast)}
 .nav-hamburger span:last-child{width:12px;transform:translateX(4px)}
@@ -667,6 +675,10 @@ html.menu-open{overflow:hidden}
 .price-table td{padding:16px 4px;border-bottom:1px solid var(--line);color:var(--text)}
 .price-table td:last-child{font-family:var(--font-cond);font-weight:600;font-size:var(--fs-5);color:var(--green);white-space:nowrap}
 .price-table tbody tr:last-child td{border-bottom:0}
+/* Ред с описание под името на класа — ползва се в английския ценоразпис,
+   където няма отделни страници по материал, към които да води връзка. */
+.price-table td b{display:block;font-weight:600;color:var(--ink)}
+.price-table td span{display:block;margin-top:3px;font-size:var(--fs-2);color:var(--text-soft);line-height:1.45}
 .price-table td a{display:flex;align-items:center;min-height:40px}
 .price-table td a.link-cell::after{content:"";width:13px;height:13px;margin-left:10px;flex-shrink:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa9a0' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 17 17 7M7 7h10v10'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform var(--dur) var(--ease)}
 .price-table td a.link-cell:hover::after{transform:translate(2px,-2px)}

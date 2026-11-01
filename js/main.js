@@ -12,6 +12,24 @@ function toggleMenu() {
   if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
 }
 
+/* ── Език на страницата ────────────────────────────────────────────────────
+   Английската версия живее под /en/. Всичко останало е българско. Езикът
+   се чете от пътя, а не от <html lang>, за да работи и при кеширан HTML. */
+var NA_ANGLIYSKI = location.pathname.indexOf('/en/') === 0 || location.pathname === '/en';
+
+/* Превключвателят на езика сочи точния превод на текущата страница.
+   В HTML-а href-ът е началната страница на другия език, за да работи и без
+   JavaScript; тук го заменяме с адреса от <link rel="alternate" hreflang>. */
+(function () {
+  var vrazki = document.querySelectorAll('a[data-lang-alt]');
+  if (!vrazki.length) return;
+  [].forEach.call(vrazki, function (a) {
+    var ez = a.getAttribute('hreflang');
+    var l = document.querySelector('link[rel="alternate"][hreflang="' + ez + '"]');
+    if (l && l.href) a.href = l.href;
+  });
+})();
+
 /* Текущият раздел в менюто получава златна черта отдолу. Страниците за
    отделните материали са под „Какво изкупуваме“. */
 (function () {
@@ -23,6 +41,8 @@ function toggleMenu() {
     var hit = path.indexOf(href) === 0;
     if (!hit && href === '/kakvo-izkupuvame/')
       hit = /^\/(izkupuvane\/|izkupuvane-zhelyazo\/|izkupuvane-cvetni-metali\/)/.test(path);
+    if (!hit && href === '/en/what-we-buy/')
+      hit = /^\/en\/(ferrous-scrap|non-ferrous-scrap)\//.test(path);
     if (hit) a.setAttribute('aria-current', 'page');
   });
 })();
@@ -82,18 +102,29 @@ sections.forEach(s => observer.observe(s));
       if (!f.action || f.action.indexOf('formspree') === -1) return; // друг action — нормален submit
       e.preventDefault();
       var btn = f.querySelector('button[type=submit]');
-      if (btn) { btn.disabled = true; btn.dataset.t = btn.textContent; btn.textContent = 'Изпращане…'; }
+      if (btn) {
+        btn.disabled = true; btn.dataset.t = btn.textContent;
+        btn.textContent = NA_ANGLIYSKI ? 'Sending…' : 'Изпращане…';
+      }
       fetch(f.action, { method: 'POST', body: new FormData(f), headers: { 'Accept': 'application/json' } })
         .then(function (r) {
           if (r.ok) {
-            window.location.href = '/blagodarim/';
+            window.location.href = NA_ANGLIYSKI ? '/en/thank-you/' : '/blagodarim/';
           }
           else { throw new Error('bad'); }
         })
         .catch(function () {
-          if (btn) { btn.disabled = false; btn.textContent = btn.dataset.t || 'Изпрати заявка'; }
+          if (btn) {
+            btn.disabled = false;
+            btn.textContent = btn.dataset.t || (NA_ANGLIYSKI ? 'Send request' : 'Изпрати заявка');
+          }
           var n = f.querySelector('.form-note');
-          if (n) { n.innerHTML = 'Възникна проблем при изпращането. Моля, обадете се на <a href="tel:+359877775577" style="color:var(--green);font-weight:700;">0877 77 55 77</a> или пишете на progresstradesofia@gmail.com.'; n.style.color = '#b00020'; }
+          if (n) {
+            n.innerHTML = NA_ANGLIYSKI
+              ? 'Something went wrong while sending. Please call <a href="tel:+359877775577" style="color:var(--green);font-weight:700;">+359 877 77 55 77</a> or write to progresstradesofia@gmail.com.'
+              : 'Възникна проблем при изпращането. Моля, обадете се на <a href="tel:+359877775577" style="color:var(--green);font-weight:700;">0877 77 55 77</a> или пишете на progresstradesofia@gmail.com.';
+            n.style.color = '#b00020';
+          }
         });
     });
   });
@@ -204,7 +235,7 @@ sections.forEach(s => observer.observe(s));
      Кликът напуска страницата и маркерът може да не успее да изпрати
      заявката си — при кацането такава гонка няма. Изисква се идване от
      сайта: който влиза направо от реклама или търсене, не е кликал нищо. */
-  if (/^\/zayavka\/?$/.test(location.pathname) &&
+  if (/^\/(zayavka|en\/request-a-quote)\/?$/.test(location.pathname) &&
       document.referrer.indexOf(location.origin) === 0) contact('quote_form');
 
   /* ── 20 секунди видимо време, сумирано за целия сайт ──
@@ -264,7 +295,8 @@ sections.forEach(s => observer.observe(s));
   /* ── заявката е изпратена ──
      „Благодарим“ се вижда само след успешно изпращане на формата и е noindex,
      тоест никой не идва там от търсачка. Това е истинската конверсия. */
-  if (location.pathname.indexOf('/blagodarim') === 0 && vednaj('zayavka'))
+  if ((location.pathname.indexOf('/blagodarim') === 0 ||
+       location.pathname.indexOf('/en/thank-you') === 0) && vednaj('zayavka'))
     push('zayavka_izpratena');
 })();
 
@@ -298,17 +330,21 @@ sections.forEach(s => observer.observe(s));
 
   var MESECI = ['януари','февруари','март','април','май','юни',
                 'юли','август','септември','октомври','ноември','декември'];
-  function slovom(isoData) {            // '2027-08-30' → '30 август'
+  var MONTHS = ['January','February','March','April','May','June',
+                'July','August','September','October','November','December'];
+  function slovom(isoData) {            // '2027-08-30' → '30 август' / '30 August'
     var ch = isoData.split('-');
-    return (+ch[2]) + ' ' + MESECI[(+ch[1]) - 1];
+    var m = (+ch[1]) - 1;
+    return NA_ANGLIYSKI ? (+ch[2]) + ' ' + MONTHS[m] : (+ch[2]) + ' ' + MESECI[m];
   }
 
   if (vOtpusk) {
     var bar = document.querySelector('[data-vacation]');
     if (bar) {
       var zagl = bar.querySelector('b');
-      if (zagl) zagl.textContent =
-        'Годишен отпуск: ' + slovom(OTPUSK_OT) + ' – ' + slovom(OTPUSK_DO) + '.';
+      if (zagl) zagl.textContent = NA_ANGLIYSKI
+        ? 'Annual leave: ' + slovom(OTPUSK_OT) + ' – ' + slovom(OTPUSK_DO) + '.'
+        : 'Годишен отпуск: ' + slovom(OTPUSK_OT) + ' – ' + slovom(OTPUSK_DO) + '.';
       bar.classList.add('on');
     }
   }
@@ -321,8 +357,11 @@ sections.forEach(s => observer.observe(s));
     if (vOtpusk) {
       notes.forEach(function (n) {
         var t = n.querySelector('span') || n;
-        t.textContent = 'В годишен отпуск сме до ' + slovom(OTPUSK_DO) + '. Оставете ' +
-          'заявка или пишете на Viber — отговаряме веднага след това.';
+        t.textContent = NA_ANGLIYSKI
+          ? 'We are on annual leave until ' + slovom(OTPUSK_DO) + '. Send a request or ' +
+            'message us on Viber — we reply as soon as we are back.'
+          : 'В годишен отпуск сме до ' + slovom(OTPUSK_DO) + '. Оставете ' +
+            'заявка или пишете на Viber — отговаряме веднага след това.';
       });
     }
     notes.forEach(function (n) { n.classList.add('on'); });

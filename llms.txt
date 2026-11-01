@@ -2,6 +2,10 @@
 
 > Прогрестрейд е лицензиран пункт за изкупуване на черни и цветни метали в София, кв. Военна рампа. Работи от 2002 г. Изкупува старо желязо, чугун, ламарина, стружки, технологичен скрап, метални опаковки, електроуреди и коли за скрап, както и мед, алуминий, неръждаема стомана, месинг, бронз, кабели и електромотори. Работи само на партиди — от 1 тон при черни метали и от 300 кг при цветни — с фирми и с частни лица. Плащане по банков път, с претегляне на калибрирана везна.
 
+## Езици
+
+Сайтът е на български. Десет основни страници имат и английска версия под `/en/`, насочена към чуждестранни фирми в България и към купувачи извън страната. Съдържанието е равностойно, не машинен превод. Връзките са в раздела „Основни страници на английски".
+
 ## Основни факти
 
 - Фирма: Прогрестрейд (ЕИК 130975863, ДДС № BG130975863)
@@ -137,6 +141,19 @@
 - [Блог](https://progresstrade.bg/blog/): статии за класовете скрап, цените и документите
 - [Поверителност](https://progresstrade.bg/poveritelnost/): как обработваме данните от формата за заявка
 
+## Основни страници на английски
+
+- [Home](https://progresstrade.bg/en/): scrap metal buying in Sofia, Bulgaria
+- [What we buy](https://progresstrade.bg/en/what-we-buy/): fifteen grades, grading rules and what is not accepted
+- [Ferrous scrap](https://progresstrade.bg/en/ferrous-scrap/): steel, cast iron, sheet, turnings and what drives the price
+- [Non-ferrous scrap](https://progresstrade.bg/en/non-ferrous-scrap/): copper, aluminium, stainless steel, brass, cable, motors
+- [For business](https://progresstrade.bg/en/for-business/): containers, cutting, collection, documents, VAT reverse charge
+- [Services](https://progresstrade.bg/en/services/): buying, oxy-fuel cutting, containers and transport
+- [Prices](https://progresstrade.bg/en/prices/): how the price is set and why payment is by bank transfer
+- [About us](https://progresstrade.bg/en/about/): licences, permit numbers, yard and equipment
+- [Contact](https://progresstrade.bg/en/contact/): address, phone, map and how a lorry handover works
+- [Request a quote](https://progresstrade.bg/en/request-a-quote/): enquiry form in English
+
 ## Полезно
 
 - [Как се определя цената на скрапа](https://progresstrade.bg/blog/kak-se-opredelya-cenata-na-skrapa.html): кои фактори движат изкупната цена
@@ -149,4 +166,4 @@
 - [Рециклиране на кабели](https://progresstrade.bg/blog/reciklirane-na-kabeli.html): видове кабели, добив на мед, гранулиране и защо изгарянето е губещо
 
 ---
-Последна редакция: 26.10.2026 г.
+Последна редакция: 01.11.2026 г.

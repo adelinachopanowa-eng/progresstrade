@@ -26,7 +26,7 @@
     }
     /* Страниците, на които се мери конверсия, не чакат: на „Благодарим“
        събитието е вече в dataLayer, а човек често затваря таба веднага. */
-    if (/^\/(blagodarim|zayavka)\/?$/.test(location.pathname)) { loadGTM(); return; }
+    if (/^\/(blagodarim|zayavka|en\/thank-you|en\/request-a-quote)\/?$/.test(location.pathname)) { loadGTM(); return; }
     ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
       window.addEventListener(ev, loadGTM, {once:true, passive:true});
     });
@@ -47,6 +47,8 @@
 <meta name="keywords" content="вторични суровини, вторични суровини цени, железен скрап, скрап цени, цена на желязо, бг скрап, изкупуване на скрап, черни метали, скрап София, коли за скрап, ИУМПС, скрап Военна Рампа">
 <link rel="canonical" href="https://progresstrade.bg/">
 <link rel="alternate" hreflang="bg" href="https://progresstrade.bg/">
+<link rel="alternate" hreflang="en" href="https://progresstrade.bg/en/">
+<link rel="alternate" hreflang="x-default" href="https://progresstrade.bg/">
 <meta name="robots" content="index, follow">
 
 <!-- Open Graph / споделяне в социални мрежи -->
@@ -151,7 +153,7 @@
 <noscript></noscript>
 
 
-<link rel="stylesheet" href="/css/site.min.css?v=32e2809c">
+<link rel="stylesheet" href="/css/site.min.css?v=2bd6b98c">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://progresstrade.bg/#website","name":"Прогрестрейд","alternateName":"Progresstrade","url":"https://progresstrade.bg/","inLanguage":"bg","publisher":{"@id":"https://progresstrade.bg/#business"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Какво представляват вторичните суровини?","acceptedAnswer":{"@type":"Answer","text":"Вторични суровини са материали, получени от рециклиране на употребявани продукти: железен скрап, черни метали, технологичен отпадък от производство. Прогрестрейд изкупува всички видове вторични суровини от черни метали на конкурентни цени."}},{"@type":"Question","name":"Какви цени предлагате за железен скрап?","acceptedAnswer":{"@type":"Answer","text":"Цената зависи от класа, чистотата и количеството и се дава за конкретната доставка, спрямо борсовата котировка в деня. Най-високо се плащат плътното желязо бонус и технологичният скрап, най-ниско — тънката ламарина и стружките. Обадете се на 0877 77 55 77 за актуална оферта."}},{"@type":"Question","name":"Има ли минимално количество?","acceptedAnswer":{"@type":"Answer","text":"Да, изкупуваме само на партиди: от 1 тон при черни метали и от 300 кг при цветни. Единични уреди и домашен метален отпадък не приемаме. Вижте количествата, с които работим."}},{"@type":"Question","name":"Идвате ли на адрес за извозване?","acceptedAnswer":{"@type":"Answer","text":"Да. При над 2 тона организираме наш транспорт — камион с щипка — и товарене на ваш адрес в София и областта. Превозът се калкулира в изкупната цена. Ако докарате материала сами в пункта, получавате по-висока цена."}},{"@type":"Question","name":"В кои райони на София работите?","acceptedAnswer":{"@type":"Answer","text":"Обслужваме цяла София и областта, включително Военна Рампа, Надежда, Подуяне, Люлин, Дружба, Гара Искър, Сточна гара и Божурище. Площадката ни е на ул. Проф. Иван Георгов 1, кв. Военна Рампа."}},{"@type":"Question","name":"Изкупувате ли коли за скрап?","acceptedAnswer":{"@type":"Answer","text":"Да, изкупуваме и разкомплектоваме излезли от употреба автомобили (ИУМПС) и издаваме всички документи за дерегистрация в КАТ."}},{"@type":"Question","name":"Как и кога се извършва плащането?","acceptedAnswer":{"@type":"Answer","text":"Плащането е по банков път, веднага при предаването, след претегляне на калибрирана везна."}},{"@type":"Question","name":"Какво е работното ви време?","acceptedAnswer":{"@type":"Answer","text":"Нашият пункт за изкупуване на вторични суровини работи от понеделник до петък, от 9:00 до 17:00 ч. Адрес: ул. Проф. Иван Георгов 1, кв. Военна Рампа, София."}}]}</script>
 <script type="application/ld+json">
@@ -206,6 +208,7 @@
       <li><a href="/kontakti/">Контакти</a></li>
     </ul>
     <div class="nav-actions">
+      <a href="/en/" class="lang-switch" data-lang-alt hreflang="en" lang="en" aria-label="View this page in English">EN</a>
       <a href="tel:+359877775577" class="btn btn-primary btn-sm btn-call" aria-label="Обадете се на 0877 77 55 77" data-tel="nav"><svg class="tel-ic" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg><span class="btn-call-txt">0877 77 55 77</span></a>
     </div>
     <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
@@ -224,6 +227,7 @@
     <a href="/za-nas/">За нас</a>
     <a href="/blog/">Блог</a>
     <a href="/kontakti/">Контакти</a>
+    <a href="/en/" class="mm-lang" data-lang-alt hreflang="en" lang="en">English</a>
     <div class="mm-call"><a href="tel:+359877775577" class="btn btn-primary btn-lg" data-tel="menu"><svg class="tel-ic" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg>0877 77 55 77</a></div>
   </div>
 </nav>
@@ -522,6 +526,6 @@
     </div>
   </div>
 </footer>
-<script src="/js/main.min.js?v=f7195549" defer></script>
+<script src="/js/main.min.js?v=e924c8c8" defer></script>
 </body>
 </html>
