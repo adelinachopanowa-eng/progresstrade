@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
+<!-- Google Tag Manager — отложено зареждане, виж коментара в скрипта -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  /* Контейнерът се вдига при първо докосване на страницата или резервно на
+     3-ата секунда. Сложен както го дава Google — най-горе в head — gtm.js
+     пада точно в прозореца, който Lighthouse мери, и връща 930-те ms
+     блокиране на нишката, които струваха 30 точки на десктоп.
+     Събитията, пуснати преди това, чакат в dataLayer и контейнерът ги
+     обработва по реда им, щом се зареди. */
+  (function(){
+    var loaded = false;
+    function loadGTM(){
+      if (loaded) return; loaded = true;
+      dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4TPVP33';
+      document.head.appendChild(s);
+    }
+    /* Страниците, на които се мери конверсия, не чакат: на „Благодарим“
+       събитието е вече в dataLayer, а човек често затваря таба веднага. */
+    if (/^\/(blagodarim|zayavka)\/?$/.test(location.pathname)) { loadGTM(); return; }
+    ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
+      window.addEventListener(ev, loadGTM, {once:true, passive:true});
+    });
+    /* Ако посетителят си тръгва преди резервния срок, вдигаме контейнера
+       сега — иначе прегледът му остава неброен. */
+    window.addEventListener('pagehide', loadGTM, {once:true});
+    document.addEventListener('visibilitychange', function(){
+      if (document.visibilityState === 'hidden') loadGTM();
+    });
+    function armFallback(){ setTimeout(loadGTM, 3000); }
+    if (document.readyState === 'complete') armFallback();
+    else window.addEventListener('load', armFallback);
+  })();
+</script>
+<title>Как се рециклира един автомобил: стъпка по стъпка</title>
+<meta name="description" content="Какво става със старата кола след предаването: обезвреждане, части за повторна употреба, пресоване, шредиране, сепариране и колко от теглото ѝ се използва отново.">
+<link rel="canonical" href="https://progresstrade.bg/blog/kak-se-reciklira-avtomobil.html">
+<link rel="alternate" hreflang="bg" href="https://progresstrade.bg/blog/kak-se-reciklira-avtomobil.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1a4a2e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Как се рециклира един автомобил: от двора до нова стомана">
+<meta property="og:description" content="Какво става със старата кола след предаването: обезвреждане, части за повторна употреба, пресоване, шредиране, сепариране и колко от теглото ѝ се използва отново.">
+<meta property="og:url" content="https://progresstrade.bg/blog/kak-se-reciklira-avtomobil.html">
+<meta property="og:image" content="https://progresstrade.bg/images/og-kak-se-reciklira-avtomobil.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Прогрестрейд">
+<meta property="og:locale" content="bg_BG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Как се рециклира един автомобил: от двора до нова стомана">
+<meta name="twitter:description" content="Какво става със старата кола след предаването: обезвреждане, части за повторна употреба, пресоване, шредиране, сепариране и колко от теглото ѝ се използва отново.">
+<meta name="twitter:image" content="https://progresstrade.bg/images/og-kak-se-reciklira-avtomobil.jpg">
+<link rel="icon" type="image/svg+xml" href="/images/progresstrade-favicon.svg?v=9">
+<link rel="icon" href="/favicon.ico?v=8" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=8">
+
+<link rel="stylesheet" href="/css/site.min.css?v=32e2809c">
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Как се рециклира един автомобил: от двора до нова стомана","description":"Какво става със старата кола след предаването: обезвреждане, части за повторна употреба, пресоване, шредиране, сепариране и колко от теглото ѝ се използва отново.","image":"https://progresstrade.bg/images/og-kak-se-reciklira-avtomobil.jpg","datePublished":"2026-11-01","dateModified":"2026-11-01","inLanguage":"bg","author":{"@type":"Organization","name":"Прогрестрейд"},"publisher":{"@type":"Organization","name":"Прогрестрейд","logo":{"@type":"ImageObject","url":"https://progresstrade.bg/images/progresstrade.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://progresstrade.bg/blog/kak-se-reciklira-avtomobil.html"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Начало","item":"https://progresstrade.bg/"},{"@type":"ListItem","position":2,"name":"Блог","item":"https://progresstrade.bg/blog/"},{"@type":"ListItem","position":3,"name":"Как се рециклира един автомобил","item":"https://progresstrade.bg/blog/kak-se-reciklira-avtomobil.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Колко струва да предам колата за скрап?","acceptedAnswer":{"@type":"Answer","text":"Нищо. Предаването, разкомплектоването и удостоверението за прекратяване на регистрацията са безплатни. Вие получавате пари за автомобила според теглото и окомплектовката, а цената казваме по телефона или след оглед."}},{"@type":"Question","name":"Какви документи са нужни?","acceptedAnswer":{"@type":"Answer","text":"Лична карта на собственика и двата регистрационни талона, голям и малък, в оригинал или копие. Удостоверението за разкомплектоване го изготвяме ние на място."}},{"@type":"Question","name":"Приемате ли кола, която не е на ход?","acceptedAnswer":{"@type":"Answer","text":"Да. Приемаме стари, неработещи, катастрофирали и непълни автомобили. Ако колата не е на ход, обадете се на 0877 77 55 77, за да уточним как да стигне до площадката."}},{"@type":"Question","name":"Може ли друг да предаде колата вместо мен?","acceptedAnswer":{"@type":"Answer","text":"Да, с документите на автомобила и нотариално заверено пълномощно."}},{"@type":"Question","name":"Колко от колата се рециклира?","acceptedAnswer":{"@type":"Answer","text":"В ЕС средно 89,1 % от теглото на излезлите от употреба коли се използва повторно или се рециклира, по данни на Евростат за 2022 г. Законовата цел е поне 85 %, а заедно с извличането на енергия — поне 95 %."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Как се рециклира един автомобил","description":"Пътят на старата кола в седем стъпки: предаване, обезвреждане, разкомплектоване, пресоване, шредиране, сепариране и нов живот на материалите.","thumbnailUrl":"https://progresstrade.bg/images/video-kak-se-reciklira-avtomobil.jpg","uploadDate":"2026-11-01","duration":"PT1M47S","inLanguage":"bg","contentUrl":"https://progresstrade.bg/video/kak-se-reciklira-avtomobil.mp4"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://progresstrade.bg/blog/kak-se-reciklira-avtomobil.html#webpage","url":"https://progresstrade.bg/blog/kak-se-reciklira-avtomobil.html","name":"Как се рециклира един автомобил: стъпка по стъпка","inLanguage":"bg","isPartOf":{"@id":"https://progresstrade.bg/#website"},"about":{"@id":"https://progresstrade.bg/#business"},"description":"Какво става със старата кола след предаването: обезвреждане, части за повторна употреба, пресоване, шредиране, сепариране и колко от теглото ѝ се използва отново.","primaryImageOfPage":"https://progresstrade.bg/images/og-kak-se-reciklira-avtomobil.jpg","dateModified":"2026-11-01"}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4TPVP33" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+<header>
+<a class="skip-link" href="#glavno">Към основното съдържание</a>
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="topbar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      гр. София, кв. Военна Рампа, ул. „Проф. Иван Георгов“ № 1
+    </span>
+    <span class="topbar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <b>Понеделник – Петък:</b> 9:00 – 17:00
+    </span>
+  </div>
+</div>
+<div class="vacation-bar" data-vacation role="status"><b>Годишен отпуск.</b> Оставете заявка или пишете на Viber на <a href="tel:+359877775577" data-tel="otpusk">0877 77 55 77</a> — отговаряме веднага след това.</div><nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="logo" aria-label="Progresstrade — изкупуване на скрап София">
+      <img class="logo-mark" src="/images/progresstrade-mark.svg?v=4" alt="" width="38" height="38">
+      <span class="logo-word"><span class="lw-a">progress</span><span class="lw-b">trade</span></span>
+    </a>
+    <ul class="nav-links">
+      <li class="has-dd"><a href="/kakvo-izkupuvame/" class="dd-toggle">Какво изкупуваме<svg class="dd-caret" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true"><path d="M1 1.75 5 5.25 9 1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="dd-menu">
+          <a href="/izkupuvane-zhelyazo/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14M5 19.5h14M12 4.5v15"/></svg></span><span class="dd-tx"><b>Черни метали</b><span>Желязо, чугун, ламарина, стружки</span></span></a>
+          <a href="/izkupuvane-cvetni-metali/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 18.5h17L17 9.5H7z"/><path d="M8.5 14h7"/></svg></span><span class="dd-tx"><b>Цветни метали</b><span>Мед, алуминий, инокс, месинг, кабели</span></span></a>
+          <a href="/izkupuvane/koli-za-skrap/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5V13l2-4.5h13l2 4.5v3.5"/><path d="M3.5 13h17"/><circle cx="7.5" cy="17" r="1.8"/><circle cx="16.5" cy="17" r="1.8"/></svg></span><span class="dd-tx"><b>Коли за скрап</b><span>ИУМПС, с удостоверение за дерегистрация</span></span></a>
+          <a href="/izkupuvane/elektrouredi/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5h2"/></svg></span><span class="dd-tx"><b>Електроуреди</b><span>Бракувана техника на партиди</span></span></a>
+        </div>
+      </li>
+      <li><a href="/izkupuvane-metal/">За бизнеса</a></li>
+      <li><a href="/uslugi/">Услуги</a></li>
+      <li><a href="/ceni/">Цени</a></li>
+      <li><a href="/za-nas/">За нас</a></li>
+      <li><a href="/blog/">Блог</a></li>
+      <li><a href="/kontakti/">Контакти</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="tel:+359877775577" class="btn btn-primary btn-sm btn-call" aria-label="Обадете се на 0877 77 55 77" data-tel="nav"><svg class="tel-ic" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg><span class="btn-call-txt">0877 77 55 77</span></a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/kakvo-izkupuvame/">Какво изкупуваме</a>
+    <div class="mm-sub">
+      <a href="/izkupuvane-zhelyazo/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14M5 19.5h14M12 4.5v15"/></svg>Черни метали</a>
+      <a href="/izkupuvane-cvetni-metali/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 18.5h17L17 9.5H7z"/><path d="M8.5 14h7"/></svg>Цветни метали</a>
+      <a href="/izkupuvane/koli-za-skrap/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5V13l2-4.5h13l2 4.5v3.5"/><path d="M3.5 13h17"/><circle cx="7.5" cy="17" r="1.8"/><circle cx="16.5" cy="17" r="1.8"/></svg>Коли за скрап</a>
+      <a href="/izkupuvane/elektrouredi/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5h2"/></svg>Електроуреди</a>
+    </div>
+    <a href="/izkupuvane-metal/">За бизнеса</a>
+    <a href="/uslugi/">Услуги</a>
+    <a href="/ceni/">Цени</a>
+    <a href="/za-nas/">За нас</a>
+    <a href="/blog/">Блог</a>
+    <a href="/kontakti/">Контакти</a>
+    <div class="mm-call"><a href="tel:+359877775577" class="btn btn-primary btn-lg" data-tel="menu"><svg class="tel-ic" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg>0877 77 55 77</a></div>
+  </div>
+</nav>
+</header>
+<main id="glavno">
+<div class="article-top">
+  <div class="container">
+  <nav class="crumb"><a href="/blog/"><span aria-hidden="true">‹</span> Всички статии</a></nav>
+    <span class="article-label">Рециклиране</span>
+    <h1>Как се рециклира един автомобил: от двора до нова стомана</h1>
+    <div class="article-meta">Публикувано на 01.11.2026 г. · Прогрестрейд · около 7 минути четене</div>
+  </div>
+</div>
+<article class="article">
+  <picture><source type="image/webp" srcset="/images/koli-za-skrap-avtomobili-480.webp 480w, /images/koli-za-skrap-avtomobili-800.webp 800w, /images/koli-za-skrap-avtomobili-1200.webp 1200w, /images/koli-za-skrap-avtomobili.webp 1400w" sizes="(max-width:640px) 94vw, 680px"><img style="width:100%;height:auto;border-radius:20px;margin-bottom:26px;display:block;" src="/images/koli-za-skrap-avtomobili-800.jpg" srcset="/images/koli-za-skrap-avtomobili-480.jpg 480w, /images/koli-za-skrap-avtomobili-800.jpg 800w, /images/koli-za-skrap-avtomobili-1200.jpg 1200w, /images/koli-za-skrap-avtomobili.jpg 1400w" sizes="(max-width:640px) 94vw, 680px" width="1400" height="933" alt="Стари автомобили, оставени на открито в очакване на рециклиране" fetchpriority="high" decoding="async"></picture>
+  <p class="article-lead">Около 70 % от теглото на една кола е стомана. Когато автомобилът стигне края на пътя си, този метал не отива на сметището, а се връща в производството. В Европейския съюз всяка година над шест милиона коли излизат от употреба, а средно около 89 % от теглото им се използва повторно или се рециклира. Ето как става това, стъпка по стъпка.</p>
+  <figure class="article-figure" style="max-width:360px;margin-left:auto;margin-right:auto;"><video controls preload="none" playsinline poster="/images/video-kak-se-reciklira-avtomobil.jpg" width="720" height="1280" style="display:block;width:100%;height:auto;border-radius:var(--radius-card);background:#10301f;" aria-label="Видео: как се рециклира един автомобил"><source src="/video/kak-se-reciklira-avtomobil.mp4" type="video/mp4"></video><figcaption>Видеото показва пътя на старата кола в седем стъпки за по-малко от две минути.</figcaption></figure>
+  <nav class="toc" aria-label="Съдържание">
+    <div class="toc-h">В тази статия</div>
+    <ol>
+      <li><a href="#iumps">Кога колата става отпадък</a></li>
+      <li><a href="#sastav">От какво е направена една кола</a></li>
+      <li><a href="#proces">Процесът стъпка по стъпка</a></li>
+      <li><a href="#kolko">Колко от колата се спасява</a></li>
+      <li><a href="#reglament">Какво променя новият регламент на ЕС</a></li>
+      <li><a href="#licenziran">Защо само в лицензиран център</a></li>
+      <li><a href="#vaprosi">Въпроси и отговори</a></li>
+    </ol>
+  </nav>
+  <div class="article-body">
+
+<h2 id="iumps">Кога колата става отпадък</h2>
+<p>Излязло от употреба моторно превозно средство, или накратко ИУМПС, е кола, която собственикът вече не може или не иска да използва и я предава за разкомплектоване. Причините обикновено са познати: ремонтът струва повече от самата кола, автомобилът е катастрофирал, не минава технически преглед или стои неподвижен от години.</p>
+<p>От момента на предаването колата е отпадък по смисъла на закона. Затова тя може да се третира само в лицензиран център или на площадка с разрешение. Не е нужно колата да е на ход или да е пълна. Приемат се и катастрофирали автомобили, и такива с липсващи части.</p>
+
+<h2 id="sastav">От какво е направена една кола</h2>
+<p>Старата кола има цена, защото по-голямата част от теглото ѝ е метал, който може да се претопи отново. Съотношението е горе-долу такова:</p>
+<div class="tablewrap">
+  <table>
+    <thead><tr><th>Материал</th><th>Ориентировъчен дял от теглото</th><th>Какво става с него</th></tr></thead>
+    <tbody>
+      <tr><td data-label="Материал"><strong>Стомана и желязо</strong></td><td data-label="Дял от теглото">около 70 %</td><td data-label="Какво става с него">Претопява се в нова стомана.</td></tr>
+      <tr><td data-label="Материал"><strong>Алуминий, мед и други цветни метали</strong></td><td data-label="Дял от теглото">около 5 %</td><td data-label="Какво става с него">Стават нови сплави и проводници.</td></tr>
+      <tr><td data-label="Материал"><strong>Пластмаси, гума, стъкло, текстил и течности</strong></td><td data-label="Дял от теглото">около 25 %</td><td data-label="Какво става с него">Рециклират се, доколкото е възможно, а остатъкът се използва за енергия.</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><em>Стойностите са ориентировъчни. При по-новите модели делът на алуминия и пластмасите е по-голям, а при по-старите — на стоманата.</em></p>
+
+<h2 id="proces">Процесът стъпка по стъпка</h2>
+
+<h3>1. Предаване и удостоверение</h3>
+<p>Всичко започва с предаването на колата в лицензиран център за разкомплектоване. Собственикът носи лична карта и двата регистрационни талона, голям и малък. При предаването се подписват договор и приемо-предавателен протокол, а центърът издава удостоверение за разкомплектоване. С това удостоверение регистрацията на колата в КАТ се прекратява.</p>
+<p>При нас удостоверението се изготвя на място, а плащането е по банков път, веднага след претеглянето. Условията и документите са описани подробно на страницата за <a href="/izkupuvane/koli-za-skrap/" class="link-green">изкупуване на коли за скрап</a>.</p>
+<figure class="article-figure"><picture><source type="image/webp" srcset="/images/sennebogen-razkomplektovane-ploshtadka-480.webp 480w, /images/sennebogen-razkomplektovane-ploshtadka-800.webp 800w, /images/sennebogen-razkomplektovane-ploshtadka-1200.webp 1200w, /images/sennebogen-razkomplektovane-ploshtadka.webp 1600w" sizes="(max-width:640px) 94vw, 680px"><img src="/images/sennebogen-razkomplektovane-ploshtadka-800.jpg" srcset="/images/sennebogen-razkomplektovane-ploshtadka-480.jpg 480w, /images/sennebogen-razkomplektovane-ploshtadka-800.jpg 800w, /images/sennebogen-razkomplektovane-ploshtadka-1200.jpg 1200w, /images/sennebogen-razkomplektovane-ploshtadka.jpg 1600w" sizes="(max-width:640px) 94vw, 680px" width="1600" height="1066" alt="Материални товарачи Sennebogen на площадката на Прогрестрейд във Военна рампа" loading="lazy" decoding="async"></picture><figcaption>Площадката ни във Военна рампа. Тук приемаме излезлите от употреба автомобили и издаваме удостоверението за КАТ.</figcaption></figure>
+
+<h3>2. Обезвреждане</h3>
+<p>Преди каквото и да е рязане или пресоване колата се обезврежда. Това е най-важната стъпка за околната среда, защото течностите и някои от компонентите замърсяват почвата и водата, ако изтекат в тях. От колата се отстраняват:</p>
+<ul class="check-list">
+  <li>горивото, моторното и трансмисионното масло;</li>
+  <li>охлаждащата и спирачната течност;</li>
+  <li>хладилният агент от климатика;</li>
+  <li>акумулаторът;</li>
+  <li>въздушните възглавници и другите пиротехнически елементи, които се неутрализират, за да не се задействат при рязането;</li>
+  <li>катализаторът;</li>
+  <li>компонентите, които съдържат живак, ако в колата има такива.</li>
+</ul>
+<p>Всяка течност се събира в отделен съд и се предава на фирма с разрешение за съответния вид отпадък.</p>
+
+<h3>3. Части за повторна употреба</h3>
+<p>След това от колата се свалят частите, които още работят: двигател, скоростна кутия, врати, фарове, стопове и джанти. Те се продават като резервни части и така спестяват производството на нови. Гумите, стъклата и пластмасовите брони се отделят, за да се рециклират отделно и да не замърсяват металния поток.</p>
+<figure class="article-figure"><picture><source type="image/webp" srcset="/images/kupeta-koli-za-reciklirane-480.webp 480w, /images/kupeta-koli-za-reciklirane-800.webp 800w, /images/kupeta-koli-za-reciklirane.webp 1200w" sizes="(max-width:640px) 94vw, 680px"><img src="/images/kupeta-koli-za-reciklirane-800.jpg" srcset="/images/kupeta-koli-za-reciklirane-480.jpg 480w, /images/kupeta-koli-za-reciklirane-800.jpg 800w, /images/kupeta-koli-za-reciklirane.jpg 1200w" sizes="(max-width:640px) 94vw, 680px" width="1200" height="800" alt="Купета на коли, наредени едно върху друго след разкомплектоването" loading="lazy" decoding="async"></picture><figcaption>Когато частите за повторна употреба са свалени, от колата остава купето. То продължава към пресата.</figcaption></figure>
+
+<h3>4. Пресоване</h3>
+<p>Онова, което остава, е празното купе. То се пресова на плосък пакет, за да се превозва по-лесно и по-евтино до инсталацията за шредиране.</p>
+
+<h3>5. Шредиране</h3>
+<p>Шредерът е голяма мелница с тежки въртящи се чукове. За секунди той разкъсва пакета на парчета, горе-долу колкото юмрук. Докато работи, металът се пръска с вода, за да не прегрява.</p>
+<p>Целта не е само да се раздроби колата. Когато е на малки парчета, различните материали вече не са свързани помежду си и могат да се разделят.</p>
+
+<h3>6. Сепариране</h3>
+<p>Парчетата минават по лента през няколко машини и всяка от тях изважда своя материал:</p>
+<ul class="check-list">
+  <li><strong>Магнит</strong> изтегля стоманата и желязото, които са най-голямата част от теглото.</li>
+  <li><strong>Въздушен поток</strong> отделя леките материали: пяна, текстил и тънки пластмаси.</li>
+  <li><strong>Вихрови токове.</strong> Бързо въртящ се магнитен ротор създава в алуминия и медта електрически токове, които ги отблъскват и ги изхвърлят от лентата. Така цветните метали се отделят от пластмасата и гумата.</li>
+  <li><strong>Разделяне по плътност.</strong> Във вода с точно определена плътност тежките цветни метали потъват, а по-леките материали изплуват.</li>
+</ul>
+<p>Накрая остава смес от пластмаси, гума, текстил и прах. Част от нея се рециклира, а останалото се използва за енергия в инсталации, които я изгарят или превръщат в газ.</p>
+
+<h3>7. Нов живот</h3>
+<p>Сортираните метали заминават за металургичните заводи. Стоманата се претопява и се връща в строителството, в машините и в новите коли. Алуминият и медта стават нови сплави и проводници. От катализатора се извличат платина, паладий и родий, които се използват отново.</p>
+<p>Защо това има смисъл за природата и за енергията, обясняваме в статията <a href="/blog/kakvo-sa-vtorichnite-surovini.html" class="link-green">какво са вторичните суровини</a>.</p>
+
+<h2 id="kolko">Колко от колата се спасява</h2>
+<p>Европейското законодателство изисква поне 85 % от теглото на излезлите от употреба коли да се използва повторно или да се рециклира. Заедно с извличането на енергия целта е поне 95 %.</p>
+<p>По последните данни на Евростат, за 2022 г., средният дял на повторната употреба и рециклирането в ЕС е 89,1 %. Това означава, че от кола, която тежи един тон, около 890 килограма се връщат в употреба като части или като суровина.</p>
+
+<h2 id="reglament">Какво променя новият регламент на ЕС</h2>
+<p>На 13 август 2026 г. влезе в сила Регламент (ЕС) 2026/1738. Той заменя директивата за излезлите от употреба превозни средства, която действаше от 2000 г., и ще се прилага от 1 септември 2028 г. По-важните промени са следните:</p>
+<ul class="check-list">
+  <li>Новите коли трябва да се проектират така, че частите и материалите им да се свалят по-лесно при разкомплектоването.</li>
+  <li>В новите коли ще трябва да има рециклирана пластмаса: поне 15 % от 2032 г. и поне 25 % от 2036 г.</li>
+  <li>Производителите ще участват в разходите за събиране и третиране на старите коли.</li>
+  <li>Въвеждат се по-ясни правила кога колата е употребявана и кога е отпадък, за да се ограничат незаконното разкомплектоване и изчезналите от отчетите автомобили.</li>
+  <li>След преходен период износът от ЕС на коли, които не са годни за движение, ще бъде забранен.</li>
+</ul>
+<p>За собственика на стара кола днес нищо не се променя. Колата се предава в лицензиран център, както досега.</p>
+
+<h2 id="licenziran">Защо само в лицензиран център</h2>
+<p>Наредбата за излезлите от употреба моторни превозни средства забранява колата да се предава на хора без разрешение за третирането ѝ. Освен законовото изискване има и три практически причини:</p>
+<ul class="check-list">
+  <li><strong>Удостоверението.</strong> Само лицензиран център издава удостоверението, с което регистрацията се прекратява. Без него колата остава на ваше име, заедно със задълженията, които идват с регистрацията, например данъка.</li>
+  <li><strong>Околната среда.</strong> Течностите и опасните компоненти се отстраняват по правилата, вместо да изтекат в почвата.</li>
+  <li><strong>Документите и плащането.</strong> Получавате договор и протокол за предаването, а парите идват по банков път.</li>
+</ul>
+<div class="callout"><strong>Предаването на колата е безплатно.</strong> По наредбата собственикът не плаща такси за предаването, третирането и удостоверението. При нас вие получавате пари за автомобила според теглото и окомплектовката.</div>
+<p>Нашето разрешение по Закона за управление на отпадъците е <strong style="white-space:nowrap">№ 12-ДО-1270-01</strong>. Автомобилите се приемат на площадката ни в кв. Военна рампа след предварително обаждане на <a href="tel:+359877775577" class="link-green" data-tel="tekst">0877&nbsp;77&nbsp;55&nbsp;77</a>.</p>
+
+<h2 id="vaprosi">Въпроси и отговори</h2>
+<div class="faq-list"><details class="faq-item"><summary>Колко струва да предам колата за скрап?</summary><div class="faq-answer">Нищо. Предаването, разкомплектоването и удостоверението за прекратяване на регистрацията са безплатни. Вие получавате пари за автомобила според теглото и окомплектовката, а цената казваме по телефона или след оглед.</div></details><details class="faq-item"><summary>Какви документи са нужни?</summary><div class="faq-answer">Лична карта на собственика и двата регистрационни талона, голям и малък, в оригинал или копие. Удостоверението за разкомплектоване го изготвяме ние на място.</div></details><details class="faq-item"><summary>Приемате ли кола, която не е на ход?</summary><div class="faq-answer">Да. Приемаме стари, неработещи, катастрофирали и непълни автомобили. Ако колата не е на ход, обадете се на <a href="tel:+359877775577" class="link-green" data-tel="tekst">0877&nbsp;77&nbsp;55&nbsp;77</a>, за да уточним как да стигне до площадката.</div></details><details class="faq-item"><summary>Може ли друг да предаде колата вместо мен?</summary><div class="faq-answer">Да, с документите на автомобила и нотариално заверено пълномощно.</div></details><details class="faq-item"><summary>Колко от колата се рециклира?</summary><div class="faq-answer">В ЕС средно 89,1 % от теглото на излезлите от употреба коли се използва повторно или се рециклира, по данни на Евростат за 2022 г. Законовата цел е поне 85 %, а заедно с извличането на енергия — поне 95 %.</div></details></div>
+
+<div class="sources">
+  <div class="sources-h">Източници</div>
+  <ul>
+    <li>Евростат — статистика за излезлите от употреба превозни средства, данни за 2022 г.: <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php/End-of-life_vehicle_statistics" rel="noopener" target="_blank">ec.europa.eu/eurostat</a></li>
+    <li>Европейска комисия — излезли от употреба превозни средства и новият регламент: <a href="https://environment.ec.europa.eu/waste/elv/" rel="noopener" target="_blank">environment.ec.europa.eu</a></li>
+    <li>Just Auto — влизането в сила на регламента и целите за рециклирана пластмаса: <a href="https://just-auto.com/news/eu-end-of-life-vehicle-regulation-takes-effect/" rel="noopener" target="_blank">just-auto.com</a></li>
+    <li>Noerr — обхватът на Регламент (ЕС) 2026/1738: <a href="https://www.noerr.com/en/insights/new-eu-end-of-life-vehicles-regulation-a-challenge-for-the-automotive-industry" rel="noopener" target="_blank">noerr.com</a></li>
+    <li>Наредба за излезлите от употреба моторни превозни средства: <a href="https://faolex.fao.org/docs/pdf/bul40458.pdf" rel="noopener" target="_blank">faolex.fao.org</a></li>
+    <li>Auto Express — как работят шредирането и сепарирането на автомобилите: <a href="https://www.autoexpress.co.uk/car-news/95207/car-recycling-how-much-of-your-old-car-is-reused" rel="noopener" target="_blank">autoexpress.co.uk</a></li>
+  </ul>
+</div>
+
+  </div>
+<div class="cta"><h2>Имате стара кола за предаване?</h2><p>Опишете автомобила и ще ви кажем цена. Удостоверението за КАТ подготвяме ние.</p><div class="cta-row"><a href="tel:+359877775577" class="btn btn-primary" data-tel="cta"><svg class="tel-ic" width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg>Обадете се: 0877 77 55 77</a><a href="/zayavka/" class="btn btn-outline-white">Заявка за оферта</a></div></div></article>
+</main>
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="Progresstrade">
+          <img class="logo-mark" src="/images/progresstrade-mark-reverse.svg?v=4" alt="" width="38" height="38">
+          <span class="logo-word"><span class="lw-a">progress</span><span class="lw-b">trade</span></span>
+        </a>
+        <p class="footer-desc">Изкупуване на черни и цветни метали в София, за фирми, обекти и площадки. Поемаме извозването и документите.</p>
+        <a href="https://www.facebook.com/share/1EXEcweybi/" target="_blank" rel="noopener" aria-label="Facebook страница на Progresstrade" class="footer-fb">
+          <span class="fb-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+          Последвайте ни във Facebook
+        </a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-h">Услуги</div>
+        <ul>
+          <li><a href="/uslugi/">Услуги</a></li>
+          <li><a href="/izkupuvane-metal/">Изкупуване за фирми</a></li>
+          <li><a href="/punkt-vtorichni-surovini/">Пункт за вторични суровини</a></li>
+          <li><a href="/izkupuvane-zhelyazo/">Изкупуване на желязо</a></li>
+          <li><a href="/izkupuvane-ot-adres/">Изкупуване от адрес</a></li>
+          <li><a href="/rayoni/">Обслужвани райони</a></li>
+          <li><a href="/uslugi/demontazh/">Рязане и демонтаж</a></li>
+          <li><a href="/uslugi/konteyneri/">Транспорт и контейнери</a></li>
+          <li><a href="/kakvo-izkupuvame/">Какво изкупуваме</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-h">Решения за бизнеса</div>
+        <ul>
+          <li><a href="/izkupuvane-metal/stroitelstvo/">Строителство</a></li>
+          <li><a href="/izkupuvane-metal/proizvodstvo/">Производство и металообработка</a></li>
+          <li><a href="/izkupuvane-metal/zemedelie/">Земеделие</a></li>
+          <li><a href="/izkupuvane-metal/brakuvane/">Бракуване на активи</a></li>
+        </ul>
+        <div class="footer-h">Още</div>
+        <ul>
+          <li><a href="/za-nas/">За нас</a></li>
+          <li><a href="/blog/">Блог</a></li>
+          <li><a href="/ceni/">Цени на скрап</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <div class="footer-h">Контакти</div>
+        <ul>
+          <li><a href="tel:+359877775577" data-tel="futar"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><span class="fc-l">Телефон</span><br><span class="fc-v" style="font-weight:700;">0877 77 55 77</span></span></a></li>
+          <li><a href="mailto:progresstradesofia@gmail.com"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><span class="fc-l">Имейл</span><br><span class="fc-v">progresstradesofia@gmail.com</span></span></a></li>
+          <li><a href="https://maps.app.goo.gl/C6KVEBHUQRiQYKrw5" target="_blank" rel="noopener"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg></span><span><span class="fc-l">Адрес</span><br><span class="fc-v">ул. Проф. Иван Георгов 1, Военна Рампа, София</span></span></a></li>
+          <li><span class="fc-row"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg></span><span><span class="fc-l">Работно време</span><br><span class="fc-v">Пон – Пет: 9:00 – 17:00</span></span></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Прогрестрейд · <a href="/poveritelnost/">Политика за поверителност</a></p>
+      <p>Изкупуване на метален отпадък в София</p>
+    </div>
+  </div>
+</footer>
+<script src="/js/main.min.js?v=f7195549" defer></script>
+</body>
+</html>
