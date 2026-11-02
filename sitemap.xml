@@ -158,7 +158,7 @@
   </url>
   <url>
     <loc>https://progresstrade.bg/blog/</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -170,7 +170,7 @@
   </url>
   <url>
     <loc>https://progresstrade.bg/blog/kak-se-opredelya-cenata-na-skrapa.html</loc>
-    <lastmod>2026-11-01</lastmod>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.6</priority>
   </url>
@@ -219,6 +219,12 @@
   <url>
     <loc>https://progresstrade.bg/blog/kak-se-reciklira-avtomobil.html</loc>
     <lastmod>2026-11-01</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://progresstrade.bg/blog/cena-zhelezen-skrap-svetoven-pazar.html</loc>
+    <lastmod>2026-11-02</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>
   </url>
