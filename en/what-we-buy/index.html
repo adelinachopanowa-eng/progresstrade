@@ -8,6 +8,11 @@
 <!-- Google Tag Manager — deferred load, see the comment in the script -->
 <script>
   window.dataLayer = window.dataLayer || [];
+  /* Google Analytics 4 (G-WKGNDN8CKR). Настройката се записва веднага в
+     dataLayer, а скриптът gtag.js се тегли заедно с контейнера по-долу. */
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WKGNDN8CKR');
   /* The container is raised on the first interaction with the page, or on the
      3rd second as a fallback. Placed exactly as Google ships it — at the top
      of head — gtm.js lands inside the window Lighthouse measures and gives
@@ -23,6 +28,10 @@
       s.async = true;
       s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4TPVP33';
       document.head.appendChild(s);
+      var ga = document.createElement('script');
+      ga.async = true;
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-WKGNDN8CKR';
+      document.head.appendChild(ga);
     }
     /* Pages where conversion is measured do not wait: on "Thank you" the
        event is already in dataLayer and people often close the tab at once. */

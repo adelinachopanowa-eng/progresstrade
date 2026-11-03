@@ -8,6 +8,11 @@
 <!-- Google Tag Manager — отложено зареждане, виж коментара в скрипта -->
 <script>
   window.dataLayer = window.dataLayer || [];
+  /* Google Analytics 4 (G-WKGNDN8CKR). Настройката се записва веднага в
+     dataLayer, а скриптът gtag.js се тегли заедно с контейнера по-долу. */
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-WKGNDN8CKR');
   /* Контейнерът се вдига при първо докосване на страницата или резервно на
      3-ата секунда. Сложен както го дава Google — най-горе в head — gtm.js
      пада точно в прозореца, който Lighthouse мери, и връща 930-те ms
@@ -23,6 +28,10 @@
       s.async = true;
       s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4TPVP33';
       document.head.appendChild(s);
+      var ga = document.createElement('script');
+      ga.async = true;
+      ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-WKGNDN8CKR';
+      document.head.appendChild(ga);
     }
     /* Страниците, на които се мери конверсия, не чакат: на „Благодарим“
        събитието е вече в dataLayer, а човек често затваря таба веднага. */
