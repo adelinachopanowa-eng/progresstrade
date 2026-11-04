@@ -76,7 +76,14 @@
 <link rel="manifest" href="/manifest.json">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=8">
 
-<link rel="stylesheet" href="/css/site.min.css?v=2bd6b98c">
+<link rel="stylesheet" href="/css/site.min.css?v=e2b7e683">
+<!-- шрифтове за първия екран -->
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Geologica-600-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-400-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-500-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-600-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-700-latin.woff2" crossorigin>
+<!-- /шрифтове -->
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","@id":"https://progresstrade.bg/en/#website","name":"Progresstrade","url":"https://progresstrade.bg/en/","inLanguage":"en","publisher":{"@id":"https://progresstrade.bg/#business"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://progresstrade.bg/en/"},{"@type":"ListItem","position":2,"name":"What we buy","item":"https://progresstrade.bg/en/what-we-buy/"},{"@type":"ListItem","position":3,"name":"Ferrous scrap"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the buying price for steel scrap?","acceptedAnswer":{"@type":"Answer","text":"It depends on the grade. Heavy melting steel and cast iron are paid higher than light sheet, and the bonus grade and clean production offcuts are at the top. The price follows the exchange levels and is quoted for the specific consignment."}},{"@type":"Question","name":"What is the difference between heavy and light steel?","acceptedAnswer":{"@type":"Answer","text":"Heavy melting steel is over 4 mm thick: structures, beams, profiles and machine parts. Light steel is under 3 mm: sheet metal and thin-walled parts. Heavy steel is bought at a higher price, because the losses in the furnace are smaller."}},{"@type":"Question","name":"Do you collect ferrous scrap from site?","acceptedAnswer":{"@type":"Answer","text":"Yes. Over 2 tonnes we arrange our own transport and loading at your address in Sofia and the region, and the haulage is calculated into the buying price. Smaller batches are accepted at the yard, after a call in advance."}},{"@type":"Question","name":"Do you accept turnings?","acceptedAnswer":{"@type":"Answer","text":"Yes, steel and cast iron turnings, provided they have been drained of cutting oil. Turnings under code 12 01 01 are accepted from legal entities only, as a condition of our permit."}},{"@type":"Question","name":"How is a consignment of ferrous scrap documented?","acceptedAnswer":{"@type":"Answer","text":"Every consignment is weighed on a calibrated weighbridge and recorded in a waste transfer note. Companies also receive a purchase contract and a certificate of origin, and the invoice is issued under the VAT reverse charge mechanism."}}]}</script>
@@ -155,6 +162,20 @@
 
 <section class="section section-white">
   <div class="container">
+    <div class="grid-2" style="align-items:center;gap:48px;">
+      <div class="feature-img"><picture><source type="image/webp" srcset="/images/platno-zhelyazo-gredi-800.webp 800w, /images/platno-zhelyazo-gredi-1200.webp 1200w, /images/platno-zhelyazo-gredi.webp 1600w" sizes="(max-width:900px) 94vw, 556px"><img src="/images/platno-zhelyazo-gredi-800.jpg" srcset="/images/platno-zhelyazo-gredi-800.jpg 800w, /images/platno-zhelyazo-gredi-1200.jpg 1200w, /images/platno-zhelyazo-gredi.jpg 1600w" sizes="(max-width:900px) 94vw, 556px" fetchpriority="high" decoding="async" width="800" height="533" alt="Heavy steel beams and profiles for scrap" class="media-cover"></picture></div>
+      <div>
+        <div class="section-label-dark">What we take</div>
+        <h2 class="section-title-dark" style="margin-bottom:12px;">Beams, profiles, sheet and cast iron</h2>
+        <p class="section-body-dark">We buy ferrous scrap from companies, project sites and private persons in Sofia: structures, beams and profiles, sheet metal, cast iron parts and production offcuts. The price depends on the type and the thickness of the material, so we quote it before you load.</p>
+        <p class="section-body-dark" style="margin-top:14px;">Material is accepted at our yard in Voenna Rampa, and over 2 tonnes we collect it from your address, with the haulage calculated into the buying price.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-cream">
+  <div class="container">
     <div class="section-label-dark">Grades</div>
     <h2 class="section-title-dark" style="margin-bottom:8px;">Ferrous grades we buy</h2>
     <p class="section-body-dark" style="max-width:820px;">Steel is traded on the exchange and the quotation moves every day, so we do not publish figures: a price from yesterday would mislead you today. The exact amount is set when the material is weighed and graded at the yard, in front of you.</p>
@@ -163,7 +184,7 @@
   </div>
 </section>
 
-<section class="section section-cream">
+<section class="section section-white">
   <div class="container">
     <div class="center-head"><div class="section-label-dark">Process</div><h2 class="section-title-dark">Handing over ferrous scrap in four steps</h2></div>
     <div class="steps-grid">
@@ -175,7 +196,7 @@
   </div>
 </section>
 
-<section class="section section-white" id="what-drives-the-price">
+<section class="section section-cream" id="what-drives-the-price">
   <div class="container">
     <div class="section-label-dark">How it is formed</div>
     <h2 class="section-title-dark" style="margin-bottom:8px;">What the price of steel scrap depends on</h2>
@@ -184,7 +205,7 @@
   </div>
 </section>
 
-<section class="section section-cream" id="codes">
+<section class="section section-white" id="codes">
   <div class="container">
     <div class="section-label-dark">Permit</div>
     <h2 class="section-title-dark" style="margin-bottom:8px;">Ferrous codes under our permit</h2>

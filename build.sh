@@ -4,8 +4,9 @@
 #
 #   1. инжектира хедъра и футъра от partials/
 #   2. минифицира CSS и JS
-#   3. обновява <lastmod> в sitemap.xml от git
-#   4. слага версия на CSS/JS в адресите, за да не се сервира кеширан стил
+#   3. предзарежда шрифтовете за първия екран и сверява снимките
+#   4. обновява <lastmod> в sitemap.xml от git
+#   5. слага версия на CSS/JS в адресите, за да не се сервира кеширан стил
 #
 # Редът има значение: sitemap се пуска преди стъпването на версиите, за да
 # вижда кои страници наистина са променени, а не кои са пипнати от стъпването.
@@ -30,6 +31,10 @@ j=re.sub(r'\n\s*\n','\n',j)
 open('js/main.min.js','w').write(re.sub(r'^\s+','',j,flags=re.M))
 print('минифицирани: css/site.min.css, js/main.min.js')
 PY
+
+python3 build/shrifty.py
+
+python3 build/snimki.py
 
 python3 build/sitemap.py
 python3 build/stamp-assets.py
