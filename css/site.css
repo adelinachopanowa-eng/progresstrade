@@ -118,14 +118,24 @@ a[href^="tel:"]{white-space:nowrap}
 .lang-switch{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:40px;padding:0 11px;border:1px solid var(--line-2);border-radius:var(--radius-pill);font-size:var(--fs-2);font-weight:700;letter-spacing:.08em;color:var(--green);background:var(--white);transition:background-color var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast)}
 .lang-switch:hover{background:var(--green);border-color:var(--green);color:var(--white)}
 .mobile-menu > a.mm-lang{font-family:var(--font);font-size:var(--fs-4);font-weight:600;color:var(--text-soft);min-height:56px;letter-spacing:0}
-.nav-hamburger{display:none;flex-direction:column;justify-content:center;align-items:center;gap:5px;cursor:pointer;width:44px;height:44px;margin-right:-4px;background:var(--cream);border:none;border-radius:14px;transition:background-color var(--dur-fast)}
-.nav-hamburger span{display:block;width:20px;height:1.8px;background:var(--ink);border-radius:2px;transition:transform var(--dur) var(--ease),opacity var(--dur-fast),width var(--dur) var(--ease),background-color var(--dur-fast)}
-.nav-hamburger span:last-child{width:12px;transform:translateX(4px)}
-.nav-hamburger[aria-expanded="true"]{background:var(--ink)}
-.nav-hamburger[aria-expanded="true"] span{background:var(--white)}
-.nav-hamburger[aria-expanded="true"] span:nth-child(1){transform:translateY(6.8px) rotate(45deg)}
-.nav-hamburger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.nav-hamburger[aria-expanded="true"] span:nth-child(3){width:20px;transform:translateY(-6.8px) rotate(-45deg)}
+/* ── Бутонът за менюто на телефон ──
+   Хапче с надпис, както всички бутони на сайта. При отваряне надписът се
+   скрива, хапчето се свива в кръгче и чертите стават хикс — едно движение,
+   без смяна на цвета, защото мигането от крем към тъмно се забелязваше. */
+.nav-hamburger{display:none;align-items:center;gap:10px;cursor:pointer;height:46px;padding:0 18px 0 15px;margin-right:-2px;background:var(--green);border:none;border-radius:var(--radius-pill);box-shadow:var(--shadow-nav);transition:width var(--dur) var(--ease),padding var(--dur) var(--ease),gap var(--dur) var(--ease),background-color var(--dur-fast)}
+.nav-hamburger:active{transform:scale(.97)}
+/* Контурът при достъп с клавиатура: зелено върху зелено не се вижда,
+   затова тук е златен, и в същата заобленост като хапчето. */
+.nav-hamburger:focus-visible{outline-color:var(--yellow);border-radius:var(--radius-pill)}
+.hb-ic{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:18px;height:14px;position:relative;flex-shrink:0}
+.hb-ic span{display:block;width:18px;height:2px;background:var(--white);border-radius:2px;transition:transform var(--dur) var(--ease),opacity var(--dur-fast),width var(--dur) var(--ease)}
+.hb-ic span:nth-child(2){width:12px}
+.hb-tx{font-family:var(--font);font-size:var(--fs-4);font-weight:600;line-height:1;color:var(--white);white-space:nowrap;max-width:6em;overflow:hidden;transition:max-width var(--dur) var(--ease),opacity var(--dur-fast)}
+.nav-hamburger[aria-expanded="true"]{width:46px;padding:0;gap:0;justify-content:center;background:var(--green-deep)}
+.nav-hamburger[aria-expanded="true"] .hb-tx{max-width:0;opacity:0}
+.nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(2){opacity:0}
+.nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(3){width:18px;transform:translateY(-6px) rotate(-45deg)}
 
 /* Падащо меню „Какво изкупуваме“: две по две, с плочка за всяка група */
 .nav-links li.has-dd{position:relative}
@@ -880,7 +890,7 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
 }
 @media(max-width:1024px){
   .nav-links,.nav-actions{display:none}
-  .nav-hamburger{display:flex}
+  .nav-hamburger{display:inline-flex}
   .nav-inner,.nav.scrolled .nav-inner{height:68px}
   .logo-mark{width:34px;height:34px}
   .mobile-menu.open{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;top:68px;z-index:99;overflow-y:auto;overscroll-behavior:contain;background:var(--white);border-top:1px solid var(--line);padding:8px var(--gutter) 0}
