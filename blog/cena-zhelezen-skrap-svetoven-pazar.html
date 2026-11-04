@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
+<!-- Google Tag Manager — отложено зареждане, виж коментара в скрипта -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  /* Контейнерът се вдига при първо докосване на страницата или резервно на
+     3-ата секунда. Сложен както го дава Google — най-горе в head — gtm.js
+     пада точно в прозореца, който Lighthouse мери, и връща 930-те ms
+     блокиране на нишката, които струваха 30 точки на десктоп.
+     Събитията, пуснати преди това, чакат в dataLayer и контейнерът ги
+     обработва по реда им, щом се зареди. */
+  (function(){
+    var loaded = false;
+    function loadGTM(){
+      if (loaded) return; loaded = true;
+      dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4TPVP33';
+      document.head.appendChild(s);
+    }
+    /* Страниците, на които се мери конверсия, не чакат: на „Благодарим“
+       събитието е вече в dataLayer, а човек често затваря таба веднага. */
+    if (/^\/(blagodarim|zayavka|en\/thank-you|en\/request-a-quote)\/?$/.test(location.pathname)) { loadGTM(); return; }
+    ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
+      window.addEventListener(ev, loadGTM, {once:true, passive:true});
+    });
+    /* Ако посетителят си тръгва преди резервния срок, вдигаме контейнера
+       сега — иначе прегледът му остава неброен. */
+    window.addEventListener('pagehide', loadGTM, {once:true});
+    document.addEventListener('visibilitychange', function(){
+      if (document.visibilityState === 'hidden') loadGTM();
+    });
+    function armFallback(){ setTimeout(loadGTM, 3000); }
+    if (document.readyState === 'complete') armFallback();
+    else window.addEventListener('load', armFallback);
+  })();
+</script>
+<title>Цената на железния скрап и световният пазар на стомана</title>
+<meta name="description" content="Защо цената на железния скрап се мени: пазарът на стомана, заготовките и рудата, строителството, вносът на Турция, борсата в Лондон, токът и доларът.">
+<link rel="canonical" href="https://progresstrade.bg/blog/cena-zhelezen-skrap-svetoven-pazar.html">
+<link rel="alternate" hreflang="bg" href="https://progresstrade.bg/blog/cena-zhelezen-skrap-svetoven-pazar.html">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#1a4a2e">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Цената на железния скрап: как я определя световният пазар на стомана">
+<meta property="og:description" content="Защо цената на железния скрап се мени: пазарът на стомана, заготовките и рудата, строителството, вносът на Турция, борсата в Лондон, токът и доларът.">
+<meta property="og:url" content="https://progresstrade.bg/blog/cena-zhelezen-skrap-svetoven-pazar.html">
+<meta property="og:image" content="https://progresstrade.bg/images/og-cena-zhelezen-skrap-svetoven-pazar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Прогрестрейд">
+<meta property="og:locale" content="bg_BG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Цената на железния скрап: как я определя световният пазар на стомана">
+<meta name="twitter:description" content="Защо цената на железния скрап се мени: пазарът на стомана, заготовките и рудата, строителството, вносът на Турция, борсата в Лондон, токът и доларът.">
+<meta name="twitter:image" content="https://progresstrade.bg/images/og-cena-zhelezen-skrap-svetoven-pazar.jpg">
+<link rel="icon" type="image/svg+xml" href="/images/progresstrade-favicon.svg?v=9">
+<link rel="icon" href="/favicon.ico?v=8" sizes="48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=8">
+
+<link rel="stylesheet" href="/css/site.min.css?v=e2b7e683">
+<!-- шрифтове за първия екран -->
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Geologica-600-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Geologica-600-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-400-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-400-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-500-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-600-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-600-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-700-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-700-latin.woff2" crossorigin>
+<!-- /шрифтове -->
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Цената на железния скрап: как я определя световният пазар на стомана","description":"Защо цената на железния скрап се мени: пазарът на стомана, заготовките и рудата, строителството, вносът на Турция, борсата в Лондон, токът и доларът.","image":"https://progresstrade.bg/images/og-cena-zhelezen-skrap-svetoven-pazar.jpg","datePublished":"2026-11-02","dateModified":"2026-11-02","inLanguage":"bg","author":{"@type":"Organization","name":"Прогрестрейд"},"publisher":{"@type":"Organization","name":"Прогрестрейд","logo":{"@type":"ImageObject","url":"https://progresstrade.bg/images/progresstrade.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://progresstrade.bg/blog/cena-zhelezen-skrap-svetoven-pazar.html"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Начало","item":"https://progresstrade.bg/"},{"@type":"ListItem","position":2,"name":"Блог","item":"https://progresstrade.bg/blog/"},{"@type":"ListItem","position":3,"name":"Цената на железния скрап и световният пазар","item":"https://progresstrade.bg/blog/cena-zhelezen-skrap-svetoven-pazar.html"}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Защо цената на железния скрап се променя толкова често?","acceptedAnswer":{"@type":"Answer","text":"Защото скрапът е суровина за стомана и цената му следва пазара на стомана. Тя зависи от търсенето в строителството, от цените на заготовките и рудата, от покупките на турските заводи, от цената на тока и от курса на долара. Всички тези фактори се движат всяка седмица."}},{"@type":"Question","name":"Има ли борсова цена на железния скрап?","acceptedAnswer":{"@type":"Answer","text":"Да. Лондонската метална борса търгува фючърси за стоманен скрап, които се уреждат по ценови индекс за вноса в Турция. Тази цена е ориентир за целия пазар, но се отнася за големи корабни товари и не е равна на изкупната цена в България."}},{"@type":"Question","name":"Защо Турция влияе на цената в България?","acceptedAnswer":{"@type":"Answer","text":"Турция е най-големият вносител на скрап в света и купува основно от Европа и САЩ. Цената, която турските заводи плащат, определя колко могат да платят европейските износители, а оттам и изкупните цени в региона."}},{"@type":"Question","name":"Как курсът на долара влияе на цената на скрапа?","acceptedAnswer":{"@type":"Answer","text":"Световната търговия със скрап и стомана се води в долари, а в България от 2026 г. се плаща в евро. Когато доларът поскъпне спрямо еврото, един и същ тон скрап струва повече евро, и обратното."}},{"@type":"Question","name":"Публикувате ли изкупни цени?","acceptedAnswer":{"@type":"Answer","text":"Не публикуваме фиксирани изкупни цени, защото пазарът се променя често. Цената казваме по телефона или след оглед, според вида, количеството и чистотата на метала."}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Как се определя цената на железния скрап","description":"Как световният пазар на стомана, заготовките и рудата, Турция, борсата в Лондон, токът и курсът на долара определят цената на железния скрап.","thumbnailUrl":"https://progresstrade.bg/images/video-cena-zhelezen-skrap.jpg","uploadDate":"2026-11-02","duration":"PT1M16S","inLanguage":"bg","contentUrl":"https://progresstrade.bg/video/kak-se-opredelya-cenata-na-zhelezniya-skrap.mp4"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://progresstrade.bg/blog/cena-zhelezen-skrap-svetoven-pazar.html#webpage","url":"https://progresstrade.bg/blog/cena-zhelezen-skrap-svetoven-pazar.html","name":"Цената на железния скрап и световният пазар на стомана","inLanguage":"bg","isPartOf":{"@id":"https://progresstrade.bg/#website"},"about":{"@id":"https://progresstrade.bg/#business"},"description":"Защо цената на железния скрап се мени: пазарът на стомана, заготовките и рудата, строителството, вносът на Турция, борсата в Лондон, токът и доларът.","primaryImageOfPage":"https://progresstrade.bg/images/og-cena-zhelezen-skrap-svetoven-pazar.jpg","dateModified":"2026-11-02"}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4TPVP33" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript>
+<header>
+<a class="skip-link" href="#glavno">Към основното съдържание</a>
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="topbar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      гр. София, кв. Военна Рампа, ул. „Проф. Иван Георгов“ № 1
+    </span>
+    <span class="topbar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <b>Понеделник – Петък:</b> 9:00 – 17:00
+    </span>
+  </div>
+</div>
+<div class="vacation-bar" data-vacation role="status"><b>Годишен отпуск.</b> Оставете заявка или пишете на Viber на <a href="tel:+359877775577" data-tel="otpusk">0877 77 55 77</a> — отговаряме веднага след това.</div><nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="logo" aria-label="Progresstrade — изкупуване на скрап София">
+      <img class="logo-mark" src="/images/progresstrade-mark.svg?v=4" alt="" width="38" height="38">
+      <span class="logo-word"><span class="lw-a">progress</span><span class="lw-b">trade</span></span>
+    </a>
+    <ul class="nav-links">
+      <li class="has-dd"><a href="/kakvo-izkupuvame/" class="dd-toggle">Какво изкупуваме<svg class="dd-caret" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true"><path d="M1 1.75 5 5.25 9 1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="dd-menu">
+          <a href="/izkupuvane-zhelyazo/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14M5 19.5h14M12 4.5v15"/></svg></span><span class="dd-tx"><b>Черни метали</b><span>Желязо, чугун, ламарина, стружки</span></span></a>
+          <a href="/izkupuvane-cvetni-metali/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 18.5h17L17 9.5H7z"/><path d="M8.5 14h7"/></svg></span><span class="dd-tx"><b>Цветни метали</b><span>Мед, алуминий, инокс, месинг, кабели</span></span></a>
+          <a href="/izkupuvane/koli-za-skrap/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5V13l2-4.5h13l2 4.5v3.5"/><path d="M3.5 13h17"/><circle cx="7.5" cy="17" r="1.8"/><circle cx="16.5" cy="17" r="1.8"/></svg></span><span class="dd-tx"><b>Коли за скрап</b><span>ИУМПС, с удостоверение за дерегистрация</span></span></a>
+          <a href="/izkupuvane/elektrouredi/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5h2"/></svg></span><span class="dd-tx"><b>Електроуреди</b><span>Бракувана техника на партиди</span></span></a>
+        </div>
+      </li>
+      <li><a href="/izkupuvane-metal/">За бизнеса</a></li>
+      <li><a href="/uslugi/">Услуги</a></li>
+      <li><a href="/ceni/">Цени</a></li>
+      <li><a href="/za-nas/">За нас</a></li>
+      <li><a href="/blog/">Блог</a></li>
+      <li><a href="/kontakti/">Контакти</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="/en/" class="lang-switch" data-lang-alt hreflang="en" lang="en" aria-label="View this page in English">EN</a>
+      <a href="tel:+359877775577" class="btn btn-primary btn-sm btn-call" aria-label="Обадете се на 0877 77 55 77" data-tel="nav"><svg class="tel-ic" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg><span class="btn-call-txt">0877 77 55 77</span></a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/kakvo-izkupuvame/">Какво изкупуваме</a>
+    <div class="mm-sub">
+      <a href="/izkupuvane-zhelyazo/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14M5 19.5h14M12 4.5v15"/></svg>Черни метали</a>
+      <a href="/izkupuvane-cvetni-metali/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 18.5h17L17 9.5H7z"/><path d="M8.5 14h7"/></svg>Цветни метали</a>
+      <a href="/izkupuvane/koli-za-skrap/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5V13l2-4.5h13l2 4.5v3.5"/><path d="M3.5 13h17"/><circle cx="7.5" cy="17" r="1.8"/><circle cx="16.5" cy="17" r="1.8"/></svg>Коли за скрап</a>
+      <a href="/izkupuvane/elektrouredi/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5h2"/></svg>Електроуреди</a>
+    </div>
+    <a href="/izkupuvane-metal/">За бизнеса</a>
+    <a href="/uslugi/">Услуги</a>
+    <a href="/ceni/">Цени</a>
+    <a href="/za-nas/">За нас</a>
+    <a href="/blog/">Блог</a>
+    <a href="/kontakti/">Контакти</a>
+    <a href="/en/" class="mm-lang" data-lang-alt hreflang="en" lang="en">English</a>
+    <div class="mm-call"><a href="tel:+359877775577" class="btn btn-primary btn-lg" data-tel="menu"><svg class="tel-ic" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg>0877 77 55 77</a></div>
+  </div>
+</nav>
+</header>
+<main id="glavno">
+<div class="article-top">
+  <div class="container">
+  <nav class="crumb"><a href="/blog/"><span aria-hidden="true">‹</span> Всички статии</a></nav>
+    <span class="article-label">Пазар</span>
+    <h1>Цената на железния скрап: как я определя световният пазар на стомана</h1>
+    <div class="article-meta">Публикувано на 02.11.2026 г. · Прогрестрейд · около 11 минути четене</div>
+  </div>
+</div>
+<article class="article">
+  <picture><source type="image/webp" srcset="/images/raztopena-stomana-kofa-480.webp 480w, /images/raztopena-stomana-kofa-800.webp 800w, /images/raztopena-stomana-kofa-1200.webp 1200w, /images/raztopena-stomana-kofa.webp 1600w" sizes="(max-width:640px) 94vw, 680px"><img style="width:100%;height:auto;border-radius:20px;margin-bottom:26px;display:block;" src="/images/raztopena-stomana-kofa-800.jpg" srcset="/images/raztopena-stomana-kofa-480.jpg 480w, /images/raztopena-stomana-kofa-800.jpg 800w, /images/raztopena-stomana-kofa-1200.jpg 1200w, /images/raztopena-stomana-kofa.jpg 1600w" sizes="(max-width:640px) 94vw, 680px" width="800" height="533" alt="Разтопена стомана се излива от пещта в кофа" fetchpriority="high" decoding="async"></picture>
+  <p class="article-lead">Железният скрап няма постоянна цена. Тя се променя често и рядко зависи само от това какво се случва в България. Скрапът е суровина за нова стомана, затова цената му се определя от световния пазар на стомана: колко се строи, колко струват заготовките и рудата, какво плащат турските заводи, колко струва токът и какъв е курсът на долара. В тази статия обясняваме всяко от тези звена и как те стигат до изкупната цена на вашия метал.</p>
+  <figure class="article-figure" style="max-width:360px;margin-left:auto;margin-right:auto;"><video controls preload="none" playsinline poster="/images/video-cena-zhelezen-skrap.jpg" width="720" height="1280" style="display:block;width:100%;height:auto;border-radius:var(--radius-card);background:#10301f;" aria-label="Видео: как се определя цената на железния скрап"><source src="/video/kak-se-opredelya-cenata-na-zhelezniya-skrap.mp4" type="video/mp4"></video><figcaption>Видеото показва основните фактори за малко повече от минута.</figcaption></figure>
+  <nav class="toc" aria-label="Съдържание">
+    <div class="toc-h">В тази статия</div>
+    <ol>
+      <li><a href="#surovina">Скрапът е суровина за стомана</a></li>
+      <li><a href="#produkciya">Цената тръгва от готовата продукция</a></li>
+      <li><a href="#tarsene">Търсенето: строителство, индустрия и сезони</a></li>
+      <li><a href="#konkurenti">Заготовки и руда: конкурентите на скрапа</a></li>
+      <li><a href="#turciya">Турция: най-големият купувач в света</a></li>
+      <li><a href="#borsa">Борсата в Лондон и ценовите индекси</a></li>
+      <li><a href="#tok-valuta">Токът, валутата и морският превоз</a></li>
+      <li><a href="#es">Какво променят новите правила в ЕС</a></li>
+      <li><a href="#vashiyat-metal">Как световната цена стига до вашия метал</a></li>
+      <li><a href="#vaprosi">Въпроси и отговори</a></li>
+    </ol>
+  </nav>
+  <div class="article-body">
+
+<h2 id="surovina">Скрапът е суровина за стомана</h2>
+<p>Стоманата се прави по два основни начина. При първия желязната руда се превръща в чугун в доменна пещ, а чугунът се превръща в стомана в кислороден конвертор. При втория скрапът се претопява в електродъгова пещ. В нея токът минава през графитни електроди и разтопява метала с електрическа дъга.</p>
+<p>В Европейския съюз 44,6&nbsp;% от стоманата през 2024 г. е произведена в електродъгови пещи, по данни на Европейската асоциация на стоманопроизводителите EUROFER. В света този дял е 30,3&nbsp;% за 2025 г., според Международното бюро по рециклиране. В Турция, която внася най-много скрап в света, делът на електродъговите пещи е над 70&nbsp;%.</p>
+<p>Скрап се слага и в кислородния конвертор, но там той е само 10 до 20&nbsp;% от суровините. Електродъговата пещ, обратно, работи почти изцяло със скрап. Затова, когато заводите с такива пещи работят на пълен капацитет, търсенето на скрап расте, а когато намалят производството, то спада.</p>
+<figure class="article-figure"><picture><source type="image/webp" srcset="/images/pesht-pretopyavane-skrap-480.webp 480w, /images/pesht-pretopyavane-skrap-800.webp 800w, /images/pesht-pretopyavane-skrap-1200.webp 1200w, /images/pesht-pretopyavane-skrap.webp 1600w" sizes="(max-width:640px) 94vw, 680px"><img src="/images/pesht-pretopyavane-skrap-800.jpg" srcset="/images/pesht-pretopyavane-skrap-480.jpg 480w, /images/pesht-pretopyavane-skrap-800.jpg 800w, /images/pesht-pretopyavane-skrap-1200.jpg 1200w, /images/pesht-pretopyavane-skrap.jpg 1600w" sizes="(max-width:640px) 94vw, 680px" width="800" height="533" alt="Пламъци и разтопен метал в отвора на промишлена пещ" loading="lazy" decoding="async"></picture><figcaption>Електродъговата пещ претопява скрапа в нова стомана, без да е нужна руда.</figcaption></figure>
+<p>В България почти цялата стомана се топи в електродъговата пещ на „Стомана Индъстри“ в Перник, по данни на GMK Center.</p>
+<p>Причината светът да разчита все повече на скрапа е в спестяванията. Всеки тон рециклиран скрап спестява около 1,4 тона желязна руда, 740 килограма въглища и 1,5 тона въглероден диоксид, по данни на Световната стоманена асоциация, цитирани от ING. Защо това има значение за природата, обясняваме в статията <a href="/blog/kakvo-sa-vtorichnite-surovini.html" class="link-green">какво са вторичните суровини</a>.</p>
+
+<h2 id="produkciya">Цената тръгва от готовата продукция</h2>
+<p>Заводът не купува скрап заради самия скрап. Купува го, за да направи стомана, която може да продаде. Колкото струва готовата стомана, толкова може да си позволи да плати за суровината.</p>
+<p>Разтопената стомана първо се отлива в полуфабрикати. Най-често това са заготовки: дълги квадратни пръти, които после се валцуват в арматура, профили и тел. По-широките и по-плоски плочи се наричат сляби и от тях се валцуват ламарина и рулони.</p>
+
+<h3>Арматура и профили</h3>
+<p>Арматурата и профилите са основната продукция на заводите, които топят скрап. Те отиват почти изцяло в строителството. Когато арматурата поскъпва, заводите могат да платят повече за скрапа. Когато поевтинява, първото, което намаляват, е цената, която предлагат за суровината.</p>
+<figure class="article-figure"><picture><source type="image/webp" srcset="/images/armatura-snopove-stomana-480.webp 480w, /images/armatura-snopove-stomana-800.webp 800w, /images/armatura-snopove-stomana-1200.webp 1200w, /images/armatura-snopove-stomana.webp 1600w" sizes="(max-width:640px) 94vw, 680px"><img src="/images/armatura-snopove-stomana-800.jpg" srcset="/images/armatura-snopove-stomana-480.jpg 480w, /images/armatura-snopove-stomana-800.jpg 800w, /images/armatura-snopove-stomana-1200.jpg 1200w, /images/armatura-snopove-stomana.jpg 1600w" sizes="(max-width:640px) 94vw, 680px" width="800" height="533" alt="Снопове стоманена арматура, гледани отдолу" loading="lazy" decoding="async"></picture><figcaption>Арматурата е основният продукт от претопен скрап и почти цялата отива в строителството.</figcaption></figure>
+
+<h3>Ламарина и рулони</h3>
+<p>Ламарината и рулоните отиват в машините, автомобилите, уредите, тръбите и металните конструкции. В Европа те се правят главно в заводи с доменни пещи, но се правят и от скрап. Дебелата ламарина, която се произвежда в България, например се прави в Перник от претопен скрап. Цената на плоската стомана зависи силно от вноса от Азия и от поръчките на индустрията.</p>
+<figure class="article-figure"><picture><source type="image/webp" srcset="/images/ruloni-lamarina-sklad-480.webp 480w, /images/ruloni-lamarina-sklad-800.webp 800w, /images/ruloni-lamarina-sklad-1200.webp 1200w, /images/ruloni-lamarina-sklad.webp 1600w" sizes="(max-width:640px) 94vw, 680px"><img src="/images/ruloni-lamarina-sklad-800.jpg" srcset="/images/ruloni-lamarina-sklad-480.jpg 480w, /images/ruloni-lamarina-sklad-800.jpg 800w, /images/ruloni-lamarina-sklad-1200.jpg 1200w, /images/ruloni-lamarina-sklad.jpg 1600w" sizes="(max-width:640px) 94vw, 680px" width="800" height="533" alt="Стоманени рулони, наредени в склад" loading="lazy" decoding="async"></picture><figcaption>Рулоните и ламарината са другият голям пазар за стомана, а оттам и за скрапа.</figcaption></figure>
+<p>Разликата между цената на готовата стомана и цената на скрапа покрива разходите на завода за ток, електроди, труд и печалба. Затова цената на скрапа обикновено следва цената на стоманата, само че с известно закъснение.</p>
+
+<h2 id="tarsene">Търсенето: строителство, индустрия и сезони</h2>
+<p>Строителството е най-големият потребител на стомана в ЕС. През 2024 г. на него се падат 36,7&nbsp;% от търсенето, по данни на EUROFER. След него идват автомобилната индустрия и машиностроенето.</p>
+<p>Затова цената на железния скрап зависи и от строителния сезон. През пролетта и лятото се строи повече и търсенето на арматура расте. През зимата строежите се забавят, а част от заводите спират за планов ремонт около празниците.</p>
+<figure class="article-figure"><picture><source type="image/webp" srcset="/images/kulovi-kranove-stroezh-480.webp 480w, /images/kulovi-kranove-stroezh-800.webp 800w, /images/kulovi-kranove-stroezh-1200.webp 1200w, /images/kulovi-kranove-stroezh.webp 1600w" sizes="(max-width:640px) 94vw, 680px"><img src="/images/kulovi-kranove-stroezh-800.jpg" srcset="/images/kulovi-kranove-stroezh-480.jpg 480w, /images/kulovi-kranove-stroezh-800.jpg 800w, /images/kulovi-kranove-stroezh-1200.jpg 1200w, /images/kulovi-kranove-stroezh.jpg 1600w" sizes="(max-width:640px) 94vw, 680px" width="800" height="533" alt="Кулови кранове над строеж по залез" loading="lazy" decoding="async"></picture><figcaption>Колкото повече се строи, толкова повече арматура се купува и толкова повече скрап се претопява.</figcaption></figure>
+<p>Важно е и откъде идва стоманата. През 2025 г. потреблението на стомана в ЕС е нараснало с 4,4&nbsp;%, но производството е паднало с 2,9&nbsp;% до 125,8 млн. тона, най-ниското ниво, откакто се води статистика. Разликата е покрита с внос. Когато внесената стомана е евтина, европейските заводи произвеждат по-малко и купуват по-малко скрап, дори хората да строят много.</p>
+<p>В България търсенето на стомана е най-високото от 11 години насам. За 2026 г. GMK Center очаква потреблението да стигне 1,39 млн. тона, главно заради инфраструктурните проекти.</p>
+
+<h2 id="konkurenti">Заготовки и руда: конкурентите на скрапа</h2>
+<p>Скрапът не е единственият път към стоманата. Заводът винаги сравнява няколко възможности и избира по-евтината.</p>
+<ul class="check-list">
+  <li><strong>Готови заготовки.</strong> Валцовъчният завод може изобщо да не топи метал, а да купи готови заготовки и да ги валцува направо в арматура. Когато заготовките на световния пазар са евтини, топенето на скрап става по-малко изгодно. Валцовъчният завод в Бургас например работи изцяло с внесени заготовки.</li>
+  <li><strong>Желязна руда.</strong> Тя е суровината на доменните пещи. Когато рудата и коксуващите въглища поевтинеят, стоманата от доменна пещ става по-евтина и заводите слагат по-малко скрап в конвертора.</li>
+  <li><strong>Чугун и пряко редуцирано желязо.</strong> Електродъговата пещ може да замени част от скрапа с чугун или с желязо, получено направо от руда без доменна пещ. Тези суровини се използват, когато скрапът е скъп или когато е нужна стомана с по-малко примеси.</li>
+</ul>
+<p>Затова, когато заготовките или рудата поевтинеят, цената на скрапа обикновено също пада, дори търсенето на стомана да не се е променило.</p>
+<figure class="article-figure"><picture><source type="image/webp" srcset="/images/zhelyazna-ruda-kasove-480.webp 480w, /images/zhelyazna-ruda-kasove-800.webp 800w, /images/zhelyazna-ruda-kasove-1200.webp 1200w, /images/zhelyazna-ruda-kasove.webp 1600w" sizes="(max-width:640px) 94vw, 680px"><img src="/images/zhelyazna-ruda-kasove-800.jpg" srcset="/images/zhelyazna-ruda-kasove-480.jpg 480w, /images/zhelyazna-ruda-kasove-800.jpg 800w, /images/zhelyazna-ruda-kasove-1200.jpg 1200w, /images/zhelyazna-ruda-kasove.jpg 1600w" sizes="(max-width:640px) 94vw, 680px" width="800" height="533" alt="Червеникави късове желязна руда" loading="lazy" decoding="async"></picture><figcaption>Рудата е суровината на доменните пещи и пряк конкурент на скрапа.</figcaption></figure>
+
+<h2 id="turciya">Турция: най-големият купувач в света</h2>
+<p>Турция внася повече скрап от всяка друга държава. През 2025 г. вносът ѝ е около 18,7 млн. тона, по данни на SteelOrbis и на Международното бюро по рециклиране. Най-много скрап идва от САЩ, Нидерландия и Великобритания. Европейският съюз е най-големият износител на скрап в света с 16,7 млн. тона през 2025 г., а 10,8 млн. тона от тях са заминали за Турция.</p>
+<p>Турските заводи купуват скрапа на цели корабни товари и правят от него главно арматура и заготовки, голяма част от които изнасят. Цената, която те плащат, се следи от целия пазар. Най-известният ориентир на търговците се записва като „HMS 80:20 CFR Турция“. Ето какво означава всяка част:</p>
+<ul class="check-list">
+  <li><strong>HMS</strong> е съкращение от английското heavy melting scrap, тоест тежък скрап за претопяване: греди, тръби, плочи и други дебели парчета.</li>
+  <li><strong>80:20</strong> показва, че товарът е 80&nbsp;% от по-дебелия вид тежък скрап и 20&nbsp;% от по-тънкия.</li>
+  <li><strong>CFR</strong> означава, че в цената е включен морският превоз до пристанището на купувача.</li>
+</ul>
+<p>Когато турските заводи купуват много и плащат повече, европейските износители също вдигат цените, за да осигурят стока за следващия кораб. Това постепенно стига и до изкупните цени в България. Когато Турция спре да купува, цените в цяла Европа се понижават.</p>
+<figure class="article-figure"><picture><source type="image/webp" srcset="/images/korab-nasipni-tovari-pristanishte-480.webp 480w, /images/korab-nasipni-tovari-pristanishte-800.webp 800w, /images/korab-nasipni-tovari-pristanishte-1200.webp 1200w, /images/korab-nasipni-tovari-pristanishte.webp 1600w" sizes="(max-width:640px) 94vw, 680px"><img src="/images/korab-nasipni-tovari-pristanishte-800.jpg" srcset="/images/korab-nasipni-tovari-pristanishte-480.jpg 480w, /images/korab-nasipni-tovari-pristanishte-800.jpg 800w, /images/korab-nasipni-tovari-pristanishte-1200.jpg 1200w, /images/korab-nasipni-tovari-pristanishte.jpg 1600w" sizes="(max-width:640px) 94vw, 680px" width="800" height="533" alt="Кораб за насипни товари на кея в пристанище" loading="lazy" decoding="async"></picture><figcaption>Скрапът пътува до Турция с кораби за насипни товари, по цели товари наведнъж.</figcaption></figure>
+
+<h2 id="borsa">Борсата в Лондон и ценовите индекси</h2>
+<p>От 2015 г. Лондонската метална борса търгува фючърси за стоманен скрап. Фючърсът е договор за цената в бъдещ месец. Той не води до доставка на метал, а се урежда с пари според средната месечна стойност на независим ценови индекс за турския внос на HMS 80:20. Един договор е за 10 тона.</p>
+<p>Борсата е полезна по две причини. Първо, цените ѝ са публични и показват какво очаква пазарът за следващите месеци. Второ, заводите и търговците могат да заключат цената предварително и така да се предпазят от резки промени.</p>
+<p>Освен борсата има и специализирани агенции, които всяка седмица записват цените на реалните сделки и ги публикуват като индекси. Много сделки между големи търговци и заводи се договарят спрямо тези индекси.</p>
+<div class="callout"><strong>Борсовата цена не е изкупната цена.</strong> Тя се отнася за голям корабен товар, доставен в Турция. От нея още не са извадени разходите за сортиране, рязане, превоз до пристанището и товарене. Изкупната цена в България следва посоката на борсата, но е по-ниска и се променя с известно закъснение.</div>
+
+<h2 id="tok-valuta">Токът, валутата и морският превоз</h2>
+<h3>Токът</h3>
+<p>Електродъговата пещ е един от най-големите потребители на ток в промишлеността. Когато токът поскъпне, стоманата от скрап също поскъпва. Тогава заводите или намаляват цената, която плащат за суровината, или временно произвеждат по-малко. От края на 2024 г. държавата компенсира част от разходите за ток на енергоемките предприятия, а това е позволило на завода в Перник да увеличи производството си, по данни на GMK Center.</p>
+<h3>Курсът на долара</h3>
+<p>Международната търговия със скрап и стомана се води в щатски долари, а в България от 1 януари 2026 г. се плаща в евро. Ако доларът поскъпне спрямо еврото, един и същ тон скрап струва повече евро, дори световната цена в долари да не се е променила. Ако доларът поевтинее, се получава обратното.</p>
+<h3>Морският превоз</h3>
+<p>Цената на превоза с кораб също има значение. Когато превозът поскъпне, европейският скрап става по-скъп за турските купувачи. Тъй като те сравняват доставчици от целия свят, разликата обикновено се поема от износителя, а оттам и от цената на скрапа в Европа.</p>
+
+<h2 id="es">Какво променят новите правила в ЕС</h2>
+<p>През 2026 г. в Европейския съюз започнаха да действат няколко промени, които засягат пазара на стомана и скрап.</p>
+<ul class="check-list">
+  <li><strong>Въглеродна такса на границата.</strong> От 1 януари 2026 г. вносителите на стомана в ЕС плащат за въглеродните емисии, отделени при производството ѝ. Така внесената стомана и внесените заготовки поскъпват, а това е предимство за стоманата, произведена в Европа от скрап.</li>
+  <li><strong>Нов режим за внос на стомана.</strong> От 1 юли 2026 г. безмитният внос на стомана в ЕС е ограничен до около 18,3 млн. тона годишно, а над тази квота се плаща мито от 50&nbsp;%. Вносителят трябва да докаже къде стоманата е разтопена и отлята за първи път. Мярката пази европейските заводи от евтин внос. Ако те произвеждат повече, ще им трябва и повече скрап.</li>
+  <li><strong>Ограничения за износа на отпадъци.</strong> От 21 май 2027 г. ЕС ще разрешава износ на отпадъци, включително на скрап, към държави извън Организацията за икономическо сътрудничество и развитие само ако те са доказали, че могат да ги преработят по екологичен начин. В проекта на списъка, публикуван на 18 септември 2026 г., не са включени Индия, Пакистан, Бангладеш, Египет и Мароко. Турция е членка на организацията и не е засегната. Окончателният списък се очаква до края на 2026 г.</li>
+</ul>
+<p>Как точно тези мерки ще се отразят на цените, ще стане ясно с времето. Те действат в две посоки: ако износът намалее, в Европа остава повече скрап, а ако европейските заводи произвеждат повече, търсенето на скрап расте.</p>
+
+<h2 id="vashiyat-metal">Как световната цена стига до вашия метал</h2>
+<p>Ето накратко как всеки от факторите обикновено действа на цената на железния скрап:</p>
+<div class="tablewrap">
+  <table>
+    <thead><tr><th>Какво се случва на пазара</th><th>Какво става обикновено с цената на скрапа</th></tr></thead>
+    <tbody>
+      <tr><td data-label="На пазара">Арматурата и профилите поскъпват.</td><td data-label="Цената на скрапа">Расте.</td></tr>
+      <tr><td data-label="На пазара">Започва строителният сезон.</td><td data-label="Цената на скрапа">Расте.</td></tr>
+      <tr><td data-label="На пазара">Внесените заготовки поевтиняват.</td><td data-label="Цената на скрапа">Пада.</td></tr>
+      <tr><td data-label="На пазара">Рудата и въглищата поевтиняват.</td><td data-label="Цената на скрапа">Пада.</td></tr>
+      <tr><td data-label="На пазара">Турските заводи купуват повече.</td><td data-label="Цената на скрапа">Расте.</td></tr>
+      <tr><td data-label="На пазара">Токът поскъпва.</td><td data-label="Цената на скрапа">Пада.</td></tr>
+      <tr><td data-label="На пазара">Доларът поскъпва спрямо еврото.</td><td data-label="Цената на скрапа">Расте.</td></tr>
+      <tr><td data-label="На пазара">Морският превоз поскъпва.</td><td data-label="Цената на скрапа">Пада.</td></tr>
+    </tbody>
+  </table>
+</div>
+<p><em>Факторите действат едновременно и често в различни посоки. Таблицата показва обичайната посока, а не правило.</em></p>
+<p>Световният пазар задава общото ниво на цената. Колко ще получите за конкретния метал, зависи от самия метал: вида му, чистотата, дебелината, количеството и превоза. Тези фактори описваме в статията <a href="/blog/kak-se-opredelya-cenata-na-skrapa.html" class="link-green">как се определя цената на скрапа</a>, а разликите между видовете черен метал са в <a href="/blog/vidove-zhelezen-skrap.html" class="link-green">наръчника за видовете железен скрап</a>. Ако предавате по-голямо количество, вижте <a href="/izkupuvane-metal/#kolichestva" class="link-green">от какво количество извозваме</a>.</p>
+<div class="callout"><strong>Не публикуваме фиксирани изкупни цени.</strong> Пазарът се променя често и една цена в сайта бързо би остаряла. Цената казваме по телефона на <a href="tel:+359877775577" class="link-green" data-tel="tekst">0877&nbsp;77&nbsp;55&nbsp;77</a> или след оглед, според вида, количеството и чистотата на метала.</div>
+
+<h2 id="vaprosi">Въпроси и отговори</h2>
+<div class="faq-list"><details class="faq-item"><summary>Защо цената на железния скрап се променя толкова често?</summary><div class="faq-answer">Защото скрапът е суровина за стомана и цената му следва пазара на стомана. Тя зависи от търсенето в строителството, от цените на заготовките и рудата, от покупките на турските заводи, от цената на тока и от курса на долара. Всички тези фактори се движат всяка седмица.</div></details><details class="faq-item"><summary>Има ли борсова цена на железния скрап?</summary><div class="faq-answer">Да. Лондонската метална борса търгува фючърси за стоманен скрап, които се уреждат по ценови индекс за вноса в Турция. Тази цена е ориентир за целия пазар, но се отнася за големи корабни товари и не е равна на изкупната цена в България.</div></details><details class="faq-item"><summary>Защо Турция влияе на цената в България?</summary><div class="faq-answer">Турция е най-големият вносител на скрап в света и купува основно от Европа и САЩ. Цената, която турските заводи плащат, определя колко могат да платят европейските износители, а оттам и изкупните цени в региона.</div></details><details class="faq-item"><summary>Как курсът на долара влияе на цената на скрапа?</summary><div class="faq-answer">Световната търговия със скрап и стомана се води в долари, а в България от 2026 г. се плаща в евро. Когато доларът поскъпне спрямо еврото, един и същ тон скрап струва повече евро, и обратното.</div></details><details class="faq-item"><summary>Публикувате ли изкупни цени?</summary><div class="faq-answer">Не публикуваме фиксирани изкупни цени, защото пазарът се променя често. Цената казваме по телефона или след оглед, според вида, количеството и чистотата на метала.</div></details></div>
+
+<div class="sources">
+  <div class="sources-h">Източници</div>
+  <ul>
+    <li>EUROFER — European Steel in Figures 2025, дял на електродъговите пещи и търсене по сектори за 2024 г.: <a href="https://www.eurofer.eu/assets/publications/brochures-booklets-and-factsheets/european-steel-in-figures-2025/EUROFER_European-Steel-in-Figures-2025.pdf" rel="noopener" target="_blank">eurofer.eu</a></li>
+    <li>EUROFER — European Steel in Figures 2026, производство и потребление през 2025 г.: <a href="https://www.eurofer.eu/european-steel-in-figures-2026" rel="noopener" target="_blank">eurofer.eu</a></li>
+    <li>SteelOrbis — данни на Международното бюро по рециклиране за 2025 г.: <a href="https://www.steelorbis.com/steel-news/latest-news/bir-global-recycled-steel-consumption-rises-despite-lower-crude-steel-output-in-2025-1456577.htm" rel="noopener" target="_blank">steelorbis.com</a></li>
+    <li>SteelOrbis — вносът на скрап в Турция през 2025 г.: <a href="https://www.steelorbis.com/steel-news/latest-news/turkeys-scrap-imports-down-67-percent-in-2025-1433270.htm" rel="noopener" target="_blank">steelorbis.com</a></li>
+    <li>Лондонска метална борса — фючърсите за стоманен скрап: <a href="https://www.lme.com/-/media/Files/Metals/Ferrous/From-the-LME-Research-Team-Understanding-steel-scrap-and-the-new-LME-ferrous-contracts.pdf" rel="noopener" target="_blank">lme.com</a></li>
+    <li>ING Think — защо железният скрап е стратегическа суровина: <a href="https://think.ing.com/downloads/pdf/article/why-is-ferrous-scrap-a-strategic-raw-material" rel="noopener" target="_blank">think.ing.com</a></li>
+    <li>GMK Center — потреблението на стомана в България: <a href="https://gmk.center/en/posts/steel-consumption-in-bulgaria-setting-new-records/" rel="noopener" target="_blank">gmk.center</a></li>
+    <li>Европейска комисия — началото на окончателния период на въглеродната такса на границата: <a href="https://trade.ec.europa.eu/access-to-markets/en/news/start-definitive-period-cbam-eu" rel="noopener" target="_blank">trade.ec.europa.eu</a></li>
+    <li>Европейска комисия — новата мярка за внос на стомана: <a href="https://trade.ec.europa.eu/access-to-markets/en/news/new-eu-safeguards-steel-imports-third-countries" rel="noopener" target="_blank">trade.ec.europa.eu</a></li>
+    <li>Европейска комисия — проектът на списъка на държавите, които могат да внасят отпадъци от ЕС: <a href="https://environment.ec.europa.eu/news/commission-publishes-draft-list-countries-authorised-import-eu-waste-2026-09-18_en" rel="noopener" target="_blank">environment.ec.europa.eu</a></li>
+    <li>Argus — кои пазари за скрап остават извън проекта на списъка: <a href="https://www.argusmedia.com/en/news-and-insights/latest-market-news/2880332-eu-proposes-scrap-export-restrictions-to-key-markets" rel="noopener" target="_blank">argusmedia.com</a></li>
+  </ul>
+  <p class="photo-credit">Снимки: Unsplash (yasin hemmati, NIloy Tanvirul, Mads Eneqvist, Morteza Mohammadi, Nicolas Beuret, Craig Thomas, PortCalls Asia).</p>
+</div>
+
+  </div>
+<div class="cta"><h2>Имате железен скрап за предаване?</h2><p>Опишете метала и количеството и ще ви кажем актуалната цена.</p><div class="cta-row"><a href="tel:+359877775577" class="btn btn-primary" data-tel="cta"><svg class="tel-ic" width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg>Обадете се: 0877 77 55 77</a><a href="/zayavka/" class="btn btn-outline-white">Заявка за оферта</a></div></div></article>
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="Progresstrade">
+          <img class="logo-mark" src="/images/progresstrade-mark-reverse.svg?v=4" alt="" width="38" height="38">
+          <span class="logo-word"><span class="lw-a">progress</span><span class="lw-b">trade</span></span>
+        </a>
+        <p class="footer-desc">Изкупуване на черни и цветни метали в София, за фирми, обекти и площадки. Поемаме извозването и документите.</p>
+        <a href="https://www.facebook.com/share/1EXEcweybi/" target="_blank" rel="noopener" aria-label="Facebook страница на Progresstrade" class="footer-fb">
+          <span class="fb-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+          Последвайте ни във Facebook
+        </a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-h">Услуги</div>
+        <ul>
+          <li><a href="/uslugi/">Услуги</a></li>
+          <li><a href="/izkupuvane-metal/">Изкупуване за фирми</a></li>
+          <li><a href="/punkt-vtorichni-surovini/">Пункт за вторични суровини</a></li>
+          <li><a href="/izkupuvane-zhelyazo/">Изкупуване на желязо</a></li>
+          <li><a href="/izkupuvane-ot-adres/">Изкупуване от адрес</a></li>
+          <li><a href="/rayoni/">Обслужвани райони</a></li>
+          <li><a href="/uslugi/demontazh/">Рязане и демонтаж</a></li>
+          <li><a href="/uslugi/konteyneri/">Транспорт и контейнери</a></li>
+          <li><a href="/kakvo-izkupuvame/">Какво изкупуваме</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-h">Решения за бизнеса</div>
+        <ul>
+          <li><a href="/izkupuvane-metal/stroitelstvo/">Строителство</a></li>
+          <li><a href="/izkupuvane-metal/proizvodstvo/">Производство и металообработка</a></li>
+          <li><a href="/izkupuvane-metal/zemedelie/">Земеделие</a></li>
+          <li><a href="/izkupuvane-metal/brakuvane/">Бракуване на активи</a></li>
+        </ul>
+        <div class="footer-h">Още</div>
+        <ul>
+          <li><a href="/za-nas/">За нас</a></li>
+          <li><a href="/blog/">Блог</a></li>
+          <li><a href="/ceni/">Цени на скрап</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <div class="footer-h">Контакти</div>
+        <ul>
+          <li><a href="tel:+359877775577" data-tel="futar"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><span class="fc-l">Телефон</span><br><span class="fc-v" style="font-weight:700;">0877 77 55 77</span></span></a></li>
+          <li><a href="mailto:progresstradesofia@gmail.com"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><span class="fc-l">Имейл</span><br><span class="fc-v">progresstradesofia@gmail.com</span></span></a></li>
+          <li><a href="https://maps.app.goo.gl/C6KVEBHUQRiQYKrw5" target="_blank" rel="noopener"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg></span><span><span class="fc-l">Адрес</span><br><span class="fc-v">ул. Проф. Иван Георгов 1, Военна Рампа, София</span></span></a></li>
+          <li><span class="fc-row"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg></span><span><span class="fc-l">Работно време</span><br><span class="fc-v">Пон – Пет: 9:00 – 17:00</span></span></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Прогрестрейд · <a href="/poveritelnost/">Политика за поверителност</a></p>
+      <p>Изкупуване на метален отпадък в София</p>
+    </div>
+  </div>
+</footer>
+<script src="/js/main.min.js?v=e924c8c8" defer></script>
+</body>
+</html>
