@@ -379,6 +379,9 @@ a.sect-card:hover .sect-media img{transform:scale(1.05)}
 /* ── На обекта (началната) ── */
 .transport-band{background:var(--white);padding:var(--section-pad) 0}
 .transport-split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:var(--space-9) 88px;align-items:center}
+/* Редът с услуги под разделената лента. Стои на цяла ширина, под двете
+   колони, защото е продължение на темата, а не част от текста вляво. */
+.link-cards{margin-top:var(--space-8)}
 .checklist{list-style:none;display:flex;flex-direction:column;margin:var(--space-5) 0 0;border-top:1px solid var(--line)}
 .checklist li{display:flex;align-items:flex-start;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:var(--fs-5);color:var(--text);line-height:1.55}
 .check-icon{width:26px;height:26px;border-radius:50%;background:var(--yellow-soft);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:-1px}
