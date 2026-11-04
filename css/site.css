@@ -231,6 +231,10 @@ h1,h2,h3{overflow-wrap:break-word}
 
 /* ── Услуги на началната ── */
 .services-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:var(--space-8)}
+/* Етикет над група карти: разделя черните от цветните метали, без да
+   вкарва още едно заглавие в йерархията на страницата. */
+.grupa-etiket{margin-top:var(--space-7)}
+.services-grid.grupa{margin-top:var(--space-4)}
 .service-card{display:flex;flex-direction:column;padding:10px;background:var(--white);border-radius:var(--radius-card);box-shadow:var(--shadow-card);transition:transform var(--dur) var(--ease),box-shadow var(--dur) ease}
 .service-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-hover)}
 .service-card > picture{display:block;overflow:hidden;border-radius:var(--radius-md);background:var(--mint-100)}
@@ -572,6 +576,9 @@ html.menu-open{overflow:hidden}
 
 /* Списък „Какво изкупуваме“ */
 .buy-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 32px;margin-top:var(--space-4);list-style:none}
+/* В две колони до снимка списъкът става едноколонен — иначе клетките
+   стават толкова тесни, че всеки ред се пренася. */
+.grid-2 .buy-grid{grid-template-columns:1fr;max-width:none}
 /* Отметката е извън потока, за да текне удебеленото и описанието като един абзац */
 .buy-grid li{position:relative;font-size:var(--fs-5);color:var(--text);line-height:var(--lh-normal);padding:12px 0 12px 36px;border-bottom:1px solid var(--line)}
 .buy-grid li::before{content:"";position:absolute;left:0;top:12px;width:24px;height:24px;border-radius:50%;background:var(--yellow-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%238a5a00' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") center/12px no-repeat}
