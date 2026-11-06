@@ -26,14 +26,15 @@
   --fs-h2:clamp(30px,3.6vw,48px);--fs-h1:clamp(36px,4.4vw,62px);--fs-num:32px;--fs-num-lg:36px;--fs-logo:22px;
   --lh-tight:1.08;--lh-snug:1.3;--lh-normal:1.6;--lh-relaxed:1.7;
   --dur-fast:.15s;--dur:.22s;--dur-slow:.45s;--ease:cubic-bezier(.2,.7,.2,1);
+  --dur-menu:.42s;--ease-soft:cubic-bezier(.32,.72,0,1);
   --pad-sm:clamp(48px,6vw,80px);--pad-md:clamp(64px,8vw,104px);--pad-lg:clamp(72px,9.5vw,128px);
   --gutter:24px;--max-w:1248px;--content-w:720px;--section-pad:var(--pad-lg);
   --font:'Commissioner','Helvetica Neue',Helvetica,Arial,sans-serif;
   --font-cond:'Geologica','Helvetica Neue',Helvetica,Arial,sans-serif;
 }
 /* Скала на шрифтовете: етикет 12.5 · малък 13.5 · вторичен 15 · бутон 16 · текст 17 · подзаглавие 19 ·
-   заглавие на карта 20 · стъпка 24 · секция 48 · страница 62 · начало 68. На телефон текстът е 16,
-   подзаглавията 18, картите 18, стъпките 21, секциите 30, страницата 36. */
+   заглавие на карта 20 · стъпка 24 · секция 48 · страница 62 · начало 54. На телефон текстът е 16,
+   подзаглавията 18, картите 18, стъпките 21, секциите 30, страницата 36, началото 31–37 според ширината. */
 @media(max-width:640px){:root{--gutter:20px;--fs-5:16px;--fs-6:18px;--fs-card:18px;--fs-h4:21px}}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
@@ -117,25 +118,32 @@ a[href^="tel:"]{white-space:nowrap}
    страница, който стои в <link rel="alternate" hreflang>. */
 .lang-switch{display:inline-flex;align-items:center;justify-content:center;min-width:42px;height:40px;padding:0 11px;border:1px solid var(--line-2);border-radius:var(--radius-pill);font-size:var(--fs-2);font-weight:700;letter-spacing:.08em;color:var(--green);background:var(--white);transition:background-color var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast)}
 .lang-switch:hover{background:var(--green);border-color:var(--green);color:var(--white)}
-.mobile-menu > a.mm-lang{font-family:var(--font);font-size:var(--fs-4);font-weight:600;color:var(--text-soft);min-height:56px;letter-spacing:0}
 /* ── Бутонът за менюто на телефон ──
-   Хапче с надпис, както всички бутони на сайта. При отваряне надписът се
-   скрива, хапчето се свива в кръгче и чертите стават хикс — едно движение,
-   без смяна на цвета, защото мигането от крем към тъмно се забелязваше. */
-.nav-hamburger{display:none;align-items:center;gap:10px;cursor:pointer;height:46px;padding:0 18px 0 15px;margin-right:-2px;background:var(--green);border:none;border-radius:var(--radius-pill);box-shadow:var(--shadow-nav);transition:width var(--dur) var(--ease),padding var(--dur) var(--ease),gap var(--dur) var(--ease),background-color var(--dur-fast)}
-.nav-hamburger:active{transform:scale(.97)}
+   Хапче с надпис, както всички бутони на сайта. При отваряне надписът
+   избледнява, хапчето плавно се свива в кръгче, а чертите първо се събират
+   в средата и после се завъртат в хикс. При затваряне е същото наобратно.
+   Ширината не се задава пряко: от „auto“ браузърът не може да я анимира и
+   бутонът подскачаше. Тя следва отстъпите и max-width на надписа, а те се
+   анимират плавно. 3em е колкото „Меню“ и „Menu“, за да няма мъртво време. */
+.nav-hamburger{display:none;align-items:center;gap:10px;cursor:pointer;height:46px;padding:0 18px 0 15px;margin-right:-2px;background:var(--green);border:none;border-radius:var(--radius-pill);box-shadow:var(--shadow-nav);-webkit-tap-highlight-color:transparent;transition:padding var(--dur-menu) var(--ease-soft),gap var(--dur-menu) var(--ease-soft),background-color var(--dur-menu) ease,transform var(--dur-fast) ease}
+.nav-hamburger:active{transform:scale(.96)}
 /* Контурът при достъп с клавиатура: зелено върху зелено не се вижда,
    затова тук е златен, и в същата заобленост като хапчето. */
 .nav-hamburger:focus-visible{outline-color:var(--yellow);border-radius:var(--radius-pill)}
 .hb-ic{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:18px;height:14px;position:relative;flex-shrink:0}
-.hb-ic span{display:block;width:18px;height:2px;background:var(--white);border-radius:2px;transition:transform var(--dur) var(--ease),opacity var(--dur-fast),width var(--dur) var(--ease)}
+.hb-ic span{display:block;width:18px;height:2px;background:var(--white);border-radius:2px;transition:rotate .22s var(--ease),translate .2s var(--ease) .16s,opacity .1s linear .16s,width .2s var(--ease) .16s}
 .hb-ic span:nth-child(2){width:12px}
-.hb-tx{font-family:var(--font);font-size:var(--fs-4);font-weight:600;line-height:1;color:var(--white);white-space:nowrap;max-width:6em;overflow:hidden;transition:max-width var(--dur) var(--ease),opacity var(--dur-fast)}
-.nav-hamburger[aria-expanded="true"]{width:46px;padding:0;gap:0;justify-content:center;background:var(--green-deep)}
-.nav-hamburger[aria-expanded="true"] .hb-tx{max-width:0;opacity:0}
-.nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.hb-tx{font-family:var(--font);font-size:var(--fs-4);font-weight:600;line-height:1;color:var(--white);white-space:nowrap;max-width:3em;overflow:hidden;transition:max-width var(--dur-menu) var(--ease-soft),opacity .22s ease .14s}
+.nav-hamburger[aria-expanded="true"]{padding:0 14px;gap:0;background:var(--green-deep)}
+.nav-hamburger[aria-expanded="true"] .hb-tx{max-width:0;opacity:0;transition:max-width var(--dur-menu) var(--ease-soft),opacity .12s ease}
+.nav-hamburger[aria-expanded="true"] .hb-ic span{transition:translate .2s var(--ease),rotate .24s var(--ease) .16s,opacity .1s linear,width .2s var(--ease)}
+.nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(1){translate:0 6px;rotate:45deg}
 .nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(2){opacity:0}
-.nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(3){width:18px;transform:translateY(-6px) rotate(-45deg)}
+.nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(3){width:18px;translate:0 -6px;rotate:-45deg}
+@supports not (rotate:45deg){
+  .nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-hamburger[aria-expanded="true"] .hb-ic span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+}
 
 /* Падащо меню „Какво изкупуваме“: две по две, с плочка за всяка група */
 .nav-links li.has-dd{position:relative}
@@ -158,7 +166,10 @@ a[href^="tel:"]{white-space:nowrap}
 .hero{background:var(--cream);padding:64px 0 0;position:relative}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px 64px;align-items:center}
 .hero-content{display:flex;flex-direction:column;align-items:flex-start;gap:30px;padding:8px 0 40px}
-.hero-title{font-family:var(--font-cond);font-size:clamp(40px,4.8vw,68px);font-weight:600;line-height:1.03;letter-spacing:-.035em;color:var(--ink);text-wrap:balance}
+/* Заглавието на началната страница е 3 реда на всяка ширина: „Изкупуваме“ /
+   „метални отпадъци“ / „на справедлива цена“. По-едър шрифт го чупи на 5 реда
+   и бутонът за обаждане слиза под първия екран. */
+.hero-title{font-family:var(--font-cond);font-size:clamp(36px,4.1vw,54px);font-weight:600;line-height:1.03;letter-spacing:-.035em;color:var(--ink);text-wrap:balance}
 .hero-title em{display:block;font-style:normal;color:var(--fern)}
 .hero-tagline{display:flex;align-items:center;gap:16px;margin-top:26px;font-family:var(--font);font-size:var(--fs-6);font-weight:500;line-height:1.4;letter-spacing:.005em;color:var(--text)}
 .hero-tagline::before{content:"";width:44px;height:2px;border-radius:2px;background:var(--yellow);flex-shrink:0}
@@ -180,7 +191,9 @@ a[href^="tel:"]{white-space:nowrap}
 /* Движение при скрол */
 .js-reveal .reveal{opacity:0;transform:translateY(12px);transition:opacity var(--dur-slow) ease-out,transform var(--dur-slow) var(--ease)}
 .js-reveal .reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.js-reveal .reveal{opacity:1!important;transform:none!important;transition:none!important}}
+@media(prefers-reduced-motion:reduce){.js-reveal .reveal{opacity:1!important;transform:none!important;transition:none!important}
+  .nav-hamburger,.hb-tx,.hb-ic span{transition:none!important}
+  .mobile-menu.open,.mobile-menu.open > *{animation:none!important}}
 
 /* ── Достъпност ──
    Пръстенът е зелен на светло и златен на тъмно — жълтото върху бяло
@@ -466,18 +479,29 @@ a.contact-item-value:hover{color:var(--green)}
 .footer-contact .fc-l{font-size:var(--fs-2);color:rgba(255,255,255,.56)}
 .footer-contact .fc-v{font-size:15px;color:var(--white);line-height:var(--lh-normal);transition:color var(--dur-fast)}
 
-/* ── Мобилно меню ── */
+/* ── Мобилно меню ──
+   Трябва да се събира на екрана на обикновен телефон без превъртане: редове
+   по 50 px, а бутонът за обаждане и езикът са на един общ ред най-долу.
+   Превъртането остава само като резерва за много ниски екрани. */
 .mobile-menu{display:none}
-.mobile-menu > a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:64px;border-bottom:1px solid var(--line);font-family:var(--font-cond);font-size:24px;font-weight:500;line-height:1.2;letter-spacing:-.02em;color:var(--ink)}
-.mobile-menu > a::after{content:"";width:18px;height:18px;flex-shrink:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa9a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat}
+.mobile-menu > a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:50px;border-bottom:1px solid var(--line);font-family:var(--font-cond);font-size:20px;font-weight:500;line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+.mobile-menu > a::after{content:"";width:16px;height:16px;flex-shrink:0;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%239aa9a0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E") center/contain no-repeat}
 .mobile-menu > a:has(+ .mm-sub){border-bottom:0}
 .mobile-menu > a:has(+ .mm-sub)::after{transform:rotate(90deg);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a4a2e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m9 6 6 6-6 6'/%3E%3C/svg%3E")}
-.mm-sub{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:2px 0 18px;border-bottom:1px solid var(--line)}
-.mm-sub a{display:flex;align-items:center;gap:10px;min-height:56px;padding:0 12px;border-radius:14px;background:var(--cream);font-size:var(--fs-3);font-weight:600;line-height:1.3;color:var(--ink);transition:background-color var(--dur-fast)}
+.mm-sub{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;padding:0 0 14px;border-bottom:1px solid var(--line)}
+.mm-sub a{display:flex;align-items:center;gap:8px;min-height:40px;padding:0 10px;border-radius:12px;background:var(--cream);font-size:var(--fs-3);font-weight:600;line-height:1.25;color:var(--ink);transition:background-color var(--dur-fast)}
 .mm-sub a:hover{background:var(--mint-100)}
-.mm-sub a svg{flex-shrink:0}
-.mm-call{position:sticky;bottom:0;margin:auto calc(-1 * var(--gutter)) 0;padding:20px var(--gutter) calc(24px + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid var(--line)}
-.mm-call .btn{width:100%}
+.mm-sub a svg{flex-shrink:0;width:17px;height:17px}
+.mm-call{position:sticky;bottom:0;display:flex;align-items:center;gap:10px;margin:auto calc(-1 * var(--gutter)) 0;padding:12px var(--gutter) calc(12px + env(safe-area-inset-bottom));background:var(--cream);border-top:1px solid var(--line)}
+.mm-call .btn{flex:1;min-width:0}
+/* Езикът е малко хапче до бутона, както „EN“ до телефона горе на компютър. */
+.mm-lang{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;width:52px;height:52px;border:1px solid var(--line-2);border-radius:var(--radius-pill);background:var(--white);font-size:var(--fs-3);font-weight:700;letter-spacing:.08em;color:var(--green);transition:background-color var(--dur-fast),color var(--dur-fast),border-color var(--dur-fast)}
+.mm-lang:hover{background:var(--green);border-color:var(--green);color:var(--white)}
+/* Отваряне: фонът избледнява навътре, а редовете леко се спускат един след
+   друг. Затваряне: всичко заедно избледнява (класът .closing се маха от JS). */
+@keyframes mm-fade{from{opacity:0}}
+@keyframes mm-drop{from{opacity:0;transform:translateY(-8px)}}
+@keyframes mm-out{to{opacity:0}}
 .mm-head{font-size:var(--fs-1);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--green);padding:8px 0 2px}
 html.menu-open{overflow:hidden}
 
@@ -900,11 +924,23 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
   .nav-hamburger{display:inline-flex}
   .nav-inner,.nav.scrolled .nav-inner{height:68px}
   .logo-mark{width:34px;height:34px}
-  .mobile-menu.open{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;top:68px;z-index:99;overflow-y:auto;overscroll-behavior:contain;background:var(--white);border-top:1px solid var(--line);padding:8px var(--gutter) 0}
+  .mobile-menu.open{display:flex;flex-direction:column;position:fixed;left:0;right:0;bottom:0;top:68px;z-index:99;overflow-y:auto;overscroll-behavior:contain;background:var(--white);border-top:1px solid var(--line);padding:6px var(--gutter) 0;animation:mm-fade .24s ease both}
+  .mobile-menu.open > *{animation:mm-drop .4s var(--ease-soft) both}
+  .mobile-menu.open > :nth-child(2){animation-delay:.02s}
+  .mobile-menu.open > :nth-child(3){animation-delay:.04s}
+  .mobile-menu.open > :nth-child(4){animation-delay:.06s}
+  .mobile-menu.open > :nth-child(5){animation-delay:.08s}
+  .mobile-menu.open > :nth-child(6){animation-delay:.1s}
+  .mobile-menu.open > :nth-child(7){animation-delay:.12s}
+  .mobile-menu.open > :nth-child(n+8){animation-delay:.14s}
+  .mobile-menu.open > .mm-call{animation:mm-fade .3s ease .1s both}
+  .mobile-menu.closing{animation:mm-out .18s ease both}
+  .mobile-menu.closing > *{animation:none}
   .nav-links li.has-dd{position:static}
 }
 @media(max-width:900px){
   .hero{padding-top:40px}
+  .hero-title{font-size:40px}
   .hero-grid{grid-template-columns:1fr;gap:28px}
   .hero-content{gap:22px;padding:0}
   .hero-img{aspect-ratio:3/2}
@@ -933,7 +969,7 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
   .logo{min-height:44px}
   .crumb a{display:inline-flex;align-items:center;min-height:36px}
   .footer-col ul{gap:0}
-  .footer-col ul li a,.mm-sub a{display:inline-flex;align-items:center;min-height:36px}
+  .footer-col ul li a{display:inline-flex;align-items:center;min-height:36px}
   .footer-contact ul{gap:14px}
   .footer-contact a,.footer-bottom a{display:inline-flex;align-items:center;min-height:32px}
   .seg-card .more,.link-cta,.ph-link{display:inline-flex;align-items:center;min-height:44px}
@@ -1000,7 +1036,7 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
 }
 /* По-компактна типография на телефон (текстът да не изяжда екрана) */
 @media(max-width:640px){
-  .hero-title{font-size:40px;line-height:1.05;letter-spacing:-.035em}
+  .hero-title{font-size:clamp(26px,8.6vw,40px);line-height:1.05;letter-spacing:-.035em}
   .hero-tagline{font-size:var(--fs-5);margin-top:20px;gap:12px}
   .hero-tagline::before{width:32px}
   .hero-sub{font-size:var(--fs-5)}
@@ -1043,7 +1079,6 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
 @media(max-width:400px){
   .section-title,.section-title-dark{font-size:27px}
   .page-hero h1{font-size:34px}
-  .hero-title{font-size:36px}
 }
 @media(max-width:340px){.price-table td:last-child{white-space:normal}}
 /* най-тесните телефони: малко по-тясна снимка в картите, за да се събират дългите думи */

@@ -1,15 +1,34 @@
 /* Мобилното меню покрива екрана под навигацията. Горният му ръб се взима от
    самата навигация в момента на отваряне — над нея може да стои горната лента
    или лентата за отпуск, затова фиксирано число би покрило бутона за затваряне.
-   Докато менюто е отворено, страницата отдолу не се превърта. */
+   Докато менюто е отворено, страницата отдолу не се превърта.
+   При затваряне менюто първо избледнява (класът .closing, 180 ms в CSS) и
+   чак тогава се скрива. Ако посетителят е поискал по-малко движение в
+   настройките на телефона, менюто се скрива веднага. */
+var MM_BEZ_DVIZHENIE = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+function setMenu(open) {
+  var mm = document.getElementById('mobile-menu');
+  if (!mm) return;
+  var nav = document.getElementById('main-nav');
+  var h = document.getElementById('hamburger');
+  clearTimeout(mm._zatvaryane);
+  if (open) {
+    mm.classList.remove('closing');
+    if (nav) mm.style.top = Math.max(0, Math.round(nav.getBoundingClientRect().bottom)) + 'px';
+    mm.classList.add('open');
+  } else if (mm.classList.contains('open')) {
+    if (MM_BEZ_DVIZHENIE) mm.classList.remove('open', 'closing');
+    else {
+      mm.classList.add('closing');
+      mm._zatvaryane = setTimeout(function () { mm.classList.remove('open', 'closing'); }, 180);
+    }
+  }
+  document.documentElement.classList.toggle('menu-open', open);
+  if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
+}
 function toggleMenu() {
   var mm = document.getElementById('mobile-menu');
-  var nav = document.getElementById('main-nav');
-  var open = mm.classList.toggle('open');
-  if (open && nav) mm.style.top = Math.max(0, Math.round(nav.getBoundingClientRect().bottom)) + 'px';
-  document.documentElement.classList.toggle('menu-open', open);
-  var h = document.getElementById('hamburger');
-  if (h) h.setAttribute('aria-expanded', open ? 'true' : 'false');
+  if (mm) setMenu(!mm.classList.contains('open') || mm.classList.contains('closing'));
 }
 
 /* ── Език на страницата ────────────────────────────────────────────────────
@@ -132,15 +151,16 @@ sections.forEach(s => observer.observe(s));
 
 /* Мобилно меню: затваряне при клик на връзка и при Escape */
 (function () {
-  var mm = document.getElementById('mobile-menu'), h = document.getElementById('hamburger');
+  var mm = document.getElementById('mobile-menu');
   if (!mm) return;
-  function close() {
-    mm.classList.remove('open');
-    document.documentElement.classList.remove('menu-open');
-    if (h) h.setAttribute('aria-expanded', 'false');
-  }
+  function close() { setMenu(false); }
   mm.querySelectorAll('a').forEach(function (a) { a.addEventListener('click', close); });
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+  /* Връщане назад от кеша на браузъра: менюто трябва да е затворено, а не
+     замръзнало по средата на избледняването. */
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) { clearTimeout(mm._zatvaryane); mm.classList.remove('open', 'closing'); setMenu(false); }
+  });
   /* При завъртане на таблета към широк екран менюто изчезва от CSS —
      затваряме го и тук, иначе страницата остава заключена за превъртане. */
   var wide = window.matchMedia('(min-width:1025px)');
