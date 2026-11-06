@@ -89,7 +89,13 @@ a[href^="tel:"]{white-space:nowrap}
 .topbar-item svg{flex-shrink:0}
 .topbar-item b{color:var(--white);font-weight:600}
 
-/* ── Навигация ── */
+/* ── Навигация ──
+   Хедърът е обвивка само за скрипта с партиалите (той сменя всичко между
+   <header> и </header>). Като кутия той е висок колкото лентата, а
+   залепеното поле не може да излезе от родителя си, затова лентата се
+   превърташе заедно със страницата. display:contents маха кутията от
+   подредбата и лентата се залепва спрямо цялата страница. */
+header{display:contents}
 .nav{position:sticky;top:0;z-index:100;background:var(--white);border-bottom:1px solid var(--line);transition:box-shadow var(--dur) ease}
 .nav.scrolled{box-shadow:var(--shadow-nav)}
 .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:24px;height:84px;padding:0 var(--gutter);max-width:var(--max-w);margin:0 auto;transition:height var(--dur) ease}
@@ -449,7 +455,14 @@ a.contact-item-value:hover{color:var(--green)}
 
 /* ── Футър ── */
 .footer{background:var(--forest);color:var(--text-white-soft);padding:96px 0 36px}
+/* Футър: лого и четири колони (Материали, За фирми, Компанията, Контакти).
+   Под 1100 px логото минава на свой ред; на телефон „Компанията“ и
+   контактите са на цяла ширина, а списъкът на „Компанията“ е в две колони.
+   Английският футър е с три колони и остава на старата решетка. */
 .footer-grid{display:grid;grid-template-columns:1.35fr 1fr 1fr 1.2fr;gap:var(--space-7) var(--space-8)}
+.footer-grid:has(> :nth-child(5):last-child){grid-template-columns:1.2fr 1fr 1fr 1fr 1.45fr;gap:var(--space-7) var(--space-5)}
+@media(max-width:1100px){.footer-grid:has(> :nth-child(5):last-child){grid-template-columns:1fr 1fr 1fr 1.5fr}.footer-grid:has(> :nth-child(5):last-child) > .footer-brand{grid-column:1 / -1}}
+@media(max-width:900px){.footer-grid:has(> :nth-child(5):last-child){grid-template-columns:1fr 1fr}}
 .footer-brand{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
 .footer-desc{font-size:15px;color:var(--text-white-soft);line-height:var(--lh-relaxed);max-width:340px}
 .footer-col ul + .footer-h{margin-top:34px}
@@ -474,7 +487,7 @@ a.contact-item-value:hover{color:var(--green)}
 .footer-contact .ic-sm svg{width:16px;height:16px}
 .footer-contact .ic-sm svg *{stroke:var(--yellow)}
 .footer-contact .fc-l{font-size:var(--fs-2);color:rgba(255,255,255,.56)}
-.footer-contact .fc-v{font-size:15px;color:var(--white);line-height:var(--lh-normal);transition:color var(--dur-fast)}
+.footer-contact .fc-v{font-size:15px;color:var(--white);line-height:var(--lh-normal);overflow-wrap:anywhere;transition:color var(--dur-fast)}
 
 /* ── Мобилно меню ──
    Трябва да се събира на екрана на обикновен телефон без превъртане: редове
@@ -768,6 +781,8 @@ html,body{overflow-x:clip}
 .price-headline{position:relative;overflow:hidden;background:var(--green-deep);color:var(--white);border-radius:var(--radius-card);padding:28px 28px 30px;display:flex;flex-direction:column;gap:6px}
 .ph-label{font-size:var(--fs-1);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62)}
 .ph-figure{font-family:var(--font-cond);font-size:var(--fs-num-lg);font-weight:600;color:var(--yellow);letter-spacing:-.025em;line-height:1.1;font-variant-numeric:tabular-nums}
+/* „1 работен ден“ трябва да е на един ред в кутията (264 px при 36 px шрифт не стигат с 1 px). */
+.price-headline .ph-figure{font-size:34px}
 .ph-unit{font-family:var(--font);font-size:var(--fs-3);font-weight:500;color:rgba(255,255,255,.75);letter-spacing:0}
 .ph-note{font-size:var(--fs-2);color:rgba(255,255,255,.72);line-height:var(--lh-normal);margin-top:2px}
 .ph-link{margin-top:12px;font-size:var(--fs-3);font-weight:600;color:var(--white);align-self:flex-start;text-decoration:underline;text-decoration-color:rgba(255,255,255,.35);text-underline-offset:4px;transition:color var(--dur-fast),text-decoration-color var(--dur-fast)}
@@ -1013,7 +1028,9 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
   .steps-grid{grid-template-columns:1fr}
   .prices-grid{grid-template-columns:1fr}
   .footer-grid{grid-template-columns:1fr 1fr;gap:var(--space-6) 20px}
-  .footer-grid > div:first-child,.footer-contact{grid-column:1 / -1}
+  .footer-grid:has(> :nth-child(5):last-child){gap:var(--space-6) 20px}
+  .footer-grid > div:first-child,.footer-contact,.footer-company{grid-column:1 / -1}
+  .footer-company ul{display:grid;grid-template-columns:1fr 1fr;column-gap:20px}
   .topbar{display:none}
   .hero-trust{padding:8px;border-radius:22px}
   .hero-trust li{flex-direction:column;align-items:flex-start;gap:10px;padding:14px 12px;font-size:var(--fs-3);text-wrap:balance}
@@ -1081,5 +1098,51 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
 /* най-тесните телефони: малко по-тясна снимка в картите, за да се събират дългите думи */
 @media(max-width:360px){.service-card{grid-template-columns:72px minmax(0,1fr)}.service-img{height:72px}.service-card p{hyphens:auto}}
 /* големите числа на телефон не бива да са по-големи от заглавието на страницата */
-@media(max-width:640px){.ph-figure{font-size:28px}.tier .tv{font-size:24px}}
+@media(max-width:640px){.ph-figure,.price-headline .ph-figure{font-size:28px}.tier .tv{font-size:24px}}
 
+
+/* ── По-къси страници на телефон ──
+   Картите с материали и секторите стоят по две на ред, само със снимка и
+   име, както плочките в менюто. Описанията остават на компютър и на самите
+   страници. Компактният вид е само за решетки с поне 4 карти: при три
+   картите „Вижте също“ щяха да оставят една сама на ред. Стъпките са
+   по-плътни: номерът стои вляво от заглавието. */
+@media(max-width:640px){
+  .services-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .service-card{display:flex;flex-direction:column;gap:0;padding:6px;border-radius:18px}
+  .service-card > picture{border-radius:13px}
+  .service-img{aspect-ratio:3/2;height:auto}
+  .service-card-body{padding:10px 6px 6px}
+  .service-card-body::after{display:none}
+  .service-card h3{font-size:15.5px;line-height:1.25;margin:0}
+  .service-card p{display:none}
+
+  .grid-3:has(> .seg-card:nth-child(4)){grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .grid-3:has(> .seg-card:nth-child(4)) > .seg-card{padding:6px 6px 12px;border-radius:18px}
+  .grid-3:has(> .seg-card:nth-child(4)) > .seg-card img{margin-bottom:10px!important;border-radius:13px!important}
+  .grid-3:has(> .seg-card:nth-child(4)) > .seg-card h3{font-size:15.5px;line-height:1.25;margin:0 4px}
+  .grid-3:has(> .seg-card:nth-child(4)) > .seg-card :is(p,.more){display:none}
+  .grid-3:has(> .seg-card:nth-child(4)) > .mat-cta{grid-column:1 / -1}
+
+  .steps-grid{gap:16px}
+  .step-card{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:14px;row-gap:4px;align-items:baseline;padding-top:16px}
+  .step-num{font-size:26px;grid-row:span 2}
+  .step-card h3{margin:0;font-size:19px}
+  .step-card p{grid-column:2;font-size:var(--fs-3)}
+}
+@media(max-width:560px){
+  .sect-grid,.sect-grid--3{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .sect-card{padding:5px;border-radius:18px}
+  .sect-media{aspect-ratio:1/1;border-radius:14px}
+  .sect-media h3{font-size:14px;left:10px;right:10px;bottom:9px;hyphens:auto}
+  .sect-body{display:none}
+}
+@media(max-width:380px){.sect-media h3{font-size:12.5px;left:8px;right:8px}}
+/* Началната страница на телефон: секциите, които повтарят друга страница,
+   остават като кратко резюме с връзка. Четирите предимства повтарят лентата
+   под херото и стъпките, списъкът с отметки повтаря трите карти под него, а
+   картата на Google е на „Контакти“ (тук остава връзката към нея). */
+@media(max-width:640px){
+  #about .advantages-grid,#transport .checklist,#contact .map-frame{display:none}
+  #contact .contact-split{gap:0}
+}
