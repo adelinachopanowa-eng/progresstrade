@@ -28,7 +28,7 @@ const url = 'http://127.0.0.1:8777/' + stranica.replace(/^\/+/, '');
     args: ['--no-sandbox'],
   });
   const stranicata = await brauzar.newPage({
-    viewport: { width: 1180, height: 1500 },
+    viewport: { width: 1280, height: 1500 },   // 1280: събира и визитките за споделяне (1200 px)
     deviceScaleFactor: 1,
   });
   await stranicata.goto(url, { waitUntil: 'networkidle' });

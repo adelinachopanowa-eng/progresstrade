@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<title>Снимки за споделяне (og:image) — Прогрестрейд</title>
+<!--
+  Снимката, която Facebook, Viber, WhatsApp и LinkedIn показват при
+  споделяне на връзка. Размер 1200×630. Шрифтовете и цветовете са тези
+  от каруселите (karusel.css).
+
+    python3 -m http.server 8777 &
+    node social/render.js social/og.html social/izhod/og jpg
+
+  Слайдовете излизат в този ред и се копират в images/ под името до тях.
+  Подменена снимка получава НОВО име на файла: images/ се кешират 30 дни,
+  а Facebook и Viber помнят снимката по адреса ѝ.
+
+  Важното стои отляво и в средата: месинджърите понякога режат краищата.
+-->
+<link rel="stylesheet" href="karusel.css">
+<style>
+  .slide.og{width:1200px;height:630px;margin:0 0 28px;padding:0;background:var(--green-deep)}
+  .og .ph{position:absolute;top:0;right:0;bottom:0;width:62%}
+  .og .ph img{width:100%;height:100%;object-fit:cover;filter:saturate(.9)}
+  .og .ph::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(90deg,var(--green-deep) 0%,rgba(15,45,28,.82) 28%,rgba(15,45,28,.18) 70%,rgba(15,45,28,0) 100%)}
+  .og .brand{top:56px;left:72px}
+  .og .in{position:absolute;left:72px;top:150px;width:680px;z-index:3}
+  .og .eb{display:flex;align-items:center;gap:14px;font-family:'Commissioner';font-weight:600;font-size:21px;
+    letter-spacing:.14em;text-transform:uppercase;color:var(--yellow)}
+  .og .eb::before{content:"";width:36px;height:3px;border-radius:3px;background:var(--yellow)}
+  .og h1{font-family:'Geologica';font-weight:800;font-size:64px;line-height:1.04;letter-spacing:-.03em;color:#fff;margin-top:20px}
+  .og h1 em{font-style:normal;color:var(--yellow)}
+  .og p{font-family:'Commissioner';font-weight:400;font-size:25px;line-height:1.45;color:rgba(255,255,255,.82);margin-top:20px;max-width:600px}
+  .og .bottom{position:absolute;left:72px;bottom:56px;display:flex;align-items:center;gap:26px;z-index:3}
+  .og .tel{display:inline-flex;align-items:center;gap:12px;background:var(--yellow);color:var(--green-deep);
+    font-family:'Geologica';font-weight:800;font-size:30px;letter-spacing:-.01em;padding:14px 28px 14px 22px;border-radius:50px}
+  .og .tel svg{width:26px;height:26px}
+  .og .site{font-family:'Commissioner';font-weight:600;font-size:24px;color:rgba(255,255,255,.75)}
+
+  /* контакти: три реда вместо изречение */
+  .og .rows{margin-top:28px;display:flex;flex-direction:column;gap:14px}
+  .og .row2{display:flex;align-items:center;gap:16px;font-family:'Commissioner';font-size:25px;color:#fff}
+  .og .row2 i{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center}
+  .og .row2 svg{width:22px;height:22px}
+  .og .row2 small{color:rgba(255,255,255,.65);font-size:22px}
+  .og--k .in{top:138px;width:760px}
+  .og--k h1{font-size:54px}
+  .og--k .rows{margin-top:24px}
+</style>
+</head>
+<body style="margin:0;background:#ddd">
+
+<!-- 1 → images/og-progresstrade-sofia.jpg (начална, поверителност, благодарим) -->
+<section class="slide og">
+  <div class="ph"><img src="/images/zhelezen-skrap-1200.jpg" alt=""></div>
+  <div class="brand"><img src="/images/progresstrade-mark-reverse.svg" alt=""><span>progress<i>trade</i></span></div>
+  <div class="in">
+    <div class="eb">Лицензирана площадка от 2002 г.</div>
+    <h1>Изкупуване на черни и цветни метали <em>в София</em></h1>
+    <p>Издаваме документи по ЗУО и плащаме по банков път. Оферта до 1 работен ден.</p>
+  </div>
+  <div class="bottom">
+    <span class="tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>0877 77 55 77</span>
+    <span class="site">progresstrade.bg</span>
+  </div>
+</section>
+
+<!-- 2 → images/og-progresstrade-en.jpg (/en/, /en/thank-you/) -->
+<section class="slide og">
+  <div class="ph"><img src="/images/zhelezen-skrap-1200.jpg" alt=""></div>
+  <div class="brand"><img src="/images/progresstrade-mark-reverse.svg" alt=""><span>progress<i>trade</i></span></div>
+  <div class="in">
+    <div class="eb">Licensed scrap yard since 2002</div>
+    <h1>Scrap metal buyer<br><em>in Sofia</em></h1>
+    <p>We buy ferrous and non-ferrous metals, issue the waste documents and pay by bank transfer.</p>
+  </div>
+  <div class="bottom">
+    <span class="tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>+359 877 77 55 77</span>
+    <span class="site">progresstrade.bg/en</span>
+  </div>
+</section>
+
+<!-- 3 → images/og-kontakti-progresstrade.jpg (/kontakti/) -->
+<section class="slide og og--k">
+  <div class="ph"><img src="/images/zhelezen-skrap-1200.jpg" alt=""></div>
+  <div class="brand"><img src="/images/progresstrade-mark-reverse.svg" alt=""><span>progress<i>trade</i></span></div>
+  <div class="in">
+    <div class="eb">Контакти</div>
+    <h1>Обадете се, преди <em>да докарате материал</em></h1>
+    <div class="rows">
+      <div class="row2"><i><svg viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg></i><span>ул. Проф. Иван Георгов 1 <small>· Военна рампа, София</small></span></div>
+      <div class="row2"><i><svg viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></i><span>Понеделник – петък, 9:00 – 17:00</span></div>
+    </div>
+  </div>
+  <div class="bottom">
+    <span class="tel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>0877 77 55 77</span>
+    <span class="site">progresstrade.bg</span>
+  </div>
+</section>
+
+</body>
+</html>
