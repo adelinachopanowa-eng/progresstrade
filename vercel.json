@@ -8,12 +8,6 @@
       "destination": "https://progresstrade.bg/:path",
       "permanent": true
     },
-    {
-      "source": "/:path(.*)",
-      "has": [{ "type": "host", "value": "progresstrade-[a-z0-9]+-kostadin-s-projects\\.vercel\\.app" }],
-      "destination": "https://progresstrade.bg/:path",
-      "permanent": false
-    },
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/:dir+/index.html", "destination": "/:dir+/", "permanent": true },
     { "source": "/izkupuvane/", "destination": "/kakvo-izkupuvame/", "permanent": true },
