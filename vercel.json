@@ -10,9 +10,7 @@
     },
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/:dir+/index.html", "destination": "/:dir+/", "permanent": true },
-    { "source": "/izkupuvane", "destination": "/kakvo-izkupuvame/", "permanent": true },
     { "source": "/izkupuvane/", "destination": "/kakvo-izkupuvame/", "permanent": true },
-    { "source": "/izkupuvane/tehnologichen-skrap-boya", "destination": "/izkupuvane/tehnologichen-otpadak/", "permanent": true },
     { "source": "/izkupuvane/tehnologichen-skrap-boya/", "destination": "/izkupuvane/tehnologichen-otpadak/", "permanent": true }
   ],
   "headers": [
