@@ -3,9 +3,15 @@
   "trailingSlash": true,
   "redirects": [
     {
-      "source": "/:path*",
+      "source": "/:path(.*)",
       "has": [{ "type": "host", "value": "progresstrade\\.vercel\\.app" }],
-      "destination": "https://progresstrade.bg/:path*",
+      "destination": "https://progresstrade.bg/:path",
+      "permanent": true
+    },
+    {
+      "source": "/:path(.*)",
+      "has": [{ "type": "host", "value": "www\\.progresstrade\\.bg" }],
+      "destination": "https://progresstrade.bg/:path",
       "permanent": true
     },
     { "source": "/index.html", "destination": "/", "permanent": true },
