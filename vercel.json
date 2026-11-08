@@ -8,6 +8,12 @@
       "destination": "https://progresstrade.bg/:path",
       "permanent": true
     },
+    {
+      "source": "/:path(.*)",
+      "has": [{ "type": "host", "value": "www\\.progresstrade\\.bg" }],
+      "destination": "https://progresstrade.bg/:path",
+      "permanent": true
+    },
     { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/:dir+/index.html", "destination": "/:dir+/", "permanent": true },
     { "source": "/izkupuvane/", "destination": "/kakvo-izkupuvame/", "permanent": true },
