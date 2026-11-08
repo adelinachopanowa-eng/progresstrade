@@ -22,18 +22,27 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Списъците не са на око: измерени са с браузър — за всеки текстов възел в
-# първите 900 px се взима използваното семейство, тегло и писменост. Затова
-# българските страници теглят и латински лица: логото, телефонът и годините
-# са на латиница.
+# първия екран (телефон 412×823 и десктоп 1350×940) се взима използваното
+# семейство, тегло и писменост. Затова българските страници теглят и
+# латински лица: в тях са интервалите, препинателните знаци и цифрите.
+#
+# Всяко предзареждане се бори за лентата с hero снимката (LCP), затова
+# списъкът е минимален. Последно измерване, ноември 2026:
+# - Commissioner 700 на първия екран е само „EN“ и звездичките във формата,
+#   затова не се предзарежда изобщо.
+# - Commissioner 500 е навигацията на десктоп. На телефон тя е скрита в
+#   менюто, а 500 остава само за „Начало“ в пътечката и подзаглавието на
+#   началната. Затова се предзарежда само над 1180 px (media), освен в
+#   статиите от блога, където уводният абзац е с него.
+NAV = "(min-width:1181px)"   # навигацията се вижда над 1180 px, под това е в менюто
+OSNOVA_BG = [("Geologica-600-cyrillic", None), ("Geologica-600-latin", None),
+             ("Commissioner-400-cyrillic", None), ("Commissioner-400-latin", None),
+             ("Commissioner-600-cyrillic", None), ("Commissioner-600-latin", None)]
 PODMNOZHESTVA = {
-    "bg": ["Geologica-600-cyrillic", "Geologica-600-latin",
-           "Commissioner-400-cyrillic", "Commissioner-400-latin",
-           "Commissioner-500-cyrillic", "Commissioner-600-cyrillic",
-           "Commissioner-600-latin", "Commissioner-700-cyrillic",
-           "Commissioner-700-latin"],
-    "en": ["Geologica-600-latin", "Commissioner-400-latin",
-           "Commissioner-500-latin", "Commissioner-600-latin",
-           "Commissioner-700-latin"],
+    "bg": OSNOVA_BG + [("Commissioner-500-cyrillic", NAV)],
+    "bg-statia": OSNOVA_BG + [("Commissioner-500-cyrillic", None)],
+    "en": [("Geologica-600-latin", None), ("Commissioner-400-latin", None),
+           ("Commissioner-600-latin", None), ("Commissioner-500-latin", NAV)],
 }
 
 NACHALO = "<!-- шрифтове за първия екран -->"
@@ -43,16 +52,21 @@ BLOK = re.compile(re.escape(NACHALO) + r".*?" + re.escape(KRAI) + r"\n?", re.S)
 
 def blok_za(ezik):
     redove = [NACHALO]
-    for ime in PODMNOZHESTVA[ezik]:
+    for ime, media in PODMNOZHESTVA[ezik]:
+        m = ' media="%s"' % media if media else ""
         redove.append('<link rel="preload" as="font" type="font/woff2" '
-                      'href="/fonts/%s.woff2" crossorigin>' % ime)
+                      'href="/fonts/%s.woff2"%s crossorigin>' % (ime, m))
     redove.append(KRAI)
     return "\n".join(redove) + "\n"
 
 
 def ezik_na(put):
     otn = os.path.relpath(put, ROOT).replace(os.sep, "/")
-    return "en" if otn == "en/index.html" or otn.startswith("en/") else "bg"
+    if otn.startswith("en/"):
+        return "en"
+    if otn.startswith("blog/") and otn != "blog/index.html":
+        return "bg-statia"
+    return "bg"
 
 
 def main():
