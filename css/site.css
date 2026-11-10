@@ -1147,43 +1147,69 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
   #contact .contact-split{gap:0}
 }
 
-/* ── Контакти: тъмна лента с бутоните и картата с данните, после картата на
-   Google до упътването и стъпките при идване с камион. Без снимка в херото. */
-.kt-hero{position:relative;overflow:hidden;padding:64px 0 72px;color:var(--white);
-  background:radial-gradient(120% 90% at 100% 0%,rgba(235,183,60,.14) 0%,rgba(235,183,60,0) 46%),var(--green-deep)}
-.kt-hero-in{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:var(--space-8);align-items:center}
-.kt-hero .crumb{margin-bottom:22px;color:rgba(255,255,255,.62)}
-.kt-hero .crumb a{color:var(--yellow)}
-.kt-hero .crumb a:hover{color:var(--white)}
-.kt-hero .crumb span[aria-hidden]{color:rgba(255,255,255,.4)}
-.kt-hero h1{font-family:var(--font-cond);font-size:var(--fs-h1);font-weight:600;line-height:1.04;letter-spacing:-.035em;color:var(--white)}
-.kt-lead{font-size:var(--fs-6);line-height:var(--lh-normal);color:rgba(255,255,255,.8);max-width:520px;margin-top:20px}
-.kt-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
-.kt-actions .btn-primary{box-shadow:var(--shadow-cta)}
-.kt-card{font-style:normal;display:flex;flex-direction:column;background:var(--white);color:var(--ink);
-  border-radius:var(--radius-card);padding:10px 30px 28px;box-shadow:0 34px 70px -34px rgba(0,0,0,.55)}
-.kt-card > .contact-item:first-child{border-top:0}
-.kt-card .contact-item{padding:18px 0}
-.kt-route{margin-top:22px;align-self:flex-start}
-.kt-route svg{color:var(--green)}
+/* ── Контакти: светло херо като на другите страници. Вляво данните (телефонът
+   е само тук), вдясно формата, за да е под ръка. Под тях картата на Google до
+   текста за районите и стъпките при идване с камион. */
+.kt-hero{padding:48px 0 72px}
+.kt-grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:var(--space-8);align-items:start}
+.kt-info{padding-top:8px}
+.kt-hero h1{max-width:none}
+.kt-lead{font-size:var(--fs-6);line-height:var(--lh-normal);color:var(--text-soft);max-width:460px;margin-top:18px}
+.kt-phone{display:flex;align-items:center;gap:16px;margin-top:30px;padding:16px 22px 16px 16px;border-radius:20px;background:var(--yellow);color:var(--ink);box-shadow:var(--shadow-cta);transition:transform var(--dur) var(--ease),background var(--dur-fast)}
+.kt-phone:hover{background:var(--yellow-dark);transform:translateY(-2px)}
+.kt-phone-ic{width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.kt-phone small,.kt-row small,.kt-viber small{display:block;font-size:var(--fs-1);font-weight:600;letter-spacing:.12em;text-transform:uppercase;line-height:1.4}
+.kt-phone small{color:rgba(15,45,28,.7)}
+.kt-phone b{display:block;font-family:var(--font-cond);font-size:30px;font-weight:600;letter-spacing:-.02em;line-height:1.15}
+.kt-ic{width:44px;height:44px;border-radius:14px;background:var(--white);color:var(--green);display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid var(--line)}
+.kt-viber{display:flex;align-items:center;gap:14px;margin-top:12px;padding:12px 18px 12px 12px;border-radius:20px;background:var(--white);border:1px solid var(--line);color:var(--ink);transition:border-color var(--dur-fast),transform var(--dur) var(--ease)}
+.kt-viber:hover{border-color:#6650d8;transform:translateY(-2px)}
+.kt-viber .kt-ic{background:#6650d8;border-color:#6650d8;color:var(--white)}
+.kt-viber b{display:block;font-weight:600;font-size:var(--fs-4)}
+.kt-viber small{text-transform:none;letter-spacing:0;font-weight:400;font-size:var(--fs-2);color:var(--text-soft)}
+.kt-list{font-style:normal;margin-top:28px;display:flex;flex-direction:column;border-top:1px solid var(--line-2)}
+.kt-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-2);color:var(--ink)}
+.kt-row small{color:var(--text-soft)}
+.kt-row b{display:block;font-weight:600;font-size:var(--fs-4);overflow-wrap:normal}
+.kt-row em{display:block;font-style:normal;font-size:var(--fs-2);color:var(--text-soft)}
+a.kt-row:hover b{color:var(--green)}
+.kt-info .closed-note{margin-top:18px}
+.kt-form .qform{max-width:none}
+.kt-form-title{font-family:var(--font-cond);font-size:clamp(26px,2.4vw,32px);font-weight:600;letter-spacing:-.025em;color:var(--ink);line-height:1.15}
+.kt-form-sub{font-size:var(--fs-3);color:var(--text-soft);line-height:1.6;margin:8px 0 24px}
 .kt-map-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:var(--space-8);align-items:center}
-.kt-map{border-radius:var(--radius-card);overflow:hidden;background:var(--cream);min-height:440px}
-.kt-map iframe{display:block;width:100%;height:440px;border:0}
+.kt-map{border-radius:var(--radius-card);overflow:hidden;background:var(--cream);min-height:420px}
+.kt-map iframe{display:block;width:100%;height:420px;border:0}
 .kt-where .section-title-dark{margin-bottom:14px}
 .kt-where .btn{margin-top:26px}
 .kt-note{margin-top:var(--space-6);font-size:var(--fs-3);color:var(--text-soft);line-height:1.6;max-width:760px}
-@media(max-width:900px){
-  .kt-hero-in,.kt-map-grid{grid-template-columns:1fr;gap:var(--space-6)}
-  .kt-map iframe{height:340px}.kt-map{min-height:340px}
-}
+@media(max-width:1024px){.kt-grid{grid-template-columns:1fr;gap:var(--space-6)}.kt-lead{max-width:600px}}
+@media(max-width:900px){.kt-map-grid{grid-template-columns:1fr;gap:var(--space-6)}.kt-map iframe{height:320px}.kt-map{min-height:320px}}
 @media(max-width:640px){
-  .kt-hero{padding:32px 0 40px}
-  .kt-actions{margin-top:24px}
-  .kt-actions > *{flex:1 1 100%}
-  .kt-card{padding:4px 20px 22px}
-  .kt-card .contact-item{gap:14px}
-  .kt-card .contact-item-icon{width:42px;height:42px;border-radius:12px}
-  .kt-card a[href^="mailto"]{overflow-wrap:normal}
-  .kt-route{align-self:stretch}
-  .kt-map iframe{height:280px}.kt-map{min-height:280px}
+  .kt-hero{padding:28px 0 48px}
+  .kt-phone{margin-top:22px}
+  .kt-phone b{font-size:26px}
+  .kt-form .qform{padding:22px 18px}
+  .kt-form .qform .row{grid-template-columns:1fr;gap:0}
+  .kt-map iframe{height:260px}.kt-map{min-height:260px}
 }
+
+/* ── „Как приемаме материал“ на началната: стъпките 2×2 и до тях видеото.
+   Корицата е наша снимка 9:16; плейърът на YouTube се зарежда чак при
+   натискане (js/main.js), за да не тежи на страницата. Без JS връзката
+   отваря видеото в YouTube. */
+.how-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:var(--space-8);align-items:center}
+.how-grid .steps-grid{margin-top:0}
+@media(min-width:561px){.steps-grid.steps-grid--2{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.yt-card{position:relative;display:block;aspect-ratio:9/16;border-radius:28px;overflow:hidden;background:var(--green-deep);
+  box-shadow:0 30px 60px -30px rgba(15,45,28,.55);isolation:isolate}
+.yt-card picture,.yt-card img{display:block;width:100%;height:100%;object-fit:cover}
+.yt-card::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,45,28,0) 42%,rgba(15,45,28,.88) 100%)}
+.yt-play{position:absolute;left:50%;top:50%;z-index:2;width:76px;height:76px;border-radius:50%;background:var(--yellow);color:var(--ink);
+  display:flex;align-items:center;justify-content:center;transform:translate(-50%,-50%);box-shadow:0 0 0 10px rgba(235,183,60,.28);transition:transform var(--dur) var(--ease)}
+.yt-card:hover .yt-play{transform:translate(-50%,-50%) scale(1.08)}
+.yt-cap{position:absolute;left:24px;right:24px;bottom:24px;z-index:2;color:var(--white)}
+.yt-cap b{display:block;font-family:var(--font-cond);font-size:22px;font-weight:600;letter-spacing:-.015em}
+.yt-cap small{display:block;font-size:var(--fs-2);color:rgba(255,255,255,.78);margin-top:4px}
+.yt-card iframe{position:absolute;inset:0;z-index:3;width:100%;height:100%;border:0}
+@media(max-width:900px){.how-grid{grid-template-columns:1fr;gap:var(--space-6)}.yt-card{width:min(300px,100%);margin:0 auto}}

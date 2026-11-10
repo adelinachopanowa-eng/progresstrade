@@ -387,3 +387,21 @@ sections.forEach(s => observer.observe(s));
     notes.forEach(function (n) { n.classList.add('on'); });
   }
 })();
+
+/* ── Видео в „Как приемаме материал“ ──
+   На страницата стои само корицата. Плейърът на YouTube (около 1 MB) се
+   вдига при натискане, от youtube-nocookie, и тръгва веднага. */
+document.addEventListener('click', function (e) {
+  var a = e.target.closest && e.target.closest('a[data-yt]');
+  if (!a || a.classList.contains('is-playing')) return;
+  e.preventDefault();
+  var f = document.createElement('iframe');
+  f.src = 'https://www.youtube-nocookie.com/embed/' + a.getAttribute('data-yt') + '?autoplay=1&playsinline=1&rel=0';
+  f.title = a.getAttribute('aria-label') || 'Видео';
+  f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+  f.setAttribute('allowfullscreen', '');
+  a.classList.add('is-playing');
+  a.removeAttribute('href');
+  a.appendChild(f);
+  (window.dataLayer = window.dataLayer || []).push({ event: 'video_play', video: a.getAttribute('data-yt') });
+});
