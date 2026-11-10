@@ -1167,12 +1167,14 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
 .kt-viber .kt-ic{background:#6650d8;border-color:#6650d8;color:var(--white)}
 .kt-viber b{display:block;font-weight:600;font-size:var(--fs-4)}
 .kt-viber small{text-transform:none;letter-spacing:0;font-weight:400;font-size:var(--fs-2);color:var(--text-soft)}
-.kt-list{font-style:normal;margin-top:28px;display:flex;flex-direction:column;border-top:1px solid var(--line-2)}
+.kt-list{font-style:normal;margin-top:30px;display:flex;flex-direction:column;border-top:1px solid var(--line-2)}
 .kt-row{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid var(--line-2);color:var(--ink)}
 .kt-row small{color:var(--text-soft)}
 .kt-row b{display:block;font-weight:600;font-size:var(--fs-4);overflow-wrap:normal}
 .kt-row em{display:block;font-style:normal;font-size:var(--fs-2);color:var(--text-soft)}
 a.kt-row:hover b{color:var(--green)}
+a.kt-row:hover .kt-ic{border-color:var(--green)}
+.kt-ic{transition:border-color var(--dur-fast)}
 .kt-info .closed-note{margin-top:18px}
 .kt-form .qform{max-width:none}
 .kt-form-title{font-family:var(--font-cond);font-size:clamp(26px,2.4vw,32px);font-weight:600;letter-spacing:-.025em;color:var(--ink);line-height:1.15}
