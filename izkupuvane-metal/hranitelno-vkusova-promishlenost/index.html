@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+
+<!-- Google Tag Manager — отложено зареждане, виж коментара в скрипта -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  /* Контейнерът се вдига при първо докосване на страницата или резервно на
+     3-ата секунда. Сложен както го дава Google — най-горе в head — gtm.js
+     пада точно в прозореца, който Lighthouse мери, и връща 930-те ms
+     блокиране на нишката, които струваха 30 точки на десктоп.
+     Събитията, пуснати преди това, чакат в dataLayer и контейнерът ги
+     обработва по реда им, щом се зареди. */
+  (function(){
+    var loaded = false;
+    function loadGTM(){
+      if (loaded) return; loaded = true;
+      dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+      var s = document.createElement('script');
+      s.async = true;
+      s.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-P4TPVP33';
+      document.head.appendChild(s);
+    }
+    /* Страниците, на които се мери конверсия, не чакат: на „Благодарим“
+       събитието е вече в dataLayer, а човек често затваря таба веднага. */
+    if (/^\/(blagodarim|zayavka|en\/thank-you|en\/request-a-quote)\/?$/.test(location.pathname)) { loadGTM(); return; }
+    ['scroll','mousemove','touchstart','keydown','click'].forEach(function(ev){
+      window.addEventListener(ev, loadGTM, {once:true, passive:true});
+    });
+    /* Ако посетителят си тръгва преди резервния срок, вдигаме контейнера
+       сега — иначе прегледът му остава неброен. */
+    window.addEventListener('pagehide', loadGTM, {once:true});
+    document.addEventListener('visibilitychange', function(){
+      if (document.visibilityState === 'hidden') loadGTM();
+    });
+    function armFallback(){ setTimeout(loadGTM, 3000); }
+    if (document.readyState === 'complete') armFallback();
+    else window.addEventListener('load', armFallback);
+  })();
+</script>
+<title>Метал от хранително-вкусовата промишленост | Прогрестрейд</title>
+<meta name="description" content="Изкупуваме резервоари, линии и машини от инокс от мандри, месни цехове и пекарни в София, с демонтаж и документи по ЗУО.">
+<link rel="canonical" href="https://progresstrade.bg/izkupuvane-metal/hranitelno-vkusova-promishlenost/">
+<meta name="robots" content="index, follow">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Метал от хранително-вкусовата промишленост">
+<meta property="og:description" content="Изкупуваме резервоари, линии и машини от инокс от мандри, месни цехове и пекарни в София, с демонтаж и документи по ЗУО.">
+<meta property="og:url" content="https://progresstrade.bg/izkupuvane-metal/hranitelno-vkusova-promishlenost/">
+<meta property="og:site_name" content="Прогрестрейд">
+<meta property="og:image" content="https://progresstrade.bg/images/og-hranitelno-vkusova-promishlenost-liniya.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="bg_BG">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Метал от хранително-вкусовата промишленост">
+<meta name="twitter:description" content="Изкупуваме резервоари, линии и машини от инокс от мандри, месни цехове и пекарни в София, с демонтаж и документи по ЗУО.">
+<meta name="twitter:image" content="https://progresstrade.bg/images/og-hranitelno-vkusova-promishlenost-liniya.jpg">
+<link rel="alternate" hreflang="bg" href="https://progresstrade.bg/izkupuvane-metal/hranitelno-vkusova-promishlenost/">
+<meta name="theme-color" content="#1a4a2e">
+<link rel="icon" type="image/svg+xml" href="/images/progresstrade-favicon.svg?v=9">
+<link rel="icon" href="/favicon.ico?v=8" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=8">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=8">
+<link rel="stylesheet" href="/css/site.min.css?v=057ff896">
+<!-- шрифтове за първия екран -->
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Geologica-600-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Geologica-600-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-400-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-400-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-600-cyrillic.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-600-latin.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="/fonts/Commissioner-500-cyrillic.woff2" media="(min-width:1181px)" crossorigin>
+<!-- /шрифтове -->
+<link rel="preload" as="image" type="image/webp" imagesrcset="/images/hranitelno-vkusova-promishlenost-liniya-800.webp 800w, /images/hranitelno-vkusova-promishlenost-liniya-1200.webp 1200w, /images/hranitelno-vkusova-promishlenost-liniya.webp 1600w" imagesizes="(max-width:900px) 100vw, 56vw" fetchpriority="high">
+
+<noscript></noscript>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Начало","item":"https://progresstrade.bg/"},{"@type":"ListItem","position":2,"name":"Изкупуване на метален отпадък","item":"https://progresstrade.bg/izkupuvane-metal/"},{"@type":"ListItem","position":3,"name":"Хранително-вкусова промишленост"}]}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Приемате ли резервоари от неръждаема стомана?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Неръждавейката е отделен клас и се плаща по-високо от желязото. Големите резервоари ги режем на място, ако не минават през вратите на цеха."}}, {"@type": "Question", "name": "Трябва ли оборудването да е почистено?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Резервоарите, тръбите и машините се предават изпразнени и измити. Остатъци от храна, суровини и почистващи препарати не се приемат заедно с метала."}}, {"@type": "Question", "name": "Приемате ли хладилни камери и компресори?", "acceptedAnswer": {"@type": "Answer", "text": "Да, след като фреонът е източен от лицензирано лице. Това е изискване по закон."}}, {"@type": "Question", "name": "Може ли да демонтирате линията, без да спираме целия цех?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Съгласуваме графика при огледа и работим в часовете, които ни дадете. Изнасяме оборудването по път, който не минава през помещенията с храна."}}, {"@type": "Question", "name": "Какви документи получаваме?", "acceptedAnswer": {"@type": "Answer", "text": "Издаваме приемо-предавателен протокол, договор за покупко-продажба и сертификат за произход. Те са нужни за отчета по Закона за управление на отпадъците."}}, {"@type": "Question", "name": "Има ли минимално количество?", "acceptedAnswer": {"@type": "Answer", "text": "Да. Праговете са общи за всички фирми. Вижте количествата, с които работим."}}]}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "Service", "serviceType": "Изкупуване на метал от хранително-вкусовата промишленост", "name": "Изкупуване на метал от хранително-вкусовата промишленост", "description": "Изкупуваме резервоари, линии и машини от инокс от мандри, месни цехове и пекарни в София, с демонтаж и документи по ЗУО.", "areaServed": {"@type": "City", "name": "София"}, "provider": {"@id": "https://progresstrade.bg/#business"}, "url": "https://progresstrade.bg/izkupuvane-metal/hranitelno-vkusova-promishlenost/"}
+</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://progresstrade.bg/izkupuvane-metal/hranitelno-vkusova-promishlenost/#webpage","url":"https://progresstrade.bg/izkupuvane-metal/hranitelno-vkusova-promishlenost/","name":"Метал от хранително-вкусовата промишленост","inLanguage":"bg","isPartOf":{"@id":"https://progresstrade.bg/#website"},"about":{"@id":"https://progresstrade.bg/#business"},"description":"Изкупуваме резервоари, линии и машини от инокс от мандри, месни цехове и пекарни в София, с демонтаж и документи по ЗУО.","primaryImageOfPage":"https://progresstrade.bg/images/og-hranitelno-vkusova-promishlenost-liniya.jpg","dateModified":"2026-11-11"}</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4TPVP33" height="0" width="0" style="display:none;visibility:hidden" title="Google Tag Manager"></iframe></noscript><header>
+<a class="skip-link" href="#glavno">Към основното съдържание</a>
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="topbar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      гр. София, кв. Военна Рампа, ул. „Проф. Иван Георгов“ № 1
+    </span>
+    <span class="topbar-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <b>Понеделник – Петък:</b> 9:00 – 17:00
+    </span>
+  </div>
+</div>
+<div class="vacation-bar" data-vacation role="status"><b>Годишен отпуск.</b> Оставете заявка или пишете на Viber на <a href="tel:+359877775577" data-tel="otpusk">0877 77 55 77</a>. Изготвяме оферта до 1 работен ден след връщането ни.</div><nav class="nav" id="main-nav">
+  <div class="nav-inner">
+    <a href="/" class="logo" aria-label="Progresstrade — изкупуване на скрап София">
+      <img class="logo-mark" src="/images/progresstrade-mark.svg?v=4" alt="" width="38" height="38">
+      <span class="logo-word"><span class="lw-a">progress</span><span class="lw-b">trade</span></span>
+    </a>
+    <ul class="nav-links">
+      <li class="has-dd"><a href="/kakvo-izkupuvame/" class="dd-toggle">Какво изкупуваме<svg class="dd-caret" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true"><path d="M1 1.75 5 5.25 9 1.75" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="dd-menu">
+          <a href="/izkupuvane-zhelyazo/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14M5 19.5h14M12 4.5v15"/></svg></span><span class="dd-tx"><b>Черни метали</b><span>Желязо, чугун, ламарина, стружки</span></span></a>
+          <a href="/izkupuvane-cvetni-metali/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 18.5h17L17 9.5H7z"/><path d="M8.5 14h7"/></svg></span><span class="dd-tx"><b>Цветни метали</b><span>Мед, алуминий, инокс, месинг, кабели</span></span></a>
+          <a href="/izkupuvane/koli-za-skrap/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5V13l2-4.5h13l2 4.5v3.5"/><path d="M3.5 13h17"/><circle cx="7.5" cy="17" r="1.8"/><circle cx="16.5" cy="17" r="1.8"/></svg></span><span class="dd-tx"><b>Коли за скрап</b><span>ИУМПС, с удостоверение за дерегистрация</span></span></a>
+          <a href="/izkupuvane/elektrouredi/"><span class="dd-ic"><svg viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5h2"/></svg></span><span class="dd-tx"><b>Електроуреди</b><span>Бракувана техника на едро</span></span></a>
+        </div>
+      </li>
+      <li><a href="/izkupuvane-metal/">За бизнеса</a></li>
+      <li><a href="/uslugi/">Услуги</a></li>
+      <li><a href="/ceni/">Цени</a></li>
+      <li><a href="/za-nas/">За нас</a></li>
+      <li><a href="/blog/">Блог</a></li>
+      <li><a href="/kontakti/">Контакти</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="/en/" class="lang-switch" data-lang-alt hreflang="en" lang="en" aria-label="View this page in English">EN</a>
+      <a href="tel:+359877775577" class="btn btn-primary btn-sm btn-call" aria-label="Обадете се на 0877 77 55 77" data-tel="nav"><svg class="tel-ic" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg><span class="btn-call-txt">0877 77 55 77</span></a>
+    </div>
+    <button class="nav-hamburger" id="hamburger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-menu" onclick="toggleMenu()"><span class="hb-ic"><span></span><span></span><span></span></span><span class="hb-tx">Меню</span></button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/kakvo-izkupuvame/">Какво изкупуваме</a>
+    <div class="mm-sub">
+      <a href="/izkupuvane-zhelyazo/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h14M5 19.5h14M12 4.5v15"/></svg>Черни метали</a>
+      <a href="/izkupuvane-cvetni-metali/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 18.5h17L17 9.5H7z"/><path d="M8.5 14h7"/></svg>Цветни метали</a>
+      <a href="/izkupuvane/koli-za-skrap/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 16.5V13l2-4.5h13l2 4.5v3.5"/><path d="M3.5 13h17"/><circle cx="7.5" cy="17" r="1.8"/><circle cx="16.5" cy="17" r="1.8"/></svg>Коли за скрап</a>
+      <a href="/izkupuvane/elektrouredi/"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a4a2e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="13" r="4"/><path d="M8 6.5h2"/></svg>Електроуреди</a>
+    </div>
+    <a href="/izkupuvane-metal/">За бизнеса</a>
+    <a href="/uslugi/">Услуги</a>
+    <a href="/ceni/">Цени</a>
+    <a href="/za-nas/">За нас</a>
+    <a href="/blog/">Блог</a>
+    <a href="/kontakti/">Контакти</a>
+    <div class="mm-call"><a href="tel:+359877775577" class="btn btn-primary" data-tel="menu"><svg class="tel-ic" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg>0877 77 55 77</a><a href="/en/" class="mm-lang" data-lang-alt hreflang="en" lang="en" aria-label="View this page in English">EN</a></div>
+  </div>
+</nav>
+</header><main id="glavno"><section class="page-hero page-hero--split">
+  <div class="hero-copy">
+    <nav class="crumb" aria-label="Пътека"><a href="https://progresstrade.bg/">Начало</a> <span aria-hidden="true">›</span> <a href="https://progresstrade.bg/izkupuvane-metal/">Изкупуване на метален отпадък</a> <span aria-hidden="true">›</span> <span>Хранително-вкусова промишленост</span></nav>
+    <h1>Подменяте линия? Изкупуваме <span class="hl">старото оборудване</span></h1>
+    <p>Резервоари, машини и линии от неръждаема стомана от мандри, месни цехове, пекарни и производства на напитки. Демонтираме и извозваме по вашия график.</p>
+    <div class="hero-actions">
+      <a href="/zayavka/" class="btn btn-primary">Заявка за оферта</a>
+    </div>
+  </div>
+  <div class="hero-figure">
+    <picture><source type="image/webp" srcset="/images/hranitelno-vkusova-promishlenost-liniya-800.webp 800w, /images/hranitelno-vkusova-promishlenost-liniya-1200.webp 1200w, /images/hranitelno-vkusova-promishlenost-liniya.webp 1600w" sizes="(max-width:900px) 100vw, 56vw"><img src="/images/hranitelno-vkusova-promishlenost-liniya-1200.jpg" srcset="/images/hranitelno-vkusova-promishlenost-liniya-800.jpg 800w, /images/hranitelno-vkusova-promishlenost-liniya-1200.jpg 1200w, /images/hranitelno-vkusova-promishlenost-liniya.jpg 1600w" sizes="(max-width:900px) 100vw, 56vw" width="1200" height="800" alt="Производствена линия за пакетиране на храни от неръждаема стомана" fetchpriority="high" decoding="async"></picture>
+  </div>
+</section><section class="section-tight section-white">
+  <div class="container">
+    <div class="section-label-dark">Познато ли ви е?</div>
+    <h2 class="section-title-dark" style="margin-bottom:8px;">Ситуации, в които помагаме</h2>
+    <div class="pain-grid"><div class="pain-card">Новата линия пристига след седмица, а старата още заема цеха.</div><div class="pain-card">Резервоарите от инокс са твърде големи, за да минат през вратата.</div><div class="pain-card">Старите хладилни камери и компресори стоят в двора и чакат решение.</div></div>
+  </div>
+</section><section class="section section-cream">
+  <div class="container">
+    <div class="section-label-dark">Какво предлагаме</div>
+    <h2 class="section-title-dark" style="margin-bottom:8px;">Решение за вашата дейност</h2>
+    <div class="grid-4" style="margin-top:28px;"><div class="icard"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.6 5h16.8l-6.6 7.6v6.4l-3.6 2v-8.4L3.6 5z"/></svg></div><h3>Неръждавейката отделно</h3><p>Оценява се по клас и се плаща по-високо от желязото.</p></div><div class="icard"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.6 8.6h7.2l2 3.4-2 3.4H2.6"/><path d="M21.4 8.6h-7.2l-2 3.4 2 3.4h7.2"/><path d="M12.2 5.4V3M8.4 6.1L7.2 4M16 6.1L17.2 4M8.4 17.9L7.2 20M16 17.9l1.2 2.1M12.2 18.6V21"/></svg></div><h3>Демонтаж на място</h3><p>Разглобяваме и режем големите съоръжения, за да излязат от цеха.</p></div><div class="icard"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.2 8.6h17.6l-2 10.4H5.2L3.2 8.6z"/><path d="M4.7 5.6h14.6l1.5 3H3.2l1.5-3z"/><path d="M9.2 11.6l.5 4.8M14.8 11.6l-.5 4.8"/></svg></div><h3>Контейнер на обекта</h3><p>За ремонт на цял цех или подмяна на линия.</p></div><div class="icard"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.4" y="5.4" width="17.2" height="15.2" rx="2"/><path d="M3.4 10.2h17.2"/><path d="M8 3.4v4M16 3.4v4"/><path d="M7.4 14.2h3M13.6 14.2h3"/></svg></div><h3>По график</h3><p>Съобразяваме се със смените и с производството.</p></div></div>
+  </div>
+</section><section class="section section-white">
+  <div class="container">
+    <div class="section-label-dark">Материали от хранителни производства</div>
+    <h2 class="section-title-dark" style="margin-bottom:8px;">Какво изкупуваме</h2>
+    <p class="section-body-dark measure-wide" style="margin-top:10px;">Оборудването в хранителните производства е предимно от неръждаема стомана, защото тя не ръждясва и се мие лесно. Затова старата линия или резервоар обикновено струват повече от обикновено желязо със същото тегло.</p>
+    <ul class="buy-grid"><li><b>Резервоари и вани</b> — за мляко, вино, сокове, бира и олио</li><li><b>Производствени линии</b> — транспортни ленти, машини за пълнене и пакетиране</li><li><b>Хладилна техника</b> — хладилни камери, витрини и компресори</li><li><b>Тръбопроводи и арматура</b> — от неръждаема стомана и мед</li><li><b>Фурни и котли</b> — пещи от пекарни, котли и парогенератори</li><li><b>Метални конструкции</b> — стелажи, платформи, работни маси и навеси</li></ul>
+    <figure class="material-photo" style="margin-top:var(--space-5);"><picture><source type="image/webp" srcset="/images/inoks-traboprovodi-hranitelna-promishlenost-800.webp 800w, /images/inoks-traboprovodi-hranitelna-promishlenost-1200.webp 1200w, /images/inoks-traboprovodi-hranitelna-promishlenost.webp 1600w" sizes="(max-width:640px) 94vw, (max-width:900px) 95vw, 820px"><img src="/images/inoks-traboprovodi-hranitelna-promishlenost-800.jpg" srcset="/images/inoks-traboprovodi-hranitelna-promishlenost-800.jpg 800w, /images/inoks-traboprovodi-hranitelna-promishlenost-1200.jpg 1200w, /images/inoks-traboprovodi-hranitelna-promishlenost.jpg 1600w" sizes="(max-width:640px) 94vw, (max-width:900px) 95vw, 820px" width="800" height="533" alt="Тръбопроводи и съоръжения от неръждаема стомана в производствен цех" loading="lazy" decoding="async"></picture></figure>
+    <p class="section-body-dark measure-wide" style="margin-top:38px;">Кодове по разрешително, които най-често излизат тук</p>
+    <div class="spec-strip"><span class="spec-pill">Желязо и стомана <b>17 04 05</b></span><span class="spec-pill">Смеси от метали <b>17 04 07</b></span><span class="spec-pill">Мед, бронз, месинг <b>17 04 01</b></span><span class="spec-pill">Алуминий <b>17 04 02</b></span><span class="spec-pill">Излязло от употреба оборудване <b>16 02 14</b></span><span class="spec-pill">Метални опаковки <b>15 01 04</b></span></div>
+    <p class="note-line">Подмяната на линия в хранително производство дава необичайно много неръждавейка на едно място. Затова си струва тя да се претегли отделно от желязото. <a href="/izkupuvane-metal/kodove-otpadaci/" class="link-cta">Вижте всички 26 кода</a></p>
+    <h2 class="section-title-dark" style="margin:48px 0 10px;">Какво трябва да е готово преди камиона</h2>
+    <div class="docs" style="max-width:860px;"><div class="doc-row"><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><polyline points="3,7 6,10 11,4" stroke="#0f2d1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Изпразнени и измити съоръжения.</b> <span>Резервоарите, тръбите и машините се предават без остатъци от храна, суровини и почистващи препарати.</span></div></div><div class="doc-row"><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><polyline points="3,7 6,10 11,4" stroke="#0f2d1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Източен фреон.</b> <span>Хладилните камери, витрините и агрегатите се приемат, след като фреонът е източен от лицензирано лице.</span></div></div><div class="doc-row"><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><polyline points="3,7 6,10 11,4" stroke="#0f2d1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Изключени ток, вода и пара.</b> <span>Машините се откачват от захранването, преди да започне демонтажът. Така работим бързо и безопасно.</span></div></div><div class="doc-row"><span class="ck"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><polyline points="3,7 6,10 11,4" stroke="#0f2d1c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><b>Неръждавейката отделно.</b> <span>Ако може да се събере на едно място, се претегля като отделен клас и се плаща по-високо от желязото.</span></div></div></div>
+  </div>
+</section><section class="section-tight section-cream">
+  <div class="container">
+    <p class="note-band" style="margin:0 auto;">Поемаме демонтажа, извозването и документите, а вие се занимавате с новата линия. Вижте <a href="/izkupuvane-metal/" class="link-green">как работим с фирми</a>.</p>
+    <p class="section-body-dark measure" style="max-width:820px;margin:var(--space-5) auto 6px;">Цени и условия по материал</p>
+    <ul class="class-links" style="max-width:820px;margin:0 auto;"><li><a href="/izkupuvane/nerazhdaema-stomana/">Неръждаема стомана</a></li><li><a href="/izkupuvane/med/">Мед</a></li><li><a href="/izkupuvane/aluminiy/">Алуминий</a></li><li><a href="/izkupuvane/elektromotori/">Електромотори</a></li><li><a href="/izkupuvane/metalni-opakovki/">Метални опаковки</a></li></ul>
+  </div>
+</section><section class="section section-white" id="faq">
+  <div class="container">
+    <div class="section-label-dark">Въпроси и отговори</div>
+    <h2 class="section-title-dark" style="margin-bottom:28px;">Често задавани въпроси</h2>
+    <div class="faq-list"><details class="faq-item"><summary>Приемате ли резервоари от неръждаема стомана?</summary><div class="faq-answer">Да. Неръждавейката е отделен клас и се плаща по-високо от желязото. Големите резервоари ги режем на място, ако не минават през вратите на цеха.</div></details><details class="faq-item"><summary>Трябва ли оборудването да е почистено?</summary><div class="faq-answer">Да. Резервоарите, тръбите и машините се предават изпразнени и измити. Остатъци от храна, суровини и почистващи препарати не се приемат заедно с метала.</div></details><details class="faq-item"><summary>Приемате ли хладилни камери и компресори?</summary><div class="faq-answer">Да, след като фреонът е източен от лицензирано лице. Това е изискване по закон.</div></details><details class="faq-item"><summary>Може ли да демонтирате линията, без да спираме целия цех?</summary><div class="faq-answer">Да. Съгласуваме графика при огледа и работим в часовете, които ни дадете. Изнасяме оборудването по път, който не минава през помещенията с храна.</div></details><details class="faq-item"><summary>Какви документи получаваме?</summary><div class="faq-answer">Издаваме приемо-предавателен протокол, договор за покупко-продажба и сертификат за произход. Те са нужни за отчета по Закона за управление на отпадъците.</div></details><details class="faq-item"><summary>Има ли минимално количество?</summary><div class="faq-answer">Да. Праговете са общи за всички фирми. Вижте <a href="/izkupuvane-metal/#kolichestva" class="link-green">количествата, с които работим</a>.</div></details></div>
+  </div>
+</section><section class="section-tight section-cream">
+  <div class="container">
+    <div class="section-label-dark">Свързани услуги</div>
+    <h2 class="section-title-dark" style="margin-bottom:24px;">Вижте също</h2>
+    <div class="grid-3" style="margin-top:28px;"><a href="/izkupuvane/nerazhdaema-stomana/" class="seg-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="6.6" width="12" height="12.4" rx="2.4"/><path d="M6 10.6h12"/><path d="M9.6 6.6V4.6h4.8v2"/><path d="M9.2 19v1.6M14.8 19v1.6"/></svg></div><h3>Неръждаема стомана</h3><p>Инокс 304 и 316 — резервоари, плотове и съдове.</p><span class="more">Вижте повече →</span></a><a href="/uslugi/demontazh/" class="seg-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.6 8.6h7.2l2 3.4-2 3.4H2.6"/><path d="M21.4 8.6h-7.2l-2 3.4 2 3.4h7.2"/><path d="M12.2 5.4V3M8.4 6.1L7.2 4M16 6.1L17.2 4M8.4 17.9L7.2 20M16 17.9l1.2 2.1M12.2 18.6V21"/></svg></div><h3>Рязане и демонтаж</h3><p>Разглобяваме и изнасяме големи машини и съоръжения.</p><span class="more">Вижте повече →</span></a><a href="/izkupuvane-metal/" class="seg-card"><div class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.4 20.6h17.2"/><path d="M5 20.6V4.9a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v15.7"/><path d="M14 11.2h4a1 1 0 0 1 1 1v8.4"/><path d="M8 7.6h3M8 11.2h3M8 14.8h3M16.2 14.6h1M16.2 17.6h1"/></svg></div><h3>Изкупуване за фирми</h3><p>Оферта, извозване и документите вместо вас.</p><span class="more">Вижте повече →</span></a></div>
+  </div>
+</section><section class="cta-band">
+  <div class="container cta-inner">
+    <div class="cta-text"><h2>Подменяте линия или цех?</h2><p>Кажете какво излиза и кога — ще дойдем на оглед и ще изготвим оферта до 1 работен ден.</p></div>
+    <div class="cta-actions">
+      <a href="/zayavka/" class="btn btn-primary">Заявка за оферта</a>
+    <a href="tel:+359877775577" class="btn btn-outline-white" data-tel="cta"><svg class="tel-ic" width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5a2 2 0 0 1 2-2h2l2 4-1.5 1.5a11 11 0 0 0 4 4L13 11l4 2v2a2 2 0 0 1-2 2C7.163 17 3 12.837 3 7V5z" fill="currentColor"/></svg>0877 77 55 77</a></div>
+  </div>
+</section></main><footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="/" class="logo" aria-label="Progresstrade">
+          <img class="logo-mark" src="/images/progresstrade-mark-reverse.svg?v=4" alt="" width="38" height="38">
+          <span class="logo-word"><span class="lw-a">progress</span><span class="lw-b">trade</span></span>
+        </a>
+        <p class="footer-desc">Изкупуване на черни и цветни метали в София, за фирми, обекти и площадки. Поемаме извозването и документите.</p>
+        <a href="https://www.facebook.com/share/1EXEcweybi/" target="_blank" rel="noopener" aria-label="Facebook страница на Progresstrade" class="footer-fb">
+          <span class="fb-ic"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></span>
+          Последвайте ни във Facebook
+        </a>
+      </div>
+      <div class="footer-col">
+        <div class="footer-h">Материали</div>
+        <ul>
+          <li><a href="/izkupuvane-zhelyazo/">Черни метали</a></li>
+          <li><a href="/izkupuvane-cvetni-metali/">Цветни метали</a></li>
+          <li><a href="/izkupuvane/koli-za-skrap/">Коли за скрап</a></li>
+          <li><a href="/izkupuvane/elektrouredi/">Електроуреди</a></li>
+          <li><a href="/izkupuvane/kabeli/">Кабели</a></li>
+          <li><a href="/kakvo-izkupuvame/">Всички материали</a></li>
+          <li><a href="/ceni/">Как се формира цената</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-h">За фирми</div>
+        <ul>
+          <li><a href="/izkupuvane-metal/">Изкупуване за фирми</a></li>
+          <li><a href="/izkupuvane-metal/#sektori">Решения по сектори</a></li>
+          <li><a href="/uslugi/">Услуги</a></li>
+          <li><a href="/uslugi/demontazh/">Рязане и демонтаж</a></li>
+          <li><a href="/uslugi/konteyneri/">Контейнери и извозване</a></li>
+          <li><a href="/izkupuvane-ot-adres/">Изкупуване от адрес</a></li>
+          <li><a href="/izkupuvane-metal/kodove-otpadaci/">Кодове на отпадъци</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-company">
+        <div class="footer-h">Компанията</div>
+        <ul>
+          <li><a href="/za-nas/">За нас</a></li>
+          <li><a href="/punkt-vtorichni-surovini/">Пункт във Военна рампа</a></li>
+          <li><a href="/rayoni/">Обслужвани райони</a></li>
+          <li><a href="/blog/">Блог</a></li>
+          <li><a href="/zayavka/">Заявка за оферта</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <div class="footer-h">Контакти</div>
+        <ul>
+          <li><a href="tel:+359877775577" data-tel="futar"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span><span><span class="fc-l">Телефон</span><br><span class="fc-v" style="font-weight:700;">0877 77 55 77</span></span></a></li>
+          <li><a href="viber://chat?number=359877775577"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span><span><span class="fc-l">Viber</span><br><span class="fc-v">Пратете снимка на материала</span></span></a></li>
+          <li><a href="mailto:progresstradesofia@gmail.com"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span><span><span class="fc-l">Имейл</span><br><span class="fc-v">progresstradesofia@gmail.com</span></span></a></li>
+          <li><a href="https://maps.app.goo.gl/C6KVEBHUQRiQYKrw5" target="_blank" rel="noopener"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.6"/></svg></span><span><span class="fc-l">Адрес</span><br><span class="fc-v">ул. Проф. Иван Георгов 1, Военна Рампа, София</span></span></a></li>
+          <li><span class="fc-row"><span class="ic-sm"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#ebb73c" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12,7 12,12 16,14"/></svg></span><span><span class="fc-l">Работно време</span><br><span class="fc-v">Пон – Пет: 9:00 – 17:00</span></span></span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Прогрестрейд · <a href="/poveritelnost/">Политика за поверителност</a></p>
+      <p>Изкупуване на метален отпадък в София</p>
+    </div>
+  </div>
+</footer>
+<script src="/js/main.min.js?v=efe11f98" defer></script>
+</body>
+</html>

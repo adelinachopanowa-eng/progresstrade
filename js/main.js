@@ -405,3 +405,79 @@ document.addEventListener('click', function (e) {
   a.appendChild(f);
   (window.dataLayer = window.dataLayer || []).push({ event: 'video_play', video: a.getAttribute('data-yt') });
 });
+
+/* „Нашата площадка и техника“: обиколка на площадката (/za-nas/).
+   Сменя спирките на 6 секунди; спира при посочване, при фокус и когато
+   обиколката не се вижда. На телефон се плъзга с пръст. */
+(function () {
+  var root = document.querySelector('[data-tour]');
+  if (!root) return;
+  var slides = root.querySelectorAll('.tour-slide');
+  var tabs = root.querySelectorAll('.tour-tab');
+  var count = root.querySelector('.tour-count b');
+  var list = root.querySelector('.tour-list');
+  var n = slides.length, cur = 0, timer = null, MS = 6000;
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var visible = false, hover = false;
+  root.style.setProperty('--tour-ms', MS + 'ms');
+  root.classList.add('is-ready');
+
+  function show(i, fromUser) {
+    cur = (i + n) % n;
+    for (var k = 0; k < n; k++) {
+      var on = k === cur;
+      slides[k].classList.toggle('is-active', on);
+      tabs[k].classList.toggle('is-active', on);
+      tabs[k].setAttribute('aria-selected', on ? 'true' : 'false');
+      tabs[k].tabIndex = on ? 0 : -1;
+      if (on) { var img = slides[k].querySelector('img'); if (img) img.loading = 'eager'; }
+    }
+    var nx = slides[(cur + 1) % n].querySelector('img'); if (nx) nx.loading = 'eager';
+    if (count) count.textContent = (cur < 9 ? '0' : '') + (cur + 1);
+    /* лентата за напредък тръгва отначало */
+    var bar = tabs[cur].querySelector('.tour-bar');
+    if (bar) { bar.style.animation = 'none'; void bar.offsetWidth; bar.style.animation = ''; }
+    if (list && list.scrollWidth > list.clientWidth) {
+      var li = tabs[cur].parentNode;
+      list.scrollTo({ left: li.offsetLeft - list.offsetLeft, behavior: fromUser ? 'smooth' : 'auto' });
+    }
+    restart();
+  }
+  function stop() { clearTimeout(timer); timer = null; }
+  function restart() {
+    stop();
+    var run = visible && !hover && !reduce;
+    root.classList.toggle('is-paused', !run);
+    if (run) timer = setTimeout(function () { show(cur + 1); }, MS);
+  }
+
+  [].forEach.call(tabs, function (t, i) {
+    t.addEventListener('click', function () { show(i, true); });
+    t.addEventListener('keydown', function (e) {
+      var d = (e.key === 'ArrowRight' || e.key === 'ArrowDown') ? 1 : (e.key === 'ArrowLeft' || e.key === 'ArrowUp') ? -1 : 0;
+      if (d) { e.preventDefault(); show(cur + d, true); tabs[cur].focus(); }
+    });
+  });
+  [].forEach.call(root.querySelectorAll('.tour-arrow'), function (b) {
+    b.addEventListener('click', function () { show(cur + (+b.getAttribute('data-dir')), true); });
+  });
+  root.addEventListener('mouseenter', function () { hover = true; restart(); });
+  root.addEventListener('mouseleave', function () { hover = false; restart(); });
+  root.addEventListener('focusin', function () { hover = true; restart(); });
+  root.addEventListener('focusout', function () { hover = false; restart(); });
+
+  /* плъзгане с пръст по сцената */
+  var stage = root.querySelector('.tour-stage'), x0 = null, y0 = null;
+  stage.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+  stage.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) show(cur + (dx < 0 ? 1 : -1), true);
+    x0 = null;
+  }, { passive: true });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) { visible = es[0].isIntersecting; restart(); }, { threshold: 0.35 }).observe(root);
+  } else { visible = true; }
+  show(0);
+})();
