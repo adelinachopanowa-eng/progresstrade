@@ -470,6 +470,7 @@ a.contact-item-value:hover{color:var(--green)}
 .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
 .footer-col ul li a{font-size:15px;color:var(--text-white-soft);transition:color var(--dur-fast)}
 .footer-col ul li a:hover{color:var(--yellow)}
+.footer-social{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .footer-fb{display:inline-flex;align-items:center;gap:12px;min-height:44px;color:var(--yellow);font-size:var(--fs-3);font-weight:600;transition:color var(--dur-fast)}
 .footer-fb:hover{color:var(--white)}
 .footer-fb .fb-ic{width:38px;height:38px;border-radius:50%;border:1px solid var(--line-white);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:border-color var(--dur-fast)}
