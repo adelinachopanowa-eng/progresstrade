@@ -1,0 +1,17 @@
+# След всяко сливане в main съобщава на Bing (IndexNow) кои страници са се
+# променили. Чака Vercel да качи новата версия, преди да изпрати адресите.
+name: IndexNow
+on:
+  push:
+    branches: [main]
+jobs:
+  indexnow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+      - name: Изчакване на Vercel
+        run: sleep 90
+      - name: Изпращане на променените адреси
+        run: python3 build/indexnow.py HEAD~1

@@ -5,8 +5,9 @@
 #   1. инжектира хедъра и футъра от partials/
 #   2. минифицира CSS и JS
 #   3. предзарежда шрифтовете за първия екран и сверява снимките
-#   4. обновява <lastmod> в sitemap.xml от git
-#   5. слага версия на CSS/JS в адресите, за да не се сервира кеширан стил
+#   4. видима дата „Проверено на …“ от dateModified и llms-full.txt от страниците
+#   5. обновява <lastmod> в sitemap.xml от git
+#   6. слага версия на CSS/JS в адресите, за да не се сервира кеширан стил
 #
 # Редът има значение: sitemap се пуска преди стъпването на версиите, за да
 # вижда кои страници наистина са променени, а не кои са пипнати от стъпването.
@@ -35,6 +36,9 @@ PY
 python3 build/shrifty.py
 
 python3 build/snimki.py
+
+python3 build/data-proverka.py
+python3 build/llms-full.py
 
 python3 build/sitemap.py
 python3 build/stamp-assets.py
