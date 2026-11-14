@@ -470,6 +470,11 @@ a.contact-item-value:hover{color:var(--green)}
 .footer-col ul{list-style:none;display:flex;flex-direction:column;gap:11px}
 .footer-col ul li a{font-size:15px;color:var(--text-white-soft);transition:color var(--dur-fast)}
 .footer-col ul li a:hover{color:var(--yellow)}
+.glossary{margin:28px 0 0}
+.glossary dt{font-family:var(--font-cond);font-weight:600;font-size:var(--fs-6);color:var(--ink);padding-top:22px;scroll-margin-top:96px}
+.glossary dd{margin:6px 0 0;padding-bottom:22px;border-bottom:1px solid var(--line);color:var(--text);line-height:var(--lh-normal)}
+.glossary dd:last-child{border-bottom:0}
+.page-checked{margin-top:22px;font-size:var(--fs-2);color:var(--text-soft)}
 .footer-social{display:flex;flex-direction:column;align-items:flex-start;gap:2px}
 .footer-fb{display:inline-flex;align-items:center;gap:12px;min-height:44px;color:var(--yellow);font-size:var(--fs-3);font-weight:600;transition:color var(--dur-fast)}
 .footer-fb:hover{color:var(--white)}
@@ -798,6 +803,7 @@ html,body{overflow-x:clip}
 .spec-card dd{padding:15px 22px;margin:0;font-size:15px;font-weight:600;color:var(--ink);text-align:right;border-bottom:1px solid var(--line)}
 .spec-card dt:nth-last-of-type(1),.spec-card dd:nth-last-of-type(1){border-bottom:0}
 @media(max-width:560px){.spec-card dl{grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.spec-card dt{padding:13px 14px;font-size:var(--fs-3)}.spec-card dd{padding:13px 14px;font-size:var(--fs-3);overflow-wrap:break-word}}
+@media(max-width:560px){.spec-card--stack dl{grid-template-columns:minmax(0,1fr)}.spec-card--stack dt{border-bottom:0;padding-bottom:0}.spec-card--stack dd{text-align:left;padding-top:3px}}
 
 /* ── класове, които не бива да се смесват (с връзки) ── */
 .class-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--space-4);list-style:none;padding:0}
