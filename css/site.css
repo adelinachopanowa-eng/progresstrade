@@ -924,8 +924,6 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
   .code-table .c-ot{font-size:var(--fs-2)}
   .code-table .c-ton{text-align:left;font-size:var(--fs-7)}
   .tablewrap table{min-width:0}
-  /* без заглавния ред клетките иначе не казват какво е числото */
-  .code-table--labels td[data-label]::before{content:attr(data-label) ": ";color:var(--text-soft);font-weight:400;font-family:var(--font);font-size:var(--fs-2)}
 }
 
 /* ═══════════════════════════════ Отзивчивост ═══════════════════════════════ */
@@ -1241,19 +1239,15 @@ a.kt-row:hover .kt-ic{border-color:var(--green)}
 .kab-body h3{font-size:var(--fs-card);line-height:1.2;color:var(--ink)}
 .kab-body p{font-size:var(--fs-3);line-height:1.55;color:var(--text-soft)}
 @media(max-width:900px){.kab-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
-/* Под описанието: колко метал има в кабела и колко труд струва
-   извличането му — по три точки, с думата до тях за екранните четци. */
-.kab-body{flex:1}
+/* Три карти на ред и под описанието — ориентировъчният добив. */
+.kab-body{flex:1;min-width:0}
 .section-white .kab-card{background:var(--cream);border-color:transparent}
+.kab-grid--3{grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
 .kab-body .kab-models{font-size:var(--fs-2);font-weight:600;color:var(--fern);margin-top:-4px}
-.kab-meta{display:grid;gap:6px;width:100%;margin:auto 0 0;padding-top:12px;border-top:1px solid var(--line-2)}
-.kab-meta div{display:flex;align-items:center;justify-content:space-between;gap:10px}
-.kab-meta dt{font-size:var(--fs-2);color:var(--text-soft)}
-.kab-meta dd{display:flex;align-items:center;gap:8px;margin:0;font-size:var(--fs-2);font-weight:600;color:var(--ink)}
-.lvl{display:inline-flex;gap:3px}
-.lvl i{width:8px;height:8px;border-radius:50%;background:var(--line-2)}
-.m-metal .lvl i.on{background:var(--fern)}
-.m-trud .lvl i.on{background:var(--yellow-dark)}
+.kab-yield{display:flex;align-items:baseline;justify-content:space-between;gap:12px;width:100%;margin-top:auto;padding-top:12px;border-top:1px solid var(--line-2)}
+.kab-yield span{font-size:var(--fs-2);color:var(--text-soft);white-space:nowrap}
+.kab-yield b{font-family:var(--font-cond);font-size:var(--fs-7);font-weight:600;letter-spacing:-.02em;color:var(--green);white-space:nowrap}
+@media(max-width:900px){.kab-grid--3{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}}
 @media(max-width:640px){
   .kab-grid{grid-template-columns:1fr;gap:10px;margin-top:var(--space-4)}
   .kab-card{flex-direction:row;align-items:stretch;gap:4px;padding:6px;border-radius:20px}
@@ -1261,17 +1255,13 @@ a.kt-row:hover .kt-ic{border-color:var(--green)}
   .kab-body{padding:8px 8px 8px 10px;gap:5px}
   .kab-body h3{font-size:17px}
   .kab-body p{font-size:14px;line-height:1.5}
+  .kab-grid--3{grid-template-columns:1fr;gap:10px}
   .kab-body .kab-models{font-size:var(--fs-1);margin-top:-2px}
-  .kab-meta{padding-top:8px;gap:4px}
-  .kab-meta dt,.kab-meta dd{font-size:var(--fs-1)}
+  .kab-yield{flex-wrap:wrap;gap:0 8px;padding-top:8px}
+  .kab-body h3{overflow-wrap:anywhere}
+  .kab-yield span{font-size:var(--fs-1)}
+  .kab-yield b{font-size:var(--fs-6)}
 }
-
-/* Снимка с маркировката на кабела до факторите за цената. */
-.kab-figure{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:22px;align-items:center;margin:var(--space-6) 0 0;max-width:860px}
-.kab-figure picture{display:block;aspect-ratio:3/2;overflow:hidden;border-radius:var(--radius-md);background:var(--mint-100)}
-.kab-figure img{width:100%;height:100%;object-fit:cover}
-.kab-figure figcaption{font-size:var(--fs-4);line-height:var(--lh-normal);color:var(--text-soft)}
-@media(max-width:760px){.kab-figure{grid-template-columns:1fr;gap:12px}}
 
 /* Двата начина за изкупуване на кабели: по проба и с аванс. */
 .path-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:var(--space-6)}
@@ -1280,7 +1270,6 @@ a.kt-row:hover .kt-ic{border-color:var(--green)}
 .path-media img{width:100%;height:100%;object-fit:cover}
 .path-body{display:flex;flex-direction:column;align-items:flex-start;gap:12px;flex:1;padding:22px 20px 18px}
 .path-body h3{font-family:var(--font-cond);font-size:var(--fs-h4);font-weight:600;line-height:1.2;letter-spacing:-.015em;color:var(--ink)}
-.path-when{font-size:var(--fs-4);line-height:var(--lh-normal);color:var(--text-soft)}
 .path-steps{list-style:none;counter-reset:ps;display:grid;gap:14px;width:100%;margin:6px 0 4px;padding:0}
 .path-steps li{display:grid;grid-template-columns:30px minmax(0,1fr);gap:12px;font-size:var(--fs-3);line-height:var(--lh-normal);color:var(--text)}
 .path-steps li::before{counter-increment:ps;content:counter(ps);width:30px;height:30px;border-radius:50%;background:var(--yellow-soft);color:var(--gold-ink);display:flex;align-items:center;justify-content:center;font:600 13px/1 var(--font-cond)}
