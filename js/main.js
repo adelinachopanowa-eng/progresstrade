@@ -412,6 +412,17 @@ document.addEventListener('click', function (e) {
 (function () {
   var root = document.querySelector('[data-tour]');
   if (!root) return;
+  /* На телефон обиколката е лента за плъзгане само със CSS. Скриптът я поема
+     едва когато екранът е по-широк от 640 px (и при завъртане на телефона). */
+  var narrow = window.matchMedia ? window.matchMedia('(max-width:640px)') : null;
+  if (narrow && narrow.matches) {
+    var later = function () { if (!narrow.matches) { off(); init(); } };
+    var off = function () { if (narrow.removeEventListener) narrow.removeEventListener('change', later); else if (narrow.removeListener) narrow.removeListener(later); };
+    if (narrow.addEventListener) narrow.addEventListener('change', later); else if (narrow.addListener) narrow.addListener(later);
+    return;
+  }
+  init();
+  function init() {
   var slides = root.querySelectorAll('.tour-slide');
   var tabs = root.querySelectorAll('.tour-tab');
   var count = root.querySelector('.tour-count b');
@@ -480,4 +491,5 @@ document.addEventListener('click', function (e) {
     new IntersectionObserver(function (es) { visible = es[0].isIntersecting; restart(); }, { threshold: 0.35 }).observe(root);
   } else { visible = true; }
   show(0);
+  }
 })();
