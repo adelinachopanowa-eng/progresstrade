@@ -21,7 +21,10 @@ import re
 c=open('css/site.css').read()
 c=re.sub(r'/\*.*?\*/','',c,flags=re.S)
 c=re.sub(r'\s*\n\s*',' ',c)
-c=re.sub(r'\s*([{}:;,>])\s*',r'\1',c)
+# Интервалът пред „:“ не се маха: в „.карта :is(p)“ той е наследник,
+# а „.карта:is(p)“ е съвсем друг селектор.
+c=re.sub(r'\s*([{};,>])\s*',r'\1',c)
+c=re.sub(r':\s+',':',c)
 c=re.sub(r';}','}',c)
 open('css/site.min.css','w').write(re.sub(r'\s+',' ',c).strip())
 
