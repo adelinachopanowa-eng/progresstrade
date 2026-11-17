@@ -203,7 +203,7 @@ header{display:contents}
    не стига контраст 3:1. */
 a:focus-visible,.btn:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:3px;border-radius:8px}
 .btn:focus-visible{border-radius:var(--radius-pill)}
-:is(.topbar,.biz-teaser,.cta-band,.footer,.price-headline,.mat-cta,.qa-call,.vacation-bar) *:focus-visible{outline-color:var(--yellow)}
+:is(.topbar,.biz-teaser,.cta-band,.footer,.offer-box,.mat-cta,.qa-call,.vacation-bar) *:focus-visible{outline-color:var(--yellow)}
 .btn-primary:focus-visible{outline-color:var(--ink)}
 .skip-link{position:absolute;left:8px;top:-60px;z-index:200;background:var(--green-deep);color:var(--white);padding:10px 16px;border-radius:0 0 10px 10px;font-size:var(--fs-3);font-weight:600;transition:top var(--dur-fast) ease}
 .skip-link:focus{top:0}
@@ -449,6 +449,10 @@ a.contact-item-value:hover{color:var(--green)}
 .cta-inner{display:flex;align-items:center;justify-content:space-between;gap:var(--space-5)}
 .cta-text,.cta-actions{position:relative}
 .cta-text{max-width:620px}
+/* Лентата е центрирана: заглавие, ред текст и бутоните под тях. */
+.cta-band .cta-inner{flex-direction:column;justify-content:center;text-align:center;padding:56px clamp(24px,5vw,72px)}
+.cta-band .cta-text{margin:0 auto}
+.cta-band .cta-actions{justify-content:center}
 .cta-text h2{font-family:var(--font-cond);font-size:clamp(28px,3.2vw,42px);font-weight:600;color:var(--white);letter-spacing:-.03em;line-height:1.1;text-wrap:balance}
 .cta-text p{font-size:var(--fs-5);line-height:1.6;color:var(--text-white-soft);margin-top:14px}
 .cta-actions{display:flex;flex-wrap:wrap;gap:12px;flex-shrink:0}
@@ -783,21 +787,16 @@ html.menu-open{overflow:hidden}
 
 html,body{overflow-x:clip}
 
-/* ── спецификации на материала ──
-   Изкупната цена излиза от спецификационната таблица на видно място. */
-.spec-row{display:grid;grid-template-columns:minmax(0,320px) minmax(0,1fr);gap:var(--space-4);align-items:start;max-width:940px;margin-top:var(--space-5)}
-.price-headline{position:relative;overflow:hidden;background:var(--green-deep);color:var(--white);border-radius:var(--radius-card);padding:28px 28px 30px;display:flex;flex-direction:column;gap:6px}
-.ph-label{font-size:var(--fs-1);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62)}
-.ph-figure{font-family:var(--font-cond);font-size:var(--fs-num-lg);font-weight:600;color:var(--yellow);letter-spacing:-.025em;line-height:1.1;font-variant-numeric:tabular-nums}
-/* „1 работен ден“ трябва да е на един ред в кутията (264 px при 36 px шрифт не стигат с 1 px). */
-.price-headline .ph-figure{font-size:34px}
-.ph-unit{font-family:var(--font);font-size:var(--fs-3);font-weight:500;color:rgba(255,255,255,.75);letter-spacing:0}
-.ph-note{font-size:var(--fs-2);color:rgba(255,255,255,.72);line-height:var(--lh-normal);margin-top:2px}
-.ph-link{margin-top:12px;font-size:var(--fs-3);font-weight:600;color:var(--white);align-self:flex-start;text-decoration:underline;text-decoration-color:rgba(255,255,255,.35);text-underline-offset:4px;transition:color var(--dur-fast),text-decoration-color var(--dur-fast)}
-.ph-link:hover{color:var(--yellow);text-decoration-color:var(--yellow)}
-@media(max-width:760px){.spec-row{grid-template-columns:1fr;gap:var(--space-3)}}
+/* Един централен блок под херото: срокът или прагът и бутонът за Viber.
+   Замести таблицата със спецификации и отделния ред с бутона. */
+.offer-box{display:flex;align-items:center;justify-content:space-between;gap:20px 32px;max-width:860px;margin:0 auto;padding:26px 32px;border-radius:var(--radius-card);background:var(--green-deep);color:var(--white)}
+.ob-text{display:flex;flex-direction:column;gap:4px}
+.ob-label{font-size:var(--fs-1);font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.62)}
+.ob-figure{font-family:var(--font-cond);font-size:34px;font-weight:600;line-height:1.1;letter-spacing:-.025em;color:var(--yellow)}
+.ob-note{font-size:var(--fs-3);line-height:var(--lh-normal);color:rgba(255,255,255,.75)}
+.offer-box .btn-viber{flex-shrink:0}
+@media(max-width:700px){.offer-box{flex-direction:column;text-align:center;padding:24px 20px}.ob-text{align-items:center}.offer-box .btn-viber{width:100%}.ob-figure{font-size:28px}}
 .spec-card{background:var(--white);border:1px solid var(--line);border-radius:20px;overflow:hidden;max-width:560px;margin-top:var(--space-4)}
-.spec-row .spec-card{margin-top:0}
 .spec-card dl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,auto);margin:0}
 .spec-card dt{padding:15px 22px;font-size:15px;color:var(--text-soft);border-bottom:1px solid var(--line)}
 .spec-card dd{padding:15px 22px;margin:0;font-size:15px;font-weight:600;color:var(--ink);text-align:right;border-bottom:1px solid var(--line)}
@@ -975,7 +974,7 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
   .prices-intro{grid-template-columns:1fr;justify-items:start;gap:var(--space-4)}
   .prices-grid{grid-template-columns:1fr 1fr}
   .footer-grid{grid-template-columns:1fr 1fr}
-  .cta-band .cta-inner{flex-direction:column;align-items:flex-start;padding:48px 32px}
+  .cta-band .cta-inner{flex-direction:column;align-items:center;padding:44px 24px}
   .head-split{grid-template-columns:1fr;gap:var(--space-3)}
   .page-hero--split{grid-template-columns:minmax(0,1fr);gap:var(--space-6);padding-top:40px;padding-bottom:56px}
   .page-hero--split .hero-figure{order:2}
@@ -992,7 +991,7 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
   .footer-col ul li a{display:inline-flex;align-items:center;min-height:36px}
   .footer-contact ul{gap:14px}
   .footer-contact a,.footer-bottom a{display:inline-flex;align-items:center;min-height:32px}
-  .seg-card .more,.link-cta,.ph-link{display:inline-flex;align-items:center;min-height:44px}
+  .seg-card .more,.link-cta{display:inline-flex;align-items:center;min-height:44px}
 }
 /* На телефон картите на услугите стават редове: снимка вляво, текст вдясно. */
 @media(max-width:640px){
@@ -1107,7 +1106,7 @@ p > .link-cta,li > .link-cta{display:inline;min-height:0;text-decoration:underli
 /* най-тесните телефони: малко по-тясна снимка в картите, за да се събират дългите думи */
 @media(max-width:360px){.service-card{grid-template-columns:72px minmax(0,1fr)}.service-img{height:72px}.service-card p{hyphens:auto}}
 /* големите числа на телефон не бива да са по-големи от заглавието на страницата */
-@media(max-width:640px){.ph-figure,.price-headline .ph-figure{font-size:28px}.tier .tv{font-size:24px}}
+@media(max-width:640px){.tier .tv{font-size:24px}}
 
 
 /* ── По-къси страници на телефон ──
